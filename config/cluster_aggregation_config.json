@@ -1,0 +1,6 @@
+﻿{
+  "cellsnp_dir": "08_cellsnp/outputs/artifacts",
+  "cell_cluster_map": "data/metadata/cell_cluster_map.tsv",
+  "outdir": "09_cluster_aggregation/outputs/artifacts",
+  "min_alt": 3
+}

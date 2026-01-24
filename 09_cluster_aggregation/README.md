@@ -1,22 +1,31 @@
 ﻿# 09_cluster_aggregation: Cluster aggregation
 
 Purpose
-- Cluster aggregation.
+- Aggregate per-cell allele counts into per-cluster variant counts.
 
 Inputs
-- cellsnp outputs + cell->cluster map
+- cellsnp outputs from `08_cellsnp/outputs/artifacts/<sample>/`.
+- Cell->cluster map TSV (e.g., `data/metadata/cell_cluster_map.tsv`).
 
 Outputs
-- per-cluster counts (TSV)
-- Stage outputs are stored in outputs/ (metrics and artifacts).
+- Per-cluster counts TSV per sample.
+- Stage outputs saved under `outputs/`.
 
 How to run (manual)
-1) Review input paths and references.
-2) Run the stage script(s) in scripts/.
-3) Confirm outputs are created in outputs/.
+1) Ensure Python + numpy/scipy are installed.
+2) Set paths in `config/cluster_aggregation_config.json`.
+3) Run:
+   - `bash scripts/run_cluster_aggregation.sh`
+
+Pre-run checks (manual)
+- Verify OS and environment.
+  - Windows: use WSL2 (per root TECH_SPEC) and run commands inside WSL.
+  - macOS/Linux: run natively.
+- Confirm cellsnp outputs and cluster map exist.
+- You are responsible for errors/logs when running manually.
 
 Success criteria
-- Expected outputs are produced and non-empty.
+- Per-cluster TSVs exist for each sample.
 
 Next stage
-- Proceed to $(System.Collections.Hashtable.next).
+- Proceed to `10_mutational_analysis`.

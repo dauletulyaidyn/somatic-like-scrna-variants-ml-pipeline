@@ -17,11 +17,23 @@ Outputs
 
 How to run (manual)
 1) Ensure STAR and STARsolo are installed and on PATH.
-2) Set paths to reference FASTA, GTF, and STAR index.
-3) For each sample, run STARsolo using:
-   - R3 as cDNA read
-   - R2 as barcode read (CB/UB)
-4) Write BAM/BAI and logs into `outputs/`.
+2) Edit `config/starsolo_config.json` (paths + CB/UMI settings).
+3) Run the stage script:
+   - `bash scripts/run_starsolo.sh`
+4) Outputs are written into `outputs/`.
+
+Config notes (important)
+- `star_index`: STAR genome index directory.
+- `gtf`: gene annotation GTF (same build as STAR index).
+- `solo` fields must match your library chemistry (CB/UMI positions and whitelist).
+
+Pre-run checks (manual)
+- Verify OS and environment.
+  - Windows: use WSL2 (per root TECH_SPEC) and run commands inside WSL.
+  - macOS/Linux: run natively.
+- Verify STAR/STARsolo and samtools are installed.
+- Confirm reference FASTA, GTF, and STAR index paths are correct.
+- You are responsible for errors/logs when running manually.
 
 Success criteria
 - For each sample, BAM and BAI are present and non-empty.

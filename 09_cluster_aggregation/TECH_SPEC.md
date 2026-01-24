@@ -1,29 +1,35 @@
 ﻿# AI Tech Spec: 09_cluster_aggregation
 
 Objective
-- Execute Cluster aggregation and produce the expected outputs.
+- Aggregate cellsnp-lite AD/DP matrices into per-cluster counts.
 
 Entry
-- Working directory: $(System.Collections.Hashtable.id)
-- Required inputs: cellsnp outputs + cell->cluster map
+- Working directory: `09_cluster_aggregation`
+- Required inputs:
+  - cellsnp outputs from `08_cellsnp/outputs/artifacts/`
+  - cell->cluster map TSV
 
 Prerequisites
 - Python 3.10+
 - numpy
 - scipy
 
+OS check
+- Windows: require WSL2; execute all commands inside WSL.
+- macOS/Linux: run natively.
+
 Actions
-1) Validate inputs exist and are non-empty.
-2) Run the stage script(s) under scripts/.
-3) Write outputs to outputs/metrics/ and outputs/artifacts/ as appropriate.
+1) Verify cellsnp outputs exist for each sample.
+2) Verify cell->cluster map exists.
+3) Ensure `config/cluster_aggregation_config.json` is filled.
+4) Run cluster aggregation script.
+5) Save outputs under `outputs/`.
 
 Outputs
-- per-cluster counts (TSV)
-- All outputs stored under outputs/.
+- Per-cluster TSVs per sample.
 
 Exit criteria
-- Outputs exist and pass basic sanity checks (non-empty, expected columns where applicable).
+- Cluster count TSVs exist and are non-empty.
 
 Next stage
-- Proceed to $(System.Collections.Hashtable.next).
-
+- Proceed to `10_mutational_analysis`.

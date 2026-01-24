@@ -19,8 +19,12 @@ How to run (manual)
    - `python scripts/validate_inputs.py --fastq-dir ../data/fastq --metadata ../data/metadata/metadata.tsv --out ../data/metadata/metadata.cleaned.tsv`
 
 Pre-run checks (manual)
+- Verify OS and environment.
+  - Windows: use WSL2 (per root TECH_SPEC) and run commands inside WSL.
+  - macOS/Linux: run natively.
 - Verify required tools/libraries are installed for this stage (Python 3.10+, pandas).
 - If any dependency is missing, install it before running the script.
+- You are responsible for errors/logs when running manually.
 
 Metadata schema (minimal)
 - `sample_id` (string): must match FASTQ prefix exactly.

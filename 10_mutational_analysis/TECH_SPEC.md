@@ -1,29 +1,36 @@
 ﻿# AI Tech Spec: 10_mutational_analysis
 
 Objective
-- Execute Mutational analysis outputs and produce the expected outputs.
+- Compute mutational analysis summaries from filtered VCFs.
 
 Entry
-- Working directory: $(System.Collections.Hashtable.id)
-- Required inputs: filtered VCF
+- Working directory: `10_mutational_analysis`
+- Required inputs:
+  - Filtered VCFs from `03_bcftools_call/outputs/artifacts/`
 
 Prerequisites
 - Python 3.10+
 - pandas
 - numpy
 
+OS check
+- Windows: require WSL2; execute all commands inside WSL.
+- macOS/Linux: run natively.
+
 Actions
-1) Validate inputs exist and are non-empty.
-2) Run the stage script(s) under scripts/.
-3) Write outputs to outputs/metrics/ and outputs/artifacts/ as appropriate.
+1) Verify filtered VCFs exist and are non-empty.
+2) Ensure `config/mutational_analysis_config.json` is filled.
+3) Run mutational analysis script.
+4) Save outputs under `outputs/`.
 
 Outputs
-- SNV/indel burden; signatures; drivers; pathway enrichment (TSV)
-- All outputs stored under outputs/.
+- Burden table.
+- Signature counts.
+- Driver counts (if driver list provided).
+- Pathway enrichment table (placeholder).
 
 Exit criteria
-- Outputs exist and pass basic sanity checks (non-empty, expected columns where applicable).
+- Output tables exist and are non-empty.
 
 Next stage
-- Proceed to $(System.Collections.Hashtable.next).
-
+- Proceed to `11_correlation`.

@@ -1,29 +1,37 @@
 ﻿# AI Tech Spec: 03_bcftools_call
 
 Objective
-- Execute bcftools mpileup/call and produce the expected outputs.
+- Call expressed variants from CB/UB-tagged BAM files using bcftools.
 
 Entry
-- Working directory: $(System.Collections.Hashtable.id)
-- Required inputs: CB/UB BAM + BAI; reference genome
+- Working directory: `03_bcftools_call`
+- Required inputs:
+  - BAM/BAI from `02_starsolo/outputs/artifacts/`
+  - Reference genome FASTA
+  - Optional: regions BED
 
 Prerequisites
 - bcftools
 - samtools
 - tabix
 
+OS check
+- Windows: require WSL2; execute all commands inside WSL.
+- macOS/Linux: run natively.
+
 Actions
-1) Validate inputs exist and are non-empty.
-2) Run the stage script(s) under scripts/.
-3) Write outputs to outputs/metrics/ and outputs/artifacts/ as appropriate.
+1) Verify BAM/BAI exist for all samples in `02_starsolo/outputs/artifacts/`.
+2) Verify reference FASTA exists.
+3) Ensure `config/bcftools_config.json` is filled.
+4) Run bcftools pipeline per sample.
+5) Save outputs under `outputs/`.
 
 Outputs
-- filtered VCF
-- All outputs stored under outputs/.
+- Filtered VCF per sample.
+- bcftools logs per sample.
 
 Exit criteria
-- Outputs exist and pass basic sanity checks (non-empty, expected columns where applicable).
+- VCFs exist and are non-empty for each sample.
 
 Next stage
-- Proceed to $(System.Collections.Hashtable.next).
-
+- Proceed to `04_cohort_filter`.

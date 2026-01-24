@@ -1,29 +1,35 @@
 ﻿# AI Tech Spec: 08_cellsnp
 
 Objective
-- Execute cellsnp-lite and produce the expected outputs.
+- Run cellsnp-lite to generate per-cell allele counts.
 
 Entry
-- Working directory: $(System.Collections.Hashtable.id)
-- Required inputs: CB/UB BAM + barcodes + VCF
+- Working directory: `08_cellsnp`
+- Required inputs:
+  - BAM/BAI from `02_starsolo/outputs/artifacts/`
+  - Cohort VCF from `04_cohort_filter/outputs/artifacts/`
+  - Barcode whitelist
 
 Prerequisites
 - cellsnp-lite
 - samtools
 - tabix
 
+OS check
+- Windows: require WSL2; execute all commands inside WSL.
+- macOS/Linux: run natively.
+
 Actions
-1) Validate inputs exist and are non-empty.
-2) Run the stage script(s) under scripts/.
-3) Write outputs to outputs/metrics/ and outputs/artifacts/ as appropriate.
+1) Verify BAM/BAI and cohort VCF exist.
+2) Ensure `config/cellsnp_config.json` is filled.
+3) Run cellsnp-lite per sample.
+4) Save outputs under `outputs/`.
 
 Outputs
-- per-cell AD/DP matrices (MTX) + variants.tsv
-- All outputs stored under outputs/.
+- AD/DP matrices + variants.tsv per sample.
 
 Exit criteria
-- Outputs exist and pass basic sanity checks (non-empty, expected columns where applicable).
+- cellsnp outputs exist and are non-empty for each sample.
 
 Next stage
-- Proceed to $(System.Collections.Hashtable.next).
-
+- Proceed to `09_cluster_aggregation`.

@@ -1,28 +1,33 @@
 ﻿# AI Tech Spec: 04_cohort_filter
 
 Objective
-- Execute Cohort-common filter and produce the expected outputs.
+- Build cohort-common VCF from per-sample filtered VCFs.
 
 Entry
-- Working directory: $(System.Collections.Hashtable.id)
-- Required inputs: filtered VCF (all samples)
+- Working directory: `04_cohort_filter`
+- Required inputs:
+  - VCFs from `03_bcftools_call/outputs/artifacts/`
 
 Prerequisites
 - bcftools
 - tabix
 
+OS check
+- Windows: require WSL2; execute all commands inside WSL.
+- macOS/Linux: run natively.
+
 Actions
-1) Validate inputs exist and are non-empty.
-2) Run the stage script(s) under scripts/.
-3) Write outputs to outputs/metrics/ and outputs/artifacts/ as appropriate.
+1) Verify input VCFs exist and are non-empty.
+2) Ensure `config/cohort_filter_config.json` is filled.
+3) Run cohort-common filter script.
+4) Save outputs under `outputs/`.
 
 Outputs
-- cohort VCF
-- All outputs stored under outputs/.
+- Cohort VCF.
+- Summary tables.
 
 Exit criteria
-- Outputs exist and pass basic sanity checks (non-empty, expected columns where applicable).
+- Cohort VCF exists and is non-empty.
 
 Next stage
-- Proceed to $(System.Collections.Hashtable.next).
-
+- Proceed to `05_variant_to_gene`.

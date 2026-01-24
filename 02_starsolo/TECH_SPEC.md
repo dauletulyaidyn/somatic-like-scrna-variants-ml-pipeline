@@ -16,13 +16,18 @@ Prerequisites
 - STAR (STARsolo)
 - samtools
 
+OS check
+- Windows: require WSL2; execute all commands inside WSL.
+- macOS/Linux: run natively.
+
 Actions
 1) Verify FASTQ files exist for all samples in `metadata.cleaned.tsv`.
 2) Verify reference FASTA, GTF, and STAR index are available.
-3) For each sample, run STARsolo with:
+3) Ensure `config/starsolo_config.json` is filled (paths + CB/UMI settings).
+4) For each sample, run STARsolo with:
    - cDNA read = R3
    - barcode read = R2 (CB/UB)
-4) Save outputs under `outputs/`.
+5) Save outputs under `outputs/`.
 
 Outputs
 - CB/UB BAM + BAI per sample.

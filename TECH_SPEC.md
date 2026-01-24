@@ -49,10 +49,10 @@ Global checks (examples)
   - `cellsnp-lite --help`
 
 Installation policy
-- If a required tool/lib is missing, install it before running the stage.
+- All required tools/libs must be installed and verified before starting Stage 01.
+- Stage scripts must NOT attempt installation or environment checks.
 - Preferred approach: micromamba/conda environment per tool group.
-- Record any install commands in the stage `outputs/metrics/` as `install_log.txt`.
- - On Windows, the agent must install/enable WSL2 before proceeding and run all tool installs inside WSL.
+- On Windows, the agent must install/enable WSL2 before proceeding and run all tool installs inside WSL.
 
 OS-specific install recipes (reference)
 - Windows (WSL2 Ubuntu; run inside WSL):

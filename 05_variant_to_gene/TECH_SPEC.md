@@ -1,29 +1,35 @@
 ﻿# AI Tech Spec: 05_variant_to_gene
 
 Objective
-- Execute Variant -> gene tables and produce the expected outputs.
+- Build long variant->gene annotation table from cohort VCF.
 
 Entry
-- Working directory: $(System.Collections.Hashtable.id)
-- Required inputs: cohort VCF + gene annotation
+- Working directory: `05_variant_to_gene`
+- Required inputs:
+  - Cohort VCF from `04_cohort_filter/outputs/artifacts/`
+  - Gene annotation GTF
 
 Prerequisites
 - Python 3.10+
 - pandas
 - numpy
 
+OS check
+- Windows: require WSL2; execute all commands inside WSL.
+- macOS/Linux: run natively.
+
 Actions
-1) Validate inputs exist and are non-empty.
-2) Run the stage script(s) under scripts/.
-3) Write outputs to outputs/metrics/ and outputs/artifacts/ as appropriate.
+1) Verify cohort VCF exists and is non-empty.
+2) Verify GTF exists.
+3) Ensure `config/variant_to_gene_config.json` is filled.
+4) Run variant->gene script.
+5) Save outputs under `outputs/`.
 
 Outputs
-- long TSV (variant-gene)
-- All outputs stored under outputs/.
+- Long TSV of variant->gene annotations.
 
 Exit criteria
-- Outputs exist and pass basic sanity checks (non-empty, expected columns where applicable).
+- Output TSV exists and is non-empty.
 
 Next stage
-- Proceed to $(System.Collections.Hashtable.next).
-
+- Proceed to `06_gene_burden`.

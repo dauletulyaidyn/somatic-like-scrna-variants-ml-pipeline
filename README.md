@@ -43,6 +43,8 @@ If you run without the AI agent, **you are responsible** for:
 - Installing all required tools and Python libraries per stage.
 - Providing sufficient compute resources (CPU/RAM/disk).
 - Monitoring logs and handling errors.
+- All tools/libs must be installed and verified before starting Stage 01.
+- Stage scripts do not perform installation or environment checks.
 
 Minimum environment
 - Windows with WSL2 (Ubuntu) for Windows users.

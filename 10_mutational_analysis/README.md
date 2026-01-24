@@ -1,22 +1,33 @@
 ﻿# 10_mutational_analysis: Mutational analysis outputs
 
 Purpose
-- Mutational analysis outputs.
+- Derive mutational analysis summaries from filtered VCFs.
 
 Inputs
-- filtered VCF
+- Filtered VCFs from `03_bcftools_call/outputs/artifacts/`.
 
 Outputs
-- SNV/indel burden; signatures; drivers; pathway enrichment (TSV)
-- Stage outputs are stored in outputs/ (metrics and artifacts).
+- SNV/indel burden per sample.
+- Simple mutational signatures (base change counts).
+- Driver gene hit counts (optional list).
+- Pathway-level mutation enrichment (placeholder table).
+- Stage outputs saved under `outputs/`.
 
 How to run (manual)
-1) Review input paths and references.
-2) Run the stage script(s) in scripts/.
-3) Confirm outputs are created in outputs/.
+1) Ensure Python + pandas/numpy are installed.
+2) Set paths in `config/mutational_analysis_config.json`.
+3) Run:
+   - `bash scripts/run_mutational_analysis.sh`
+
+Pre-run checks (manual)
+- Verify OS and environment.
+  - Windows: use WSL2 (per root TECH_SPEC) and run commands inside WSL.
+  - macOS/Linux: run natively.
+- Confirm input VCFs exist.
+- You are responsible for errors/logs when running manually.
 
 Success criteria
-- Expected outputs are produced and non-empty.
+- Output tables exist and are non-empty.
 
 Next stage
-- Proceed to $(System.Collections.Hashtable.next).
+- Proceed to `11_correlation`.

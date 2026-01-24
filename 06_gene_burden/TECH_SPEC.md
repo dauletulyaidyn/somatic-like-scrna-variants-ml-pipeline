@@ -1,29 +1,34 @@
 ﻿# AI Tech Spec: 06_gene_burden
 
 Objective
-- Execute Somatic-like gene-burden features and produce the expected outputs.
+- Build gene-level burden matrix from variant->gene table.
 
 Entry
-- Working directory: $(System.Collections.Hashtable.id)
-- Required inputs: long TSV
+- Working directory: `06_gene_burden`
+- Required inputs:
+  - Variant->gene long TSV from `05_variant_to_gene/outputs/artifacts/`
+  - Per-sample VCFs from `03_bcftools_call/outputs/artifacts/`
 
 Prerequisites
 - Python 3.10+
 - pandas
 - numpy
 
+OS check
+- Windows: require WSL2; execute all commands inside WSL.
+- macOS/Linux: run natively.
+
 Actions
-1) Validate inputs exist and are non-empty.
-2) Run the stage script(s) under scripts/.
-3) Write outputs to outputs/metrics/ and outputs/artifacts/ as appropriate.
+1) Verify variant->gene TSV exists and is non-empty.
+2) Ensure `config/gene_burden_config.json` is filled.
+3) Run gene-burden script.
+4) Save outputs under `outputs/`.
 
 Outputs
-- gene-burden matrix (TSV/CSV)
-- All outputs stored under outputs/.
+- Gene-burden matrix (TSV/CSV).
 
 Exit criteria
-- Outputs exist and pass basic sanity checks (non-empty, expected columns where applicable).
+- Output matrix exists and is non-empty.
 
 Next stage
-- Proceed to $(System.Collections.Hashtable.next).
-
+- Proceed to `07_ml_we_vs_uwe`.

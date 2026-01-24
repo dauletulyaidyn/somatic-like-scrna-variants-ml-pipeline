@@ -13,6 +13,10 @@ Prerequisites
 - Python 3.10+
 - pandas
 
+OS check
+- Windows: require WSL2; execute all commands inside WSL.
+- macOS/Linux: run natively.
+
 Actions
 1) Validate that FASTQ files exist in `data/fastq/`.
 2) Validate metadata schema (min columns: `sample_id`, `condition`, `run_id`).

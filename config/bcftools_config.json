@@ -1,0 +1,9 @@
+﻿{
+  "ref_fasta": "config/ref/genome.fa",
+  "threads": 4,
+  "min_baseq": 20,
+  "min_mapq": 30,
+  "extra_mpileup": [],
+  "extra_call": ["-mv"],
+  "extra_filter": ["-s", "LowQual", "-e", "QUAL<20"]
+}

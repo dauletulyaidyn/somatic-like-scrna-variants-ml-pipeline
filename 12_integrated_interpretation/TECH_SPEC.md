@@ -1,28 +1,31 @@
 ﻿# AI Tech Spec: 12_integrated_interpretation
 
 Objective
-- Execute Integrated interpretation and produce the expected outputs.
+- Collect key tables/figures from each stage into `for_report/`.
 
 Entry
-- Working directory: $(System.Collections.Hashtable.id)
-- Required inputs: ML metrics + correlation results
+- Working directory: `12_integrated_interpretation`
+- Required inputs:
+  - All stage `outputs/metrics/` and `outputs/artifacts/` folders
 
 Prerequisites
 - Python 3.10+
-- pandas
+
+OS check
+- Windows: require WSL2; execute all commands inside WSL.
+- macOS/Linux: run natively.
 
 Actions
-1) Validate inputs exist and are non-empty.
-2) Run the stage script(s) under scripts/.
-3) Write outputs to outputs/metrics/ and outputs/artifacts/ as appropriate.
+1) Verify stage outputs exist.
+2) Run collection script to copy files into `for_report/`.
+3) Write summary manifest.
 
 Outputs
-- final conclusions/figures
-- All outputs stored under outputs/.
+- `for_report/` bundle with normalized filenames.
+- `12_integrated_interpretation/outputs/metrics/for_report_manifest.tsv`
 
 Exit criteria
-- Outputs exist and pass basic sanity checks (non-empty, expected columns where applicable).
+- `for_report/` contains at least one file per stage (where outputs exist).
 
 Next stage
-- Proceed to $(System.Collections.Hashtable.next).
-
+- End.
