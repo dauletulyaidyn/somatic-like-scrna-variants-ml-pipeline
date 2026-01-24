@@ -1,0 +1,22 @@
+﻿---
+title: "Somatic-like expressed variants from scRNA-seq in chronic wounds (WE vs UWE): pipeline + ML classification"
+author: "Kunikeyev Aidyn"
+doi: ""
+git: ""
+---
+flowchart TD
+
+    A["Input data<br>In: scRNA-seq FASTQ + metadata (TSV, CSV)<br>Out: FASTQ + metadata"] --> B["STARsolo alignment<br>In: FASTQ + metadata; reference genome + GTF<br>Out: CB/UB BAM + BAI"]
+    B --> C["bcftools mpileup/call<br>In: CB/UB BAM; reference genome<br>Out: filtered VCF"]
+    C --> D["Cohort-common filter<br>In: filtered VCF (all samples)<br>Out: cohort VCF"]
+    D --> E["Expressed variant->gene tables<br>In: cohort VCF + gene annotation (GTF)<br>Out: long TSV"]
+    E --> F["Somatic-like gene-burden features<br>In: long TSV<br>Out: gene-burden matrix (TSV, CSV)"]
+    F --> G["ML: WE vs UWE<br>In: gene-burden matrix + labels (metadata)<br>Out: CV metrics + permutation p-values"]
+    B --> I["cellsnp-lite<br>In: CB/UB BAM + barcodes + VCF<br>Out: per-cell AD/DP matrices (MTX) + variants.tsv"]
+    I --> J["Cluster aggregation<br>In: cellsnp outputs + cell->cluster map (TSV)<br>Out: per-cluster counts (TSV)"]
+    F --> H["Correlation with mutational analysis<br>In: gene-burden + cluster counts + mutational outputs<br>Out: correlation/enrichment stats (TSV) + FDR"]
+    J --> H
+    C --> M["Mutational analysis outputs<br>In: filtered VCF<br>Out: SNV/indel burden; signatures; drivers; pathway enrichment (TSV)"]
+    M --> H
+    G --> K["Integrated interpretation<br>In: ML metrics + correlation results<br>Out: final conclusions/figures"]
+    H --> K
