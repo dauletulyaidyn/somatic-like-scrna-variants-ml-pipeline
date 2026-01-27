@@ -4,7 +4,7 @@ Purpose
 - Prepare raw scRNA-seq FASTQ and metadata for downstream steps.
 
 Inputs
-- Raw FASTQ files (R1/R2 as required by this pipeline).
+- Raw FASTQ files (R1/R2; R3 only if using three_read).
 - Sample metadata (TSV/CSV).
 
 Outputs
@@ -51,6 +51,7 @@ Consistent naming rules
 - Example for sample `SRR14762238`:
   - `data/fastq/SRR14762238_R1.fastq.gz`
   - `data/fastq/SRR14762238_R2.fastq.gz`
+  - `data/fastq/SRR14762238_R3.fastq.gz` (only for three_read)
   - `data/fastq/SRR14762238_R2.fastq.gz`
 
 Notes

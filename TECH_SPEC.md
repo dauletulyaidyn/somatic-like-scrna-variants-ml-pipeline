@@ -129,12 +129,26 @@ curl -L -o config/ref/whitelist.txt.gz https://github.com/10XGenomics/cellranger
 gunzip -c config/ref/whitelist.txt.gz > config/ref/whitelist.txt
 ```
 - Auto-download policy (required): the agent must download the correct whitelist for the dataset chemistry and place it at `config/ref/whitelist.txt` before running Stage 02. If chemistry is unknown, the agent must ask the user or infer from dataset metadata and report the choice.
+- Bundled whitelists (preferred): repo includes common 10x whitelist files at `config/ref/whitelists/10x/`. Use these to avoid external downloads; copy the correct one to `config/ref/whitelist.txt` (gunzip first if needed).
+  - 10x v1 (3-read): `737K-april-2014_rc.txt`
+  - 10x 3' v2: `737K-august-2016.txt`
+  - 10x 3' v3/v3.1: `3M-february-2018_TRU.txt.gz`
+  - 10x 3' v4: `3M-3pgex-may-2023_TRU.txt.gz`
+  - 10x 5' v3: `3M-5pgex-jan-2023.txt.gz`
+  - 10x 3' LT: `9K-LT-march-2021.txt.gz`
+  - 10x Fixed RNA Profiling: `737K-fixed-rna-profiling.txt.gz`
+- Known dataset mappings (update if protocol differs):
+  - PAD dataset (3-read): `read_structure=three_read`, whitelist `737K-april-2014_rc.txt` (10x v1).
+  - Test FASTQ (2-read R1=28, R2~90): `read_structure=two_read`, whitelist `3M-february-2018_TRU.txt.gz` (10x 3' v3/v3.1).
+  - CVD dataset (local `U:\! ! ! Datasets\! ! ! CVD Original dadtaset`): `read_structure=two_read`, whitelist `3M-february-2018_TRU.txt.gz` (10x 3' v3/v3.1).
 
 FASTQ expectations
 - User-provided scRNA-seq dataset (control vs disease).
-- Read structure used in this project (2-read):
-  - R1 = barcode (CB/UMI)
-  - R2 = cDNA
+- Supported read structures:
+  - two_read (default): R1 = barcode (CB/UMI), R2 = cDNA.
+  - three_read (legacy 10x v1): R1 = cDNA, R2 = CB, R3 = UMI (R2+R3 merged for STARsolo).
+  - Set `read_structure` in `config/starsolo_config.json` to select.
+  - Aliases: `common`, `tenx_v2`, `tenx_v3`, `tenx_v2v3`, `tenx_5p` map to two_read; `tenx_v1` maps to three_read.
 
 Naming convention
 - `SAMPLEID_R1.fastq.gz`

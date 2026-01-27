@@ -25,7 +25,12 @@ How to run (manual)
 Config notes (important)
 - `star_index`: STAR genome index directory.
 - `gtf`: gene annotation GTF (same build as STAR index).
+- `read_structure`:
+  - `two_read` (default): R1 = CB/UMI, R2 = cDNA.
+  - `three_read`: R1 = cDNA, R2 = CB, R3 = UMI (R2+R3 merged).
+  - Aliases: `common`, `tenx_v2`, `tenx_v3`, `tenx_v2v3`, `tenx_5p` => two_read; `tenx_v1` => three_read.
 - `solo` fields must match your library chemistry (CB/UMI positions and whitelist).
+- Whitelist files are bundled under `config/ref/whitelists/10x/`. Copy the correct one to `config/ref/whitelist.txt` (gunzip first if needed).
 
 Pre-run checks (manual)
 - Verify OS and environment.

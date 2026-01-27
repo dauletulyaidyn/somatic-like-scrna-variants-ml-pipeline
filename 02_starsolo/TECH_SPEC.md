@@ -26,10 +26,15 @@ Actions
 2) Verify reference FASTA, GTF, STAR index, and whitelist are available.
    - See root `TECH_SPEC.md` > "Reference preparation (required before Stage 02)" for download links and build steps.
    - If whitelist is missing, download the correct 10x list (chemistry-specific) and save it as `config/ref/whitelist.txt`.
+   - Preferred: copy from bundled `config/ref/whitelists/10x/` and gunzip if needed.
 3) Ensure `config/starsolo_config.json` is filled (paths + CB/UMI settings).
+   - Set `read_structure`:
+     - `two_read` (default): R1 = CB/UMI, R2 = cDNA.
+     - `three_read`: R1 = cDNA, R2 = CB, R3 = UMI (R2+R3 merged).
+     - Aliases: `common`, `tenx_v2`, `tenx_v3`, `tenx_v2v3`, `tenx_5p` => two_read; `tenx_v1` => three_read.
 4) For each sample, run STARsolo with:
-   - cDNA read = R2
-   - barcode read = R1 (CB/UMI)
+   - two_read: cDNA = R2, barcode = R1 (CB/UMI)
+   - three_read: cDNA = R1, barcode = R2+R3 (CB+UMI merged)
 5) Save outputs under `outputs/`.
 
 Outputs

@@ -87,14 +87,16 @@ Place raw inputs in `data/` (not tracked by git):
 ### FASTQ expectations
 - Data type: scRNA-seq.
 - STARsolo is configured for platforms with CB/UB tags from barcode reads.
-- Expected reads for this project (2-read):
-  - R1 = barcode (CB/UMI)
-  - R2 = cDNA
+- Expected reads for this project:
+  - two_read (default): R1 = barcode (CB/UMI), R2 = cDNA.
+  - three_read (legacy 10x v1): R1 = cDNA, R2 = CB, R3 = UMI (R2+R3 merged).
+  - Aliases: `common`, `tenx_v2`, `tenx_v3`, `tenx_v2v3`, `tenx_5p` => two_read; `tenx_v1` => three_read.
 
 ### FASTQ naming
 Use consistent sample prefixes:
 - `SAMPLEID_R1.fastq.gz`
 - `SAMPLEID_R2.fastq.gz`
+- `SAMPLEID_R3.fastq.gz` (required only for three_read)
 
 All downstream stages assume `metadata.cleaned.tsv` from Stage 01.
 

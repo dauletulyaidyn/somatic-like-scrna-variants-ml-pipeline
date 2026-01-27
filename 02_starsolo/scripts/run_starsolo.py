@@ -3,6 +3,7 @@ import argparse
 import csv
 import json
 import os
+import gzip
 import subprocess
 import sys
 from pathlib import Path
@@ -27,6 +28,36 @@ def find_fastq(fastq_dir: Path, sample_id: str, read: str):
         if p.exists():
             return p
     return None
+
+
+def open_fastq(path: Path, mode: str):
+    if path.suffix == ".gz":
+        return gzip.open(path, mode, encoding="utf-8")
+    return path.open(mode, encoding="utf-8")
+
+
+def merge_cb_umi(r2_path: Path, r3_path: Path, out_path: Path):
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    with open_fastq(r2_path, "rt") as r2, open_fastq(r3_path, "rt") as r3, gzip.open(out_path, "wt", encoding="utf-8") as out:
+        while True:
+            h2 = r2.readline()
+            h3 = r3.readline()
+            if not h2 and not h3:
+                break
+            if not h2 or not h3:
+                raise ValueError("R2/R3 FASTQ lengths do not match")
+            s2 = r2.readline().strip()
+            s3 = r3.readline().strip()
+            p2 = r2.readline()
+            p3 = r3.readline()
+            q2 = r2.readline().strip()
+            q3 = r3.readline().strip()
+            if not (s2 and s3 and q2 and q3 and p2 and p3):
+                raise ValueError("Malformed R2/R3 FASTQ record")
+            out.write(h2)
+            out.write(s2 + s3 + "\n")
+            out.write(p2)
+            out.write(q2 + q3 + "\n")
 
 
 def run_cmd(cmd, log_path: Path):
@@ -59,6 +90,7 @@ def main():
     gtf = cfg.get("gtf")
     threads = str(cfg.get("threads", 8))
     solo = cfg.get("solo", {})
+    read_structure = (cfg.get("read_structure") or "two_read").strip().lower()
     cb_start = str(solo.get("CBstart"))
     cb_len = str(solo.get("CBlen"))
     umi_start = str(solo.get("UMIstart"))
@@ -67,6 +99,13 @@ def main():
     read_files_command = cfg.get("readFilesCommand", "")
     extra_args = cfg.get("extra_args", [])
 
+    if read_structure in ("two_read", "common", "tenx_v2", "tenx_v3", "tenx_v2v3", "tenx_5p", "tenx_5prime", "10x_v2", "10x_v3"):
+        read_structure = "two_read"
+    elif read_structure in ("three_read", "tenx_v1", "10x_v1"):
+        read_structure = "three_read"
+    else:
+        print(f"Unsupported read_structure: {read_structure}", file=sys.stderr)
+        return 2
     if not (star_index and gtf and cb_start and cb_len and umi_start and umi_len and whitelist):
         print("Missing required STARsolo config fields", file=sys.stderr)
         return 2
@@ -75,17 +114,29 @@ def main():
         sample_id = (row.get("sample_id") or "").strip()
         if not sample_id:
             continue
-        r2 = find_fastq(fastq_dir, sample_id, "R2")
         r1 = find_fastq(fastq_dir, sample_id, "R1")
-        if not r2 or not r1:
-            print(f"Missing R2/R1 FASTQ for {sample_id}", file=sys.stderr)
-            return 2
+        r2 = find_fastq(fastq_dir, sample_id, "R2")
+        r3 = find_fastq(fastq_dir, sample_id, "R3")
+        if read_structure == "three_read":
+            if not (r1 and r2 and r3):
+                print(f"Missing R1/R2/R3 FASTQ for {sample_id}", file=sys.stderr)
+                return 2
+            merged_cb_umi = Path(args.outdir) / sample_id / "cb_umi_R2R3.fastq.gz"
+            merge_cb_umi(r2, r3, merged_cb_umi)
+            cdna_read = r1
+            barcode_read = merged_cb_umi
+        else:
+            if not (r1 and r2):
+                print(f"Missing R1/R2 FASTQ for {sample_id}", file=sys.stderr)
+                return 2
+            cdna_read = r2
+            barcode_read = r1
 
         out_prefix = Path(args.outdir) / sample_id / ""
         cmd = [
             "STAR",
             "--genomeDir", star_index,
-            "--readFilesIn", str(r2), str(r1),
+            "--readFilesIn", str(cdna_read), str(barcode_read),
             "--runThreadN", threads,
             "--sjdbGTFfile", gtf,
             "--soloType", "CB_UMI_Simple",
