@@ -142,6 +142,12 @@ gunzip -c config/ref/whitelist.txt.gz > config/ref/whitelist.txt
   - Test FASTQ (2-read R1=28, R2~90): `read_structure=two_read`, whitelist `3M-february-2018_TRU.txt.gz` (10x 3' v3/v3.1).
   - CVD dataset (local `U:\! ! ! Datasets\! ! ! CVD Original dadtaset`): `read_structure=two_read`, whitelist `3M-february-2018_TRU.txt.gz` (10x 3' v3/v3.1).
 
+Whitelist selection requirement (must follow)
+- Before Stage 02, the AI agent must ask the user for the library chemistry (e.g., 10x v3/v3.1, v2, v1, 5' v3).
+- The user must provide `chemistry` OR explicitly approve the agent's inference.
+- The agent must then copy the corresponding file from `config/ref/whitelists/10x/` into `config/ref/whitelist.txt` (gunzip if needed).
+- If chemistry is unknown and user does not approve inference, the agent must stop and request clarification.
+
 FASTQ expectations
 - User-provided scRNA-seq dataset (control vs disease).
 - Supported read structures:

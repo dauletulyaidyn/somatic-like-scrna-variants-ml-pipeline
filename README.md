@@ -84,6 +84,12 @@ Place raw inputs in `data/` (not tracked by git):
 - FASTQ: `data/fastq/`
 - Metadata: `data/metadata/metadata.tsv`
 
+## Whitelist selection (required)
+Before running Stage 02, you must select the correct 10x whitelist for your library chemistry:
+- Identify chemistry (e.g., 10x 3' v3/v3.1, 3' v2, 3' v1, 5' v3).
+- Copy the corresponding file from `config/ref/whitelists/10x/` into `config/ref/whitelist.txt` (gunzip if needed).
+- If chemistry is unknown, stop and determine it from protocol/metadata before proceeding.
+
 ### FASTQ expectations
 - Data type: scRNA-seq.
 - STARsolo is configured for platforms with CB/UB tags from barcode reads.

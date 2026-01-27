@@ -38,6 +38,7 @@ Pre-run checks (manual)
   - macOS/Linux: run natively.
 - Verify STAR/STARsolo and samtools are installed.
 - Confirm reference FASTA, GTF, and STAR index paths are correct.
+- Confirm chemistry and copy the correct whitelist to `config/ref/whitelist.txt`.
 - You are responsible for errors/logs when running manually.
 
 Success criteria

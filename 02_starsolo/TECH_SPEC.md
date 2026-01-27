@@ -32,6 +32,7 @@ Actions
      - `two_read` (default): R1 = CB/UMI, R2 = cDNA.
      - `three_read`: R1 = cDNA, R2 = CB, R3 = UMI (R2+R3 merged).
      - Aliases: `common`, `tenx_v2`, `tenx_v3`, `tenx_v2v3`, `tenx_5p` => two_read; `tenx_v1` => three_read.
+   - Confirm chemistry with the user before running, and select the matching whitelist.
 4) For each sample, run STARsolo with:
    - two_read: cDNA = R2, barcode = R1 (CB/UMI)
    - three_read: cDNA = R1, barcode = R2+R3 (CB+UMI merged)
