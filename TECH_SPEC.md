@@ -92,6 +92,43 @@ Initial inputs (required)
   - `condition` (control [baseline, untreated] or disease [condition, treated])
   - `run_id`
 
+Reference preparation (required before Stage 02)
+- Set reference file locations:
+  - `config/ref/genome.fa`
+  - `config/ref/genes.gtf`
+  - `config/ref/STAR_index/`
+  - `config/ref/whitelist.txt`
+- Example: GENCODE human GRCh38 primary assembly (FASTA) + matching GTF:
+  - FASTA: `https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_48/GRCh38.primary_assembly.genome.fa.gz`
+  - GTF: `https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_48/gencode.v48.primary_assembly.annotation.gtf.gz`
+- Example download commands:
+```bash
+mkdir -p config/ref
+curl -L -o config/ref/genome.fa.gz https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_48/GRCh38.primary_assembly.genome.fa.gz
+curl -L -o config/ref/genes.gtf.gz https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_48/gencode.v48.primary_assembly.annotation.gtf.gz
+gunzip -c config/ref/genome.fa.gz > config/ref/genome.fa
+gunzip -c config/ref/genes.gtf.gz > config/ref/genes.gtf
+```
+- STAR index build (use the same FASTA/GTF):
+```bash
+mkdir -p config/ref/STAR_index
+STAR --runMode genomeGenerate \
+  --genomeDir config/ref/STAR_index \
+  --genomeFastaFiles config/ref/genome.fa \
+  --sjdbGTFfile config/ref/genes.gtf \
+  --sjdbOverhang <READ_LENGTH_MINUS_1> \
+  --runThreadN <THREADS>
+```
+- Whitelist (10x): pick the correct barcode list for your chemistry; 10x publishes the names and mapping by chemistry in their barcode inclusion list doc. Download or copy into `config/ref/whitelist.txt`.
+  - 3' v3/v3.1: `3M-february-2018.txt.gz`
+  - 3' v2: `737k-august-2016.txt`
+  - If you have Cell Ranger installed, the lists are inside its `lib/python/cellranger/barcodes/` directory.
+  - Direct download mirrors (if needed):
+```bash
+curl -L -o config/ref/whitelist.txt.gz https://github.com/10XGenomics/cellranger/raw/master/lib/python/cellranger/barcodes/3M-february-2018.txt.gz
+gunzip -c config/ref/whitelist.txt.gz > config/ref/whitelist.txt
+```
+
 FASTQ expectations
 - User-provided scRNA-seq dataset (control vs disease).
 - Read structure used in this project:
