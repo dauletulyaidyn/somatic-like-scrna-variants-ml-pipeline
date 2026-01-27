@@ -4,7 +4,7 @@ Purpose
 - Prepare raw scRNA-seq FASTQ and metadata for downstream steps.
 
 Inputs
-- Raw FASTQ files (R1/R2/R3 as applicable by platform).
+- Raw FASTQ files (R1/R2 as required by this pipeline).
 - Sample metadata (TSV/CSV).
 
 Outputs
@@ -51,7 +51,7 @@ Consistent naming rules
 - Example for sample `SRR14762238`:
   - `data/fastq/SRR14762238_R1.fastq.gz`
   - `data/fastq/SRR14762238_R2.fastq.gz`
-  - `data/fastq/SRR14762238_R3.fastq.gz`
+  - `data/fastq/SRR14762238_R2.fastq.gz`
 
 Notes
 - Keep raw FASTQ out of git.

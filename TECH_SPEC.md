@@ -132,15 +132,13 @@ gunzip -c config/ref/whitelist.txt.gz > config/ref/whitelist.txt
 
 FASTQ expectations
 - User-provided scRNA-seq dataset (control vs disease).
-- Read structure used in this project:
-  - R2 = barcode (CB/UB)
-  - R3 = cDNA
-  - R1 optional or index read
+- Read structure used in this project (2-read):
+  - R1 = barcode (CB/UMI)
+  - R2 = cDNA
 
 Naming convention
 - `SAMPLEID_R1.fastq.gz`
 - `SAMPLEID_R2.fastq.gz`
-- `SAMPLEID_R3.fastq.gz`
 
 Execution protocol
 1) Start in `01_input_data/`.

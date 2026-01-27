@@ -75,17 +75,17 @@ def main():
         sample_id = (row.get("sample_id") or "").strip()
         if not sample_id:
             continue
-        r3 = find_fastq(fastq_dir, sample_id, "R3")
         r2 = find_fastq(fastq_dir, sample_id, "R2")
-        if not r3 or not r2:
-            print(f"Missing R3/R2 FASTQ for {sample_id}", file=sys.stderr)
+        r1 = find_fastq(fastq_dir, sample_id, "R1")
+        if not r2 or not r1:
+            print(f"Missing R2/R1 FASTQ for {sample_id}", file=sys.stderr)
             return 2
 
         out_prefix = Path(args.outdir) / sample_id / ""
         cmd = [
             "STAR",
             "--genomeDir", star_index,
-            "--readFilesIn", str(r3), str(r2),
+            "--readFilesIn", str(r2), str(r1),
             "--runThreadN", threads,
             "--sjdbGTFfile", gtf,
             "--soloType", "CB_UMI_Simple",
