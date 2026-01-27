@@ -17,7 +17,7 @@ How to run (manual)
 1) Ensure Python + pandas/numpy/scipy are installed.
 2) Set paths in `config/correlation_config.json`.
 3) Run:
-   - `bash scripts/run_correlation.sh`
+   - `bash scripts/run_11_correlation_stage.sh`
 
 Pre-run checks (manual)
 - Verify OS and environment.

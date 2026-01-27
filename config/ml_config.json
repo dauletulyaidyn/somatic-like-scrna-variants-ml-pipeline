@@ -1,11 +1,11 @@
-﻿{
+{
   "feature_matrix": "06_gene_burden/outputs/artifacts/gene_burden_matrix.tsv",
   "metadata": "data/metadata/metadata.cleaned.tsv",
   "label_col": "condition",
-  "positive_label": "WE",
+  "positive_label": "disease",
   "cv_folds": 5,
   "cv_repeats": 10,
   "permutations": 1000,
-  "out_metrics": "07_ml_we_vs_uwe/outputs/metrics/ml_metrics.tsv",
-  "out_permutation": "07_ml_we_vs_uwe/outputs/metrics/permutation.tsv"
+  "out_metrics": "07_ml_control_vs_disease/outputs/metrics/ml_metrics.tsv",
+  "out_permutation": "07_ml_control_vs_disease/outputs/metrics/permutation.tsv"
 }

@@ -1,0 +1,43 @@
+﻿<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Pipeline Status</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 16px; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ddd; padding: 8px; }
+    th { background: #f3f3f3; }
+    .status-running { color: #0a7; }
+    .status-finished { color: #06c; }
+    .status-error { color: #c00; }
+  </style>
+</head>
+<body>
+  <h1>Pipeline Status</h1>
+  <table>
+    <tr>
+      <th>Stage</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Start</th>
+      <th>End</th>
+      <th>Duration (s)</th>
+      <th>Estimate error (s)</th>
+      <th>Last error</th>
+    </tr>
+    {% for s in stages %}
+    <tr>
+      <td><a href="/stage/{{s[0]}}">{{s[0]}}</a></td>
+      <td>{{s[1]}}</td>
+      <td class="status-{{s[2]}}">{{s[2]}}</td>
+      <td>{{s[3]}}</td>
+      <td>{{s[4]}}</td>
+      <td>{{s[5]}}</td>
+      <td>{{s[6]}}</td>
+      <td>{{s[7]}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>

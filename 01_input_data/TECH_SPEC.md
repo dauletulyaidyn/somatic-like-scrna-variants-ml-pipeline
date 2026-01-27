@@ -1,10 +1,10 @@
-﻿# AI Tech Spec: Stage 01 (Input data)
+﻿# AI Tech Spec: 01_input_data
 
 Objective
 - Standardize input FASTQ layout and clean sample metadata.
 
 Entry
-- Working directory: `01_input_data/`
+- Working directory: `01_input_data`
 - Required inputs:
   - FASTQ directory: `data/fastq/`
   - Metadata file: `data/metadata/metadata.tsv`
@@ -31,6 +31,5 @@ Exit criteria
 - All metadata sample IDs have matching FASTQ prefixes.
 
 Next stage
-- Proceed to `02_starsolo/`.
+- Proceed to `02_starsolo`.
 - Use `metadata.cleaned.tsv` as input labels.
-

@@ -1,0 +1,16 @@
+{
+  "stages": [
+    {"id": "01_input_data", "description": "Input validation and metadata cleaning", "estimate_seconds": 60},
+    {"id": "02_starsolo", "description": "STARsolo alignment (CB/UB BAM)", "estimate_seconds": 7200},
+    {"id": "03_bcftools_call", "description": "bcftools mpileup/call (filtered VCF)", "estimate_seconds": 3600},
+    {"id": "04_cohort_filter", "description": "Cohort-common filter", "estimate_seconds": 900},
+    {"id": "05_variant_to_gene", "description": "Variant to gene annotation", "estimate_seconds": 600},
+    {"id": "06_gene_burden", "description": "Gene-burden matrix", "estimate_seconds": 600},
+    {"id": "07_ml_control_vs_disease", "description": "ML classification + permutation", "estimate_seconds": 1200},
+    {"id": "08_cellsnp", "description": "cellsnp-lite per-cell allele counts", "estimate_seconds": 3600},
+    {"id": "09_cluster_aggregation", "description": "Cluster aggregation", "estimate_seconds": 900},
+    {"id": "10_mutational_analysis", "description": "Mutational analysis summaries", "estimate_seconds": 600},
+    {"id": "11_correlation", "description": "Correlation analysis", "estimate_seconds": 300},
+    {"id": "12_integrated_interpretation", "description": "Collect report bundle", "estimate_seconds": 300}
+  ]
+}

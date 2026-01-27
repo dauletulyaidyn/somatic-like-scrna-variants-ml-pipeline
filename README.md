@@ -1,4 +1,4 @@
-﻿# Pipeline Repository
+# Pipeline Repository
 
 Author: Kunikeyev Aidyn  
 DOI:  
@@ -7,8 +7,8 @@ Git:
 This repository contains a stage-by-stage pipeline for expressed-variant analysis from scRNA-seq.
 
 ## What this is
-- Data source: scRNA-seq (PRJNA736095), wound edge (WE) vs unwounded skin (UWE).
-- Goal: extract expressed variants, build gene-burden features, classify WE vs UWE, and correlate with mutational analysis outputs.
+- Data source: scRNA-seq with control (baseline, untreated) vs disease (condition, treated) groups.
+- Goal: extract expressed variants, build gene-burden features, classify control (baseline, untreated) vs disease (condition, treated), and correlate with mutational analysis outputs.
 - Each stage lives in its own folder with:
   - `TECH_SPEC.md` (AI agent instructions)
   - `README.md` (manual run instructions)
@@ -23,20 +23,7 @@ This repository contains a stage-by-stage pipeline for expressed-variant analysi
 - `../results/` : shared outputs outside repo (used for manuscript)
 - `for_report/` : curated tables/figures copied by final stage
 - `scripts/`    : shared utilities used across stages
-
-## Stage folders
-- `01_input_data/`
-- `02_starsolo/`
-- `03_bcftools_call/`
-- `04_cohort_filter/`
-- `05_variant_to_gene/`
-- `06_gene_burden/`
-- `07_ml_we_vs_uwe/`
-- `08_cellsnp/`
-- `09_cluster_aggregation/`
-- `10_mutational_analysis/`
-- `11_correlation/`
-- `12_integrated_interpretation/`
+- `status/`     : Flask status web UI (port 5556)
 
 ## Requirements (manual run)
 If you run without the AI agent, **you are responsible** for:
@@ -61,27 +48,36 @@ Core Python libraries (stage-specific)
 - scipy
 - scikit-learn
 - scanpy/anndata (optional)
+- flask (status UI)
 
 OS-specific setup (summary)
 - Windows (use WSL2 Ubuntu; run installs inside WSL):
   - `sudo apt-get update`
   - `sudo apt-get install -y samtools bcftools tabix`
   - `conda install -c bioconda -c conda-forge star cellsnp-lite`
-  - `pip install numpy pandas scipy scikit-learn scanpy anndata`
+  - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
 - macOS:
   - `brew install star samtools bcftools htslib tabix`
-  - `pip install numpy pandas scipy scikit-learn scanpy anndata`
-  - For cellsnp-lite, prefer conda: `conda install -c bioconda -c conda-forge cellsnp-lite`
+  - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
+  - `conda install -c bioconda -c conda-forge cellsnp-lite`
 - Linux (Ubuntu/Debian):
   - `sudo apt-get install -y samtools bcftools tabix`
-  - `pip install numpy pandas scipy scikit-learn scanpy anndata`
-  - For STAR and cellsnp-lite, prefer conda: `conda install -c bioconda -c conda-forge star cellsnp-lite`
+  - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
+  - `conda install -c bioconda -c conda-forge star cellsnp-lite`
 
-Resource guidance (rough)
-- STARsolo: 8–16 CPU cores, 32–64 GB RAM, 100+ GB disk
-- bcftools: 4–8 CPU cores, 8–16 GB RAM
-- cellsnp-lite: 4–8 CPU cores, 16–32 GB RAM
-- ML/correlation: 2–8 CPU cores, 8–16 GB RAM
+## Stage folders
+- `01_input_data/`
+- `02_starsolo/`
+- `03_bcftools_call/`
+- `04_cohort_filter/`
+- `05_variant_to_gene/`
+- `06_gene_burden/`
+- `07_ml_control_vs_disease/`
+- `08_cellsnp/`
+- `09_cluster_aggregation/`
+- `10_mutational_analysis/`
+- `11_correlation/`
+- `12_integrated_interpretation/`
 
 ## Required initial inputs
 Place raw inputs in `data/` (not tracked by git):
@@ -103,6 +99,11 @@ Use consistent sample prefixes:
 - `SAMPLEID_R3.fastq.gz`
 
 All downstream stages assume `metadata.cleaned.tsv` from Stage 01.
+
+## Status web UI (port 5556)
+1) Install Flask: `pip install flask`
+2) Run server: `python status/app.py --port 5556`
+3) Open: `http://localhost:5556`
 
 ## Start here
 1) Go to `01_input_data/`.

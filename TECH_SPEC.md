@@ -1,4 +1,4 @@
-﻿# AI Tech Spec (Root)
+# AI Tech Spec (Root)
 
 Purpose
 - Provide an entry point for AI agents to execute the pipeline end-to-end.
@@ -12,6 +12,7 @@ Repository layout
   - `../results/`  : shared outputs outside repo (used for manuscript)
   - `for_report/`  : curated tables/figures copied by final stage
   - `scripts/`  : shared utilities
+  - `status/`   : Flask status web UI
 - Stage folders are numbered: `01_...` -> `02_...` -> ... -> `12_...`.
 - Each stage folder contains:
   - `TECH_SPEC.md` (agent instructions)
@@ -24,17 +25,18 @@ Global prerequisites (check before running any stage)
   - Windows users must use WSL2 (Ubuntu) for toolchain stability.
   - macOS or Linux supported natively.
   - Python 3.10+ available.
-- Core tools (stage-specific use):
-  - STAR/STARsolo
-  - samtools
-  - bcftools + htslib + tabix
-  - cellsnp-lite (for stage 08)
-  - R (optional, if used for plots)
-- Core Python libs (stage-specific use):
-  - numpy, pandas
-  - scipy
-  - scikit-learn (ML stage)
-  - scanpy/anndata (single-cell utilities, optional)
+
+Core tools (stage-specific use)
+- STAR/STARsolo
+- samtools
+- bcftools + htslib + tabix
+- cellsnp-lite
+
+Core Python libs (stage-specific use)
+- numpy, pandas, scipy
+- scikit-learn
+- scanpy/anndata (optional)
+- flask (status UI)
 
 Global checks (examples)
 - OS check:
@@ -59,31 +61,39 @@ OS-specific install recipes (reference)
   - `sudo apt-get update`
   - `sudo apt-get install -y samtools bcftools tabix`
   - `conda install -c bioconda -c conda-forge star cellsnp-lite`
-  - `pip install numpy pandas scipy scikit-learn scanpy anndata`
+  - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
 - macOS:
   - `brew install star samtools bcftools htslib tabix`
-  - `pip install numpy pandas scipy scikit-learn scanpy anndata`
+  - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
   - `conda install -c bioconda -c conda-forge cellsnp-lite`
 - Linux (Ubuntu/Debian):
   - `sudo apt-get install -y samtools bcftools tabix`
-  - `pip install numpy pandas scipy scikit-learn scanpy anndata`
+  - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
   - `conda install -c bioconda -c conda-forge star cellsnp-lite`
 
 Resource guidance (rough)
-- STARsolo alignment: CPU 8-16 cores; RAM 32-64 GB (genome index dependent); disk 100+ GB
-- bcftools calling: CPU 4-8 cores; RAM 8-16 GB; disk moderate
-- cellsnp-lite: CPU 4-8 cores; RAM 16-32 GB; disk moderate
+- STARsolo alignment: CPU 8-16 cores; RAM 32-64 GB; disk 100+ GB
+- bcftools calling: CPU 4-8 cores; RAM 8-16 GB
+- cellsnp-lite: CPU 4-8 cores; RAM 16-32 GB
 - ML + correlation: CPU 2-8 cores; RAM 8-16 GB
+
+Status system (required)
+- Initialize status DB before running any stage:
+  - `python scripts/status.py init --config config/status_config.json`
+- Each stage run script logs start/finish/error and scans outputs.
+- Web UI:
+  - `python status/app.py --port 5556`
+  - Open `http://localhost:5556`
 
 Initial inputs (required)
 - `data/fastq/` : raw scRNA-seq FASTQ files.
 - `data/metadata/metadata.tsv` : sample metadata with columns:
   - `sample_id` (matches FASTQ filename prefix)
-  - `condition` (WE or UWE)
+  - `condition` (control [baseline, untreated] or disease [condition, treated])
   - `run_id`
 
 FASTQ expectations
-- scRNA-seq dataset (PRJNA736095).
+- User-provided scRNA-seq dataset (control vs disease).
 - Read structure used in this project:
   - R2 = barcode (CB/UB)
   - R3 = cDNA

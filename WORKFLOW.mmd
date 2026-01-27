@@ -1,5 +1,5 @@
-﻿---
-title: "Somatic-like expressed variants from scRNA-seq in chronic wounds (WE vs UWE): pipeline + ML classification"
+---
+title: "Somatic-like expressed variants from scRNA-seq (control [baseline, untreated] vs disease [condition, treated]): pipeline + ML classification"
 author: "Kunikeyev Aidyn"
 doi: ""
 git: ""
@@ -11,7 +11,7 @@ flowchart TD
     C --> D["Cohort-common filter<br>In: filtered VCF (all samples)<br>Out: cohort VCF"]
     D --> E["Expressed variant->gene tables<br>In: cohort VCF + gene annotation (GTF)<br>Out: long TSV"]
     E --> F["Somatic-like gene-burden features<br>In: long TSV<br>Out: gene-burden matrix (TSV, CSV)"]
-    F --> G["ML: WE vs UWE<br>In: gene-burden matrix + labels (metadata)<br>Out: CV metrics + permutation p-values"]
+    F --> G["ML: control (baseline, untreated) vs disease (condition, treated)<br>In: gene-burden matrix + labels (metadata)<br>Out: CV metrics + permutation p-values"]
     B --> I["cellsnp-lite<br>In: CB/UB BAM + barcodes + VCF<br>Out: per-cell AD/DP matrices (MTX) + variants.tsv"]
     I --> J["Cluster aggregation<br>In: cellsnp outputs + cell->cluster map (TSV)<br>Out: per-cluster counts (TSV)"]
     F --> H["Correlation with mutational analysis<br>In: gene-burden + cluster counts + mutational outputs<br>Out: correlation/enrichment stats (TSV) + FDR"]

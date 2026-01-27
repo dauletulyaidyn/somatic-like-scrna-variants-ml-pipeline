@@ -15,7 +15,7 @@ How to run (manual)
 1) Ensure Python + numpy/scipy are installed.
 2) Set paths in `config/cluster_aggregation_config.json`.
 3) Run:
-   - `bash scripts/run_cluster_aggregation.sh`
+   - `bash scripts/run_09_cluster_aggregation_stage.sh`
 
 Pre-run checks (manual)
 - Verify OS and environment.

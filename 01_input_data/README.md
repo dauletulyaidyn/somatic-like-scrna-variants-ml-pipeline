@@ -1,8 +1,7 @@
-﻿# Stage 01: Input data
+﻿# 01_input_data: Input data
 
 Purpose
 - Prepare raw scRNA-seq FASTQ and metadata for downstream steps.
-- Ensure consistent sample IDs and file layout.
 
 Inputs
 - Raw FASTQ files (R1/R2/R3 as applicable by platform).
@@ -14,9 +13,9 @@ Outputs
 
 How to run (manual)
 1) Place FASTQ files under `data/fastq/` with consistent naming.
-2) Create `data/metadata/metadata.tsv` with at least: `sample_id`, `condition` (WE/UWE), `run_id`.
+2) Create `data/metadata/metadata.tsv` with at least: `sample_id`, `condition` (control [baseline, untreated] / disease [condition, treated]), `run_id`.
 3) Run the check script:
-   - `python scripts/validate_inputs.py --fastq-dir ../data/fastq --metadata ../data/metadata/metadata.tsv --out ../data/metadata/metadata.cleaned.tsv`
+   - `bash scripts/run_01_input_data_stage.sh`
 
 Pre-run checks (manual)
 - Verify OS and environment.
@@ -28,12 +27,12 @@ Pre-run checks (manual)
 
 Metadata schema (minimal)
 - `sample_id` (string): must match FASTQ prefix exactly.
-- `condition` (string): `WE` or `UWE`.
+- `condition` (string): `control` (baseline, untreated) or `disease` (condition, treated).
 - `run_id` (string): run/library identifier (e.g., SRR accession).
 
 Metadata schema (recommended)
 - `patient_id` (string)
-- `sample_type` (string; e.g., `wound_edge`, `unwounded_skin`)
+- `sample_type` (string; e.g., `baseline`, `condition`)
 - `library_prep` (string)
 - `batch` (string)
 - `fastq_prefix` (string; only if different from `sample_id`)
@@ -42,8 +41,8 @@ Metadata schema (recommended)
 Example metadata (TSV)
 ```
 sample_id	condition	run_id	patient_id	sample_type	batch
-SRR14762238	WE	SRR14762238	P01	wound_edge	B1
-SRR14762239	UWE	SRR14762239	P01	unwounded_skin	B1
+SRR14762238	control	SRR14762238	P01	baseline	B1
+SRR14762239	disease	SRR14762239	P01	condition	B1
 ```
 
 Consistent naming rules

@@ -1,10 +1,10 @@
-﻿# AI Tech Spec: 07_ml_we_vs_uwe
+# AI Tech Spec: 07_ml_control_vs_disease
 
 Objective
-- Train ML models to classify WE vs UWE using gene-burden features.
+- Train ML models to classify control (baseline, untreated) vs disease (condition, treated) using gene-burden features.
 
 Entry
-- Working directory: `07_ml_we_vs_uwe`
+- Working directory: `07_ml_control_vs_disease`
 - Required inputs:
   - Gene-burden matrix from `06_gene_burden/outputs/artifacts/`
   - `data/metadata/metadata.cleaned.tsv`
@@ -25,6 +25,10 @@ Actions
 3) Ensure `config/ml_config.json` is filled.
 4) Run ML script.
 5) Save outputs under `outputs/`.
+
+Notes
+- Class balance can be n != m; warn users about strong imbalance and use stratified CV or class weights as needed.
+- `positive_label` should be set to `disease`.
 
 Outputs
 - CV metrics and permutation test results.

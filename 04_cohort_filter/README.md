@@ -16,7 +16,7 @@ How to run (manual)
 1) Ensure bcftools + tabix are installed.
 2) Set parameters in `config/cohort_filter_config.json`.
 3) Run:
-   - `bash scripts/run_cohort_filter.sh`
+   - `bash scripts/run_04_cohort_filter_stage.sh`
 
 Pre-run checks (manual)
 - Verify OS and environment.

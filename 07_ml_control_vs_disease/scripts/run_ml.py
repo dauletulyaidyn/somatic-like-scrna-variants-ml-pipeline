@@ -45,7 +45,7 @@ def load_data(feature_path, meta_path, label_col, positive_label):
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Run ML for WE vs UWE.")
+    ap = argparse.ArgumentParser(description="Run ML for control vs disease.")
     ap.add_argument("--config", required=True, help="config JSON")
     args = ap.parse_args()
 

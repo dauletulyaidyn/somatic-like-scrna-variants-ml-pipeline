@@ -17,7 +17,7 @@ How to run (manual)
 1) Ensure Python + pandas/numpy are installed.
 2) Set paths in `config/mutational_analysis_config.json`.
 3) Run:
-   - `bash scripts/run_mutational_analysis.sh`
+   - `bash scripts/run_10_mutational_analysis_stage.sh`
 
 Pre-run checks (manual)
 - Verify OS and environment.

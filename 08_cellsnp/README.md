@@ -16,7 +16,7 @@ How to run (manual)
 1) Ensure cellsnp-lite, samtools, tabix are installed.
 2) Set paths in `config/cellsnp_config.json`.
 3) Run:
-   - `bash scripts/run_cellsnp.sh`
+   - `bash scripts/run_08_cellsnp_stage.sh`
 
 Pre-run checks (manual)
 - Verify OS and environment.

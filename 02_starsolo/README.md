@@ -19,7 +19,7 @@ How to run (manual)
 1) Ensure STAR and STARsolo are installed and on PATH.
 2) Edit `config/starsolo_config.json` (paths + CB/UMI settings).
 3) Run the stage script:
-   - `bash scripts/run_starsolo.sh`
+   - `bash scripts/run_02_starsolo_stage.sh`
 4) Outputs are written into `outputs/`.
 
 Config notes (important)

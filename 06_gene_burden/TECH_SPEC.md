@@ -1,4 +1,4 @@
-﻿# AI Tech Spec: 06_gene_burden
+# AI Tech Spec: 06_gene_burden
 
 Objective
 - Build gene-level burden matrix from variant->gene table.
@@ -31,4 +31,4 @@ Exit criteria
 - Output matrix exists and is non-empty.
 
 Next stage
-- Proceed to `07_ml_we_vs_uwe`.
+- Proceed to `07_ml_control_vs_disease`.

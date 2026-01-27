@@ -15,7 +15,7 @@ How to run (manual)
 1) Ensure Python + pandas are installed.
 2) Set paths in `config/variant_to_gene_config.json`.
 3) Run:
-   - `bash scripts/run_variant_to_gene.sh`
+   - `bash scripts/run_05_variant_to_gene_stage.sh`
 
 Pre-run checks (manual)
 - Verify OS and environment.

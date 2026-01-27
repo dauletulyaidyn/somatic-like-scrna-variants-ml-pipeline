@@ -13,7 +13,7 @@ Outputs
 How to run (manual)
 1) Ensure all prior stages completed.
 2) Run:
-   - `bash scripts/collect_for_report.sh`
+   - `bash scripts/run_12_integrated_interpretation_stage.sh`
 
 Pre-run checks (manual)
 - Verify OS and environment.

@@ -1,0 +1,11 @@
+02_starsolo|python3 scripts/run_starsolo.py --metadata ../data/metadata/metadata.cleaned.tsv --fastq-dir ../data/fastq --config ../config/starsolo_config.json --outdir outputs/artifacts
+03_bcftools_call|python3 scripts/run_bcftools.py --bam-dir ../02_starsolo/outputs/artifacts --config ../config/bcftools_config.json --outdir outputs/artifacts
+04_cohort_filter|python3 scripts/run_cohort_filter.py --vcf-dir ../03_bcftools_call/outputs/artifacts --config ../config/cohort_filter_config.json --outdir outputs/artifacts
+05_variant_to_gene|python3 scripts/run_variant_to_gene.py --config ../config/variant_to_gene_config.json
+06_gene_burden|python3 scripts/run_gene_burden.py --config ../config/gene_burden_config.json
+07_ml_control_vs_disease|python3 scripts/run_ml.py --config ../config/ml_config.json
+08_cellsnp|python3 scripts/run_cellsnp.py --config ../config/cellsnp_config.json
+09_cluster_aggregation|python3 scripts/run_cluster_aggregation.py --config ../config/cluster_aggregation_config.json
+10_mutational_analysis|python3 scripts/run_mutational_analysis.py --config ../config/mutational_analysis_config.json
+11_correlation|python3 scripts/run_correlation.py --config ../config/correlation_config.json
+12_integrated_interpretation|python3 scripts/collect_for_report.py --repo-root .. --out for_report

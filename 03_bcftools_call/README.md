@@ -4,7 +4,7 @@ Purpose
 - Call expressed variants from CB/UB-tagged BAM files.
 
 Inputs
-- CB/UB BAM + BAI from `02_starsolo` (in `02_starsolo/outputs/artifacts/`).
+- CB/UB BAM + BAI from `02_starsolo/outputs/artifacts/`.
 - Reference genome FASTA (e.g., `config/ref/genome.fa`).
 - Optional: target regions BED (if limiting to expressed genes).
 
@@ -17,7 +17,7 @@ How to run (manual)
 1) Ensure bcftools, samtools, and tabix are installed.
 2) Set paths in `config/bcftools_config.json`.
 3) Run:
-   - `bash scripts/run_bcftools.sh`
+   - `bash scripts/run_03_bcftools_call_stage.sh`
 
 Pre-run checks (manual)
 - Verify OS and environment.
