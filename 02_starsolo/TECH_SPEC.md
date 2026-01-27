@@ -25,6 +25,7 @@ Actions
 1) Verify FASTQ files exist for all samples in `metadata.cleaned.tsv`.
 2) Verify reference FASTA, GTF, STAR index, and whitelist are available.
    - See root `TECH_SPEC.md` > "Reference preparation (required before Stage 02)" for download links and build steps.
+   - If whitelist is missing, download the correct 10x list (chemistry-specific) and save it as `config/ref/whitelist.txt`.
 3) Ensure `config/starsolo_config.json` is filled (paths + CB/UMI settings).
 4) For each sample, run STARsolo with:
    - cDNA read = R3

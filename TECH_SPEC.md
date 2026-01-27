@@ -128,6 +128,7 @@ STAR --runMode genomeGenerate \
 curl -L -o config/ref/whitelist.txt.gz https://github.com/10XGenomics/cellranger/raw/master/lib/python/cellranger/barcodes/3M-february-2018.txt.gz
 gunzip -c config/ref/whitelist.txt.gz > config/ref/whitelist.txt
 ```
+- Auto-download policy (required): the agent must download the correct whitelist for the dataset chemistry and place it at `config/ref/whitelist.txt` before running Stage 02. If chemistry is unknown, the agent must ask the user or infer from dataset metadata and report the choice.
 
 FASTQ expectations
 - User-provided scRNA-seq dataset (control vs disease).
