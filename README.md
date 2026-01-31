@@ -147,3 +147,6 @@ to enforce LF for `*.sh`, `*.py`, `*.json`, and `*.md`.
   - `08_cellsnp_1_heatmap.jpg`
   - `08_cellsnp_1_heatmap.csv`
   - `08_cellsnp_2_summary.tsv`
+
+## Changelog
+See `CHANGELOG.md` for release notes.
