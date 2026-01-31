@@ -29,8 +29,14 @@ def main():
     args = ap.parse_args()
 
     cfg = json.loads(Path(args.config).read_text(encoding="utf-8"))
-    gene_burden_path = Path(cfg.get("gene_burden", ""))
-    mut_burden_path = Path(cfg.get("mut_burden", ""))
+    repo_root = Path(__file__).resolve().parents[2]
+
+    def resolve_cfg_path(p: str) -> Path:
+        p = Path(p)
+        return p if p.is_absolute() else (repo_root / p)
+
+    gene_burden_path = resolve_cfg_path(cfg.get("gene_burden", ""))
+    mut_burden_path = resolve_cfg_path(cfg.get("mut_burden", ""))
 
     if not gene_burden_path.exists() or not mut_burden_path.exists():
         print("Missing required inputs", file=sys.stderr)
@@ -52,7 +58,7 @@ def main():
     rho, p = spearmanr(merged["variant_count"], merged["gene_burden_total"])
     out = pd.DataFrame([{"metric": "spearman", "rho": rho, "p": p}])
 
-    out_path = Path(cfg.get("out_corr", "11_correlation/outputs/metrics/correlation.tsv"))
+    out_path = resolve_cfg_path(cfg.get("out_corr", "11_correlation/outputs/metrics/correlation.tsv"))
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out.to_csv(out_path, sep="\t", index=False)
     return 0

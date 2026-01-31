@@ -1,4 +1,4 @@
-﻿{
+{
   "ref_fasta": "config/ref/genome.fa",
   "threads": 4,
   "min_baseq": 20,

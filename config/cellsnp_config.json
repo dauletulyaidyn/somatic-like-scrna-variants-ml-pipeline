@@ -1,4 +1,4 @@
-﻿{
+{
   "bam_dir": "02_starsolo/outputs/artifacts",
   "vcf": "04_cohort_filter/outputs/artifacts/cohort.common.vcf.gz",
   "barcode_whitelist": "config/ref/whitelist.txt",

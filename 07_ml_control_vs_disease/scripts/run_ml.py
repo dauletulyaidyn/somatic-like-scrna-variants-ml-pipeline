@@ -51,8 +51,18 @@ def main():
 
     cfg_path = Path(args.config)
     cfg = json.loads(cfg_path.read_text(encoding="utf-8"))
+    repo_root = Path(__file__).resolve().parents[2]
 
-    X, y = load_data(cfg["feature_matrix"], cfg["metadata"], cfg["label_col"], cfg["positive_label"])
+    def resolve_cfg_path(p: str) -> str:
+        p = Path(p)
+        return str(p if p.is_absolute() else (repo_root / p))
+
+    feature_path = resolve_cfg_path(cfg["feature_matrix"])
+    meta_path = resolve_cfg_path(cfg["metadata"])
+    out_metrics = resolve_cfg_path(cfg["out_metrics"])
+    out_perm = resolve_cfg_path(cfg["out_permutation"])
+
+    X, y = load_data(feature_path, meta_path, cfg["label_col"], cfg["positive_label"])
 
     rkf = RepeatedStratifiedKFold(n_splits=cfg["cv_folds"], n_repeats=cfg["cv_repeats"], random_state=42)
     model = LogisticRegression(max_iter=1000)
@@ -64,8 +74,8 @@ def main():
         scores.append(roc_auc_score(y[test_idx], probs))
 
     metrics = pd.DataFrame({"metric": ["roc_auc_mean", "roc_auc_std"], "value": [np.mean(scores), np.std(scores)]})
-    Path(cfg["out_metrics"]).parent.mkdir(parents=True, exist_ok=True)
-    metrics.to_csv(cfg["out_metrics"], sep="\t", index=False)
+    Path(out_metrics).parent.mkdir(parents=True, exist_ok=True)
+    metrics.to_csv(out_metrics, sep="\t", index=False)
 
     # permutation test
     perm_scores = []
@@ -79,7 +89,7 @@ def main():
         perm_scores.append(np.mean(fold_scores))
 
     perm = pd.DataFrame({"perm_score": perm_scores})
-    perm.to_csv(cfg["out_permutation"], sep="\t", index=False)
+    perm.to_csv(out_perm, sep="\t", index=False)
 
     return 0
 

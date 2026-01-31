@@ -1,5 +1,6 @@
 ﻿#!/usr/bin/env python3
 import argparse
+import gzip
 import json
 import sys
 from pathlib import Path
@@ -13,9 +14,15 @@ def main():
     args = ap.parse_args()
 
     cfg = json.loads(Path(args.config).read_text(encoding="utf-8"))
-    tsv_path = Path(cfg.get("variant_gene_tsv", ""))
-    vcf_dir = Path(cfg.get("vcf_dir", ""))
-    out_path = Path(cfg.get("out_matrix", ""))
+    repo_root = Path(__file__).resolve().parents[2]
+
+    def resolve_cfg_path(p: str) -> Path:
+        p = Path(p)
+        return p if p.is_absolute() else (repo_root / p)
+
+    tsv_path = resolve_cfg_path(cfg.get("variant_gene_tsv", ""))
+    vcf_dir = resolve_cfg_path(cfg.get("vcf_dir", ""))
+    out_path = resolve_cfg_path(cfg.get("out_matrix", ""))
 
     if not tsv_path.exists():
         print(f"Missing variant-gene TSV: {tsv_path}", file=sys.stderr)
@@ -38,15 +45,20 @@ def main():
     genes = var_to_gene[["gene_id", "gene_name"]].drop_duplicates().reset_index(drop=True)
 
     # Parse per-sample VCFs and count variants per gene
-    vcf_files = sorted(vcf_dir.glob("*.vcf"))
+    vcf_files = sorted(vcf_dir.glob("*.vcf.gz"))
+    if not vcf_files:
+        vcf_files = sorted(vcf_dir.glob("*.vcf"))
     if not vcf_files:
         print("No VCF files found", file=sys.stderr)
         return 2
 
     for vcf in vcf_files:
-        sample_id = vcf.stem.replace(".filtered", "")
+        sample_id = vcf.name.replace(".filtered.vcf.gz", "").replace(".filtered.vcf", "")
+        if sample_id.endswith("Aligned.sortedByCoord.out"):
+            sample_id = sample_id.replace("Aligned.sortedByCoord.out", "")
         sample_keys = set()
-        with vcf.open("r", encoding="utf-8") as f:
+        opener = gzip.open if vcf.suffix == ".gz" else open
+        with opener(vcf, "rt", encoding="utf-8") as f:
             for line in f:
                 if line.startswith("#"):
                     continue

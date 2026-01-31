@@ -11,4 +11,5 @@ Run
 The UI shows:
 - Stage statuses
 - Events (start/finish/error)
+- Configured inputs/outputs per stage (from config/status_config.json)
 - File list with sizes and previews

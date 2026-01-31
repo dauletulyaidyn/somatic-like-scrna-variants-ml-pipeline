@@ -21,11 +21,17 @@ def main():
     args = ap.parse_args()
 
     cfg = json.loads(Path(args.config).read_text(encoding="utf-8"))
-    bam_dir = Path(cfg.get("bam_dir", ""))
-    vcf = Path(cfg.get("vcf", ""))
-    whitelist = Path(cfg.get("barcode_whitelist", ""))
+    repo_root = Path(__file__).resolve().parents[2]
+
+    def resolve_cfg_path(p: str) -> Path:
+        p = Path(p)
+        return p if p.is_absolute() else (repo_root / p)
+
+    bam_dir = resolve_cfg_path(cfg.get("bam_dir", ""))
+    vcf = resolve_cfg_path(cfg.get("vcf", ""))
+    whitelist = resolve_cfg_path(cfg.get("barcode_whitelist", ""))
     threads = str(cfg.get("threads", 4))
-    outdir = Path(cfg.get("outdir", "outputs/artifacts"))
+    outdir = resolve_cfg_path(cfg.get("outdir", "outputs/artifacts"))
 
     if not bam_dir.exists():
         print(f"Missing bam_dir: {bam_dir}", file=sys.stderr)
@@ -44,11 +50,16 @@ def main():
 
     for bam in bams:
         sample_id = bam.stem
+        if sample_id.endswith("Aligned.sortedByCoord.out"):
+            sample_id = sample_id.replace("Aligned.sortedByCoord.out", "")
         sample_out = outdir / sample_id
+        sample_out.mkdir(parents=True, exist_ok=True)
+        solo_barcodes = bam.parent / f"{sample_id}Solo.out" / "Gene" / "filtered" / "barcodes.tsv"
+        barcode_file = solo_barcodes if solo_barcodes.exists() else whitelist
         cmd = [
             "cellsnp-lite",
             "-s", str(bam),
-            "-b", str(whitelist),
+            "-b", str(barcode_file),
             "-R", str(vcf),
             "-O", str(sample_out),
             "-p", threads,

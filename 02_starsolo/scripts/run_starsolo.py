@@ -79,7 +79,9 @@ def main():
 
     meta_path = Path(args.metadata)
     fastq_dir = Path(args.fastq_dir)
-    cfg = load_config(Path(args.config))
+    cfg_path = Path(args.config)
+    cfg = load_config(cfg_path)
+    repo_root = Path(__file__).resolve().parents[2]
 
     rows = read_metadata(meta_path)
     if not rows:
@@ -110,6 +112,14 @@ def main():
         print("Missing required STARsolo config fields", file=sys.stderr)
         return 2
 
+    def resolve_cfg_path(p):
+        p = Path(p)
+        return p if p.is_absolute() else (repo_root / p)
+
+    star_index = str(resolve_cfg_path(star_index))
+    gtf = str(resolve_cfg_path(gtf))
+    whitelist = str(resolve_cfg_path(whitelist))
+
     for row in rows:
         sample_id = (row.get("sample_id") or "").strip()
         if not sample_id:
@@ -133,6 +143,9 @@ def main():
             barcode_read = r1
 
         out_prefix = Path(args.outdir) / sample_id / ""
+        tmp_base = Path(os.environ.get("STAR_TMP_DIR", "/tmp"))
+        tmp_dir = tmp_base / f"STARtmp_{sample_id}_{os.getpid()}"
+
         cmd = [
             "STAR",
             "--genomeDir", star_index,
@@ -146,6 +159,7 @@ def main():
             "--soloUMIlen", umi_len,
             "--soloCBwhitelist", whitelist,
             "--outFileNamePrefix", str(out_prefix),
+            "--outTmpDir", str(tmp_dir),
         ]
         if read_files_command:
             cmd += ["--readFilesCommand", read_files_command]
@@ -157,6 +171,13 @@ def main():
         if rc != 0:
             print(f"STARsolo failed for {sample_id} (exit {rc})", file=sys.stderr)
             return rc
+
+        bam_path = Path(args.outdir) / sample_id / "Aligned.sortedByCoord.out.bam"
+        if bam_path.exists():
+            idx_rc = subprocess.run(["samtools", "index", str(bam_path)]).returncode
+            if idx_rc != 0:
+                print(f"samtools index failed for {sample_id} (exit {idx_rc})", file=sys.stderr)
+                return idx_rc
 
     return 0
 

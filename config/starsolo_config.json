@@ -1,4 +1,4 @@
-﻿{
+{
   "star_index": "config/ref/STAR_index/",
   "gtf": "config/ref/genes.gtf",
   "threads": 8,
@@ -10,6 +10,6 @@
     "UMIlen": 10,
     "whitelist": "config/ref/whitelist.txt"
   },
-  "readFilesCommand": "zcat",
-  "extra_args": ["--outSAMtype", "BAM", "SortedByCoordinate"]
+  "readFilesCommand": "cat",
+  "extra_args": ["--outSAMtype", "BAM", "SortedByCoordinate", "--soloBarcodeReadLength", "0"]
 }

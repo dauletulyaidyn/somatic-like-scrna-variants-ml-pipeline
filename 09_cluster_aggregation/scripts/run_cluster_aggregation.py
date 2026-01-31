@@ -21,9 +21,15 @@ def main():
     args = ap.parse_args()
 
     cfg = json.loads(Path(args.config).read_text(encoding="utf-8"))
-    cellsnp_dir = Path(cfg.get("cellsnp_dir", ""))
-    cell_cluster_map = Path(cfg.get("cell_cluster_map", ""))
-    outdir = Path(cfg.get("outdir", "outputs/artifacts"))
+    repo_root = Path(__file__).resolve().parents[2]
+
+    def resolve_cfg_path(p: str) -> Path:
+        p = Path(p)
+        return p if p.is_absolute() else (repo_root / p)
+
+    cellsnp_dir = resolve_cfg_path(cfg.get("cellsnp_dir", ""))
+    cell_cluster_map = resolve_cfg_path(cfg.get("cell_cluster_map", ""))
+    outdir = resolve_cfg_path(cfg.get("outdir", "outputs/artifacts"))
     min_alt = str(cfg.get("min_alt", 3))
 
     if not cellsnp_dir.exists():
@@ -41,9 +47,10 @@ def main():
     for sdir in sample_dirs:
         srr = sdir.name
         out_path = outdir / f"{srr}.cellsnp.cluster_counts.tsv.gz"
+        out_path.parent.mkdir(parents=True, exist_ok=True)
         cmd = [
             "python3",
-            "../scripts/aggregate_cellsnp_by_cluster.py",
+            str(Path(__file__).resolve().parent / "aggregate_cellsnp_by_cluster.py"),
             "--srr", srr,
             "--cellsnp-outdir", str(sdir),
             "--cell-cluster-map", str(cell_cluster_map),

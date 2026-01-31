@@ -25,7 +25,9 @@ def main():
     outdir = Path(args.outdir)
     outdir.mkdir(parents=True, exist_ok=True)
 
-    vcfs = sorted(vcf_dir.glob("*.vcf"))
+    vcfs = sorted(vcf_dir.glob("*.vcf.gz"))
+    if not vcfs:
+        vcfs = sorted(vcf_dir.glob("*.vcf"))
     if not vcfs:
         print("No VCFs found", file=sys.stderr)
         return 2
@@ -51,6 +53,7 @@ def main():
     ]
 
     rc = Path("outputs/metrics").joinpath("cohort_filter.log")
+    rc.parent.mkdir(parents=True, exist_ok=True)
     with rc.open("w", encoding="utf-8") as log:
         log.write("CMD: " + " ".join(merge_cmd) + "\n")
         log.flush()

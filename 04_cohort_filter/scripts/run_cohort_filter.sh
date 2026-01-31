@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env bash
+#!/usr/bin/env bash
 set -euo pipefail
 
 VCF_DIR="../03_bcftools_call/outputs/artifacts"
