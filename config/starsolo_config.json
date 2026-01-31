@@ -1,5 +1,5 @@
 {
-  "star_index": "config/ref/STAR_index/",
+  "star_index": "/home/justaidyn/star_index",
   "gtf": "config/ref/genes.gtf",
   "threads": 8,
   "read_structure": "two_read",
@@ -10,6 +10,7 @@
     "UMIlen": 10,
     "whitelist": "config/ref/whitelist.txt"
   },
-  "readFilesCommand": "cat",
+  "readFilesCommand": "zcat",
   "extra_args": ["--outSAMtype", "BAM", "SortedByCoordinate", "--soloBarcodeReadLength", "0"]
 }
+
