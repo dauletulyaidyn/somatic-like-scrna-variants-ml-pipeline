@@ -84,6 +84,20 @@ Place raw inputs in `data/` (not tracked by git):
 - FASTQ: `data/fastq/`
 - Metadata: `data/metadata/metadata.tsv`
 
+## Reference setup (required before Stage 02)
+You must provide reference files and a STAR index:
+- `config/ref/genes.gtf`
+- `config/ref/genome.fa` (and `.fai`)
+- `config/ref/whitelist.txt` (10x barcode list)
+- `config/ref/STAR_index/` (STAR genome index built from the same FASTA + GTF)
+
+### STAR index location (WSL/Windows note)
+On Windows, run the pipeline inside WSL and keep the STAR index on the Linux filesystem
+(e.g., `/home/<user>/star_index`) to avoid FIFO/NTFS issues.
+- If you place the index outside the repo, set `star_index` in `config/starsolo_config.json`
+  to the absolute Linux path (e.g., `/home/justaidyn/star_index`).
+- If you keep it in the repo, use `config/ref/STAR_index/` and ensure it is on a Linux path.
+
 ## Whitelist selection (required)
 Before running Stage 02, you must select the correct 10x whitelist for your library chemistry:
 - Identify chemistry (e.g., 10x 3' v3/v3.1, 3' v2, 3' v1, 5' v3).
@@ -105,6 +119,10 @@ Use consistent sample prefixes:
 - `SAMPLEID_R3.fastq.gz` (required only for three_read)
 
 All downstream stages assume `metadata.cleaned.tsv` from Stage 01.
+
+### Line endings (Windows)
+Shell scripts must use LF line endings for WSL. This repo includes `.gitattributes`
+to enforce LF for `*.sh`, `*.py`, `*.json`, and `*.md`.
 
 ## Status web UI (port 5556)
 1) Install Flask: `pip install flask`

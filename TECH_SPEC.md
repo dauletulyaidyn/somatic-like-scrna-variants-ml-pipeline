@@ -22,7 +22,9 @@ Repository layout
 
 Global prerequisites (check before running any stage)
 - OS/runtime:
-  - Windows users must use WSL2 (Ubuntu) for toolchain stability.
+- Windows users must use WSL2 (Ubuntu) for toolchain stability.
+- STAR index should be located on the Linux filesystem (e.g., `/home/<user>/star_index`) to avoid NTFS FIFO issues.
+  If stored outside the repo, set `star_index` in `config/starsolo_config.json` to the absolute Linux path.
   - macOS or Linux supported natively.
   - Python 3.10+ available.
 

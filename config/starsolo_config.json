@@ -1,5 +1,5 @@
 {
-  "star_index": "/home/justaidyn/star_index",
+  "star_index": "config/ref/STAR_index/",
   "gtf": "config/ref/genes.gtf",
   "threads": 8,
   "read_structure": "two_read",
