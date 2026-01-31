@@ -133,6 +133,14 @@ to enforce LF for `*.sh`, `*.py`, `*.json`, and `*.md`.
 1) Go to `01_input_data/`.
 2) Follow `README.md` for manual execution or `TECH_SPEC.md` for AI-agent execution.
 
+## Pre-flight checklist (recommended)
+- WSL2 enabled on Windows and tools installed inside WSL.
+- `config/ref/genes.gtf`, `config/ref/genome.fa` (+ `.fai`) present.
+- `config/ref/whitelist.txt` selected for the correct 10x chemistry.
+- STAR index built from the same FASTA + GTF (see `BUILD_STAR_INDEX.md` and `STAR_INDEX_COMMANDS.md`).
+- `config/starsolo_config.json` points to the correct `star_index`.
+- FASTQ files and `data/metadata/metadata.tsv` are in place.
+
 ## Report bundle convention
 - The final stage copies tables/figures from each stage into `for_report/`.
 - Filenames must start with the stage name and an index, then a short purpose, e.g.:
