@@ -44,3 +44,6 @@ for_report/
 
 # runtime state
 /status/status.db
+
+# local scratch
+/_tmp_enrichment_test/

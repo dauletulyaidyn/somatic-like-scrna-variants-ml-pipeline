@@ -16,7 +16,7 @@ flowchart TD
     I --> J["Cluster aggregation<br>In: cellsnp outputs + cell->cluster map (TSV)<br>Out: per-cluster counts (TSV)"]
     F --> H["Correlation with mutational analysis<br>In: gene-burden + cluster counts + mutational outputs<br>Out: correlation/enrichment stats (TSV) + FDR"]
     J --> H
-    C --> M["Mutational analysis outputs<br>In: filtered VCF<br>Out: SNV/indel burden; signatures; drivers; pathway enrichment (TSV)"]
+    C --> M["Mutational analysis outputs<br>In: filtered VCF + gene-burden + pathway gene sets (.gmt)<br>Out: burden; signatures; drivers; pathway enrichment (ORA, TSV)"]
     M --> H
     G --> K["Integrated interpretation<br>In: ML metrics + correlation results<br>Out: final conclusions/figures"]
     H --> K

@@ -5,12 +5,14 @@ Purpose
 
 Inputs
 - Filtered VCFs from `03_bcftools_call/outputs/artifacts/`.
+- Gene-burden matrix from `06_gene_burden/outputs/artifacts/gene_burden_matrix.tsv`.
+- One or more pathway gene set `.gmt` files (see `config/ref/gene_sets/`).
 
 Outputs
 - SNV/indel burden per sample.
 - Simple mutational signatures (base change counts).
 - Driver gene hit counts (optional list).
-- Pathway-level mutation enrichment (placeholder table).
+- Pathway enrichment (ORA; hypergeometric test + BH FDR) for genes with burden > 0 per sample (and `cohort_union`).
 - Stage outputs saved under `outputs/`.
 
 How to run (manual)
@@ -24,6 +26,7 @@ Pre-run checks (manual)
   - Windows: use WSL2 (per root TECH_SPEC) and run commands inside WSL.
   - macOS/Linux: run natively.
 - Confirm input VCFs exist.
+- Confirm `gene_sets_gmt` in `config/mutational_analysis_config.json` points to a valid `.gmt` file.
 - You are responsible for errors/logs when running manually.
 
 Success criteria

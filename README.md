@@ -91,6 +91,10 @@ You must provide reference files and a STAR index:
 - `config/ref/whitelist.txt` (10x barcode list)
 - `config/ref/STAR_index/` (STAR genome index built from the same FASTA + GTF)
 
+Pathway gene sets (required for Stage 10 enrichment):
+- One or more `.gmt` files (tab-delimited gene sets) under `config/ref/gene_sets/`.
+- Configure the path(s) via `config/mutational_analysis_config.json` (`gene_sets_gmt`).
+
 ### STAR index location (WSL/Windows note)
 On Windows, run the pipeline inside WSL and keep the STAR index on the Linux filesystem
 (e.g., `/home/<user>/star_index`) to avoid FIFO/NTFS issues.

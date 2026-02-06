@@ -100,7 +100,8 @@ Reference preparation (required before Stage 02)
   - `config/ref/genes.gtf`
   - `config/ref/STAR_index/`
   - `config/ref/whitelist.txt`
-- Example: GENCODE human GRCh38 primary assembly (FASTA) + matching GTF:
+- Example (not necessarily the latest): GENCODE human GRCh38 primary assembly (FASTA) + matching GTF.
+  You may use a newer GENCODE release, but keep FASTA + GTF + STAR index consistent (same release/build).
   - FASTA: `https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_48/GRCh38.primary_assembly.genome.fa.gz`
   - GTF: `https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_48/gencode.v48.primary_assembly.annotation.gtf.gz`
 - Example download commands:
