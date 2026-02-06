@@ -52,6 +52,7 @@ def main():
         print("No BAM files found", file=sys.stderr)
         return 2
 
+    rows_out = []
     for bam in bams:
         sample_id = bam.stem
         out_vcf = outdir / f"{sample_id}.filtered.vcf.gz"
@@ -86,6 +87,21 @@ def main():
             print(f"tabix failed for {sample_id}", file=sys.stderr)
             return 1
 
+        rows_out.append(
+            {
+                "sample_id": sample_id,
+                "vcf_path": str(out_vcf),
+                "vcf_exists": out_vcf.exists(),
+                "tbi_exists": Path(str(out_vcf) + ".tbi").exists(),
+                "vcf_size_bytes": out_vcf.stat().st_size if out_vcf.exists() else 0,
+            }
+        )
+
+    if rows_out:
+        import pandas as pd  # local import
+
+        Path("outputs/metrics").mkdir(parents=True, exist_ok=True)
+        pd.DataFrame(rows_out).to_csv(Path("outputs/metrics") / "bcftools_outputs.tsv", sep="\t", index=False)
     return 0
 
 

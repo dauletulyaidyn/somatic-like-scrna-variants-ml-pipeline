@@ -208,6 +208,80 @@ def run_pathway_enrichment(
     res.to_csv(out_pathways, sep="\t", index=False)
 
 
+def plot_mutational_outputs(
+    out_burden: Path,
+    out_signatures: Path,
+    out_pathways: Path,
+    *,
+    top_pathways: int = 20,
+) -> None:
+    try:
+        import matplotlib.pyplot as plt  # type: ignore
+    except Exception:
+        return
+
+    plot_dir = Path("outputs/plots")
+    plot_dir.mkdir(parents=True, exist_ok=True)
+
+    # Burden per sample
+    try:
+        b = pd.read_csv(out_burden, sep="\t")
+        if {"sample_id", "variant_count"}.issubset(b.columns) and len(b) > 0:
+            b = b.sort_values("variant_count", ascending=True)
+            plt.figure(figsize=(10, max(4, 0.25 * len(b) + 1)))
+            plt.barh(b["sample_id"].astype(str), b["variant_count"].astype(float))
+            plt.xlabel("Variant count")
+            plt.title("Mutation burden per sample")
+            plt.tight_layout()
+            plt.savefig(plot_dir / "mutation_burden_per_sample.png", dpi=200)
+            plt.close()
+    except Exception:
+        pass
+
+    # Signature totals across samples
+    try:
+        s = pd.read_csv(out_signatures, sep="\t")
+        if "sample_id" in s.columns and len(s) > 0:
+            cols = [c for c in s.columns if c != "sample_id"]
+            if cols:
+                totals = s[cols].fillna(0).sum(axis=0).sort_values(ascending=False)
+                totals = totals.head(12)
+                if len(totals) > 0:
+                    plt.figure(figsize=(10, 5))
+                    plt.bar(totals.index.astype(str), totals.values.astype(float))
+                    plt.xticks(rotation=45, ha="right")
+                    plt.ylabel("Count")
+                    plt.title("Top base-change signature counts (summed across samples)")
+                    plt.tight_layout()
+                    plt.savefig(plot_dir / "mutation_signatures_top.png", dpi=200)
+                    plt.close()
+    except Exception:
+        pass
+
+    # Pathway enrichment: top terms from cohort_union (if present)
+    try:
+        p = pd.read_csv(out_pathways, sep="\t")
+        if {"sample_id", "term", "fdr"}.issubset(p.columns) and len(p) > 0:
+            sub = p[p["sample_id"].astype(str) == "cohort_union"].copy()
+            if len(sub) == 0:
+                sub = p.copy()
+            sub["fdr"] = pd.to_numeric(sub["fdr"], errors="coerce").fillna(1.0)
+            sub = sub.sort_values(["fdr", "p_value"], ascending=[True, True]).head(int(top_pathways))
+            if len(sub) > 0:
+                sub = sub.iloc[::-1]
+                sub["score"] = (-sub["fdr"].clip(lower=1e-300)).apply(lambda x: -math.log10(float(x)))
+                labels = sub["term"].astype(str)
+                plt.figure(figsize=(10, max(4, 0.25 * len(sub) + 1)))
+                plt.barh(labels, sub["score"].astype(float))
+                plt.xlabel("-log10(FDR)")
+                plt.title("Top enriched pathways (cohort_union)")
+                plt.tight_layout()
+                plt.savefig(plot_dir / "pathway_enrichment_top_terms.png", dpi=200)
+                plt.close()
+    except Exception:
+        pass
+
+
 def main():
     ap = argparse.ArgumentParser(description="Mutational analysis summaries.")
     ap.add_argument("--config", required=True, help="config JSON")
@@ -304,6 +378,8 @@ def main():
         top_terms_per_sample=int(cfg.get("pathway_top_terms_per_sample", 50)),
         include_cohort_union=bool(cfg.get("pathway_include_cohort_union", True)),
     )
+
+    plot_mutational_outputs(out_burden, out_signatures, out_pathways)
 
     return 0
 

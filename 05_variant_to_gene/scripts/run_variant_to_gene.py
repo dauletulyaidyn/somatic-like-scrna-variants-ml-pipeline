@@ -89,6 +89,8 @@ def main():
 
     out_tsv.parent.mkdir(parents=True, exist_ok=True)
     wrote = 0
+    gene_counts = defaultdict(int)
+    variant_keys = set()
     with out_tsv.open("w", encoding="utf-8") as out:
         out.write("chrom\tpos\tref\talt\tgene_id\tgene_name\tstrand\n")
         for chrom, variants in variants_by_chrom.items():
@@ -107,10 +109,51 @@ def main():
                     if start <= pos <= end:
                         out.write(f"{chrom}\t{pos}\t{ref}\t{alt}\t{gene_id}\t{gene_name}\t{strand}\n")
                         wrote += 1
+                        gene_counts[gene_name] += 1
+                        variant_keys.add((chrom, pos, ref, alt))
 
     if wrote == 0:
         print("No variant-gene overlaps found", file=sys.stderr)
         return 2
+
+    # Metrics table for the report bundle.
+    metrics_dir = Path("outputs/metrics")
+    metrics_dir.mkdir(parents=True, exist_ok=True)
+    summary_path = metrics_dir / "variant_to_gene_summary.tsv"
+    top_genes = sorted(gene_counts.items(), key=lambda kv: (-kv[1], kv[0]))[:25]
+    with summary_path.open("w", encoding="utf-8") as f:
+        f.write("metric\tvalue\n")
+        f.write(f"n_variant_gene_rows\t{wrote}\n")
+        f.write(f"n_unique_variants_overlapping_gene\t{len(variant_keys)}\n")
+        f.write(f"n_genes_with_variant\t{len(gene_counts)}\n")
+        if top_genes:
+            f.write(f"top_gene_by_rows\t{top_genes[0][0]}\n")
+            f.write(f"top_gene_rows\t{top_genes[0][1]}\n")
+
+    top_path = metrics_dir / "variant_to_gene_top_genes.tsv"
+    with top_path.open("w", encoding="utf-8") as f:
+        f.write("gene_name\tn_rows\n")
+        for g, c in top_genes:
+            f.write(f"{g}\t{c}\n")
+
+    # Optional plot (best-effort).
+    try:
+        import matplotlib.pyplot as plt  # type: ignore
+
+        if top_genes:
+            plot_dir = Path("outputs/plots")
+            plot_dir.mkdir(parents=True, exist_ok=True)
+            names = [g for g, _c in top_genes[::-1]]
+            vals = [c for _g, c in top_genes[::-1]]
+            plt.figure(figsize=(10, max(4, 0.25 * len(names) + 1)))
+            plt.barh(names, vals)
+            plt.xlabel("Variant-gene rows")
+            plt.title("Top genes by overlapping variants (cohort VCF)")
+            plt.tight_layout()
+            plt.savefig(plot_dir / "variant_to_gene_top_genes.png", dpi=200)
+            plt.close()
+    except Exception:
+        pass
 
     print(f"Wrote: {out_tsv}")
     return 0

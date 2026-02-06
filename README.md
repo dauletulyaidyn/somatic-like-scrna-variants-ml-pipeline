@@ -13,7 +13,9 @@ This repository contains a stage-by-stage pipeline for expressed-variant analysi
   - `TECH_SPEC.md` (AI agent instructions)
   - `README.md` (manual run instructions)
   - `scripts/` (bash + python as needed)
-  - `outputs/metrics/` and `outputs/artifacts/` (ignored by git)
+  - `outputs/metrics/` (tables/logs for humans; collected into `for_report/`)
+  - `outputs/plots/` (figures for humans; collected into `for_report/`)
+  - `outputs/artifacts/` (large intermediates; ignored by git)
 
 ## Root folders (common)
 - `config/`     : shared configuration (references, parameters)

@@ -48,6 +48,7 @@ def main():
         print("No BAM files found", file=sys.stderr)
         return 2
 
+    rows_out = []
     for bam in bams:
         sample_id = bam.stem
         if sample_id.endswith("Aligned.sortedByCoord.out"):
@@ -71,6 +72,22 @@ def main():
             print(f"cellsnp-lite failed for {sample_id} (exit {rc})", file=sys.stderr)
             return rc
 
+        rows_out.append(
+            {
+                "sample_id": sample_id,
+                "outdir": str(sample_out),
+                "variants_tsv_exists": (sample_out / "cellSNP.variants.tsv").exists(),
+                "samples_tsv_exists": (sample_out / "cellSNP.samples.tsv").exists(),
+                "ad_mtx_exists": (sample_out / "cellSNP.tag.AD.mtx").exists(),
+                "dp_mtx_exists": (sample_out / "cellSNP.tag.DP.mtx").exists(),
+            }
+        )
+
+    if rows_out:
+        import pandas as pd  # local import
+
+        Path("outputs/metrics").mkdir(parents=True, exist_ok=True)
+        pd.DataFrame(rows_out).to_csv(Path("outputs/metrics") / "cellsnp_outputs.tsv", sep="\t", index=False)
     return 0
 
 

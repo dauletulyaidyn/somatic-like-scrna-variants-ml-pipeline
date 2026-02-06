@@ -18,7 +18,9 @@ Repository layout
   - `TECH_SPEC.md` (agent instructions)
   - `README.md` (manual instructions)
   - `scripts/`
-  - `outputs/metrics/` and `outputs/artifacts/` (gitignored)
+  - `outputs/metrics/` (tables/logs for humans; collected into `for_report/`)
+  - `outputs/plots/` (figures for humans; collected into `for_report/`)
+  - `outputs/artifacts/` (large intermediates; not copied to report by default)
 
 Global prerequisites (check before running any stage)
 - OS/runtime:

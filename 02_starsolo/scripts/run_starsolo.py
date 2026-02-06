@@ -120,6 +120,10 @@ def main():
     gtf = str(resolve_cfg_path(gtf))
     whitelist = str(resolve_cfg_path(whitelist))
 
+    metrics_dir = Path("outputs/metrics")
+    metrics_dir.mkdir(parents=True, exist_ok=True)
+    rows_out = []
+
     for row in rows:
         sample_id = (row.get("sample_id") or "").strip()
         if not sample_id:
@@ -179,6 +183,22 @@ def main():
                 print(f"samtools index failed for {sample_id} (exit {idx_rc})", file=sys.stderr)
                 return idx_rc
 
+        bai_path = bam_path.with_suffix(bam_path.suffix + ".bai")
+        solo_dir = Path(args.outdir) / sample_id / "Solo.out"
+        rows_out.append(
+            {
+                "sample_id": sample_id,
+                "bam_exists": bam_path.exists(),
+                "bai_exists": bai_path.exists(),
+                "solo_out_exists": solo_dir.exists(),
+            }
+        )
+
+    # Summary table for report bundle.
+    import pandas as pd  # local import to keep stage deps small
+
+    if rows_out:
+        pd.DataFrame(rows_out).to_csv(metrics_dir / "starsolo_outputs.tsv", sep="\t", index=False)
     return 0
 
 

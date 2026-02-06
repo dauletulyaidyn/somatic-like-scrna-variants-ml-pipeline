@@ -4,7 +4,7 @@ Purpose
 - Collect stage outputs into `for_report/` and summarize final conclusions.
 
 Inputs
-- Stage outputs (tables/plots) from each `*/outputs/` folder.
+- Stage outputs from each `*/outputs/metrics/` and `*/outputs/plots/` folder.
 
 Outputs
 - Curated report bundle in `for_report/`.

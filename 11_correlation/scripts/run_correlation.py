@@ -61,6 +61,23 @@ def main():
     out_path = resolve_cfg_path(cfg.get("out_corr", "11_correlation/outputs/metrics/correlation.tsv"))
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out.to_csv(out_path, sep="\t", index=False)
+
+    # Optional plot for report bundle.
+    try:
+        import matplotlib.pyplot as plt  # type: ignore
+
+        plot_dir = Path("outputs/plots")
+        plot_dir.mkdir(parents=True, exist_ok=True)
+        plt.figure(figsize=(6, 5))
+        plt.scatter(merged["variant_count"], merged["gene_burden_total"], s=30, alpha=0.8)
+        plt.xlabel("Variant count (per-sample VCF)")
+        plt.ylabel("Gene-burden total")
+        plt.title(f"Spearman rho={rho:.3f}, p={p:.2e}")
+        plt.tight_layout()
+        plt.savefig(plot_dir / "correlation_scatter.png", dpi=200)
+        plt.close()
+    except Exception:
+        pass
     return 0
 
 

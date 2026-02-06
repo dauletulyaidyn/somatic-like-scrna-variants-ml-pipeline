@@ -20,11 +20,17 @@ def main():
 
     for stage in stages:
         stage_name = stage.name
-        outputs = stage / "outputs"
-        if not outputs.exists():
-            continue
-        files = list(outputs.rglob("*"))
-        files = [f for f in files if f.is_file()]
+        metrics = stage / "outputs" / "metrics"
+        plots = stage / "outputs" / "plots"
+        figures = stage / "outputs" / "figures"
+
+        candidates = []
+        for d in (metrics, plots, figures):
+            if d.exists():
+                candidates += list(d.rglob("*"))
+
+        files = [f for f in candidates if f.is_file()]
+        files.sort(key=lambda p: str(p).lower())
         if not files:
             continue
         idx = 1

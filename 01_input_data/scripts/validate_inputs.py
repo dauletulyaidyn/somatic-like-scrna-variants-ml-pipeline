@@ -41,6 +41,29 @@ def write_metadata(path: Path, fieldnames, rows):
             writer.writerow(r)
 
 
+def write_metrics(outdir: Path, cleaned_rows, fastq_samples):
+    outdir.mkdir(parents=True, exist_ok=True)
+
+    # Per-sample table for the report bundle.
+    per_sample = outdir / "input_samples.tsv"
+    with per_sample.open("w", encoding="utf-8", newline="") as f:
+        w = csv.writer(f, delimiter="\t")
+        w.writerow(["sample_id", "has_R1", "has_R2", "has_R3"])
+        for r in cleaned_rows:
+            sid = (r.get("sample_id") or "").strip()
+            reads = fastq_samples.get(sid, set())
+            w.writerow([sid, "R1" in reads, "R2" in reads, "R3" in reads])
+
+    overview = outdir / "input_overview.tsv"
+    n = len(cleaned_rows)
+    n_r3 = sum(1 for r in cleaned_rows if "R3" in fastq_samples.get((r.get("sample_id") or "").strip(), set()))
+    with overview.open("w", encoding="utf-8", newline="") as f:
+        w = csv.writer(f, delimiter="\t")
+        w.writerow(["metric", "value"])
+        w.writerow(["n_samples", n])
+        w.writerow(["n_samples_with_R3", n_r3])
+
+
 def main():
     ap = argparse.ArgumentParser(description="Validate FASTQ + metadata inputs.")
     ap.add_argument("--fastq-dir", required=True, help="Path to FASTQ directory")
@@ -87,6 +110,10 @@ def main():
         return 2
 
     write_metadata(out_path, fieldnames, cleaned)
+
+    # Metrics for downstream reporting (collected by Stage 12 into for_report/).
+    write_metrics(Path("outputs/metrics"), cleaned, samples)
+
     print(f"Wrote: {out_path}")
     print(f"Samples: {len(cleaned)}")
     return 0

@@ -68,6 +68,22 @@ def main():
     if __import__("subprocess").call(["tabix", "-p", "vcf", str(cohort)]) != 0:
         return 2
 
+    # Metrics for report bundle.
+    try:
+        import pandas as pd  # type: ignore
+
+        Path("outputs/metrics").mkdir(parents=True, exist_ok=True)
+        rows = [
+            {"metric": "n_input_vcfs", "value": len(vcfs)},
+            {"metric": "min_samples", "value": min_samples},
+            {"metric": "min_vaf", "value": min_vaf},
+            {"metric": "merged_vcf_size_bytes", "value": merged.stat().st_size if merged.exists() else 0},
+            {"metric": "cohort_vcf_size_bytes", "value": cohort.stat().st_size if cohort.exists() else 0},
+        ]
+        pd.DataFrame(rows).to_csv(Path("outputs/metrics") / "cohort_filter_summary.tsv", sep="\t", index=False)
+    except Exception:
+        pass
+
     return 0
 
 

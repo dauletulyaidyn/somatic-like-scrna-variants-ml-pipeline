@@ -6,7 +6,7 @@ Objective
 Entry
 - Working directory: `12_integrated_interpretation`
 - Required inputs:
-  - All stage `outputs/metrics/` and `outputs/artifacts/` folders
+  - All stage `outputs/metrics/` and `outputs/plots/` folders (where present)
 
 Prerequisites
 - Python 3.10+
@@ -25,7 +25,7 @@ Outputs
 - `12_integrated_interpretation/outputs/metrics/for_report_manifest.tsv`
 
 Exit criteria
-- `for_report/` contains at least one file per stage (where outputs exist).
+- `for_report/` contains metrics/plots for stages that produced them.
 
 Next stage
 - End.

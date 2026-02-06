@@ -77,6 +77,44 @@ def main():
     out_path.parent.mkdir(parents=True, exist_ok=True)
     genes.to_csv(out_path, sep="\t", index=False)
     print(f"Wrote: {out_path}")
+
+    # Metrics and optional plot for reporting.
+    metrics_dir = Path("outputs/metrics")
+    metrics_dir.mkdir(parents=True, exist_ok=True)
+
+    sample_cols = [c for c in genes.columns if c not in ("gene_id", "gene_name")]
+    total = genes[sample_cols].sum(axis=0).astype(int)
+    total_path = metrics_dir / "gene_burden_total_per_sample.tsv"
+    total.reset_index().rename(columns={"index": "sample_id", 0: "gene_burden_total"}).to_csv(
+        total_path, sep="\t", index=False
+    )
+
+    summary_path = metrics_dir / "gene_burden_summary.tsv"
+    with summary_path.open("w", encoding="utf-8") as f:
+        f.write("metric\tvalue\n")
+        f.write(f"n_genes\t{len(genes)}\n")
+        f.write(f"n_samples\t{len(sample_cols)}\n")
+        f.write(f"total_burden_sum\t{int(total.sum())}\n")
+        if len(total) > 0:
+            f.write(f"total_burden_min\t{int(total.min())}\n")
+            f.write(f"total_burden_median\t{int(total.median())}\n")
+            f.write(f"total_burden_max\t{int(total.max())}\n")
+
+    try:
+        import matplotlib.pyplot as plt  # type: ignore
+
+        plot_dir = Path("outputs/plots")
+        plot_dir.mkdir(parents=True, exist_ok=True)
+        s = total.sort_values(ascending=True)
+        plt.figure(figsize=(10, max(4, 0.25 * len(s) + 1)))
+        plt.barh(s.index.astype(str), s.values)
+        plt.xlabel("Gene-burden total (variants mapped to genes)")
+        plt.title("Total gene-burden per sample")
+        plt.tight_layout()
+        plt.savefig(plot_dir / "gene_burden_total_per_sample.png", dpi=200)
+        plt.close()
+    except Exception:
+        pass
     return 0
 
 

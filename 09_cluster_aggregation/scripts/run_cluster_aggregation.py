@@ -5,6 +5,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pandas as pd
 
 def run_cmd(cmd, log_path: Path):
     log_path.parent.mkdir(parents=True, exist_ok=True)
@@ -44,6 +45,7 @@ def main():
         print("No sample dirs found", file=sys.stderr)
         return 2
 
+    rows_out = []
     for sdir in sample_dirs:
         srr = sdir.name
         out_path = outdir / f"{srr}.cellsnp.cluster_counts.tsv.gz"
@@ -63,6 +65,18 @@ def main():
             print(f"Cluster aggregation failed for {srr} (exit {rc})", file=sys.stderr)
             return rc
 
+        rows_out.append(
+            {
+                "sample_id": srr,
+                "out_path": str(out_path),
+                "out_exists": out_path.exists(),
+                "out_size_bytes": out_path.stat().st_size if out_path.exists() else 0,
+            }
+        )
+
+    if rows_out:
+        Path("outputs/metrics").mkdir(parents=True, exist_ok=True)
+        pd.DataFrame(rows_out).to_csv(Path("outputs/metrics") / "cluster_aggregation_outputs.tsv", sep="\t", index=False)
     return 0
 
 

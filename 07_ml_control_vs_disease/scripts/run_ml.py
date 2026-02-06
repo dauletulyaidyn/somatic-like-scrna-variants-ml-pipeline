@@ -91,6 +91,26 @@ def main():
     perm = pd.DataFrame({"perm_score": perm_scores})
     perm.to_csv(out_perm, sep="\t", index=False)
 
+    # Optional plot for report bundle.
+    try:
+        import matplotlib.pyplot as plt  # type: ignore
+
+        plot_dir = Path("outputs/plots")
+        plot_dir.mkdir(parents=True, exist_ok=True)
+        obs = float(metrics.loc[metrics["metric"] == "roc_auc_mean", "value"].iloc[0])
+        plt.figure(figsize=(8, 5))
+        plt.hist(perm_scores, bins=30, alpha=0.8, color="#4c78a8")
+        plt.axvline(obs, color="#f58518", linewidth=2, label=f"Observed (mean CV) = {obs:.3f}")
+        plt.xlabel("Permutation ROC-AUC (mean over CV folds)")
+        plt.ylabel("Count")
+        plt.title("Permutation test distribution")
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(plot_dir / "ml_permutation_hist.png", dpi=200)
+        plt.close()
+    except Exception:
+        pass
+
     return 0
 
 
