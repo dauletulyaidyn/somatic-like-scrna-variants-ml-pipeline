@@ -7,14 +7,14 @@ cd "$STAGE_DIR"
 
 export PATH="/opt/miniforge/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
-STAGE="03_bcftools_call"
+STAGE="03_gatk_call"
 STATUS="../scripts/status.py"
 CONFIG="../config/status_config.json"
 
 python3 "$STATUS" init --config "$CONFIG"
 python3 "$STATUS" start --stage "$STAGE" --message "start"
 
-if python3 scripts/run_bcftools.py --bam-dir ../02_starsolo/outputs/artifacts --config ../config/bcftools_config.json --outdir outputs/artifacts; then
+if python3 scripts/run_gatk.py --bam-dir ../02_starsolo/outputs/artifacts --config ../config/gatk_config.json --outdir outputs/artifacts; then
   python3 "$STATUS" scan --stage "$STAGE" --paths outputs
   python3 "$STATUS" finish --stage "$STAGE" --message "success"
 else

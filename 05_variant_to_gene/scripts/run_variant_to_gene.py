@@ -10,7 +10,8 @@ from collections import defaultdict
 
 def parse_gtf(gtf_path: Path):
     genes_by_chrom = defaultdict(list)
-    with gtf_path.open("r", encoding="utf-8") as f:
+    opener = gzip.open if gtf_path.suffix == ".gz" else open
+    with opener(gtf_path, "rt", encoding="utf-8") as f:
         for line in f:
             if line.startswith("#"):
                 continue

@@ -1,5 +1,5 @@
 {
   "cohort_vcf": "04_cohort_filter/outputs/artifacts/cohort.common.vcf.gz",
-  "gtf": "config/ref/genes.gtf",
+  "gtf": "U:/PAD/project/ref/gencode.v43.annotation.gtf.gz",
   "out_tsv": "05_variant_to_gene/outputs/artifacts/variant_gene_long.tsv"
 }

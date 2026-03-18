@@ -1,0 +1,4 @@
+set,n_genes,top_term,top_source,top_p_value
+unwounded_skin_higher_mutation_burden,200,Binding and Uptake of Ligands by Scavenger Receptors,REAC,4.903830380429342e-12
+wound_edge_higher_mutation_burden,200,MHC protein complex,GO:CC,7.693256448680439e-08
+top_mutated_genes,200,cytoplasm,GO:CC,1.4721254130290778e-06

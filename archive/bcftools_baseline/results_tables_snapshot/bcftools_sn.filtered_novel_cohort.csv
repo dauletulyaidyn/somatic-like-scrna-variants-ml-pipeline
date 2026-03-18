@@ -1,0 +1,15 @@
+sample,kind,number of MNPs:,number of SNPs:,number of indels:,number of multiallelic SNP sites:,number of multiallelic sites:,number of no-ALTs:,number of others:,number of records:,number of samples:
+SRR14762238,filtered_novel_cohort,0,91304,2906,70,106,0,0,94210,1
+SRR14762239,filtered_novel_cohort,0,84798,2625,40,66,0,0,87423,1
+SRR14762240,filtered_novel_cohort,0,18525,884,12,22,0,0,19409,1
+SRR14762241,filtered_novel_cohort,0,5027,252,6,8,0,0,5279,1
+SRR14762242,filtered_novel_cohort,0,42737,2071,19,34,0,0,44808,1
+SRR14762243,filtered_novel_cohort,0,42791,1994,21,40,0,0,44785,1
+SRR14762244,filtered_novel_cohort,0,27267,1377,10,27,0,0,28644,1
+SRR14762245,filtered_novel_cohort,0,39107,1763,17,31,0,0,40870,1
+SRR14762246,filtered_novel_cohort,0,84842,1450,60,71,0,0,86292,1
+SRR14762247,filtered_novel_cohort,0,86089,1451,51,59,0,0,87540,1
+SRR14762248,filtered_novel_cohort,0,67364,3408,25,66,0,0,70772,1
+SRR14762250,filtered_novel_cohort,0,65998,3330,21,57,0,0,69328,1
+SRR14762251,filtered_novel_cohort,0,65051,3467,27,57,0,0,68518,1
+SRR14762252,filtered_novel_cohort,0,65583,3582,33,71,0,0,69165,1

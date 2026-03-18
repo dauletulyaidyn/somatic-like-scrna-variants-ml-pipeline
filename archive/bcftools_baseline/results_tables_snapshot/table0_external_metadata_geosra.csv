@@ -1,0 +1,15 @@
+donor_proxy_id,sample_title,run_lane,run_id,geo_accession,sra_experiment,biosample,source_name,condition,sex,age_years,patient_id_public
+D01,Sc_Skin1,r1,SRR14762238,GSM5364333,SRX11095720,SAMN19608534,human unwounded skin tissue,unwounded_skin,Male,69,not_provided
+D01,Sc_Skin1,r2,SRR14762239,GSM5364333,SRX11095720,SAMN19608534,human unwounded skin tissue,unwounded_skin,Male,69,not_provided
+D02,Sc_Skin2,r1,SRR14762240,GSM5364334,SRX11095721,SAMN19608533,human unwounded skin tissue,unwounded_skin,Female,53,not_provided
+D02,Sc_Skin2,r2,SRR14762241,GSM5364334,SRX11095721,SAMN19608533,human unwounded skin tissue,unwounded_skin,Female,53,not_provided
+D03,Sc_Skin3,r1,SRR14762242,GSM5364335,SRX11095722,SAMN19608532,human unwounded skin tissue,unwounded_skin,Female,23,not_provided
+D03,Sc_Skin3,r2,SRR14762243,GSM5364335,SRX11095722,SAMN19608532,human unwounded skin tissue,unwounded_skin,Female,23,not_provided
+D04,Sc_Skin4,r1,SRR14762244,GSM5364336,SRX11095723,SAMN19608531,human unwounded skin tissue,unwounded_skin,Female,28,not_provided
+D04,Sc_Skin4,r2,SRR14762245,GSM5364336,SRX11095723,SAMN19608531,human unwounded skin tissue,unwounded_skin,Female,28,not_provided
+D05,Sc_W1,r1,SRR14762246,GSM5364337,SRX11095724,SAMN19608530,human chronic wound edge tissue,wound_edge,Male,39,not_provided
+D05,Sc_W1,r2,SRR14762247,GSM5364337,SRX11095724,SAMN19608530,human chronic wound edge tissue,wound_edge,Male,39,not_provided
+D06,Sc_W2,r1,SRR14762248,GSM5364338,SRX11095725,SAMN19608529,human chronic wound edge tissue,wound_edge,Male,69,not_provided
+D06,Sc_W2,r2,SRR14762250,GSM5364338,SRX11095725,SAMN19608529,human chronic wound edge tissue,wound_edge,Male,69,not_provided
+D07,Sc_W3,r1,SRR14762251,GSM5364339,SRX11095726,SAMN19608528,human chronic wound edge tissue,wound_edge,Female,42,not_provided
+D07,Sc_W3,r2,SRR14762252,GSM5364339,SRX11095726,SAMN19608528,human chronic wound edge tissue,wound_edge,Female,42,not_provided

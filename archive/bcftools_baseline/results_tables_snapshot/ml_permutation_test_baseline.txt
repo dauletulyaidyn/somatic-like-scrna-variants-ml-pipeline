@@ -1,0 +1,7 @@
+scoring: balanced_accuracy
+cv: StratifiedKFold(n_splits=5)
+n_permutations: 200
+observed_score: 1.000000
+perm_mean: 0.496500
+perm_std: 0.182381
+pvalue: 0.009950

@@ -33,7 +33,7 @@ Global prerequisites (check before running any stage)
 Core tools (stage-specific use)
 - STAR/STARsolo
 - samtools
-- bcftools + htslib + tabix
+- GATK 4 + tabix
 - cellsnp-lite
 
 Core Python libs (stage-specific use)
@@ -50,7 +50,7 @@ Global checks (examples)
   - `python --version`
   - `STAR --version`
   - `samtools --version`
-  - `bcftools --version`
+  - `gatk --help`
   - `tabix --version`
   - `cellsnp-lite --help`
 
@@ -63,21 +63,24 @@ Installation policy
 OS-specific install recipes (reference)
 - Windows (WSL2 Ubuntu; run inside WSL):
   - `sudo apt-get update`
-  - `sudo apt-get install -y samtools bcftools tabix`
+  - `sudo apt-get install -y samtools tabix`
+  - `conda install -c bioconda -c conda-forge gatk4`
   - `conda install -c bioconda -c conda-forge star cellsnp-lite`
   - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
 - macOS:
-  - `brew install star samtools bcftools htslib tabix`
+  - `brew install star samtools htslib tabix`
+  - `conda install -c bioconda -c conda-forge gatk4`
   - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
   - `conda install -c bioconda -c conda-forge cellsnp-lite`
 - Linux (Ubuntu/Debian):
-  - `sudo apt-get install -y samtools bcftools tabix`
+  - `sudo apt-get install -y samtools tabix`
+  - `conda install -c bioconda -c conda-forge gatk4`
   - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
   - `conda install -c bioconda -c conda-forge star cellsnp-lite`
 
 Resource guidance (rough)
 - STARsolo alignment: CPU 8-16 cores; RAM 32-64 GB; disk 100+ GB
-- bcftools calling: CPU 4-8 cores; RAM 8-16 GB
+- GATK variant calling: CPU 4-8 cores; RAM 16-32 GB
 - cellsnp-lite: CPU 4-8 cores; RAM 16-32 GB
 - ML + correlation: CPU 2-8 cores; RAM 8-16 GB
 
@@ -102,15 +105,15 @@ Reference preparation (required before Stage 02)
   - `config/ref/genes.gtf`
   - `config/ref/STAR_index/`
   - `config/ref/whitelist.txt`
-- Example (not necessarily the latest): GENCODE human GRCh38 primary assembly (FASTA) + matching GTF.
-  You may use a newer GENCODE release, but keep FASTA + GTF + STAR index consistent (same release/build).
-  - FASTA: `https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_48/GRCh38.primary_assembly.genome.fa.gz`
-  - GTF: `https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_48/gencode.v48.primary_assembly.annotation.gtf.gz`
+- Latest stable (GENCODE human GRCh38 primary assembly, release 49).
+  Keep FASTA + GTF + STAR index consistent (same release/build).
+  - FASTA: `https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_49/GRCh38.primary_assembly.genome.fa.gz`
+  - GTF: `https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_49/gencode.v49.primary_assembly.annotation.gtf.gz`
 - Example download commands:
 ```bash
 mkdir -p config/ref
-curl -L -o config/ref/genome.fa.gz https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_48/GRCh38.primary_assembly.genome.fa.gz
-curl -L -o config/ref/genes.gtf.gz https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_48/gencode.v48.primary_assembly.annotation.gtf.gz
+curl -L -o config/ref/genome.fa.gz https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_49/GRCh38.primary_assembly.genome.fa.gz
+curl -L -o config/ref/genes.gtf.gz https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_49/gencode.v49.primary_assembly.annotation.gtf.gz
 gunzip -c config/ref/genome.fa.gz > config/ref/genome.fa
 gunzip -c config/ref/genes.gtf.gz > config/ref/genes.gtf
 ```

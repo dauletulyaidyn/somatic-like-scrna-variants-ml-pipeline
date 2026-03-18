@@ -1,0 +1,2 @@
+model,features,accuracy_mean,accuracy_std,accuracy_q025,accuracy_q975,balanced_accuracy_mean,balanced_accuracy_std,balanced_accuracy_q025,balanced_accuracy_q975,roc_auc_mean,roc_auc_std,roc_auc_q025,roc_auc_q975
+logreg_l2,number of records:+number of SNPs:+number of indels:,0.7333333333333333,0.2185812841434,0.3333333333333333,1.0,0.7583333333333333,0.20899893673307424,0.5,1.0,0.7466666666666667,0.3499841266241783,0.0,1.0

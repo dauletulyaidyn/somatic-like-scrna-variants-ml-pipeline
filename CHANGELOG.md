@@ -15,7 +15,7 @@ This project follows Semantic Versioning:
 ### Changed
 - Stage runner scripts fixed for correct invocation and WSL compatibility.
 - STARsolo runner resolves config paths, uses Linux tmp dir, and indexes BAMs.
-- bcftools runner uses safer piped commands and produces bgzipped VCF + tabix index.
+- Active variant-calling stage is now GATK-based and imports or reproduces the canonical RNA calling workflow.
 - Config defaults tuned for test runs (see `config/ml_config.json`) and STARsolo (`readFilesCommand`, barcode length).
 - Enforced LF line endings for scripts and configs via `.gitattributes`.
 - Documentation updated for reference setup and WSL STAR index location.
@@ -24,4 +24,3 @@ This project follows Semantic Versioning:
 - Broken stage scripts that referenced empty commands/paths.
 - Path resolution issues when running from non-repo directories.
 - STARsolo failures on NTFS FIFO paths (WSL).
-

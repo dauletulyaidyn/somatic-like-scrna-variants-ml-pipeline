@@ -6,7 +6,7 @@ Objective
 Entry
 - Working directory: `10_mutational_analysis`
 - Required inputs:
-  - Filtered VCFs from `03_bcftools_call/outputs/artifacts/`
+  - Filtered VCFs from `03_gatk_call/outputs/artifacts/`
   - Gene-burden matrix from `06_gene_burden/outputs/artifacts/gene_burden_matrix.tsv`
   - One or more pathway gene set `.gmt` files (see `config/ref/gene_sets/`)
 

@@ -42,7 +42,7 @@ Minimum environment
 
 Core tools (used across stages)
 - STAR/STARsolo, samtools
-- bcftools + htslib + tabix
+- GATK 4 + tabix
 - cellsnp-lite (single-cell stage)
 
 Core Python libraries (stage-specific)
@@ -55,22 +55,25 @@ Core Python libraries (stage-specific)
 OS-specific setup (summary)
 - Windows (use WSL2 Ubuntu; run installs inside WSL):
   - `sudo apt-get update`
-  - `sudo apt-get install -y samtools bcftools tabix`
+  - `sudo apt-get install -y samtools tabix`
+  - `conda install -c bioconda -c conda-forge gatk4`
   - `conda install -c bioconda -c conda-forge star cellsnp-lite`
   - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
 - macOS:
-  - `brew install star samtools bcftools htslib tabix`
+  - `brew install star samtools htslib tabix`
+  - `conda install -c bioconda -c conda-forge gatk4`
   - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
   - `conda install -c bioconda -c conda-forge cellsnp-lite`
 - Linux (Ubuntu/Debian):
-  - `sudo apt-get install -y samtools bcftools tabix`
+  - `sudo apt-get install -y samtools tabix`
+  - `conda install -c bioconda -c conda-forge gatk4`
   - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
   - `conda install -c bioconda -c conda-forge star cellsnp-lite`
 
 ## Stage folders
 - `01_input_data/`
 - `02_starsolo/`
-- `03_bcftools_call/`
+- `03_gatk_call/`
 - `04_cohort_filter/`
 - `05_variant_to_gene/`
 - `06_gene_burden/`

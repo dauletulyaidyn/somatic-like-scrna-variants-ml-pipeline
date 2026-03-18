@@ -1,0 +1,4 @@
+set,n_genes,description,file
+top_mutated_genes,200,Top 200 genes by total unique expressed-variant count across samples.,gene_sets/top_mutated_genes.txt
+wound_edge_higher_mutation_burden,200,Top 200 genes by mean burden difference (wound_edge - unwounded_skin).,gene_sets/wound_edge_higher_mutation_burden.txt
+unwounded_skin_higher_mutation_burden,200,Top 200 genes by mean burden difference (unwounded_skin - wound_edge).,gene_sets/unwounded_skin_higher_mutation_burden.txt

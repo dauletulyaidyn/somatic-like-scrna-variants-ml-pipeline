@@ -32,17 +32,17 @@
       ]
     },
     {
-      "id": "03_bcftools_call",
-      "description": "bcftools mpileup/call (filtered VCF)",
+      "id": "03_gatk_call",
+      "description": "GATK RNA variant calling (filtered PASS VCF)",
       "estimate_seconds": 3600,
       "inputs": [
         "02_starsolo/outputs/artifacts/",
         "config/ref/genome.fa",
-        "config/bcftools_config.json"
+        "config/gatk_config.json"
       ],
       "outputs": [
-        "03_bcftools_call/outputs/artifacts/",
-        "03_bcftools_call/outputs/metrics/"
+        "03_gatk_call/outputs/artifacts/",
+        "03_gatk_call/outputs/metrics/"
       ]
     },
     {
@@ -50,7 +50,7 @@
       "description": "Cohort-common filter",
       "estimate_seconds": 900,
       "inputs": [
-        "03_bcftools_call/outputs/artifacts/",
+        "03_gatk_call/outputs/artifacts/",
         "config/cohort_filter_config.json"
       ],
       "outputs": [
@@ -78,7 +78,7 @@
       "estimate_seconds": 600,
       "inputs": [
         "05_variant_to_gene/outputs/artifacts/variant_gene_long.tsv",
-        "03_bcftools_call/outputs/artifacts/",
+        "03_gatk_call/outputs/artifacts/",
         "config/gene_burden_config.json"
       ],
       "outputs": [
@@ -133,7 +133,7 @@
       "description": "Mutational analysis summaries",
       "estimate_seconds": 600,
       "inputs": [
-        "03_bcftools_call/outputs/artifacts/",
+        "03_gatk_call/outputs/artifacts/",
         "config/ref/driver_genes.txt",
         "config/mutational_analysis_config.json"
       ],

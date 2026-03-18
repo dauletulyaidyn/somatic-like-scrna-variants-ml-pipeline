@@ -1,5 +1,5 @@
 {
-  "vcf_dir": "03_bcftools_call/outputs/artifacts",
+  "vcf_dir": "03_gatk_call/outputs/artifacts",
   "gene_burden_matrix": "06_gene_burden/outputs/artifacts/gene_burden_matrix.tsv",
   "driver_genes": "config/ref/driver_genes.txt",
   "gene_sets_gmt": "config/ref/gene_sets/example_pathways.gmt",

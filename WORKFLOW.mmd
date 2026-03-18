@@ -7,7 +7,7 @@ git: ""
 flowchart TD
 
     A["Input data<br>In: scRNA-seq FASTQ + metadata (TSV, CSV)<br>Out: FASTQ + metadata"] --> B["STARsolo alignment<br>In: FASTQ + metadata; reference genome + GTF<br>Out: CB/UB BAM + BAI"]
-    B --> C["bcftools mpileup/call<br>In: CB/UB BAM; reference genome<br>Out: filtered VCF"]
+    B --> C["GATK RNA variant calling<br>In: CB/UB BAM; reference genome<br>Out: filtered PASS VCF"]
     C --> D["Cohort-common filter<br>In: filtered VCF (all samples)<br>Out: cohort VCF"]
     D --> E["Expressed variant->gene tables<br>In: cohort VCF + gene annotation (GTF)<br>Out: long TSV"]
     E --> F["Somatic-like gene-burden features<br>In: long TSV<br>Out: gene-burden matrix (TSV, CSV)"]
