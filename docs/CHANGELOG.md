@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.9.0-beta.3 - 2026-03-23
+
+Scope
+- repository hygiene and documented contribution/release workflow
+
+Major changes
+- added `CONTRIBUTING.md` with the standard branch, commit, merge, and cleanup workflow
+- added `docs/RELEASE_WORKFLOW.md` to document the repository release routine
+- linked contribution and release workflow documentation from `README.md`
+
 ## 0.9.0-beta.2 - 2026-03-22
 
 Scope

@@ -1,7 +1,7 @@
 # Pipeline Repository
 
 Author: Kunikeyev Aidyn  
-Version: 0.9.0-beta.2  
+Version: 0.9.0-beta.3  
 Release status: working beta  
 DOI:  
 Git:  
@@ -121,7 +121,7 @@ All downstream stages assume `metadata.cleaned.tsv` from Stage 01.
   - `zapusti analiz`
 
 ## Versioning
-- Current pipeline version: `0.9.0-beta.2`
+- Current pipeline version: `0.9.0-beta.3`
 - Machine-readable version metadata: `config/pipeline_version.json`
 - Release notes: `docs/CHANGELOG.md`
 - Current release posture: `docs/RELEASE_STATUS.md`

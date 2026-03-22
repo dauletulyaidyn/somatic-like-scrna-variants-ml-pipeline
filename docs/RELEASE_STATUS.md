@@ -1,7 +1,7 @@
 # Release Status
 
 Current version
-- `0.9.0-beta.2`
+- `0.9.0-beta.3`
 
 Current label
 - working beta
