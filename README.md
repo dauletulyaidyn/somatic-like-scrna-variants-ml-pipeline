@@ -125,6 +125,8 @@ All downstream stages assume `metadata.cleaned.tsv` from Stage 01.
 - Machine-readable version metadata: `config/pipeline_version.json`
 - Release notes: `docs/CHANGELOG.md`
 - Current release posture: `docs/RELEASE_STATUS.md`
+- Contribution workflow: `CONTRIBUTING.md`
+- Release workflow: `docs/RELEASE_WORKFLOW.md`
 
 ## Start here
 1) Go to `01_input_data/`.
