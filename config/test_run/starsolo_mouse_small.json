@@ -1,0 +1,23 @@
+{
+  "star_index": "config/test_run/ref_mouse/STAR_index",
+  "gtf": "config/test_run/ref_mouse/Mus_musculus.GRCm39.114.gtf",
+  "threads": 4,
+  "read_structure": "two_read",
+  "solo": {
+    "CBstart": 1,
+    "CBlen": 16,
+    "UMIstart": 17,
+    "UMIlen": 10,
+    "whitelist": "config/ref/whitelist.txt"
+  },
+  "readFilesCommand": "zcat",
+  "extra_args": [
+    "--outSAMtype",
+    "BAM",
+    "SortedByCoordinate",
+    "--outTmpDir",
+    "/tmp/STARtmp_test_run",
+    "--soloBarcodeReadLength",
+    "0"
+  ]
+}

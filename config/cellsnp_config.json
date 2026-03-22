@@ -1,6 +1,6 @@
 {
   "bam_dir": "02_starsolo/outputs/artifacts",
-  "vcf": "04_cohort_filter/outputs/artifacts/cohort.common.vcf.gz",
+  "vcf": "04_cohort_filter/outputs/artifacts/cohort.common.vcf",
   "barcode_whitelist": "config/ref/whitelist.txt",
   "threads": 4,
   "outdir": "08_cellsnp/outputs/artifacts"

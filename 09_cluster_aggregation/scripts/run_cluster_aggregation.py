@@ -5,7 +5,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-import pandas as pd
 
 def run_cmd(cmd, log_path: Path):
     log_path.parent.mkdir(parents=True, exist_ok=True)
@@ -16,21 +15,19 @@ def run_cmd(cmd, log_path: Path):
         return proc.wait()
 
 
+def normalize_sample_id(name: str) -> str:
+    return name.replace("Aligned.sortedByCoord.out", "")
+
+
 def main():
     ap = argparse.ArgumentParser(description="Run cluster aggregation for all samples.")
     ap.add_argument("--config", required=True, help="cluster aggregation config JSON")
     args = ap.parse_args()
 
     cfg = json.loads(Path(args.config).read_text(encoding="utf-8"))
-    repo_root = Path(__file__).resolve().parents[2]
-
-    def resolve_cfg_path(p: str) -> Path:
-        p = Path(p)
-        return p if p.is_absolute() else (repo_root / p)
-
-    cellsnp_dir = resolve_cfg_path(cfg.get("cellsnp_dir", ""))
-    cell_cluster_map = resolve_cfg_path(cfg.get("cell_cluster_map", ""))
-    outdir = resolve_cfg_path(cfg.get("outdir", "outputs/artifacts"))
+    cellsnp_dir = Path(cfg.get("cellsnp_dir", ""))
+    cell_cluster_map = Path(cfg.get("cell_cluster_map", ""))
+    outdir = Path(cfg.get("outdir", "outputs/artifacts"))
     min_alt = str(cfg.get("min_alt", 3))
 
     if not cellsnp_dir.exists():
@@ -45,14 +42,18 @@ def main():
         print("No sample dirs found", file=sys.stderr)
         return 2
 
-    rows_out = []
+    helper = Path(__file__).resolve().parents[2] / "scripts" / "aggregate_cellsnp_by_cluster.py"
+    if not helper.exists():
+        print(f"Missing helper script: {helper}", file=sys.stderr)
+        return 2
+
     for sdir in sample_dirs:
-        srr = sdir.name
+        raw_name = sdir.name
+        srr = normalize_sample_id(raw_name)
         out_path = outdir / f"{srr}.cellsnp.cluster_counts.tsv.gz"
-        out_path.parent.mkdir(parents=True, exist_ok=True)
         cmd = [
             "python3",
-            str(Path(__file__).resolve().parent / "aggregate_cellsnp_by_cluster.py"),
+            str(helper),
             "--srr", srr,
             "--cellsnp-outdir", str(sdir),
             "--cell-cluster-map", str(cell_cluster_map),
@@ -65,18 +66,6 @@ def main():
             print(f"Cluster aggregation failed for {srr} (exit {rc})", file=sys.stderr)
             return rc
 
-        rows_out.append(
-            {
-                "sample_id": srr,
-                "out_path": str(out_path),
-                "out_exists": out_path.exists(),
-                "out_size_bytes": out_path.stat().st_size if out_path.exists() else 0,
-            }
-        )
-
-    if rows_out:
-        Path("outputs/metrics").mkdir(parents=True, exist_ok=True)
-        pd.DataFrame(rows_out).to_csv(Path("outputs/metrics") / "cluster_aggregation_outputs.tsv", sep="\t", index=False)
     return 0
 
 

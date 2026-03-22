@@ -1,22 +1,24 @@
----
-title: "Somatic-like expressed variants from scRNA-seq (control [baseline, untreated] vs disease [condition, treated]): pipeline + ML classification"
-author: "Kunikeyev Aidyn"
-doi: ""
-git: ""
----
 flowchart TD
+    A[Input data] --> B[STARsolo alignment]
 
-    A["Input data<br>In: scRNA-seq FASTQ + metadata (TSV, CSV)<br>Out: FASTQ + metadata"] --> B["STARsolo alignment<br>In: FASTQ + metadata; reference genome + GTF<br>Out: CB/UB BAM + BAI"]
-    B --> C["GATK RNA variant calling<br>In: CB/UB BAM; reference genome<br>Out: filtered PASS VCF"]
-    C --> D["Cohort-common filter<br>In: filtered VCF (all samples)<br>Out: cohort VCF"]
-    D --> E["Expressed variant->gene tables<br>In: cohort VCF + gene annotation (GTF)<br>Out: long TSV"]
-    E --> F["Somatic-like gene-burden features<br>In: long TSV<br>Out: gene-burden matrix (TSV, CSV)"]
-    F --> G["ML: control (baseline, untreated) vs disease (condition, treated)<br>In: gene-burden matrix + labels (metadata)<br>Out: CV metrics + permutation p-values"]
-    B --> I["cellsnp-lite<br>In: CB/UB BAM + barcodes + VCF<br>Out: per-cell AD/DP matrices (MTX) + variants.tsv"]
-    I --> J["Cluster aggregation<br>In: cellsnp outputs + cell->cluster map (TSV)<br>Out: per-cluster counts (TSV)"]
-    F --> H["Correlation with mutational analysis<br>In: gene-burden + cluster counts + mutational outputs<br>Out: correlation/enrichment stats (TSV) + FDR"]
-    J --> H
-    C --> M["Mutational analysis outputs<br>In: filtered VCF + gene-burden + pathway gene sets (.gmt)<br>Out: burden; signatures; drivers; pathway enrichment (ORA, TSV)"]
-    M --> H
-    G --> K["Integrated interpretation<br>In: ML metrics + correlation results<br>Out: final conclusions/figures"]
-    H --> K
+    B --> C[Expression analysis]
+    C --> D[Expression results]
+    D --> E[ML control vs disease]
+
+    B --> F[GATK RNA seq preprocessing]
+    F --> G[GATK HaplotypeCaller and filtering]
+    G --> H[Cohort common filter]
+    H --> I[Variant to gene tables]
+    I --> J[Gene burden features]
+    G --> K[cellsnp lite]
+    K --> L[Cluster aggregation]
+    G --> M[Mutational analysis]
+    M --> N[Mutational results]
+
+    D --> O[Correlation of expression and mutation signals]
+    J --> O
+    L --> O
+    N --> O
+
+    E --> P[Integrated interpretation]
+    O --> P

@@ -1,37 +1,19 @@
 {
-  "mode": "import_existing",
-  "ref_fasta": "U:/PAD/project/ref/hg38.fa",
-  "gatk_cmd": "gatk",
-  "samtools_cmd": "samtools",
-  "java_options": [
-    "-Xms4G",
-    "-Xmx24G"
+  "ref_fasta": "config/ref/genome.fa",
+  "gatk_executable": "gatk",
+  "java_options": ["-Xmx4g"],
+  "split_ncigar_reads": true,
+  "tmp_dir": "03_gatk_call/outputs/tmp",
+  "haplotypecaller_args": [
+    "--dont-use-soft-clipped-bases",
+    "true",
+    "--standard-min-confidence-threshold-for-calling",
+    "20.0"
   ],
-  "external_work_dir": "U:/PAD mutational/GATK/work",
-  "external_raw_vcf_dir": "U:/PAD mutational/GATK/raw_variants",
-  "external_filtered_vcf_dir": "U:/PAD mutational/GATK/filtered_variants",
-  "external_logs_dir": "U:/PAD mutational/GATK/logs",
-  "work_dir": "03_gatk_call/outputs/work",
-  "emit_pass_only": true,
-  "split_ncigar_extra": [],
-  "haplotypecaller_extra": [],
-  "variant_filtration_extra": [],
-  "variant_filters": [
-    {
-      "name": "LowQD",
-      "expression": "QD < 2.0"
-    },
-    {
-      "name": "HighFS",
-      "expression": "FS > 30.0"
-    },
-    {
-      "name": "LowMQ",
-      "expression": "MQ < 40.0"
-    },
-    {
-      "name": "HighSOR",
-      "expression": "SOR > 3.0"
-    }
+  "hard_filters": [
+    {"name": "LowQD", "expr": "QD < 2.0"},
+    {"name": "HighFS", "expr": "FS > 30.0"},
+    {"name": "LowMQ", "expr": "MQ < 40.0"},
+    {"name": "HighSOR", "expr": "SOR > 3.0"}
   ]
 }

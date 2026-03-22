@@ -1,8 +1,9 @@
-﻿<!doctype html>
+<!doctype html>
 <html>
 <head>
   <meta charset="utf-8">
   <title>Stage {{stage[0]}}</title>
+  <meta http-equiv="refresh" content="10">
   <style>
     body { font-family: Arial, sans-serif; padding: 16px; }
     table { border-collapse: collapse; width: 100%; }
@@ -17,8 +18,8 @@
   <h1>{{stage[0]}} - {{stage[1]}}</h1>
   <p>Status: {{stage[2]}}</p>
   <p>Estimate (s): {{stage[9]}}</p>
-  <p>Last duration (s): {{stage[5]}}</p>
-  <p>Estimate error (s): {{stage[6]}}</p>
+  <p>Last duration (s): {{stage[5] | fmt_num}}</p>
+  <p>Estimate error (s): {{stage[6] | fmt_num}}</p>
   <p>Last error: {{stage[7]}}</p>
 
   <h2>Configured inputs</h2>
@@ -57,7 +58,7 @@
   <table>
     <tr><th>Type</th><th>Timestamp</th><th>Message</th></tr>
     {% for e in events %}
-      <tr><td>{{e[0]}}</td><td>{{e[1]}}</td><td>{{e[2]}}</td></tr>
+      <tr><td>{{e[0]}}</td><td>{{e[1] | fmt_ts}}</td><td>{{e[2]}}</td></tr>
     {% endfor %}
   </table>
 
@@ -66,7 +67,7 @@
     <tr><th>Path</th><th>Size (bytes)</th><th>Timestamp</th><th>Preview</th></tr>
     {% for f in files %}
       <tr>
-        <td>{{f[0]}}</td><td>{{f[1]}}</td><td>{{f[2]}}</td>
+        <td>{{f[0]}}</td><td>{{f[1]}}</td><td>{{f[2] | fmt_ts}}</td>
         <td><a href="/file?path={{f[0]}}">open</a></td>
       </tr>
     {% endfor %}

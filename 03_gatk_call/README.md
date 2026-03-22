@@ -1,31 +1,22 @@
-# 03_gatk_call: GATK RNA Variant Calling
+# 03_gatk_call: GATK RNA-seq variant calling
 
 Purpose
-- Call expressed variants from CB/UB-tagged BAM files with the GATK RNA workflow.
+- Call expressed variants from CB/UB-tagged BAM files using the GATK RNA-seq workflow.
 
 Inputs
 - CB/UB BAM + BAI from `02_starsolo/outputs/artifacts/`.
-- Reference genome FASTA (e.g., `config/ref/genome.fa`).
-- `config/gatk_config.json`.
+- Reference genome FASTA (for example `config/ref/genome.fa`).
 
 Outputs
 - PASS-only filtered VCF per sample.
-- Stage metrics, imported logs, and run manifests.
+- Intermediate GATK logs per sample.
 - Stage outputs saved under `outputs/`.
 
 How to run (manual)
-1) Ensure GATK, samtools, and tabix are installed.
+1) Ensure `gatk`, `samtools`, and Java are installed.
 2) Set paths in `config/gatk_config.json`.
 3) Run:
-   - `bash scripts/run_03_gatk_call_stage.sh`
-
-Pre-run checks (manual)
-- Verify OS and environment.
-  - Windows: use WSL2 (per root TECH_SPEC) and run commands inside WSL.
-  - macOS/Linux: run natively.
-- Confirm reference FASTA and BAM/BAI inputs exist.
-- If `mode=import_existing`, confirm the external GATK workspace paths resolve.
-- You are responsible for errors/logs when running manually.
+   - `python scripts/run_gatk.py --bam-dir ../02_starsolo/outputs/artifacts --config ../config/gatk_config.json --outdir outputs/artifacts`
 
 Success criteria
 - Filtered VCFs exist and are non-empty for each sample.

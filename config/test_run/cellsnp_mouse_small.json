@@ -1,0 +1,7 @@
+{
+  "bam_dir": "02_starsolo/outputs/test_run",
+  "vcf": "04_cohort_filter/outputs/test_run/cohort.common.vcf",
+  "barcode_whitelist": "data/test_run/cell_barcodes.txt",
+  "threads": 2,
+  "outdir": "08_cellsnp/outputs/test_run"
+}

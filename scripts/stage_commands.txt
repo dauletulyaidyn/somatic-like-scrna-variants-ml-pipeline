@@ -1,3 +1,4 @@
+01_input_data|python3 01_input_data/scripts/validate_inputs.py --fastq-dir data/fastq --metadata data/metadata/metadata.tsv --out data/metadata/metadata.cleaned.tsv
 02_starsolo|python3 scripts/run_starsolo.py --metadata ../data/metadata/metadata.cleaned.tsv --fastq-dir ../data/fastq --config ../config/starsolo_config.json --outdir outputs/artifacts
 03_gatk_call|python3 scripts/run_gatk.py --bam-dir ../02_starsolo/outputs/artifacts --config ../config/gatk_config.json --outdir outputs/artifacts
 04_cohort_filter|python3 scripts/run_cohort_filter.py --vcf-dir ../03_gatk_call/outputs/artifacts --config ../config/cohort_filter_config.json --outdir outputs/artifacts

@@ -1,7 +1,7 @@
-# AI Tech Spec: 04_cohort_filter
+﻿# AI Tech Spec: 04_cohort_filter
 
 Objective
-- Build a cohort-common VCF from per-sample filtered VCFs.
+- Build cohort-common VCF from per-sample filtered VCFs.
 
 Entry
 - Working directory: `04_cohort_filter`
@@ -10,7 +10,6 @@ Entry
 
 Prerequisites
 - Python 3.10+
-- tabix (optional, for indexing)
 
 OS check
 - Windows: require WSL2; execute all commands inside WSL.
@@ -19,8 +18,8 @@ OS check
 Actions
 1) Verify input VCFs exist and are non-empty.
 2) Ensure `config/cohort_filter_config.json` is filled.
-3) Parse per-sample VCFs and compute sample recurrence plus max per-sample VAF per locus.
-4) Emit the cohort-common VCF under `outputs/`.
+3) Run cohort-common filter script.
+4) Save outputs under `outputs/`.
 
 Outputs
 - Cohort VCF.

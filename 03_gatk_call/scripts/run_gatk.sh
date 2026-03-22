@@ -1,11 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-BAM_DIR="../02_starsolo/outputs/artifacts"
-CONFIG="../config/gatk_config.json"
-OUTDIR="outputs/artifacts"
-
 python3 scripts/run_gatk.py \
-  --bam-dir "$BAM_DIR" \
-  --config "$CONFIG" \
-  --outdir "$OUTDIR"
+  --bam-dir ../02_starsolo/outputs/artifacts \
+  --config ../config/gatk_config.json \
+  --outdir outputs/artifacts

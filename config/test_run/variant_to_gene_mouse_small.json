@@ -1,0 +1,5 @@
+{
+  "cohort_vcf": "04_cohort_filter/outputs/test_run/cohort.common.vcf",
+  "gtf": "config/test_run/ref_mouse/Mus_musculus.GRCm39.114.gtf",
+  "out_tsv": "05_variant_to_gene/outputs/test_run/variant_gene_long.tsv"
+}

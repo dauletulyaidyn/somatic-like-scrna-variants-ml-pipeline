@@ -60,14 +60,40 @@ def init_from_config(config_path: Path):
     con = ensure_db()
     cur = con.cursor()
     cfg = json.loads(config_path.read_text(encoding="utf-8"))
+    stage_ids = [s["id"] for s in cfg.get("stages", [])]
+    if stage_ids:
+        placeholders = ",".join("?" for _ in stage_ids)
+        cur.execute(f"DELETE FROM stages WHERE id NOT IN ({placeholders})", stage_ids)
     for s in cfg.get("stages", []):
         cur.execute(
             """
-            INSERT OR REPLACE INTO stages (id, description, estimate_seconds, last_status)
+            INSERT INTO stages (id, description, estimate_seconds, last_status)
             VALUES (?, ?, ?, COALESCE((SELECT last_status FROM stages WHERE id=?), 'idle'))
+            ON CONFLICT(id) DO UPDATE SET
+                description=excluded.description,
+                estimate_seconds=excluded.estimate_seconds
             """,
             (s["id"], s.get("description", ""), int(s.get("estimate_seconds", 0)), s["id"]),
         )
+    con.commit()
+    con.close()
+
+
+def reset_stages():
+    con = ensure_db()
+    cur = con.cursor()
+    cur.execute(
+        """
+        UPDATE stages
+        SET last_status='idle',
+            last_start_ts=NULL,
+            last_end_ts=NULL,
+            last_error=NULL,
+            last_error_ts=NULL,
+            last_duration=NULL,
+            last_estimate_error=NULL
+        """
+    )
     con.commit()
     con.close()
 
@@ -123,6 +149,8 @@ def main():
     p_init = sub.add_parser("init")
     p_init.add_argument("--config", required=True)
 
+    sub.add_parser("reset")
+
     p_start = sub.add_parser("start")
     p_start.add_argument("--stage", required=True)
     p_start.add_argument("--message", default="")
@@ -143,6 +171,10 @@ def main():
 
     if args.cmd == "init":
         init_from_config(Path(args.config))
+        return 0
+
+    if args.cmd == "reset":
+        reset_stages()
         return 0
 
     if args.cmd == "start":

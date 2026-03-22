@@ -1,0 +1,6 @@
+{
+  "cellsnp_dir": "08_cellsnp/outputs/test_run",
+  "cell_cluster_map": "data/test_run/cell_cluster_map.tsv",
+  "outdir": "09_cluster_aggregation/outputs/test_run",
+  "min_alt": 1
+}

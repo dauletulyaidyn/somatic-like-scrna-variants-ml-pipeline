@@ -1,28 +1,28 @@
-﻿<!doctype html>
+<!doctype html>
 <html>
 <head>
   <meta charset="utf-8">
   <title>Pipeline Status</title>
+  <meta http-equiv="refresh" content="10">
   <style>
     body { font-family: Arial, sans-serif; padding: 16px; }
     table { border-collapse: collapse; width: 100%; }
-    th, td { border: 1px solid #ddd; padding: 8px; vertical-align: top; }
+    th, td { border: 1px solid #ddd; padding: 8px; }
     th { background: #f3f3f3; }
     .status-running { color: #0a7; }
     .status-finished { color: #06c; }
     .status-error { color: #c00; }
-    .paths { font-family: Consolas, monospace; font-size: 12px; line-height: 1.3; }
+    .status-idle { color: #666; }
   </style>
 </head>
 <body>
   <h1>Pipeline Status</h1>
+  <p>Total events: {{event_count}}</p>
   <table>
     <tr>
       <th>Stage</th>
       <th>Description</th>
       <th>Status</th>
-      <th>Inputs</th>
-      <th>Outputs</th>
       <th>Start</th>
       <th>End</th>
       <th>Duration (s)</th>
@@ -31,24 +31,14 @@
     </tr>
     {% for s in stages %}
     <tr>
-      <td><a href="/stage/{{s.id}}">{{s.id}}</a></td>
-      <td>{{s.description}}</td>
-      <td class="status-{{s.status}}">{{s.status}}</td>
-      <td class="paths">
-        {% for p in s.inputs %}
-          <div>{{p}}</div>
-        {% endfor %}
-      </td>
-      <td class="paths">
-        {% for p in s.outputs %}
-          <div>{{p}}</div>
-        {% endfor %}
-      </td>
-      <td>{{s.start_ts}}</td>
-      <td>{{s.end_ts}}</td>
-      <td>{{s.duration}}</td>
-      <td>{{s.estimate_error}}</td>
-      <td>{{s.last_error}}</td>
+      <td><a href="/stage/{{s[0]}}">{{s[0]}}</a></td>
+      <td>{{s[1]}}</td>
+      <td class="status-{{s[2]}}">{{s[2]}}</td>
+      <td>{{s[3] | fmt_ts}}</td>
+      <td>{{s[4] | fmt_ts}}</td>
+      <td>{{s[5] | fmt_num}}</td>
+      <td>{{s[6] | fmt_num}}</td>
+      <td>{{s[7]}}</td>
     </tr>
     {% endfor %}
   </table>

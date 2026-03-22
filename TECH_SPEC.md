@@ -2,6 +2,7 @@
 
 Purpose
 - Provide an entry point for AI agents to execute the pipeline end-to-end.
+- Support autonomous execution from a single command such as `zapusti analiz`.
 
 Repository layout
 - Root folders:
@@ -18,22 +19,18 @@ Repository layout
   - `TECH_SPEC.md` (agent instructions)
   - `README.md` (manual instructions)
   - `scripts/`
-  - `outputs/metrics/` (tables/logs for humans; collected into `for_report/`)
-  - `outputs/plots/` (figures for humans; collected into `for_report/`)
-  - `outputs/artifacts/` (large intermediates; not copied to report by default)
+  - `outputs/metrics/` and `outputs/artifacts/` (gitignored)
 
 Global prerequisites (check before running any stage)
 - OS/runtime:
-- Windows users must use WSL2 (Ubuntu) for toolchain stability.
-- STAR index should be located on the Linux filesystem (e.g., `/home/<user>/star_index`) to avoid NTFS FIFO issues.
-  If stored outside the repo, set `star_index` in `config/starsolo_config.json` to the absolute Linux path.
+  - Windows users must use WSL2 (Ubuntu) for toolchain stability.
   - macOS or Linux supported natively.
   - Python 3.10+ available.
 
 Core tools (stage-specific use)
 - STAR/STARsolo
 - samtools
-- GATK 4 + tabix
+- GATK 4 + Java
 - cellsnp-lite
 
 Core Python libs (stage-specific use)
@@ -51,36 +48,32 @@ Global checks (examples)
   - `STAR --version`
   - `samtools --version`
   - `gatk --help`
-  - `tabix --version`
   - `cellsnp-lite --help`
 
 Installation policy
-- All required tools/libs must be installed and verified before starting Stage 01.
-- Stage scripts must NOT attempt installation or environment checks.
+- The autonomous runner may perform best-effort installation and environment checks before Stage 01.
+- Stage-specific Python scripts remain computation-focused and do not install dependencies themselves.
 - Preferred approach: micromamba/conda environment per tool group.
-- On Windows, the agent must install/enable WSL2 before proceeding and run all tool installs inside WSL.
+- On Windows, the agent should prefer WSL2 for bioinformatics toolchain stability.
 
 OS-specific install recipes (reference)
 - Windows (WSL2 Ubuntu; run inside WSL):
   - `sudo apt-get update`
-  - `sudo apt-get install -y samtools tabix`
-  - `conda install -c bioconda -c conda-forge gatk4`
-  - `conda install -c bioconda -c conda-forge star cellsnp-lite`
+  - `sudo apt-get install -y samtools default-jre`
+  - `conda install -c bioconda -c conda-forge star gatk4 cellsnp-lite`
   - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
 - macOS:
-  - `brew install star samtools htslib tabix`
-  - `conda install -c bioconda -c conda-forge gatk4`
+  - `brew install star samtools`
   - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
-  - `conda install -c bioconda -c conda-forge cellsnp-lite`
+  - `conda install -c bioconda -c conda-forge gatk4 cellsnp-lite`
 - Linux (Ubuntu/Debian):
-  - `sudo apt-get install -y samtools tabix`
-  - `conda install -c bioconda -c conda-forge gatk4`
+  - `sudo apt-get install -y samtools default-jre`
   - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
-  - `conda install -c bioconda -c conda-forge star cellsnp-lite`
+  - `conda install -c bioconda -c conda-forge star gatk4 cellsnp-lite`
 
 Resource guidance (rough)
 - STARsolo alignment: CPU 8-16 cores; RAM 32-64 GB; disk 100+ GB
-- GATK variant calling: CPU 4-8 cores; RAM 16-32 GB
+- GATK RNA calling: CPU 4-8 cores; RAM 16-32 GB
 - cellsnp-lite: CPU 4-8 cores; RAM 16-32 GB
 - ML + correlation: CPU 2-8 cores; RAM 8-16 GB
 
@@ -91,6 +84,7 @@ Status system (required)
 - Web UI:
   - `python status/app.py --port 5556`
   - Open `http://localhost:5556`
+  - Autonomous entrypoint: `python scripts/run_autonomous_pipeline.py --auto-install --start-status`
 
 Initial inputs (required)
 - `data/fastq/` : raw scRNA-seq FASTQ files.
@@ -105,15 +99,14 @@ Reference preparation (required before Stage 02)
   - `config/ref/genes.gtf`
   - `config/ref/STAR_index/`
   - `config/ref/whitelist.txt`
-- Latest stable (GENCODE human GRCh38 primary assembly, release 49).
-  Keep FASTA + GTF + STAR index consistent (same release/build).
-  - FASTA: `https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_49/GRCh38.primary_assembly.genome.fa.gz`
-  - GTF: `https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_49/gencode.v49.primary_assembly.annotation.gtf.gz`
+- Example: GENCODE human GRCh38 primary assembly (FASTA) + matching GTF:
+  - FASTA: `https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_48/GRCh38.primary_assembly.genome.fa.gz`
+  - GTF: `https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_48/gencode.v48.primary_assembly.annotation.gtf.gz`
 - Example download commands:
 ```bash
 mkdir -p config/ref
-curl -L -o config/ref/genome.fa.gz https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_49/GRCh38.primary_assembly.genome.fa.gz
-curl -L -o config/ref/genes.gtf.gz https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_49/gencode.v49.primary_assembly.annotation.gtf.gz
+curl -L -o config/ref/genome.fa.gz https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_48/GRCh38.primary_assembly.genome.fa.gz
+curl -L -o config/ref/genes.gtf.gz https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_48/gencode.v48.primary_assembly.annotation.gtf.gz
 gunzip -c config/ref/genome.fa.gz > config/ref/genome.fa
 gunzip -c config/ref/genes.gtf.gz > config/ref/genes.gtf
 ```
@@ -150,11 +143,12 @@ gunzip -c config/ref/whitelist.txt.gz > config/ref/whitelist.txt
   - Test FASTQ (2-read R1=28, R2~90): `read_structure=two_read`, whitelist `3M-february-2018_TRU.txt.gz` (10x 3' v3/v3.1).
   - CVD dataset (local `U:\! ! ! Datasets\! ! ! CVD Original dadtaset`): `read_structure=two_read`, whitelist `3M-february-2018_TRU.txt.gz` (10x 3' v3/v3.1).
 
-Whitelist selection requirement (must follow)
-- Before Stage 02, the AI agent must ask the user for the library chemistry (e.g., 10x v3/v3.1, v2, v1, 5' v3).
-- The user must provide `chemistry` OR explicitly approve the agent's inference.
-- The agent must then copy the corresponding file from `config/ref/whitelists/10x/` into `config/ref/whitelist.txt` (gunzip if needed).
-- If chemistry is unknown and user does not approve inference, the agent must stop and request clarification.
+Whitelist selection requirement
+- Preferred autonomous behavior:
+  - infer chemistry from known dataset mappings or `read_structure`
+  - copy the corresponding bundled whitelist into `config/ref/whitelist.txt`
+  - report the choice in logs/status
+- If inference is ambiguous, the agent should request clarification.
 
 FASTQ expectations
 - User-provided scRNA-seq dataset (control vs disease).

@@ -1,19 +1,19 @@
-# 04_cohort_filter: Cohort-Common Filter
+﻿# 04_cohort_filter: Cohort-common filter
 
 Purpose
-- Build a cohort-common VCF to keep candidate somatic-like loci based on multi-sample recurrence and per-sample VAF support.
+- Build a cohort-common filter VCF to keep candidate somatic-like variants.
 
 Inputs
 - Filtered VCFs from `03_gatk_call/outputs/artifacts/`.
-- Optional: minimum cohort recurrence and VAF thresholds.
+- Optional: min cohort frequency threshold.
 
 Outputs
 - Cohort VCF (combined/common sites).
-- Summary tables.
+- Summary tables (counts per sample).
 - Stage outputs saved under `outputs/`.
 
 How to run (manual)
-1) Ensure Python 3.10+ is installed. `tabix` is optional for indexing.
+1) Ensure Python 3.10+ is installed.
 2) Set parameters in `config/cohort_filter_config.json`.
 3) Run:
    - `bash scripts/run_04_cohort_filter_stage.sh`

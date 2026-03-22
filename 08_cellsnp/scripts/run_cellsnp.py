@@ -15,23 +15,24 @@ def run_cmd(cmd, log_path: Path):
         return proc.wait()
 
 
+def infer_sample_barcode_file(bam: Path) -> Path | None:
+    sample_id = bam.stem
+    sample_prefix = sample_id.replace("Aligned.sortedByCoord.out", "")
+    candidate = bam.parent / f"{sample_prefix}Solo.out" / "Gene" / "filtered" / "barcodes.tsv"
+    return candidate if candidate.exists() else None
+
+
 def main():
     ap = argparse.ArgumentParser(description="Run cellsnp-lite for all samples.")
     ap.add_argument("--config", required=True, help="cellsnp config JSON")
     args = ap.parse_args()
 
     cfg = json.loads(Path(args.config).read_text(encoding="utf-8"))
-    repo_root = Path(__file__).resolve().parents[2]
-
-    def resolve_cfg_path(p: str) -> Path:
-        p = Path(p)
-        return p if p.is_absolute() else (repo_root / p)
-
-    bam_dir = resolve_cfg_path(cfg.get("bam_dir", ""))
-    vcf = resolve_cfg_path(cfg.get("vcf", ""))
-    whitelist = resolve_cfg_path(cfg.get("barcode_whitelist", ""))
+    bam_dir = Path(cfg.get("bam_dir", ""))
+    vcf = Path(cfg.get("vcf", ""))
+    whitelist = Path(cfg.get("barcode_whitelist", ""))
     threads = str(cfg.get("threads", 4))
-    outdir = resolve_cfg_path(cfg.get("outdir", "outputs/artifacts"))
+    outdir = Path(cfg.get("outdir", "outputs/artifacts"))
 
     if not bam_dir.exists():
         print(f"Missing bam_dir: {bam_dir}", file=sys.stderr)
@@ -48,19 +49,18 @@ def main():
         print("No BAM files found", file=sys.stderr)
         return 2
 
-    rows_out = []
     for bam in bams:
         sample_id = bam.stem
-        if sample_id.endswith("Aligned.sortedByCoord.out"):
-            sample_id = sample_id.replace("Aligned.sortedByCoord.out", "")
         sample_out = outdir / sample_id
         sample_out.mkdir(parents=True, exist_ok=True)
-        solo_barcodes = bam.parent / f"{sample_id}Solo.out" / "Gene" / "filtered" / "barcodes.tsv"
-        barcode_file = solo_barcodes if solo_barcodes.exists() else whitelist
+        sample_barcodes = infer_sample_barcode_file(bam) or whitelist
+        if not sample_barcodes.exists():
+            print(f"Missing barcode file for {sample_id}: {sample_barcodes}", file=sys.stderr)
+            return 2
         cmd = [
             "cellsnp-lite",
             "-s", str(bam),
-            "-b", str(barcode_file),
+            "-b", str(sample_barcodes),
             "-R", str(vcf),
             "-O", str(sample_out),
             "-p", threads,
@@ -72,22 +72,6 @@ def main():
             print(f"cellsnp-lite failed for {sample_id} (exit {rc})", file=sys.stderr)
             return rc
 
-        rows_out.append(
-            {
-                "sample_id": sample_id,
-                "outdir": str(sample_out),
-                "variants_tsv_exists": (sample_out / "cellSNP.variants.tsv").exists(),
-                "samples_tsv_exists": (sample_out / "cellSNP.samples.tsv").exists(),
-                "ad_mtx_exists": (sample_out / "cellSNP.tag.AD.mtx").exists(),
-                "dp_mtx_exists": (sample_out / "cellSNP.tag.DP.mtx").exists(),
-            }
-        )
-
-    if rows_out:
-        import pandas as pd  # local import
-
-        Path("outputs/metrics").mkdir(parents=True, exist_ok=True)
-        pd.DataFrame(rows_out).to_csv(Path("outputs/metrics") / "cellsnp_outputs.tsv", sep="\t", index=False)
     return 0
 
 

@@ -1,21 +1,21 @@
 # Pipeline Repository
 
 Author: Kunikeyev Aidyn  
+Version: 0.9.0-beta.2  
+Release status: working beta  
 DOI:  
 Git:  
 
-This repository contains a stage-by-stage pipeline for expressed-variant analysis from scRNA-seq.
+This repository contains a stage-by-stage pipeline for integrated expression and mutational analysis from scRNA-seq.
 
 ## What this is
 - Data source: scRNA-seq with control (baseline, untreated) vs disease (condition, treated) groups.
-- Goal: extract expressed variants, build gene-burden features, classify control (baseline, untreated) vs disease (condition, treated), and correlate with mutational analysis outputs.
+- Goal: run expression analysis, call expressed variants with GATK, build gene-burden features, classify control (baseline, untreated) vs disease (condition, treated), and correlate expression and mutational outputs.
 - Each stage lives in its own folder with:
   - `TECH_SPEC.md` (AI agent instructions)
   - `README.md` (manual run instructions)
   - `scripts/` (bash + python as needed)
-  - `outputs/metrics/` (tables/logs for humans; collected into `for_report/`)
-  - `outputs/plots/` (figures for humans; collected into `for_report/`)
-  - `outputs/artifacts/` (large intermediates; ignored by git)
+  - `outputs/metrics/` and `outputs/artifacts/` (ignored by git)
 
 ## Root folders (common)
 - `config/`     : shared configuration (references, parameters)
@@ -33,7 +33,7 @@ If you run without the AI agent, **you are responsible** for:
 - Providing sufficient compute resources (CPU/RAM/disk).
 - Monitoring logs and handling errors.
 - All tools/libs must be installed and verified before starting Stage 01.
-- Stage scripts do not perform installation or environment checks.
+- The autonomous runner can perform best-effort installation and stage orchestration.
 
 Minimum environment
 - Windows with WSL2 (Ubuntu) for Windows users.
@@ -42,7 +42,7 @@ Minimum environment
 
 Core tools (used across stages)
 - STAR/STARsolo, samtools
-- GATK 4 + tabix
+- GATK 4 + Java
 - cellsnp-lite (single-cell stage)
 
 Core Python libraries (stage-specific)
@@ -55,20 +55,17 @@ Core Python libraries (stage-specific)
 OS-specific setup (summary)
 - Windows (use WSL2 Ubuntu; run installs inside WSL):
   - `sudo apt-get update`
-  - `sudo apt-get install -y samtools tabix`
-  - `conda install -c bioconda -c conda-forge gatk4`
-  - `conda install -c bioconda -c conda-forge star cellsnp-lite`
+  - `sudo apt-get install -y samtools default-jre`
+  - `conda install -c bioconda -c conda-forge star gatk4 cellsnp-lite`
   - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
 - macOS:
-  - `brew install star samtools htslib tabix`
-  - `conda install -c bioconda -c conda-forge gatk4`
+  - `brew install star samtools`
   - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
-  - `conda install -c bioconda -c conda-forge cellsnp-lite`
+  - `conda install -c bioconda -c conda-forge gatk4 cellsnp-lite`
 - Linux (Ubuntu/Debian):
-  - `sudo apt-get install -y samtools tabix`
-  - `conda install -c bioconda -c conda-forge gatk4`
+  - `sudo apt-get install -y samtools default-jre`
   - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
-  - `conda install -c bioconda -c conda-forge star cellsnp-lite`
+  - `conda install -c bioconda -c conda-forge star gatk4 cellsnp-lite`
 
 ## Stage folders
 - `01_input_data/`
@@ -88,24 +85,6 @@ OS-specific setup (summary)
 Place raw inputs in `data/` (not tracked by git):
 - FASTQ: `data/fastq/`
 - Metadata: `data/metadata/metadata.tsv`
-
-## Reference setup (required before Stage 02)
-You must provide reference files and a STAR index:
-- `config/ref/genes.gtf`
-- `config/ref/genome.fa` (and `.fai`)
-- `config/ref/whitelist.txt` (10x barcode list)
-- `config/ref/STAR_index/` (STAR genome index built from the same FASTA + GTF)
-
-Pathway gene sets (required for Stage 10 enrichment):
-- One or more `.gmt` files (tab-delimited gene sets) under `config/ref/gene_sets/`.
-- Configure the path(s) via `config/mutational_analysis_config.json` (`gene_sets_gmt`).
-
-### STAR index location (WSL/Windows note)
-On Windows, run the pipeline inside WSL and keep the STAR index on the Linux filesystem
-(e.g., `/home/<user>/star_index`) to avoid FIFO/NTFS issues.
-- If you place the index outside the repo, set `star_index` in `config/starsolo_config.json`
-  to the absolute Linux path (e.g., `/home/justaidyn/star_index`).
-- If you keep it in the repo, use `config/ref/STAR_index/` and ensure it is on a Linux path.
 
 ## Whitelist selection (required)
 Before running Stage 02, you must select the correct 10x whitelist for your library chemistry:
@@ -129,26 +108,27 @@ Use consistent sample prefixes:
 
 All downstream stages assume `metadata.cleaned.tsv` from Stage 01.
 
-### Line endings (Windows)
-Shell scripts must use LF line endings for WSL. This repo includes `.gitattributes`
-to enforce LF for `*.sh`, `*.py`, `*.json`, and `*.md`.
-
 ## Status web UI (port 5556)
 1) Install Flask: `pip install flask`
 2) Run server: `python status/app.py --port 5556`
 3) Open: `http://localhost:5556`
 
+## Autonomous Start
+- One-command / agent start:
+  - `python scripts/run_autonomous_pipeline.py --auto-install --start-status --use-wsl` (recommended on Windows)
+  - `./zapusti_analiz.ps1`
+- Suggested agent instruction:
+  - `zapusti analiz`
+
+## Versioning
+- Current pipeline version: `0.9.0-beta.2`
+- Machine-readable version metadata: `config/pipeline_version.json`
+- Release notes: `docs/CHANGELOG.md`
+- Current release posture: `docs/RELEASE_STATUS.md`
+
 ## Start here
 1) Go to `01_input_data/`.
 2) Follow `README.md` for manual execution or `TECH_SPEC.md` for AI-agent execution.
-
-## Pre-flight checklist (recommended)
-- WSL2 enabled on Windows and tools installed inside WSL.
-- `config/ref/genes.gtf`, `config/ref/genome.fa` (+ `.fai`) present.
-- `config/ref/whitelist.txt` selected for the correct 10x chemistry.
-- STAR index built from the same FASTA + GTF (see `BUILD_STAR_INDEX.md` and `STAR_INDEX_COMMANDS.md`).
-- `config/starsolo_config.json` points to the correct `star_index`.
-- FASTQ files and `data/metadata/metadata.tsv` are in place.
 
 ## Report bundle convention
 - The final stage copies tables/figures from each stage into `for_report/`.
@@ -156,6 +136,3 @@ to enforce LF for `*.sh`, `*.py`, `*.json`, and `*.md`.
   - `08_cellsnp_1_heatmap.jpg`
   - `08_cellsnp_1_heatmap.csv`
   - `08_cellsnp_2_summary.tsv`
-
-## Changelog
-See `CHANGELOG.md` for release notes.

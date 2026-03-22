@@ -1,6 +1,8 @@
-﻿# data and results
+# data and results
 /data/
 /results/
+/outputs/
+/for_report_test_run/
 
 # envs
 .env/
@@ -16,13 +18,16 @@ __pycache__/
 # OS
 .DS_Store
 Thumbs.db
+
 # stage outputs
 01_input_data/outputs/
 02_starsolo/outputs/
+03_bcftools_call/outputs/
 03_gatk_call/outputs/
 04_cohort_filter/outputs/
 05_variant_to_gene/outputs/
 06_gene_burden/outputs/
+07_ml_we_vs_uwe/outputs/
 07_ml_control_vs_disease/outputs/
 08_cellsnp/outputs/
 09_cluster_aggregation/outputs/
@@ -33,18 +38,17 @@ Thumbs.db
 # report bundle
 for_report/
 
-# reference data (exclude for now)
-/config/ref/STAR_index/
-/config/ref/genome.fa
-/config/ref/genome.fa.gz
-/config/ref/genome.fa.fai
-/config/ref/genes.gtf
-/config/ref/genes.gtf.gz
-/config/ref/whitelist.txt
+# local status runtime
+status/status.db
+status/status_server.out.log
+status/status_server.err.log
 
-# runtime state
-/status/status.db
-
-# local scratch
-/_tmp_enrichment_test/
-/_tmp_for_report/
+# local reference bundles and generated reference files
+config/ref/STAR_index/
+config/ref/genome.fa
+config/ref/genome.fa.fai
+config/ref/genome.fa.gz
+config/ref/genes.gtf
+config/ref/genes.gtf.gz
+config/ref/whitelist.txt
+config/test_run/ref_mouse/
