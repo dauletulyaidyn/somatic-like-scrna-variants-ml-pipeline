@@ -1,5 +1,5 @@
-﻿{
+{
   "variant_gene_tsv": "05_variant_to_gene/outputs/artifacts/variant_gene_long.tsv",
-  "vcf_dir": "03_bcftools_call/outputs/artifacts",
+  "vcf_dir": "03_gatk_call/outputs/artifacts",
   "out_matrix": "06_gene_burden/outputs/artifacts/gene_burden_matrix.tsv"
 }

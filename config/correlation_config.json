@@ -1,4 +1,4 @@
-﻿{
+{
   "gene_burden": "06_gene_burden/outputs/artifacts/gene_burden_matrix.tsv",
   "cluster_counts_dir": "09_cluster_aggregation/outputs/artifacts",
   "mut_burden": "10_mutational_analysis/outputs/metrics/mutation_burden.tsv",

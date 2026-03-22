@@ -15,6 +15,13 @@ def run_cmd(cmd, log_path: Path):
         return proc.wait()
 
 
+def infer_sample_barcode_file(bam: Path) -> Path | None:
+    sample_id = bam.stem
+    sample_prefix = sample_id.replace("Aligned.sortedByCoord.out", "")
+    candidate = bam.parent / f"{sample_prefix}Solo.out" / "Gene" / "filtered" / "barcodes.tsv"
+    return candidate if candidate.exists() else None
+
+
 def main():
     ap = argparse.ArgumentParser(description="Run cellsnp-lite for all samples.")
     ap.add_argument("--config", required=True, help="cellsnp config JSON")
@@ -45,10 +52,15 @@ def main():
     for bam in bams:
         sample_id = bam.stem
         sample_out = outdir / sample_id
+        sample_out.mkdir(parents=True, exist_ok=True)
+        sample_barcodes = infer_sample_barcode_file(bam) or whitelist
+        if not sample_barcodes.exists():
+            print(f"Missing barcode file for {sample_id}: {sample_barcodes}", file=sys.stderr)
+            return 2
         cmd = [
             "cellsnp-lite",
             "-s", str(bam),
-            "-b", str(whitelist),
+            "-b", str(sample_barcodes),
             "-R", str(vcf),
             "-O", str(sample_out),
             "-p", threads,

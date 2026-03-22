@@ -7,7 +7,7 @@ Entry
 - Working directory: `06_gene_burden`
 - Required inputs:
   - Variant->gene long TSV from `05_variant_to_gene/outputs/artifacts/`
-  - Per-sample VCFs from `03_bcftools_call/outputs/artifacts/`
+  - Per-sample VCFs from `03_gatk_call/outputs/artifacts/`
 
 Prerequisites
 - Python 3.10+

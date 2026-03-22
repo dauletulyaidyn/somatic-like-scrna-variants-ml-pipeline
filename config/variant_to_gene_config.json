@@ -1,5 +1,5 @@
-﻿{
-  "cohort_vcf": "04_cohort_filter/outputs/artifacts/cohort.common.vcf.gz",
+{
+  "cohort_vcf": "04_cohort_filter/outputs/artifacts/cohort.common.vcf",
   "gtf": "config/ref/genes.gtf",
   "out_tsv": "05_variant_to_gene/outputs/artifacts/variant_gene_long.tsv"
 }

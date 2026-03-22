@@ -2,7 +2,7 @@
   "stages": [
     {"id": "01_input_data", "description": "Input validation and metadata cleaning", "estimate_seconds": 60},
     {"id": "02_starsolo", "description": "STARsolo alignment (CB/UB BAM)", "estimate_seconds": 7200},
-    {"id": "03_bcftools_call", "description": "bcftools mpileup/call (filtered VCF)", "estimate_seconds": 3600},
+    {"id": "03_gatk_call", "description": "GATK RNA variant calling (filtered VCF)", "estimate_seconds": 5400},
     {"id": "04_cohort_filter", "description": "Cohort-common filter", "estimate_seconds": 900},
     {"id": "05_variant_to_gene", "description": "Variant to gene annotation", "estimate_seconds": 600},
     {"id": "06_gene_burden", "description": "Gene-burden matrix", "estimate_seconds": 600},

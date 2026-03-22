@@ -1,7 +1,9 @@
-﻿#!/usr/bin/env python3
-from flask import Flask, render_template, send_file, request
-import sqlite3
+#!/usr/bin/env python3
+from datetime import datetime
 from pathlib import Path
+import sqlite3
+
+from flask import Flask, render_template, request, send_file
 
 app = Flask(__name__)
 DB_PATH = Path(__file__).resolve().parent / "status.db"
@@ -11,21 +13,50 @@ def db():
     return sqlite3.connect(DB_PATH)
 
 
+def fmt_ts(ts):
+    if ts in (None, ""):
+        return ""
+    try:
+        return datetime.fromtimestamp(float(ts)).strftime("%Y-%m-%d %H:%M:%S")
+    except Exception:
+        return str(ts)
+
+
+def fmt_num(val, digits=1):
+    if val in (None, ""):
+        return ""
+    try:
+        return f"{float(val):.{digits}f}"
+    except Exception:
+        return str(val)
+
+
+app.jinja_env.filters["fmt_ts"] = fmt_ts
+app.jinja_env.filters["fmt_num"] = fmt_num
+
+
 @app.route("/")
 def index():
     con = db()
     cur = con.cursor()
-    cur.execute("SELECT id, description, last_status, last_start_ts, last_end_ts, last_duration, last_estimate_error, last_error, last_error_ts FROM stages ORDER BY id")
+    cur.execute(
+        "SELECT id, description, last_status, last_start_ts, last_end_ts, last_duration, last_estimate_error, last_error, last_error_ts FROM stages ORDER BY id"
+    )
     stages = cur.fetchall()
+    cur.execute("SELECT COUNT(*) FROM events")
+    event_count = cur.fetchone()[0]
     con.close()
-    return render_template("index.html", stages=stages)
+    return render_template("index.html", stages=stages, event_count=event_count)
 
 
 @app.route("/stage/<stage_id>")
 def stage(stage_id):
     con = db()
     cur = con.cursor()
-    cur.execute("SELECT id, description, last_status, last_start_ts, last_end_ts, last_duration, last_estimate_error, last_error, last_error_ts, estimate_seconds FROM stages WHERE id=?", (stage_id,))
+    cur.execute(
+        "SELECT id, description, last_status, last_start_ts, last_end_ts, last_duration, last_estimate_error, last_error, last_error_ts, estimate_seconds FROM stages WHERE id=?",
+        (stage_id,),
+    )
     st = cur.fetchone()
     cur.execute("SELECT type, ts, message FROM events WHERE stage=? ORDER BY ts DESC", (stage_id,))
     events = cur.fetchall()
@@ -48,6 +79,7 @@ def file_view():
 
 def main():
     import argparse
+
     ap = argparse.ArgumentParser()
     ap.add_argument("--host", default="0.0.0.0")
     ap.add_argument("--port", type=int, default=5556)

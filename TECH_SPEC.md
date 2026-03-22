@@ -2,6 +2,7 @@
 
 Purpose
 - Provide an entry point for AI agents to execute the pipeline end-to-end.
+- Support autonomous execution from a single command such as `zapusti analiz`.
 
 Repository layout
 - Root folders:
@@ -29,7 +30,7 @@ Global prerequisites (check before running any stage)
 Core tools (stage-specific use)
 - STAR/STARsolo
 - samtools
-- bcftools + htslib + tabix
+- GATK 4 + Java
 - cellsnp-lite
 
 Core Python libs (stage-specific use)
@@ -46,34 +47,33 @@ Global checks (examples)
   - `python --version`
   - `STAR --version`
   - `samtools --version`
-  - `bcftools --version`
-  - `tabix --version`
+  - `gatk --help`
   - `cellsnp-lite --help`
 
 Installation policy
-- All required tools/libs must be installed and verified before starting Stage 01.
-- Stage scripts must NOT attempt installation or environment checks.
+- The autonomous runner may perform best-effort installation and environment checks before Stage 01.
+- Stage-specific Python scripts remain computation-focused and do not install dependencies themselves.
 - Preferred approach: micromamba/conda environment per tool group.
-- On Windows, the agent must install/enable WSL2 before proceeding and run all tool installs inside WSL.
+- On Windows, the agent should prefer WSL2 for bioinformatics toolchain stability.
 
 OS-specific install recipes (reference)
 - Windows (WSL2 Ubuntu; run inside WSL):
   - `sudo apt-get update`
-  - `sudo apt-get install -y samtools bcftools tabix`
-  - `conda install -c bioconda -c conda-forge star cellsnp-lite`
+  - `sudo apt-get install -y samtools default-jre`
+  - `conda install -c bioconda -c conda-forge star gatk4 cellsnp-lite`
   - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
 - macOS:
-  - `brew install star samtools bcftools htslib tabix`
+  - `brew install star samtools`
   - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
-  - `conda install -c bioconda -c conda-forge cellsnp-lite`
+  - `conda install -c bioconda -c conda-forge gatk4 cellsnp-lite`
 - Linux (Ubuntu/Debian):
-  - `sudo apt-get install -y samtools bcftools tabix`
+  - `sudo apt-get install -y samtools default-jre`
   - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
-  - `conda install -c bioconda -c conda-forge star cellsnp-lite`
+  - `conda install -c bioconda -c conda-forge star gatk4 cellsnp-lite`
 
 Resource guidance (rough)
 - STARsolo alignment: CPU 8-16 cores; RAM 32-64 GB; disk 100+ GB
-- bcftools calling: CPU 4-8 cores; RAM 8-16 GB
+- GATK RNA calling: CPU 4-8 cores; RAM 16-32 GB
 - cellsnp-lite: CPU 4-8 cores; RAM 16-32 GB
 - ML + correlation: CPU 2-8 cores; RAM 8-16 GB
 
@@ -84,6 +84,7 @@ Status system (required)
 - Web UI:
   - `python status/app.py --port 5556`
   - Open `http://localhost:5556`
+  - Autonomous entrypoint: `python scripts/run_autonomous_pipeline.py --auto-install --start-status`
 
 Initial inputs (required)
 - `data/fastq/` : raw scRNA-seq FASTQ files.
@@ -142,11 +143,12 @@ gunzip -c config/ref/whitelist.txt.gz > config/ref/whitelist.txt
   - Test FASTQ (2-read R1=28, R2~90): `read_structure=two_read`, whitelist `3M-february-2018_TRU.txt.gz` (10x 3' v3/v3.1).
   - CVD dataset (local `U:\! ! ! Datasets\! ! ! CVD Original dadtaset`): `read_structure=two_read`, whitelist `3M-february-2018_TRU.txt.gz` (10x 3' v3/v3.1).
 
-Whitelist selection requirement (must follow)
-- Before Stage 02, the AI agent must ask the user for the library chemistry (e.g., 10x v3/v3.1, v2, v1, 5' v3).
-- The user must provide `chemistry` OR explicitly approve the agent's inference.
-- The agent must then copy the corresponding file from `config/ref/whitelists/10x/` into `config/ref/whitelist.txt` (gunzip if needed).
-- If chemistry is unknown and user does not approve inference, the agent must stop and request clarification.
+Whitelist selection requirement
+- Preferred autonomous behavior:
+  - infer chemistry from known dataset mappings or `read_structure`
+  - copy the corresponding bundled whitelist into `config/ref/whitelist.txt`
+  - report the choice in logs/status
+- If inference is ambiguous, the agent should request clarification.
 
 FASTQ expectations
 - User-provided scRNA-seq dataset (control vs disease).

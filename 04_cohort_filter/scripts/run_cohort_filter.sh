@@ -1,7 +1,7 @@
-﻿#!/usr/bin/env bash
+#!/usr/bin/env bash
 set -euo pipefail
 
-VCF_DIR="../03_bcftools_call/outputs/artifacts"
+VCF_DIR="../03_gatk_call/outputs/artifacts"
 CONFIG="../config/cohort_filter_config.json"
 OUTDIR="outputs/artifacts"
 

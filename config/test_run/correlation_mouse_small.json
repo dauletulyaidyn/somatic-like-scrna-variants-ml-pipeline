@@ -1,0 +1,7 @@
+{
+  "gene_burden": "06_gene_burden/outputs/test_run/gene_burden_matrix.tsv",
+  "cluster_counts_dir": "09_cluster_aggregation/outputs/test_run",
+  "mut_burden": "10_mutational_analysis/outputs/test_run/mutation_burden.tsv",
+  "mut_signatures": "10_mutational_analysis/outputs/test_run/mutation_signatures.tsv",
+  "out_corr": "11_correlation/outputs/test_run/correlation.tsv"
+}

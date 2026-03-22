@@ -4,7 +4,7 @@ Purpose
 - Build a cohort-common filter VCF to keep candidate somatic-like variants.
 
 Inputs
-- Filtered VCFs from `03_bcftools_call/outputs/artifacts/`.
+- Filtered VCFs from `03_gatk_call/outputs/artifacts/`.
 - Optional: min cohort frequency threshold.
 
 Outputs
@@ -13,7 +13,7 @@ Outputs
 - Stage outputs saved under `outputs/`.
 
 How to run (manual)
-1) Ensure bcftools + tabix are installed.
+1) Ensure Python 3.10+ is installed.
 2) Set parameters in `config/cohort_filter_config.json`.
 3) Run:
    - `bash scripts/run_04_cohort_filter_stage.sh`

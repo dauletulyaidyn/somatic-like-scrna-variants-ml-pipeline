@@ -1,0 +1,11 @@
+{
+  "feature_matrix": "06_gene_burden/outputs/test_run/gene_burden_matrix.tsv",
+  "metadata": "data/test_run/metadata.cleaned.tsv",
+  "label_col": "condition",
+  "positive_label": "disease",
+  "cv_folds": 2,
+  "cv_repeats": 1,
+  "permutations": 10,
+  "out_metrics": "07_ml_control_vs_disease/outputs/test_run/ml_metrics.tsv",
+  "out_permutation": "07_ml_control_vs_disease/outputs/test_run/permutation.tsv"
+}

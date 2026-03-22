@@ -4,7 +4,7 @@ Purpose
 - Derive mutational analysis summaries from filtered VCFs.
 
 Inputs
-- Filtered VCFs from `03_bcftools_call/outputs/artifacts/`.
+- Filtered VCFs from `03_gatk_call/outputs/artifacts/`.
 
 Outputs
 - SNV/indel burden per sample.

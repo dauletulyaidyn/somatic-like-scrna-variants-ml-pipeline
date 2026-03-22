@@ -1,14 +1,16 @@
 # Pipeline Repository
 
 Author: Kunikeyev Aidyn  
+Version: 0.9.0-beta.2  
+Release status: working beta  
 DOI:  
 Git:  
 
-This repository contains a stage-by-stage pipeline for expressed-variant analysis from scRNA-seq.
+This repository contains a stage-by-stage pipeline for integrated expression and mutational analysis from scRNA-seq.
 
 ## What this is
 - Data source: scRNA-seq with control (baseline, untreated) vs disease (condition, treated) groups.
-- Goal: extract expressed variants, build gene-burden features, classify control (baseline, untreated) vs disease (condition, treated), and correlate with mutational analysis outputs.
+- Goal: run expression analysis, call expressed variants with GATK, build gene-burden features, classify control (baseline, untreated) vs disease (condition, treated), and correlate expression and mutational outputs.
 - Each stage lives in its own folder with:
   - `TECH_SPEC.md` (AI agent instructions)
   - `README.md` (manual run instructions)
@@ -31,7 +33,7 @@ If you run without the AI agent, **you are responsible** for:
 - Providing sufficient compute resources (CPU/RAM/disk).
 - Monitoring logs and handling errors.
 - All tools/libs must be installed and verified before starting Stage 01.
-- Stage scripts do not perform installation or environment checks.
+- The autonomous runner can perform best-effort installation and stage orchestration.
 
 Minimum environment
 - Windows with WSL2 (Ubuntu) for Windows users.
@@ -40,7 +42,7 @@ Minimum environment
 
 Core tools (used across stages)
 - STAR/STARsolo, samtools
-- bcftools + htslib + tabix
+- GATK 4 + Java
 - cellsnp-lite (single-cell stage)
 
 Core Python libraries (stage-specific)
@@ -53,22 +55,22 @@ Core Python libraries (stage-specific)
 OS-specific setup (summary)
 - Windows (use WSL2 Ubuntu; run installs inside WSL):
   - `sudo apt-get update`
-  - `sudo apt-get install -y samtools bcftools tabix`
-  - `conda install -c bioconda -c conda-forge star cellsnp-lite`
+  - `sudo apt-get install -y samtools default-jre`
+  - `conda install -c bioconda -c conda-forge star gatk4 cellsnp-lite`
   - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
 - macOS:
-  - `brew install star samtools bcftools htslib tabix`
+  - `brew install star samtools`
   - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
-  - `conda install -c bioconda -c conda-forge cellsnp-lite`
+  - `conda install -c bioconda -c conda-forge gatk4 cellsnp-lite`
 - Linux (Ubuntu/Debian):
-  - `sudo apt-get install -y samtools bcftools tabix`
+  - `sudo apt-get install -y samtools default-jre`
   - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
-  - `conda install -c bioconda -c conda-forge star cellsnp-lite`
+  - `conda install -c bioconda -c conda-forge star gatk4 cellsnp-lite`
 
 ## Stage folders
 - `01_input_data/`
 - `02_starsolo/`
-- `03_bcftools_call/`
+- `03_gatk_call/`
 - `04_cohort_filter/`
 - `05_variant_to_gene/`
 - `06_gene_burden/`
@@ -110,6 +112,19 @@ All downstream stages assume `metadata.cleaned.tsv` from Stage 01.
 1) Install Flask: `pip install flask`
 2) Run server: `python status/app.py --port 5556`
 3) Open: `http://localhost:5556`
+
+## Autonomous Start
+- One-command / agent start:
+  - `python scripts/run_autonomous_pipeline.py --auto-install --start-status --use-wsl` (recommended on Windows)
+  - `./zapusti_analiz.ps1`
+- Suggested agent instruction:
+  - `zapusti analiz`
+
+## Versioning
+- Current pipeline version: `0.9.0-beta.2`
+- Machine-readable version metadata: `config/pipeline_version.json`
+- Release notes: `docs/CHANGELOG.md`
+- Current release posture: `docs/RELEASE_STATUS.md`
 
 ## Start here
 1) Go to `01_input_data/`.

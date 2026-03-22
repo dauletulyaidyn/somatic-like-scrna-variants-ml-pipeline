@@ -2,6 +2,7 @@
 import argparse
 import json
 import sys
+import gzip
 from pathlib import Path
 
 import pandas as pd
@@ -36,7 +37,8 @@ def parse_gtf(gtf_path: Path):
 
 def parse_vcf(vcf_path: Path):
     rows = []
-    with vcf_path.open("r", encoding="utf-8") as f:
+    opener = gzip.open if vcf_path.suffix == ".gz" else open
+    with opener(vcf_path, "rt", encoding="utf-8") as f:
         for line in f:
             if line.startswith("#"):
                 continue

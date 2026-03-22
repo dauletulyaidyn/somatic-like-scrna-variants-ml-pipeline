@@ -1,0 +1,25 @@
+flowchart TD
+
+    A[Input data] --> B[STARsolo alignment]
+
+    B --> C[Expression analysis]
+    C --> D[Expression results]
+    D --> E[ML control vs disease]
+
+    B --> F[GATK RNA seq preprocessing]
+    F --> G[GATK HaplotypeCaller and filtering]
+    G --> H[Cohort common filter]
+    H --> I[Variant to gene tables]
+    I --> J[Gene burden features]
+    G --> K[cellsnp lite]
+    K --> L[Cluster aggregation]
+    G --> M[Mutational analysis]
+    M --> N[Mutational results]
+
+    D --> O[Correlation of expression and mutation signals]
+    J --> O
+    L --> O
+    N --> O
+
+    E --> P[Integrated interpretation]
+    O --> P

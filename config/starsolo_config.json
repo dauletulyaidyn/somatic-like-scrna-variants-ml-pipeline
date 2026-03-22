@@ -1,15 +1,23 @@
-﻿{
-  "star_index": "config/ref/STAR_index/",
-  "gtf": "config/ref/genes.gtf",
-  "threads": 8,
-  "read_structure": "two_read",
-  "solo": {
-    "CBstart": 1,
-    "CBlen": 16,
-    "UMIstart": 17,
-    "UMIlen": 10,
-    "whitelist": "config/ref/whitelist.txt"
-  },
-  "readFilesCommand": "zcat",
-  "extra_args": ["--outSAMtype", "BAM", "SortedByCoordinate"]
+{
+    "star_index":  "config/ref/STAR_index",
+    "gtf":  "config/ref/genes.gtf",
+    "threads":  8,
+    "read_structure":  "two_read",
+    "solo":  {
+                 "CBstart":  1,
+                 "CBlen":  16,
+                 "UMIstart":  17,
+                 "UMIlen":  10,
+                 "whitelist":  "config/ref/whitelist.txt"
+             },
+    "readFilesCommand":  "zcat",
+    "extra_args":  [
+                       "--outSAMtype",
+                       "BAM",
+                       "SortedByCoordinate",
+                       "--outTmpDir",
+                       "/tmp/STARtmp_main",
+                       "--soloBarcodeReadLength",
+                       "0"
+                   ]
 }

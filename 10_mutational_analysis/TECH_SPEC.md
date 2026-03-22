@@ -6,7 +6,7 @@ Objective
 Entry
 - Working directory: `10_mutational_analysis`
 - Required inputs:
-  - Filtered VCFs from `03_bcftools_call/outputs/artifacts/`
+  - Filtered VCFs from `03_gatk_call/outputs/artifacts/`
 
 Prerequisites
 - Python 3.10+

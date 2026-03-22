@@ -8,6 +8,16 @@ from pathlib import Path
 import pandas as pd
 
 
+def normalize_sample_id(vcf: Path) -> str:
+    name = vcf.name
+    if name.endswith(".filtered.vcf"):
+        name = name[: -len(".filtered.vcf")]
+    elif name.endswith(".vcf"):
+        name = name[: -len(".vcf")]
+    name = name.replace("Aligned.sortedByCoord.out", "")
+    return name
+
+
 def parse_vcf(vcf_path: Path):
     variants = []
     with vcf_path.open("r", encoding="utf-8") as f:
@@ -36,9 +46,9 @@ def main():
         print(f"Missing vcf_dir: {vcf_dir}", file=sys.stderr)
         return 2
 
-    vcf_files = sorted(vcf_dir.glob("*.vcf"))
+    vcf_files = sorted(vcf_dir.glob("*.filtered.vcf"))
     if not vcf_files:
-        print("No VCFs found", file=sys.stderr)
+        print("No filtered VCFs found", file=sys.stderr)
         return 2
 
     driver_genes = set()
@@ -50,7 +60,7 @@ def main():
     driver_rows = []
 
     for vcf in vcf_files:
-        sample_id = vcf.stem.replace(".filtered", "")
+        sample_id = normalize_sample_id(vcf)
         vars_ = parse_vcf(vcf)
 
         # burden

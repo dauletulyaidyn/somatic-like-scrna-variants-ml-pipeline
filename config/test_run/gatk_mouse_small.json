@@ -1,0 +1,19 @@
+{
+  "ref_fasta": "config/test_run/ref_mouse/Mus_musculus.GRCm39.dna.primary_assembly.fa",
+  "gatk_executable": "gatk",
+  "java_options": ["-Xmx4g"],
+  "split_ncigar_reads": true,
+  "tmp_dir": "03_gatk_call/outputs/test_run_tmp",
+  "haplotypecaller_args": [
+    "--dont-use-soft-clipped-bases",
+    "true",
+    "--standard-min-confidence-threshold-for-calling",
+    "20.0"
+  ],
+  "hard_filters": [
+    {"name": "LowQD", "expr": "QD < 2.0"},
+    {"name": "HighFS", "expr": "FS > 30.0"},
+    {"name": "LowMQ", "expr": "MQ < 40.0"},
+    {"name": "HighSOR", "expr": "SOR > 3.0"}
+  ]
+}

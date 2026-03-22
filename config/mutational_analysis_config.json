@@ -1,5 +1,5 @@
-﻿{
-  "vcf_dir": "03_bcftools_call/outputs/artifacts",
+{
+  "vcf_dir": "03_gatk_call/outputs/artifacts",
   "driver_genes": "config/ref/driver_genes.txt",
   "out_burden": "10_mutational_analysis/outputs/metrics/mutation_burden.tsv",
   "out_signatures": "10_mutational_analysis/outputs/metrics/mutation_signatures.tsv",

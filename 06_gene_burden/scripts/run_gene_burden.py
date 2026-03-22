@@ -7,6 +7,16 @@ from pathlib import Path
 import pandas as pd
 
 
+def normalize_sample_id(vcf: Path) -> str:
+    name = vcf.name
+    if name.endswith(".filtered.vcf"):
+        name = name[: -len(".filtered.vcf")]
+    elif name.endswith(".vcf"):
+        name = name[: -len(".vcf")]
+    name = name.replace("Aligned.sortedByCoord.out", "")
+    return name
+
+
 def main():
     ap = argparse.ArgumentParser(description="Build gene-burden matrix.")
     ap.add_argument("--config", required=True, help="config JSON")
@@ -38,13 +48,13 @@ def main():
     genes = var_to_gene[["gene_id", "gene_name"]].drop_duplicates().reset_index(drop=True)
 
     # Parse per-sample VCFs and count variants per gene
-    vcf_files = sorted(vcf_dir.glob("*.vcf"))
+    vcf_files = sorted(vcf_dir.glob("*.filtered.vcf"))
     if not vcf_files:
-        print("No VCF files found", file=sys.stderr)
+        print("No filtered VCF files found", file=sys.stderr)
         return 2
 
     for vcf in vcf_files:
-        sample_id = vcf.stem.replace(".filtered", "")
+        sample_id = normalize_sample_id(vcf)
         sample_keys = set()
         with vcf.open("r", encoding="utf-8") as f:
             for line in f:

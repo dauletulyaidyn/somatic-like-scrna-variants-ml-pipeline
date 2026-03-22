@@ -5,7 +5,7 @@ Purpose
 
 Inputs
 - `05_variant_to_gene/outputs/artifacts/variant_gene_long.tsv`.
-- Per-sample VCFs from `03_bcftools_call/outputs/artifacts/`.
+- Per-sample VCFs from `03_gatk_call/outputs/artifacts/`.
 
 Outputs
 - Gene-burden matrix (TSV/CSV), genes x samples.

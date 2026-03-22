@@ -15,6 +15,10 @@ def run_cmd(cmd, log_path: Path):
         return proc.wait()
 
 
+def normalize_sample_id(name: str) -> str:
+    return name.replace("Aligned.sortedByCoord.out", "")
+
+
 def main():
     ap = argparse.ArgumentParser(description="Run cluster aggregation for all samples.")
     ap.add_argument("--config", required=True, help="cluster aggregation config JSON")
@@ -38,12 +42,18 @@ def main():
         print("No sample dirs found", file=sys.stderr)
         return 2
 
+    helper = Path(__file__).resolve().parents[2] / "scripts" / "aggregate_cellsnp_by_cluster.py"
+    if not helper.exists():
+        print(f"Missing helper script: {helper}", file=sys.stderr)
+        return 2
+
     for sdir in sample_dirs:
-        srr = sdir.name
+        raw_name = sdir.name
+        srr = normalize_sample_id(raw_name)
         out_path = outdir / f"{srr}.cellsnp.cluster_counts.tsv.gz"
         cmd = [
             "python3",
-            "../scripts/aggregate_cellsnp_by_cluster.py",
+            str(helper),
             "--srr", srr,
             "--cellsnp-outdir", str(sdir),
             "--cell-cluster-map", str(cell_cluster_map),

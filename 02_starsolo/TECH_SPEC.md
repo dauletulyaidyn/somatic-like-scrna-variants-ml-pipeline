@@ -47,5 +47,5 @@ Exit criteria
 - STARsolo logs exist (Log.final.out).
 
 Next stage
-- Proceed to `03_bcftools_call`.
+- Proceed to `03_gatk_call`.
 

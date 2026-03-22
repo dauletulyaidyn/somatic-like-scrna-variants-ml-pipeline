@@ -1,6 +1,7 @@
+01_input_data|python3 01_input_data/scripts/validate_inputs.py --fastq-dir data/fastq --metadata data/metadata/metadata.tsv --out data/metadata/metadata.cleaned.tsv
 02_starsolo|python3 scripts/run_starsolo.py --metadata ../data/metadata/metadata.cleaned.tsv --fastq-dir ../data/fastq --config ../config/starsolo_config.json --outdir outputs/artifacts
-03_bcftools_call|python3 scripts/run_bcftools.py --bam-dir ../02_starsolo/outputs/artifacts --config ../config/bcftools_config.json --outdir outputs/artifacts
-04_cohort_filter|python3 scripts/run_cohort_filter.py --vcf-dir ../03_bcftools_call/outputs/artifacts --config ../config/cohort_filter_config.json --outdir outputs/artifacts
+03_gatk_call|python3 scripts/run_gatk.py --bam-dir ../02_starsolo/outputs/artifacts --config ../config/gatk_config.json --outdir outputs/artifacts
+04_cohort_filter|python3 scripts/run_cohort_filter.py --vcf-dir ../03_gatk_call/outputs/artifacts --config ../config/cohort_filter_config.json --outdir outputs/artifacts
 05_variant_to_gene|python3 scripts/run_variant_to_gene.py --config ../config/variant_to_gene_config.json
 06_gene_burden|python3 scripts/run_gene_burden.py --config ../config/gene_burden_config.json
 07_ml_control_vs_disease|python3 scripts/run_ml.py --config ../config/ml_config.json

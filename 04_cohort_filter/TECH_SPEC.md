@@ -6,11 +6,10 @@ Objective
 Entry
 - Working directory: `04_cohort_filter`
 - Required inputs:
-  - VCFs from `03_bcftools_call/outputs/artifacts/`
+  - VCFs from `03_gatk_call/outputs/artifacts/`
 
 Prerequisites
-- bcftools
-- tabix
+- Python 3.10+
 
 OS check
 - Windows: require WSL2; execute all commands inside WSL.
