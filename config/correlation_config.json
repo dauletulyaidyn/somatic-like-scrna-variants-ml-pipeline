@@ -1,7 +1,15 @@
 {
+  "metadata": "data/metadata/metadata.cleaned.tsv",
+  "starsolo_dir": "02_starsolo/outputs/artifacts",
   "gene_burden": "06_gene_burden/outputs/artifacts/gene_burden_matrix.tsv",
   "cluster_counts_dir": "09_cluster_aggregation/outputs/artifacts",
   "mut_burden": "10_mutational_analysis/outputs/metrics/mutation_burden.tsv",
   "mut_signatures": "10_mutational_analysis/outputs/metrics/mutation_signatures.tsv",
-  "out_corr": "11_correlation/outputs/metrics/correlation.tsv"
+  "out_sample_integration": "11_correlation/outputs/metrics/sample_integration.tsv",
+  "out_corr": "11_correlation/outputs/metrics/correlation_matrix.tsv",
+  "out_pairs": "11_correlation/outputs/metrics/correlation_pairs.tsv",
+  "out_condition_summary": "11_correlation/outputs/metrics/condition_summary.tsv",
+  "out_notes": "11_correlation/outputs/metrics/integration_notes.md",
+  "out_heatmap": "11_correlation/outputs/plots/correlation_heatmap.png",
+  "out_scatter": "11_correlation/outputs/plots/mutational_vs_gene_burden.png"
 }

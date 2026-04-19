@@ -1,0 +1,94 @@
+flowchart TD
+    FASTQ["data/fastq/<br/>raw FASTQ files"]
+    META["data/metadata/metadata.tsv<br/>raw metadata"]
+    REF["config/ref/<br/>genome.fa, genes.gtf,<br/>STAR_index, whitelist.txt"]
+    CLMAP["data/metadata/cell_cluster_map.tsv"]
+
+    S01["01_input_data<br/>validate FASTQ naming,<br/>validate metadata,<br/>write cleaned metadata"]
+    O01["data/metadata/metadata.cleaned.tsv"]
+
+    S02["02_starsolo<br/>STARsolo alignment,<br/>barcode-aware BAMs,<br/>alignment artifacts"]
+    O02["02_starsolo/outputs/artifacts/<br/>BAM, Solo.out, barcode-aware outputs"]
+
+    S03["03_gatk_call<br/>SplitNCigarReads,<br/>HaplotypeCaller,<br/>filter PASS variants"]
+    O03["03_gatk_call/outputs/artifacts/<br/>filtered per-sample VCFs"]
+
+    S04["04_cohort_filter<br/>build cohort.common.vcf<br/>using min_samples + min_vaf"]
+    O04["04_cohort_filter/outputs/artifacts/<br/>cohort.common.vcf"]
+
+    S05["05_variant_to_gene<br/>map cohort variants to genes<br/>using genes.gtf"]
+    O05["05_variant_to_gene/outputs/artifacts/<br/>variant_gene_long.tsv"]
+
+    S06["06_gene_burden<br/>build gene x sample<br/>burden matrix"]
+    O06["06_gene_burden/outputs/artifacts/<br/>gene_burden_matrix.tsv"]
+
+    S07["07_ml_control_vs_disease<br/>logistic regression + CV + permutation"]
+    O07["07_ml_control_vs_disease/outputs/metrics/<br/>ML metrics + permutation outputs"]
+
+    S08["08_cellsnp<br/>cellsnp-lite per-cell allele counting<br/>using BAM + cohort VCF"]
+    O08["08_cellsnp/outputs/artifacts/<br/>per-sample cellSNP directories"]
+
+    S09["09_cluster_aggregation<br/>aggregate allele counts by cluster"]
+    O09["09_cluster_aggregation/outputs/artifacts/<br/>cluster mutation tables"]
+
+    S10["10_mutational_analysis<br/>sample-level mutation burden,<br/>SNV/indel counts, signatures"]
+    O10["10_mutational_analysis/outputs/metrics/<br/>mutation_burden.tsv,<br/>mutation_signatures.tsv,<br/>driver/pathway placeholders"]
+
+    S11["11_correlation<br/>integrated sample-level expression/mutation layer:<br/>gene burden + mutation burden + signatures +<br/>optional cluster burden + optional STARsolo cell counts + metadata"]
+    O11["11_correlation/outputs/<br/>sample_integration.tsv,<br/>correlation_matrix.tsv,<br/>correlation_pairs.tsv,<br/>condition_summary.tsv,<br/>integration_notes.md,<br/>plots"]
+
+    S12["12_integrated_interpretation<br/>collect manuscript-facing outputs,<br/>copy report bundle,<br/>write final agentic report"]
+    O12["for_report/<br/>figures, tables, agentic stage reports,<br/>agentic_final_report.md,<br/>agentic_stage_manifest.tsv"]
+
+    FASTQ --> S01
+    META --> S01
+    S01 --> O01
+
+    FASTQ --> S02
+    O01 --> S02
+    REF --> S02
+    S02 --> O02
+
+    O02 --> S03
+    REF --> S03
+    S03 --> O03
+
+    O03 --> S04
+    S04 --> O04
+
+    O04 --> S05
+    REF --> S05
+    S05 --> O05
+
+    O05 --> S06
+    O03 --> S06
+    S06 --> O06
+
+    O06 --> S07
+    O01 --> S07
+    S07 --> O07
+
+    O02 --> S08
+    O04 --> S08
+    REF --> S08
+    S08 --> O08
+
+    O08 --> S09
+    CLMAP --> S09
+    S09 --> O09
+
+    O03 --> S10
+    S10 --> O10
+
+    O06 --> S11
+    O10 --> S11
+    O09 --> S11
+    O02 --> S11
+    O01 --> S11
+    S11 --> O11
+
+    O07 --> S12
+    O11 --> S12
+    O10 --> S12
+    O09 --> S12
+    S12 --> O12

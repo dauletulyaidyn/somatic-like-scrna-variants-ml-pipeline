@@ -1,0 +1,88 @@
+{
+  "workflow_id": "legacy_01_12_agentic",
+  "canonical_runner": "scripts/run_agentic_pipeline.py",
+  "hierarchy": {
+    "main_agent": {
+      "type": "controller",
+      "controls": [
+        "stage_preflight_agent",
+        "stage_execution_agent",
+        "stage_review_agent",
+        "stage_report_agent",
+        "implementation_support"
+      ]
+    }
+  },
+  "phase_to_role": {
+    "preflight": "stage_preflight_agent",
+    "execution": "stage_execution_agent",
+    "review": "stage_review_agent",
+    "mini_report": "stage_report_agent",
+    "advance_decision": "main_agent",
+    "final_report": "main_agent"
+  },
+  "roles": {
+    "main_agent": {
+      "provider": "codex",
+      "required_for_advance": false,
+      "responsibility": "Single controlling agent for the full workflow. It assigns stage work to subordinate agents, decides whether the workflow may advance, and generates the final integrated report and interpretation."
+    },
+    "stage_preflight_agent": {
+      "provider": "qwen",
+      "required_for_advance": false,
+      "responsibility": "Subordinate stage agent or skill. It validates input files, stage config, tool availability, and readiness before execution."
+    },
+    "stage_execution_agent": {
+      "provider": "codex",
+      "required_for_advance": true,
+      "responsibility": "Subordinate stage agent or skill. It executes the deterministic stage command after preflight passes and persists execution metadata."
+    },
+    "stage_review_agent": {
+      "provider": "claude",
+      "required_for_advance": false,
+      "responsibility": "Subordinate stage agent or skill. It checks whether the stage ran correctly and whether the outputs are valid enough for the next stage."
+    },
+    "stage_report_agent": {
+      "provider": "codex",
+      "required_for_advance": false,
+      "responsibility": "Subordinate stage agent or skill. It generates a mini report and mini interpretation for the current stage using inputs, run details, and outputs."
+    },
+    "implementation_support": {
+      "provider": "cursor",
+      "required_for_advance": false,
+      "responsibility": "Optional implementation and debugging support for code/config changes around the pipeline."
+    }
+  },
+  "providers": {
+    "codex": {
+      "enabled": false,
+      "command_template": "",
+      "approval_regex": "\\b(PASS|APPROVE|ACCEPT)\\b",
+      "notes": "Optional external Codex adapter. If disabled, the builtin deterministic implementation remains canonical."
+    },
+    "claude": {
+      "enabled": false,
+      "command_template": "",
+      "approval_regex": "\\b(PASS|APPROVE|ACCEPT)\\b",
+      "notes": "Optional external Claude adapter for scientific/method review."
+    },
+    "qwen": {
+      "enabled": false,
+      "command_template": "",
+      "approval_regex": "\\b(PASS|APPROVE|ACCEPT)\\b",
+      "notes": "Optional external Qwen adapter for adversarial input/output validation."
+    },
+    "cursor": {
+      "enabled": false,
+      "command_template": "",
+      "approval_regex": "\\b(PASS|APPROVE|ACCEPT)\\b",
+      "notes": "Optional Cursor/IDE adapter for implementation-side assistance."
+    }
+  },
+  "artifact_layout": {
+    "per_stage_dir": "outputs/agentic",
+    "final_report_dir": "12_integrated_interpretation/outputs/agentic",
+    "bundle_dir": "for_report",
+    "bundle_stage_reports_dir": "for_report/agentic_stage_reports"
+  }
+}

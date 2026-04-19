@@ -108,7 +108,7 @@ def main():
     else:
         print(f"Unsupported read_structure: {read_structure}", file=sys.stderr)
         return 2
-    if not (star_index and gtf and cb_start and cb_len and umi_start and umi_len and whitelist):
+    if not (star_index and gtf and cb_start and cb_len and umi_start and umi_len):
         print("Missing required STARsolo config fields", file=sys.stderr)
         return 2
 
@@ -118,7 +118,8 @@ def main():
 
     star_index = str(resolve_cfg_path(star_index))
     gtf = str(resolve_cfg_path(gtf))
-    whitelist = str(resolve_cfg_path(whitelist))
+    use_none_whitelist = whitelist in (None, "", "None", "none", "null", "NULL")
+    whitelist_arg = "None" if use_none_whitelist else str(resolve_cfg_path(whitelist))
 
     metrics_dir = Path("outputs/metrics")
     metrics_dir.mkdir(parents=True, exist_ok=True)
@@ -161,10 +162,10 @@ def main():
             "--soloCBlen", cb_len,
             "--soloUMIstart", umi_start,
             "--soloUMIlen", umi_len,
-            "--soloCBwhitelist", whitelist,
             "--outFileNamePrefix", str(out_prefix),
             "--outTmpDir", str(tmp_dir),
         ]
+        cmd += ["--soloCBwhitelist", whitelist_arg]
         if read_files_command:
             cmd += ["--readFilesCommand", read_files_command]
         if extra_args:

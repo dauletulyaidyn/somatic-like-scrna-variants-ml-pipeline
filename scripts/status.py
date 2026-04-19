@@ -163,6 +163,11 @@ def main():
     p_error.add_argument("--stage", required=True)
     p_error.add_argument("--message", default="")
 
+    p_event = sub.add_parser("event")
+    p_event.add_argument("--stage", required=True)
+    p_event.add_argument("--type", required=True)
+    p_event.add_argument("--message", default="")
+
     p_scan = sub.add_parser("scan")
     p_scan.add_argument("--stage", required=True)
     p_scan.add_argument("--paths", nargs="+", required=True)
@@ -179,7 +184,16 @@ def main():
 
     if args.cmd == "start":
         log_event(args.stage, "start", args.message)
-        update_stage(args.stage, last_status="running", last_start_ts=time.time())
+        update_stage(
+            args.stage,
+            last_status="running",
+            last_start_ts=time.time(),
+            last_end_ts=None,
+            last_duration=None,
+            last_estimate_error=None,
+            last_error=None,
+            last_error_ts=None,
+        )
         return 0
 
     if args.cmd == "finish":
@@ -200,12 +214,18 @@ def main():
             last_end_ts=end_ts,
             last_duration=duration,
             last_estimate_error=est_err,
+            last_error=None,
+            last_error_ts=None,
         )
         return 0
 
     if args.cmd == "error":
         log_event(args.stage, "error", args.message)
         update_stage(args.stage, last_status="error", last_error=args.message, last_error_ts=time.time())
+        return 0
+
+    if args.cmd == "event":
+        log_event(args.stage, args.type, args.message)
         return 0
 
     if args.cmd == "scan":

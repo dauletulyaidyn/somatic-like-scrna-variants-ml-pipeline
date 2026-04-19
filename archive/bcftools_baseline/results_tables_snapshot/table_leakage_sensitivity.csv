@@ -1,3 +1,0 @@
-evaluation,n_samples,n_unique_donors,accuracy_mean,balanced_accuracy_mean
-run_level_repeated_stratified_5x30,14,7,0.9511111111111112,0.9633333333333334
-donor_group_kfold_7,14,7,0.35714285714285715,0.35714285714285715

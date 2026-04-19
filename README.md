@@ -1,12 +1,18 @@
 # Pipeline Repository
 
-Author: Kunikeyev Aidyn  
-Version: 0.9.0-beta.3  
-Release status: working beta  
-DOI:  
-Git:  
+Author: Kunikeyev Aidyn
 
 This repository contains a stage-by-stage pipeline for integrated expression and mutational analysis from scRNA-seq.
+
+## Canonical workflow
+- The canonical root workflow is the legacy `01_...12_` pipeline wrapped by one controlling `main_agent`.
+- Each stage is handled as `subordinate preflight agent/skill -> subordinate execution agent/skill -> subordinate review agent/skill -> subordinate mini-report agent/skill -> main agent decision`.
+- Agent role mapping:
+  - `Codex`: main agent, stage execution agent, stage report agent
+  - `Qwen`: stage preflight agent
+  - `Claude`: stage review agent
+  - `Cursor`: optional implementation support
+- Full workflow spec: `docs/AGENTIC_WORKFLOW.md`
 
 ## What this is
 - Data source: scRNA-seq with control (baseline, untreated) vs disease (condition, treated) groups.
@@ -115,18 +121,14 @@ All downstream stages assume `metadata.cleaned.tsv` from Stage 01.
 
 ## Autonomous Start
 - One-command / agent start:
-  - `python scripts/run_autonomous_pipeline.py --auto-install --start-status --use-wsl` (recommended on Windows)
+  - `python scripts/run_agentic_pipeline.py --auto-install --start-status --use-wsl` (recommended on Windows)
   - `./zapusti_analiz.ps1`
 - Suggested agent instruction:
   - `zapusti analiz`
 
-## Versioning
-- Current pipeline version: `0.9.0-beta.3`
-- Machine-readable version metadata: `config/pipeline_version.json`
-- Release notes: `docs/CHANGELOG.md`
-- Current release posture: `docs/RELEASE_STATUS.md`
-- Contribution workflow: `CONTRIBUTING.md`
-- Release workflow: `docs/RELEASE_WORKFLOW.md`
+## Release Metadata
+- Formal versioning, release notes, and distribution metadata are intentionally not maintained in this working repo state.
+- Add those only when the pipeline is ready for publication or public distribution.
 
 ## Start here
 1) Go to `01_input_data/`.

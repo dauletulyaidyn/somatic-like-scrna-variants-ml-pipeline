@@ -1,16 +1,20 @@
 ﻿# 11_correlation: Correlation with mutational analysis
 
 Purpose
-- Correlate gene-burden and cluster-level counts with mutational analysis outputs.
+- Build an integrated sample-level view across gene burden, mutational burden, mutational signatures, optional cluster-level burden, optional STARsolo-derived sample metrics, and metadata.
 
 Inputs
 - Gene-burden matrix from `06_gene_burden/outputs/artifacts/`.
 - Cluster counts from `09_cluster_aggregation/outputs/artifacts/`.
 - Mutational analysis tables from `10_mutational_analysis/outputs/metrics/`.
+- Optional STARsolo sample metrics from `02_starsolo/outputs/artifacts/`.
+- Optional metadata from `data/metadata/metadata.cleaned.tsv`.
 
 Outputs
-- Correlation tables (Spearman/Pearson) + FDR.
-- Overlap/enrichment summaries.
+- Integrated sample table.
+- Pairwise Spearman correlation tables + FDR.
+- Condition-level summaries.
+- Integration notes and plots.
 - Stage outputs saved under `outputs/`.
 
 How to run (manual)
@@ -27,7 +31,7 @@ Pre-run checks (manual)
 - You are responsible for errors/logs when running manually.
 
 Success criteria
-- Correlation tables exist and are non-empty.
+- Integrated sample table and correlation outputs exist and are non-empty.
 
 Next stage
 - Proceed to `12_integrated_interpretation`.

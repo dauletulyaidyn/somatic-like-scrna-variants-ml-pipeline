@@ -1,5 +1,8 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
+from __future__ import annotations
+
 import argparse
+import gzip
 import json
 import sys
 from collections import Counter
@@ -8,20 +11,61 @@ from pathlib import Path
 import pandas as pd
 
 
-def normalize_sample_id(vcf: Path) -> str:
-    name = vcf.name
-    if name.endswith(".filtered.vcf"):
-        name = name[: -len(".filtered.vcf")]
-    elif name.endswith(".vcf"):
-        name = name[: -len(".vcf")]
-    name = name.replace("Aligned.sortedByCoord.out", "")
-    return name
+def open_text(path: Path):
+    if path.suffix == ".gz":
+        return gzip.open(path, "rt", encoding="utf-8")
+    return path.open("r", encoding="utf-8")
+
+
+def normalize_sample_id(value: str | Path) -> str:
+    name = value.name if isinstance(value, Path) else str(value)
+    suffixes = [
+        ".filtered.annotated.vcf.gz",
+        ".filtered.annotated.vcf",
+        ".filtered.with_filters.vcf.gz",
+        ".filtered.with_filters.vcf",
+        ".filtered.vcf.gz",
+        ".filtered.vcf",
+        ".raw.vcf.gz",
+        ".raw.vcf",
+        ".vcf.gz",
+        ".vcf",
+        ".bam",
+    ]
+    for suffix in suffixes:
+        if name.endswith(suffix):
+            name = name[: -len(suffix)]
+            break
+    return name.replace("Aligned.sortedByCoord.out", "")
+
+
+def candidate_vcfs(vcf_dir: Path) -> list[Path]:
+    patterns = [
+        "*.filtered.vcf",
+        "*.filtered.vcf.gz",
+        "*.filtered.annotated.vcf",
+        "*.filtered.annotated.vcf.gz",
+        "*.raw.vcf",
+        "*.raw.vcf.gz",
+        "*.vcf",
+        "*.vcf.gz",
+    ]
+    priority = {pattern: idx for idx, pattern in enumerate(patterns)}
+    best_by_sample: dict[str, tuple[int, Path]] = {}
+    for pattern in patterns:
+        for path in sorted(vcf_dir.glob(pattern)):
+            sample_id = normalize_sample_id(path)
+            rank = priority[pattern]
+            current = best_by_sample.get(sample_id)
+            if current is None or rank < current[0]:
+                best_by_sample[sample_id] = (rank, path)
+    return [item[1] for item in sorted(best_by_sample.values(), key=lambda pair: pair[1].name.lower())]
 
 
 def parse_vcf(vcf_path: Path):
     variants = []
-    with vcf_path.open("r", encoding="utf-8") as f:
-        for line in f:
+    with open_text(vcf_path) as handle:
+        for line in handle:
             if line.startswith("#"):
                 continue
             parts = line.rstrip("\n").split("\t")
@@ -46,14 +90,14 @@ def main():
         print(f"Missing vcf_dir: {vcf_dir}", file=sys.stderr)
         return 2
 
-    vcf_files = sorted(vcf_dir.glob("*.filtered.vcf"))
+    vcf_files = candidate_vcfs(vcf_dir)
     if not vcf_files:
-        print("No filtered VCFs found", file=sys.stderr)
+        print("No VCFs found", file=sys.stderr)
         return 2
 
     driver_genes = set()
     if driver_genes_path.exists():
-        driver_genes = set([l.strip() for l in driver_genes_path.read_text(encoding="utf-8").splitlines() if l.strip()])
+        driver_genes = {line.strip() for line in driver_genes_path.read_text(encoding="utf-8").splitlines() if line.strip()}
 
     burden_rows = []
     sig_rows = []
@@ -63,10 +107,16 @@ def main():
         sample_id = normalize_sample_id(vcf)
         vars_ = parse_vcf(vcf)
 
-        # burden
-        burden_rows.append({"sample_id": sample_id, "variant_count": len(vars_)})
+        snv_count = sum(1 for _chrom, _pos, ref, alt in vars_ if len(ref) == 1 and len(alt) == 1)
+        burden_rows.append(
+            {
+                "sample_id": sample_id,
+                "variant_count": len(vars_),
+                "snv_count": snv_count,
+                "indel_count": len(vars_) - snv_count,
+            }
+        )
 
-        # signatures (simple base change counts)
         sig = Counter()
         for _chrom, _pos, ref, alt in vars_:
             if len(ref) == 1 and len(alt) == 1:
@@ -75,7 +125,6 @@ def main():
         sig_row.update(sig)
         sig_rows.append(sig_row)
 
-        # driver hits (placeholder: none without annotation)
         if driver_genes:
             driver_rows.append({"sample_id": sample_id, "driver_hits": 0})
 
@@ -86,7 +135,6 @@ def main():
 
     out_burden.parent.mkdir(parents=True, exist_ok=True)
     pd.DataFrame(burden_rows).to_csv(out_burden, sep="\t", index=False)
-
     pd.DataFrame(sig_rows).fillna(0).to_csv(out_signatures, sep="\t", index=False)
 
     if driver_genes:
@@ -95,7 +143,6 @@ def main():
         pd.DataFrame([{"note": "driver_genes list not provided"}]).to_csv(out_drivers, sep="\t", index=False)
 
     pd.DataFrame([{"note": "pathway enrichment placeholder"}]).to_csv(out_pathways, sep="\t", index=False)
-
     return 0
 
 

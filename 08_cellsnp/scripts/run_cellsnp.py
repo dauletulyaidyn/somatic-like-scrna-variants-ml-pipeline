@@ -18,8 +18,14 @@ def run_cmd(cmd, log_path: Path):
 def infer_sample_barcode_file(bam: Path) -> Path | None:
     sample_id = bam.stem
     sample_prefix = sample_id.replace("Aligned.sortedByCoord.out", "")
-    candidate = bam.parent / f"{sample_prefix}Solo.out" / "Gene" / "filtered" / "barcodes.tsv"
-    return candidate if candidate.exists() else None
+    candidates = [
+        bam.parent / "Solo.out" / "Gene" / "filtered" / "barcodes.tsv",
+        bam.parent / f"{sample_prefix}Solo.out" / "Gene" / "filtered" / "barcodes.tsv",
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return None
 
 
 def main():

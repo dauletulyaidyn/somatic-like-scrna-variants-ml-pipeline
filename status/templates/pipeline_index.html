@@ -1,0 +1,226 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Pipeline Status</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 16px; color: #222; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ddd; padding: 8px; vertical-align: top; }
+    th { background: #f3f3f3; text-align: left; }
+    .status-running { color: #0a7; font-weight: 700; }
+    .status-finished { color: #06c; font-weight: 700; }
+    .status-error { color: #c00; font-weight: 700; }
+    .status-idle { color: #666; }
+    .pill { display: inline-block; padding: 4px 8px; border-radius: 999px; background: #eee; margin-right: 8px; margin-bottom: 6px; }
+    .mono { font-family: Consolas, monospace; }
+    .muted { color: #666; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; margin-bottom: 18px; }
+    .card { border: 1px solid #ddd; border-radius: 10px; padding: 12px 14px; background: #fafafa; }
+    .warn { color: #a15c00; font-weight: 700; }
+    .ok { color: #0a7; font-weight: 700; }
+    .changed-row { background: #ecfdf3; }
+    .changed-badge { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 999px; background: #22c55e; color: #fff; font-size: 12px; font-weight: 700; }
+    ul { margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Pipeline Status</h1>
+  <p>
+    Last refresh:
+    <span id="last-refresh"></span>
+    <span class="muted">Auto-refresh every 10 seconds</span>
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Runner</h2>
+      <p id="supervisor-summary">
+        <span class="pill">{{ supervisor.status }}</span>
+        {% if supervisor.runner_pid %}
+        <span class="mono">PID {{ supervisor.runner_pid }}</span>
+        {% endif %}
+      </p>
+      <p class="muted">Sequential stages continue automatically while the runner is alive.</p>
+    </div>
+
+    <div class="card">
+      <h2>Watchdog</h2>
+      <p id="watchdog-summary">
+        <span class="pill">{{ watchdog.status }}</span>
+        {% if watchdog.watchdog_pid %}
+        <span class="mono">PID {{ watchdog.watchdog_pid }}</span>
+        {% endif %}
+      </p>
+      <p id="watchdog-decision" class="muted">
+        {% if watchdog.last_action %}Last action: {{ watchdog.last_action }}{% endif %}
+        {% if watchdog.next_stage_candidate %} | Next stage candidate: {{ watchdog.next_stage_candidate }}{% endif %}
+      </p>
+      <div id="watchdog-anomalies">
+        {% if watchdog.anomalies %}
+        <div class="warn">Warnings detected:</div>
+        <ul>
+          {% for item in watchdog.anomalies %}
+          <li class="mono">{{ item }}</li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <div class="ok">No sequence violations detected.</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Stage Counts</h2>
+      <p id="stage-counts">
+        <span class="pill">finished {{ stage_counts.finished }}</span>
+        <span class="pill">running {{ stage_counts.running }}</span>
+        <span class="pill">error {{ stage_counts.error }}</span>
+        <span class="pill">idle {{ stage_counts.idle }}</span>
+      </p>
+      <p>Total events: <span id="event-count">{{ event_count }}</span></p>
+      <p><span class="changed-badge">Changed</span> means this stage was updated in the current pipeline version.</p>
+    </div>
+  </div>
+
+  <table id="stage-table">
+    <thead>
+      <tr>
+        <th>Stage</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Duration (s)</th>
+        <th>Estimate error (s)</th>
+        <th>Last error</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for s in stages %}
+      <tr data-stage="{{ s.id }}" class="{% if s.changed %}changed-row{% endif %}">
+        <td><a href="/stage/{{ s.id }}">{{ s.id }}</a></td>
+        <td class="desc-cell">{{ s.description }}{% if s.changed %}<span class="changed-badge">Changed</span><div class="muted">{{ s.change_note }}</div>{% endif %}</td>
+        <td class="status-cell status-{{ s.last_status }}">{{ s.last_status }}</td>
+        <td class="start-cell">{{ s.last_start_ts | fmt_ts }}</td>
+        <td class="end-cell">{{ s.last_end_ts | fmt_ts }}</td>
+        <td class="duration-cell">{{ s.last_duration | fmt_num }}</td>
+        <td class="estimate-cell">{{ s.last_estimate_error | fmt_num }}</td>
+        <td class="error-cell">{{ s.last_error }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <script>
+    function fmtTs(ts) {
+      if (ts === null || ts === undefined || ts === "") return "";
+      const d = new Date(ts * 1000);
+      if (Number.isNaN(d.getTime())) return String(ts);
+      const pad = (v) => String(v).padStart(2, "0");
+      return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+    }
+
+    function fmtNum(v) {
+      if (v === null || v === undefined || v === "") return "";
+      const n = Number(v);
+      return Number.isFinite(n) ? n.toFixed(1) : String(v);
+    }
+
+    function updateRunner(supervisor) {
+      const el = document.getElementById("supervisor-summary");
+      const pid = supervisor.runner_pid ? ` <span class="mono">PID ${supervisor.runner_pid}</span>` : "";
+      el.innerHTML = `<span class="pill">${supervisor.status || "unknown"}</span>${pid}`;
+    }
+
+    function updateWatchdog(watchdog) {
+      const summary = document.getElementById("watchdog-summary");
+      const pid = watchdog.watchdog_pid ? ` <span class="mono">PID ${watchdog.watchdog_pid}</span>` : "";
+      summary.innerHTML = `<span class="pill">${watchdog.status || "unknown"}</span>${pid}`;
+
+      const decision = document.getElementById("watchdog-decision");
+      const parts = [];
+      if (watchdog.last_action) parts.push(`Last action: ${watchdog.last_action}`);
+      if (watchdog.next_stage_candidate) parts.push(`Next stage candidate: ${watchdog.next_stage_candidate}`);
+      if (watchdog.running_stage) parts.push(`Running stage: ${watchdog.running_stage}`);
+      decision.textContent = parts.join(" | ");
+
+      const anomaliesEl = document.getElementById("watchdog-anomalies");
+      const anomalies = Array.isArray(watchdog.anomalies) ? watchdog.anomalies : [];
+      if (anomalies.length) {
+        anomaliesEl.innerHTML = `<div class="warn">Warnings detected:</div><ul>${anomalies.map(a => `<li class="mono">${a}</li>`).join("")}</ul>`;
+      } else {
+        anomaliesEl.innerHTML = `<div class="ok">No sequence violations detected.</div>`;
+      }
+    }
+
+    function updateStageCounts(counts) {
+      const el = document.getElementById("stage-counts");
+      el.innerHTML = `
+        <span class="pill">finished ${counts.finished || 0}</span>
+        <span class="pill">running ${counts.running || 0}</span>
+        <span class="pill">error ${counts.error || 0}</span>
+        <span class="pill">idle ${counts.idle || 0}</span>
+      `;
+    }
+
+    function updateRows(stages) {
+      const tbody = document.querySelector("#stage-table tbody");
+      const byId = new Map();
+      for (const row of tbody.querySelectorAll("tr[data-stage]")) {
+        byId.set(row.dataset.stage, row);
+      }
+      for (const stage of stages) {
+        let row = byId.get(stage.id);
+        if (!row) {
+          row = document.createElement("tr");
+          row.dataset.stage = stage.id;
+          row.innerHTML = `
+            <td><a></a></td>
+            <td class="desc-cell"></td>
+            <td class="status-cell"></td>
+            <td class="start-cell"></td>
+            <td class="end-cell"></td>
+            <td class="duration-cell"></td>
+            <td class="estimate-cell"></td>
+            <td class="error-cell"></td>
+          `;
+          tbody.appendChild(row);
+        }
+        row.querySelector("a").href = `/stage/${stage.id}`;
+        row.querySelector("a").textContent = stage.id;
+        row.className = stage.changed ? "changed-row" : "";
+        const descCell = row.querySelector(".desc-cell");
+        descCell.innerHTML = `${stage.description || ""}${stage.changed ? ` <span class="changed-badge">Changed</span><div class="muted">${stage.change_note || ""}</div>` : ""}`;
+        const statusCell = row.querySelector(".status-cell");
+        statusCell.textContent = stage.last_status || "";
+        statusCell.className = `status-cell status-${stage.last_status || "idle"}`;
+        row.querySelector(".start-cell").textContent = fmtTs(stage.last_start_ts);
+        row.querySelector(".end-cell").textContent = fmtTs(stage.last_end_ts);
+        row.querySelector(".duration-cell").textContent = fmtNum(stage.last_duration);
+        row.querySelector(".estimate-cell").textContent = fmtNum(stage.last_estimate_error);
+        row.querySelector(".error-cell").textContent = stage.last_error || "";
+      }
+    }
+
+    async function refreshStatus() {
+      try {
+        const res = await fetch("/api/status", { cache: "no-store" });
+        if (!res.ok) return;
+        const data = await res.json();
+        document.getElementById("event-count").textContent = data.event_count;
+        document.getElementById("last-refresh").textContent = data.server_time;
+        updateRunner(data.supervisor || {});
+        updateWatchdog(data.watchdog || {});
+        updateStageCounts(data.stage_counts || {});
+        updateRows(data.stages || []);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    refreshStatus();
+    setInterval(refreshStatus, 10000);
+  </script>
+</body>
+</html>

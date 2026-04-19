@@ -1,15 +1,16 @@
-﻿# Status Web UI
+# Status Web UI
 
-Run the status server (Flask) on port 5556.
+Run the status server on port `5556` for the legacy `01_...12_` pipeline.
 
-Install Flask (manual)
-- `pip install flask`
-
-Run
+Manual server start
 - `python status/app.py --port 5556`
 
+Recommended background start
+- `python scripts/launch_pipeline_background.py --use-wsl --watchdog-interval 10`
+
 The UI shows:
-- Stage statuses
-- Events (start/finish/error)
-- Configured inputs/outputs per stage (from config/status_config.json)
-- File list with sizes and previews
+- stage statuses from `config/status_config.json`
+- runner state
+- watchdog state and sequence warnings
+- events (`start` / `finish` / `error` / `scan`)
+- file list with sizes and previews
