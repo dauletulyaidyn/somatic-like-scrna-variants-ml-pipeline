@@ -12,7 +12,7 @@ Repository layout
   - `data/`     : raw inputs (FASTQ, metadata)
   - `docs/`     : shared documentation
   - `notebooks/`: exploratory notebooks
-  - `../results/`  : shared outputs outside repo (used for manuscript)
+  - `../results/`  : shared analysis outputs outside repo
   - `for_report/`  : curated tables/figures copied by final stage
   - `scripts/`  : shared utilities
   - `status/`   : Flask status web UI
@@ -143,7 +143,7 @@ gunzip -c config/ref/whitelist.txt.gz > config/ref/whitelist.txt
 - Known dataset mappings (update if protocol differs):
   - PAD dataset (3-read): `read_structure=three_read`, whitelist `737K-april-2014_rc.txt` (10x v1).
   - Test FASTQ (2-read R1=28, R2~90): `read_structure=two_read`, whitelist `3M-february-2018_TRU.txt.gz` (10x 3' v3/v3.1).
-  - CVD dataset (local `U:\! ! ! Datasets\! ! ! CVD Original dadtaset`): `read_structure=two_read`, whitelist `3M-february-2018_TRU.txt.gz` (10x 3' v3/v3.1).
+  - CVD-like 10x v3/v3.1 datasets: `read_structure=two_read`, whitelist `3M-february-2018_TRU.txt.gz`.
 
 Whitelist selection requirement
 - Preferred autonomous behavior:

@@ -454,10 +454,12 @@
       "output_globs": [],
       "review_focus": [
         "Confirm that the stage integrates mutation burden, gene burden, cluster burden, and optional STARsolo-derived sample metrics.",
-        "Confirm that pairwise correlation outputs are present."
+        "Confirm that pairwise correlation outputs are present.",
+        "Confirm that the outputs are sufficient for mutation-expression interpretation rather than a single isolated coefficient."
       ],
       "report_focus": [
-        "Summarize whether the integrated sample-level expression-mutation view is ready for final interpretation."
+        "Summarize the strongest mutation-expression associations and whether they are positive, negative, weak, or unstable.",
+        "Summarize whether the integrated sample-level expression-mutation view is ready for final interpretation and external-study comparison."
       ]
     },
     {
@@ -486,10 +488,12 @@
       ],
       "output_globs": [],
       "review_focus": [
-        "Confirm that the report bundle and manifest were generated."
+        "Confirm that the report bundle and manifest were generated.",
+        "Confirm that the final bundle can support a literature-aware interpretation of mutation-expression coupling."
       ],
       "report_focus": [
-        "Summarize whether the manuscript-facing bundle, figures, tables, and integrated interpretation are complete."
+        "Summarize whether the reproducibility report bundle, figures, tables, and integrated interpretation are complete.",
+        "Compare the observed mutation-expression relationships with other studies and explicitly distinguish association from causation."
       ]
     }
   ]

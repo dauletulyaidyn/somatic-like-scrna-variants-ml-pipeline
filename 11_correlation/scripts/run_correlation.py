@@ -244,7 +244,11 @@ def main():
         pair = merged[["sample_id", metric_x, metric_y]].dropna()
         if len(pair) < 3:
             continue
+        if pair[metric_x].nunique() < 2 or pair[metric_y].nunique() < 2:
+            continue
         rho, p_value = spearmanr(pair[metric_x], pair[metric_y])
+        if pd.isna(rho) or pd.isna(p_value):
+            continue
         pair_rows.append(
             {
                 "metric_x": metric_x,

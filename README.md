@@ -1,142 +1,240 @@
-# Pipeline Repository
+# scRNA-seq Agentic Pipeline
 
 Author: Kunikeyev Aidyn
 
-This repository contains a stage-by-stage pipeline for integrated expression and mutational analysis from scRNA-seq.
+This repository contains one working pipeline for integrated scRNA-seq expression and mutation analysis.
 
-## Canonical workflow
-- The canonical root workflow is the legacy `01_...12_` pipeline wrapped by one controlling `main_agent`.
-- Each stage is handled as `subordinate preflight agent/skill -> subordinate execution agent/skill -> subordinate review agent/skill -> subordinate mini-report agent/skill -> main agent decision`.
-- Agent role mapping:
-  - `Codex`: main agent, stage execution agent, stage report agent
-  - `Qwen`: stage preflight agent
-  - `Claude`: stage review agent
-  - `Cursor`: optional implementation support
-- Full workflow spec: `docs/AGENTIC_WORKFLOW.md`
+The canonical workflow is the legacy `01_...12_` stage chain, controlled by one `main_agent`.
 
-## What this is
-- Data source: scRNA-seq with control (baseline, untreated) vs disease (condition, treated) groups.
-- Goal: run expression analysis, call expressed variants with GATK, build gene-burden features, classify control (baseline, untreated) vs disease (condition, treated), and correlate expression and mutational outputs.
-- Each stage lives in its own folder with:
-  - `TECH_SPEC.md` (AI agent instructions)
-  - `README.md` (manual run instructions)
-  - `scripts/` (bash + python as needed)
-  - `outputs/metrics/` and `outputs/artifacts/` (ignored by git)
+## What The Repo Does
 
-## Root folders (common)
-- `config/`     : shared configuration (references, parameters)
-- `data/`       : raw inputs (FASTQ, metadata); not tracked by git
-- `docs/`       : shared documentation and runbooks
-- `notebooks/`  : exploratory notebooks
-- `../results/` : shared outputs outside repo (used for manuscript)
-- `for_report/` : curated tables/figures copied by final stage
-- `scripts/`    : shared utilities used across stages
-- `status/`     : Flask status web UI (port 5556)
+Input:
+- scRNA-seq FASTQ files
+- sample metadata
+- reference genome, GTF, STAR index, and 10x whitelist
 
-## Requirements (manual run)
-If you run without the AI agent, **you are responsible** for:
-- Installing all required tools and Python libraries per stage.
-- Providing sufficient compute resources (CPU/RAM/disk).
-- Monitoring logs and handling errors.
-- All tools/libs must be installed and verified before starting Stage 01.
-- The autonomous runner can perform best-effort installation and stage orchestration.
+Main outputs:
+- STARsolo alignment artifacts
+- filtered RNA-seq variant calls from GATK
+- cohort-common variants
+- variant-to-gene tables
+- gene burden matrix
+- control vs disease ML results
+- cellsnp-lite per-cell allele counts
+- cluster-level mutation summaries
+- mutational burden and signature tables
+- integrated expression-mutation correlation outputs
+- final reproducibility report bundle in `for_report/`
 
-Minimum environment
-- Windows with WSL2 (Ubuntu) for Windows users.
-- macOS or Linux supported natively.
-- Python 3.10+.
+## Agent Model
 
-Core tools (used across stages)
-- STAR/STARsolo, samtools
-- GATK 4 + Java
-- cellsnp-lite (single-cell stage)
+There is one controlling `main_agent`.
 
-Core Python libraries (stage-specific)
-- numpy, pandas
-- scipy
-- scikit-learn
-- scanpy/anndata (optional)
-- flask (status UI)
+For every stage, the `main_agent` does this:
+1. calls a subordinate preflight agent or skill
+2. calls a subordinate execution agent or skill
+3. calls a subordinate review agent or skill
+4. calls a subordinate mini-report agent or skill
+5. decides whether the workflow can move to the next stage
 
-OS-specific setup (summary)
-- Windows (use WSL2 Ubuntu; run installs inside WSL):
-  - `sudo apt-get update`
-  - `sudo apt-get install -y samtools default-jre`
-  - `conda install -c bioconda -c conda-forge star gatk4 cellsnp-lite`
-  - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
-- macOS:
-  - `brew install star samtools`
-  - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
-  - `conda install -c bioconda -c conda-forge gatk4 cellsnp-lite`
-- Linux (Ubuntu/Debian):
-  - `sudo apt-get install -y samtools default-jre`
-  - `pip install numpy pandas scipy scikit-learn scanpy anndata flask`
-  - `conda install -c bioconda -c conda-forge star gatk4 cellsnp-lite`
+After the last stage, the `main_agent` writes the final integrated report, interpretation, and bundle summary.
 
-## Stage folders
-- `01_input_data/`
-- `02_starsolo/`
-- `03_gatk_call/`
-- `04_cohort_filter/`
-- `05_variant_to_gene/`
-- `06_gene_burden/`
-- `07_ml_control_vs_disease/`
-- `08_cellsnp/`
-- `09_cluster_aggregation/`
-- `10_mutational_analysis/`
-- `11_correlation/`
-- `12_integrated_interpretation/`
+Scientific priority:
+- `01..10` generate the validated inputs needed for interpretation.
+- `11_correlation` is the primary integrative stage.
+- `12_integrated_interpretation` must explain whether mutation-linked signals are associated with expression-linked signals and how that compares with other studies.
 
-## Required initial inputs
-Place raw inputs in `data/` (not tracked by git):
-- FASTQ: `data/fastq/`
-- Metadata: `data/metadata/metadata.tsv`
+Current role mapping:
+- `Codex`: `main_agent`, `stage_execution_agent`, `stage_report_agent`
+- `Qwen`: `stage_preflight_agent`
+- `Claude`: `stage_review_agent`
+- `Cursor`: optional implementation support
 
-## Whitelist selection (required)
-Before running Stage 02, you must select the correct 10x whitelist for your library chemistry:
-- Identify chemistry (e.g., 10x 3' v3/v3.1, 3' v2, 3' v1, 5' v3).
-- Copy the corresponding file from `config/ref/whitelists/10x/` into `config/ref/whitelist.txt` (gunzip if needed).
-- If chemistry is unknown, stop and determine it from protocol/metadata before proceeding.
+More detail:
+- `docs/AGENTIC_WORKFLOW.md`
+- `docs/AGENTIC_WORKFLOW_REVIEW.md`
 
-### FASTQ expectations
-- Data type: scRNA-seq.
-- STARsolo is configured for platforms with CB/UB tags from barcode reads.
-- Expected reads for this project:
-  - two_read (default): R1 = barcode (CB/UMI), R2 = cDNA.
-  - three_read (legacy 10x v1): R1 = cDNA, R2 = CB, R3 = UMI (R2+R3 merged).
-  - Aliases: `common`, `tenx_v2`, `tenx_v3`, `tenx_v2v3`, `tenx_5p` => two_read; `tenx_v1` => three_read.
+## Stage Order
 
-### FASTQ naming
-Use consistent sample prefixes:
+The canonical pipeline is:
+
+1. `01_input_data`
+   Validates FASTQ naming and metadata, then writes cleaned metadata.
+2. `02_starsolo`
+   Runs STARsolo and produces barcode-aware alignment outputs.
+3. `03_gatk_call`
+   Runs RNA-seq variant calling and writes filtered per-sample VCFs.
+4. `04_cohort_filter`
+   Builds a cohort-common VCF.
+5. `05_variant_to_gene`
+   Maps cohort variants to genes using the GTF.
+6. `06_gene_burden`
+   Builds the gene-by-sample burden matrix.
+7. `07_ml_control_vs_disease`
+   Runs ML classification and permutation testing.
+8. `08_cellsnp`
+   Runs cellsnp-lite for per-cell allele counting.
+9. `09_cluster_aggregation`
+   Aggregates cellsnp outputs to cluster-level mutation summaries.
+10. `10_mutational_analysis`
+   Builds sample-level mutation burden and signature summaries.
+11. `11_correlation`
+   Builds the main mutation-expression integration layer and identifies the strongest associations.
+12. `12_integrated_interpretation`
+   Collects outputs into the final bundle and writes the final literature-aware reporting artifacts.
+
+## Minimal Repo Layout
+
+- `01_input_data/` ... `12_integrated_interpretation/`: canonical stages
+- `config/`: pipeline configs and references
+- `data/`: user-provided FASTQ and metadata
+- `docs/`: workflow documentation
+- `scripts/`: shared runner and helper scripts
+- `status/`: Flask status UI
+- `for_report/`: final bundle created by the last stage
+
+## Required Inputs
+
+Put your working inputs here:
+
+- `data/fastq/`
+- `data/metadata/metadata.tsv`
+
+Required metadata columns:
+- `sample_id`
+- `condition`
+- `run_id`
+
+## Required References
+
+The pipeline expects:
+
+- `config/ref/genome.fa`
+- `config/ref/genes.gtf`
+- `config/ref/STAR_index/`
+- `config/ref/whitelist.txt`
+
+The repository already contains bundled 10x whitelist files in:
+- `config/ref/whitelists/10x/`
+
+Before running Stage 02, choose the correct whitelist for the library chemistry and copy it to:
+- `config/ref/whitelist.txt`
+
+## FASTQ Expectations
+
+Supported read layouts:
+- `two_read`: `R1=barcode/UMI`, `R2=cDNA`
+- `three_read`: `R1=cDNA`, `R2=CB`, `R3=UMI`
+
+Expected naming:
 - `SAMPLEID_R1.fastq.gz`
 - `SAMPLEID_R2.fastq.gz`
-- `SAMPLEID_R3.fastq.gz` (required only for three_read)
+- `SAMPLEID_R3.fastq.gz` for `three_read` mode only
 
-All downstream stages assume `metadata.cleaned.tsv` from Stage 01.
+## Quick Start
 
-## Status web UI (port 5556)
-1) Install Flask: `pip install flask`
-2) Run server: `python status/app.py --port 5556`
-3) Open: `http://localhost:5556`
+Recommended on Windows:
 
-## Autonomous Start
-- One-command / agent start:
-  - `python scripts/run_agentic_pipeline.py --auto-install --start-status --use-wsl` (recommended on Windows)
-  - `./zapusti_analiz.ps1`
-- Suggested agent instruction:
-  - `zapusti analiz`
+```powershell
+./zapusti_analiz.ps1
+```
 
-## Release Metadata
-- Formal versioning, release notes, and distribution metadata are intentionally not maintained in this working repo state.
-- Add those only when the pipeline is ready for publication or public distribution.
+Equivalent explicit command:
 
-## Start here
-1) Go to `01_input_data/`.
-2) Follow `README.md` for manual execution or `TECH_SPEC.md` for AI-agent execution.
+```powershell
+python scripts/run_agentic_pipeline.py --auto-install --start-status --use-wsl
+```
 
-## Report bundle convention
-- The final stage copies tables/figures from each stage into `for_report/`.
-- Filenames must start with the stage name and an index, then a short purpose, e.g.:
-  - `08_cellsnp_1_heatmap.jpg`
-  - `08_cellsnp_1_heatmap.csv`
-  - `08_cellsnp_2_summary.tsv`
+Recommended on Linux/macOS:
+
+```bash
+python scripts/run_agentic_pipeline.py --auto-install --start-status
+```
+
+Background runner with watchdog:
+
+```powershell
+python scripts/launch_pipeline_background.py --use-wsl --watchdog-interval 10
+```
+
+## Status UI
+
+Start manually if needed:
+
+```bash
+python status/app.py --port 5556
+```
+
+Open:
+- `http://localhost:5556`
+
+The UI shows:
+- stage status
+- runner state
+- watchdog state
+- event log
+- scanned output files
+
+For a GATK run folder:
+
+```bash
+python scripts/launch_gatk_status_server.py --run-root "PATH_TO_GATK_RUN_FOLDER" --port 5556
+```
+
+Open:
+- `http://localhost:5556/gatk`
+
+The GATK page refreshes every 10 seconds and shows active process, current sample, current step, per-sample outputs, and variant counts for completed VCF files.
+
+To keep exactly two GATK samples running in parallel for a run folder:
+
+```bash
+python scripts/launch_gatk_parallel_supervisor.py --run-root "PATH_TO_GATK_RUN_FOLDER" --max-parallel 2
+```
+
+The supervisor starts one-sample workers from `input_bam_remaining_13`, keeps at most two active samples, and launches the next pending sample when a slot opens. It skips stopped or failed samples by default so partial outputs are not overwritten silently.
+
+## What Gets Written Per Stage
+
+Every stage writes agentic artifacts under:
+- `<stage>/outputs/agentic/`
+
+Important files:
+- `<stage>.preflight.json`
+- `<stage>.execution.json`
+- `<stage>.review.json`
+- `<stage>.mini_report.md`
+- `<stage>.mini_report.json`
+- `<stage>.main_agent_decision.json`
+
+## Final Outputs
+
+The final stage writes:
+- `12_integrated_interpretation/outputs/agentic/final_report.md`
+- `12_integrated_interpretation/outputs/agentic/final_report.json`
+- `for_report/agentic_final_report.md`
+- `for_report/agentic_stage_manifest.tsv`
+- `for_report/agentic_stage_reports/`
+
+The `for_report/` directory is a reproducibility report bundle with selected stage outputs and summaries.
+
+## Manual Run Note
+
+If you do not use the agentic runner, you are responsible for:
+- environment setup
+- tool installation
+- resource management
+- stage order
+- validation of outputs
+
+## Important Docs
+
+- `docs/AGENTIC_WORKFLOW.md`
+- `docs/AGENTIC_WORKFLOW_REVIEW.md`
+- `TECH_SPEC.md`
+
+## Current Repo State
+
+This is a working research repo state.
+
+Formal release metadata, publication packaging, and public-distribution polish are intentionally not maintained here yet.

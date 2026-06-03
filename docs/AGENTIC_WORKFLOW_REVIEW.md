@@ -11,7 +11,7 @@ flowchart TD
     M --> L1["Load stage order<br/>01_input_data -> ... -> 12_integrated_interpretation"]
 
     subgraph LOOP["Per-stage agentic loop (applies to every stage 01..12)"]
-        A["Read stage contract<br/>inputs, tools, outputs, review focus"]
+        A["Main agent reads stage contract<br/>inputs, tools, outputs, review focus, report focus"]
         B["Subordinate preflight agent or skill<br/>check inputs, config, tools, paths"]
         C{"Preflight PASS?"}
         D["Subordinate execution agent or skill<br/>run deterministic stage script"]
@@ -78,10 +78,10 @@ flowchart TD
     S10["10_mutational_analysis<br/>sample-level mutation burden,<br/>SNV/indel counts, signatures"]
     O10["10_mutational_analysis/outputs/metrics/<br/>mutation_burden.tsv,<br/>mutation_signatures.tsv,<br/>driver/pathway placeholders"]
 
-    S11["11_correlation<br/>integrated sample-level expression/mutation layer:<br/>gene burden + mutation burden + signatures +<br/>optional cluster burden + optional STARsolo cell counts + metadata"]
+    S11["11_correlation<br/>primary integrative stage:<br/>gene burden + mutation burden + signatures +<br/>cluster mutation summaries + optional STARsolo summaries + metadata<br/>goal: quantify mutation-expression associations"]
     O11["11_correlation/outputs/<br/>sample_integration.tsv,<br/>correlation_matrix.tsv,<br/>correlation_pairs.tsv,<br/>condition_summary.tsv,<br/>integration_notes.md,<br/>plots"]
 
-    S12["12_integrated_interpretation<br/>collect manuscript-facing outputs,<br/>copy report bundle,<br/>write final agentic report"]
+    S12["12_integrated_interpretation<br/>collect reproducibility outputs,<br/>copy report bundle,<br/>write final agentic report,<br/>compare mutation-expression patterns with literature"]
     O12["for_report/<br/>figures, tables, agentic stage reports,<br/>agentic_final_report.md,<br/>agentic_stage_manifest.tsv"]
 
     FASTQ --> S01
@@ -138,22 +138,47 @@ flowchart TD
     S12 --> O12
 ```
 
-## 3. What Each Stage Means
+## 3. Stage Registry
 
-- `01_input_data`: checks whether the raw dataset is even runnable. If this stage is wrong, every downstream stage is contaminated.
-- `02_starsolo`: creates the alignment backbone and barcode-aware outputs needed by both the mutation branch and the per-cell branch.
-- `03_gatk_call`: converts aligned RNA-seq reads into filtered per-sample expressed variant calls.
-- `04_cohort_filter`: reduces the sample-level variant space into a cohort-common mutation set.
-- `05_variant_to_gene`: links the cohort-common variants to gene intervals.
-- `06_gene_burden`: converts variant-to-gene links into a feature matrix for downstream statistics and ML.
-- `07_ml_control_vs_disease`: tests whether the burden matrix can separate control vs disease.
-- `08_cellsnp`: goes back to the single-cell level and counts reference/alternate alleles per cell for the cohort-common sites.
-- `09_cluster_aggregation`: converts per-cell allele counts into per-cluster mutation burden summaries.
-- `10_mutational_analysis`: produces sample-level mutation burden and simple substitution-signature summaries.
-- `11_correlation`: is now the real integration stage, not just a single narrow correlation. It joins burden, mutation, signature, cluster, STARsolo-derived, and metadata-level summaries.
-- `12_integrated_interpretation`: packages all manuscript-facing outputs and final agentic reporting artifacts.
+The stage pattern is always:
 
-## 4. Agentic Artifacts Written For Every Stage
+- `main_agent` assigns the stage
+- `stage_preflight_agent` validates readiness
+- `stage_execution_agent` runs the script
+- `stage_review_agent` validates outputs
+- `stage_report_agent` writes the mini report
+- `main_agent` decides whether to advance
+
+| Stage | Deterministic execution target | What review must confirm | Why the stage exists |
+| --- | --- | --- | --- |
+| `01_input_data` | validate FASTQ naming and metadata consistency | cleaned metadata exists and sample IDs are aligned | prevent contamination of every downstream step |
+| `02_starsolo` | build alignment and barcode-aware STARsolo outputs | expected alignment artifacts exist for downstream mutation and single-cell analysis | create the expression-aware backbone |
+| `03_gatk_call` | produce filtered expressed-variant calls per sample | filtered VCFs exist and are ready for cohort filtering and mutation summaries | convert aligned RNA reads into variant evidence |
+| `04_cohort_filter` | derive the cohort-common variant set | cohort-common VCF exists and is non-empty | reduce sample-level calls to a shared mutation space |
+| `05_variant_to_gene` | annotate cohort-common variants to genes | long-format variant-to-gene table exists | connect mutations to biological feature units |
+| `06_gene_burden` | build the gene-by-sample burden matrix | matrix has gene rows and sample columns | create the feature space for statistics and modeling |
+| `07_ml_control_vs_disease` | run classification and permutation testing | metrics and permutation outputs exist and are interpretable | test whether mutation-derived gene features separate groups |
+| `08_cellsnp` | compute per-cell allele counts for cohort-common sites | per-sample cellsnp outputs exist | restore single-cell mutation evidence |
+| `09_cluster_aggregation` | aggregate cellsnp outputs to clusters | cluster-level mutation summary tables exist | connect mutation burden to cellular structure |
+| `10_mutational_analysis` | summarize sample-level mutation burden and signatures | burden and signature tables exist and are non-empty | characterize mutation load before integration |
+| `11_correlation` | integrate mutation burden, signatures, cluster summaries, and expression-linked summaries | correlation outputs support mutation-expression association analysis | perform the main scientific integration step |
+| `12_integrated_interpretation` | assemble report bundle and final narrative | final bundle is complete and ready for reproducibility review | compare observed mutation-expression relationships with published work |
+
+## 4. Interpretation Priority
+
+- `01..10` are enabling stages.
+- `11_correlation` is the main inferential stage.
+- `12_integrated_interpretation` must not just copy files. It must explain whether the observed mutation-linked signals are associated with expression-linked signals and how that compares with other studies.
+
+The final workflow should answer:
+
+1. Do mutation burden or mutation signatures track expression-linked sample differences?
+2. Do cluster-level mutation summaries align with cluster marker programs or cell-type structure?
+3. Are the observed associations strong, weak, or inconsistent?
+4. Are they compatible with published studies on scRNA-seq variant analysis, wound biology, and mutation-associated transcriptional change?
+5. Is the claim only correlation, or is there evidence strong enough to discuss candidate mutation-associated influence on expression?
+
+## 5. Agentic Artifacts Written For Every Stage
 
 ```mermaid
 flowchart LR
@@ -165,12 +190,13 @@ flowchart LR
     S --> D["outputs/agentic/<stage>.main_agent_decision.json"]
 ```
 
-## 5. Current Interpretation Of The Repo
+## 6. Current Interpretation Of The Repo
 
 - The repo is now modeled as one legacy `01..12` canonical pipeline with one controlling `main_agent`.
 - The scientific computations still live inside deterministic scripts.
 - Subordinate agents or skills handle stage-local validation, execution, review, and mini-report generation.
 - The `main_agent` decides whether a stage is ready to run, whether the workflow may advance, and generates the final integrated output bundle.
+- The main scientific endpoint is not Stage `07` ML in isolation. It is the mutation-expression integration produced in Stage `11` and interpreted in Stage `12`.
 - The place where you are most likely to request structural changes is either:
   - stage order
   - stage dependencies

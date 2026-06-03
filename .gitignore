@@ -3,6 +3,12 @@
 /results/
 /outputs/
 /for_report_test_run/
+/results_GATK*/
+/input_bam*/
+/one_sample_input*/
+/vcf/
+/logs/
+/ref/
 
 # envs
 .env/
@@ -42,6 +48,32 @@ for_report/
 status/status.db
 status/status_server.out.log
 status/status_server.err.log
+status/gatk_status_server.pid
+status/gatk_status_server.out.log
+status/gatk_status_server.err.log
+status/gatk_parallel_supervisor.pid
+status/gatk_parallel_supervisor.out.log
+status/gatk_parallel_supervisor.err.log
+
+# sequencing and GATK runtime artifacts
+*.bam
+*.bai
+*.sam
+*.cram
+*.vcf
+*.vcf.gz
+*.tbi
+*.csi
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+*.sra
+*.log
+*.pid
+*_state.json
+gatk_estimate_baseline.json
+gatk_parallel_supervisor_state.json
 
 # local reference bundles and generated reference files
 config/ref/STAR_index/

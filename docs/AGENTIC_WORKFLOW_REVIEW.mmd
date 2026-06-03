@@ -1,94 +1,123 @@
 flowchart TD
-    FASTQ["data/fastq/<br/>raw FASTQ files"]
-    META["data/metadata/metadata.tsv<br/>raw metadata"]
-    REF["config/ref/<br/>genome.fa, genes.gtf,<br/>STAR_index, whitelist.txt"]
+    U["User in VS Code / Cursor / Claude Code / Codex"]
+    M["main_agent<br/>single workflow controller"]
+
+    FASTQ["data/fastq"]
+    META["data/metadata/metadata.tsv"]
+    REF["config/ref"]
     CLMAP["data/metadata/cell_cluster_map.tsv"]
 
-    S01["01_input_data<br/>validate FASTQ naming,<br/>validate metadata,<br/>write cleaned metadata"]
-    O01["data/metadata/metadata.cleaned.tsv"]
+    U --> M
 
-    S02["02_starsolo<br/>STARsolo alignment,<br/>barcode-aware BAMs,<br/>alignment artifacts"]
-    O02["02_starsolo/outputs/artifacts/<br/>BAM, Solo.out, barcode-aware outputs"]
+    subgraph ST01["01_input_data"]
+        S01P["preflight_agent<br/>FASTQ + metadata checks"] --> S01E["execution_agent<br/>validate_inputs.py"] --> S01R["review_agent<br/>cleaned metadata QC"] --> S01M["report_agent<br/>mini report"]
+    end
+    M --> S01P
+    S01M --> M
+    FASTQ --> S01P
+    META --> S01P
+    S01M --> O01["metadata.cleaned.tsv"]
 
-    S03["03_gatk_call<br/>SplitNCigarReads,<br/>HaplotypeCaller,<br/>filter PASS variants"]
-    O03["03_gatk_call/outputs/artifacts/<br/>filtered per-sample VCFs"]
+    subgraph ST02["02_starsolo"]
+        S02P["preflight_agent<br/>references + cleaned metadata"] --> S02E["execution_agent<br/>run_starsolo.py"] --> S02R["review_agent<br/>BAM + Solo.out validation"] --> S02M["report_agent<br/>alignment summary"]
+    end
+    M --> S02P
+    S02M --> M
+    O01 --> S02P
+    FASTQ --> S02P
+    REF --> S02P
+    S02M --> O02["STARsolo artifacts"]
 
-    S04["04_cohort_filter<br/>build cohort.common.vcf<br/>using min_samples + min_vaf"]
-    O04["04_cohort_filter/outputs/artifacts/<br/>cohort.common.vcf"]
+    subgraph ST03["03_gatk_call"]
+        S03P["preflight_agent<br/>BAM + GATK readiness"] --> S03E["execution_agent<br/>run_gatk.py"] --> S03R["review_agent<br/>filtered VCF validation"] --> S03M["report_agent<br/>variant call summary"]
+    end
+    M --> S03P
+    S03M --> M
+    O02 --> S03P
+    REF --> S03P
+    S03M --> O03["filtered per-sample VCFs"]
 
-    S05["05_variant_to_gene<br/>map cohort variants to genes<br/>using genes.gtf"]
-    O05["05_variant_to_gene/outputs/artifacts/<br/>variant_gene_long.tsv"]
+    subgraph ST04["04_cohort_filter"]
+        S04P["preflight_agent<br/>VCF set checks"] --> S04E["execution_agent<br/>run_cohort_filter.py"] --> S04R["review_agent<br/>cohort VCF validation"] --> S04M["report_agent<br/>cohort mutation summary"]
+    end
+    M --> S04P
+    S04M --> M
+    O03 --> S04P
+    S04M --> O04["cohort.common.vcf"]
 
-    S06["06_gene_burden<br/>build gene x sample<br/>burden matrix"]
-    O06["06_gene_burden/outputs/artifacts/<br/>gene_burden_matrix.tsv"]
+    subgraph ST05["05_variant_to_gene"]
+        S05P["preflight_agent<br/>cohort VCF + GTF checks"] --> S05E["execution_agent<br/>run_variant_to_gene.py"] --> S05R["review_agent<br/>variant-gene table validation"] --> S05M["report_agent<br/>gene mapping summary"]
+    end
+    M --> S05P
+    S05M --> M
+    O04 --> S05P
+    REF --> S05P
+    S05M --> O05["variant_gene_long.tsv"]
 
-    S07["07_ml_control_vs_disease<br/>logistic regression + CV + permutation"]
-    O07["07_ml_control_vs_disease/outputs/metrics/<br/>ML metrics + permutation outputs"]
+    subgraph ST06["06_gene_burden"]
+        S06P["preflight_agent<br/>annotation + sample VCF checks"] --> S06E["execution_agent<br/>run_gene_burden.py"] --> S06R["review_agent<br/>burden matrix validation"] --> S06M["report_agent<br/>feature matrix summary"]
+    end
+    M --> S06P
+    S06M --> M
+    O05 --> S06P
+    O03 --> S06P
+    S06M --> O06["gene_burden_matrix.tsv"]
 
-    S08["08_cellsnp<br/>cellsnp-lite per-cell allele counting<br/>using BAM + cohort VCF"]
-    O08["08_cellsnp/outputs/artifacts/<br/>per-sample cellSNP directories"]
+    subgraph ST07["07_ml_control_vs_disease"]
+        S07P["preflight_agent<br/>feature matrix + labels checks"] --> S07E["execution_agent<br/>run_ml.py"] --> S07R["review_agent<br/>metrics + permutation validation"] --> S07M["report_agent<br/>ML interpretation"]
+    end
+    M --> S07P
+    S07M --> M
+    O06 --> S07P
+    O01 --> S07P
+    S07M --> O07["ML metrics and permutation outputs"]
 
-    S09["09_cluster_aggregation<br/>aggregate allele counts by cluster"]
-    O09["09_cluster_aggregation/outputs/artifacts/<br/>cluster mutation tables"]
+    subgraph ST08["08_cellsnp"]
+        S08P["preflight_agent<br/>BAM + cohort VCF checks"] --> S08E["execution_agent<br/>run_cellsnp.py"] --> S08R["review_agent<br/>per-cell allele output validation"] --> S08M["report_agent<br/>single-cell mutation summary"]
+    end
+    M --> S08P
+    S08M --> M
+    O02 --> S08P
+    O04 --> S08P
+    REF --> S08P
+    S08M --> O08["cellsnp outputs"]
 
-    S10["10_mutational_analysis<br/>sample-level mutation burden,<br/>SNV/indel counts, signatures"]
-    O10["10_mutational_analysis/outputs/metrics/<br/>mutation_burden.tsv,<br/>mutation_signatures.tsv,<br/>driver/pathway placeholders"]
+    subgraph ST09["09_cluster_aggregation"]
+        S09P["preflight_agent<br/>cellsnp + cluster map checks"] --> S09E["execution_agent<br/>run_cluster_aggregation.py"] --> S09R["review_agent<br/>cluster table validation"] --> S09M["report_agent<br/>cluster burden summary"]
+    end
+    M --> S09P
+    S09M --> M
+    O08 --> S09P
+    CLMAP --> S09P
+    S09M --> O09["cluster mutation tables"]
 
-    S11["11_correlation<br/>integrated sample-level expression/mutation layer:<br/>gene burden + mutation burden + signatures +<br/>optional cluster burden + optional STARsolo cell counts + metadata"]
-    O11["11_correlation/outputs/<br/>sample_integration.tsv,<br/>correlation_matrix.tsv,<br/>correlation_pairs.tsv,<br/>condition_summary.tsv,<br/>integration_notes.md,<br/>plots"]
+    subgraph ST10["10_mutational_analysis"]
+        S10P["preflight_agent<br/>VCF + pathway config checks"] --> S10E["execution_agent<br/>run_mutational_analysis.py"] --> S10R["review_agent<br/>burden + signature validation"] --> S10M["report_agent<br/>mutational pattern summary"]
+    end
+    M --> S10P
+    S10M --> M
+    O03 --> S10P
+    S10M --> O10["mutation burden and signatures"]
 
-    S12["12_integrated_interpretation<br/>collect manuscript-facing outputs,<br/>copy report bundle,<br/>write final agentic report"]
-    O12["for_report/<br/>figures, tables, agentic stage reports,<br/>agentic_final_report.md,<br/>agentic_stage_manifest.tsv"]
+    subgraph ST11["11_correlation"]
+        S11P["preflight_agent<br/>integration input checks"] --> S11E["execution_agent<br/>run_correlation.py"] --> S11R["review_agent<br/>mutation-expression association validation"] --> S11M["report_agent<br/>main integration summary"]
+    end
+    M --> S11P
+    S11M --> M
+    O06 --> S11P
+    O09 --> S11P
+    O10 --> S11P
+    O02 --> S11P
+    O01 --> S11P
+    S11M --> O11["correlation and integration outputs"]
 
-    FASTQ --> S01
-    META --> S01
-    S01 --> O01
-
-    FASTQ --> S02
-    O01 --> S02
-    REF --> S02
-    S02 --> O02
-
-    O02 --> S03
-    REF --> S03
-    S03 --> O03
-
-    O03 --> S04
-    S04 --> O04
-
-    O04 --> S05
-    REF --> S05
-    S05 --> O05
-
-    O05 --> S06
-    O03 --> S06
-    S06 --> O06
-
-    O06 --> S07
-    O01 --> S07
-    S07 --> O07
-
-    O02 --> S08
-    O04 --> S08
-    REF --> S08
-    S08 --> O08
-
-    O08 --> S09
-    CLMAP --> S09
-    S09 --> O09
-
-    O03 --> S10
-    S10 --> O10
-
-    O06 --> S11
-    O10 --> S11
-    O09 --> S11
-    O02 --> S11
-    O01 --> S11
-    S11 --> O11
-
-    O07 --> S12
-    O11 --> S12
-    O10 --> S12
-    O09 --> S12
-    S12 --> O12
+    subgraph ST12["12_integrated_interpretation"]
+        S12P["preflight_agent<br/>bundle readiness checks"] --> S12E["execution_agent<br/>collect_for_report.py"] --> S12R["review_agent<br/>bundle completeness validation"] --> S12M["report_agent<br/>final literature-aware interpretation"]
+    end
+    M --> S12P
+    S12M --> M
+    O07 --> S12P
+    O09 --> S12P
+    O10 --> S12P
+    O11 --> S12P
+    S12M --> O12["final report, figures, tables, workflow bundle"]

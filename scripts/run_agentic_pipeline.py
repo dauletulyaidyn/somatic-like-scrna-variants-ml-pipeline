@@ -600,7 +600,7 @@ def summarize_bundle(bundle_dir: Path) -> dict[str, int]:
     counts = {"total_files": 0, "figure_files": 0, "table_files": 0, "report_files": 0}
     figure_suffixes = {".png", ".jpg", ".jpeg", ".svg", ".pdf"}
     table_suffixes = {".tsv", ".csv", ".xlsx", ".xls"}
-    report_suffixes = {".md", ".txt", ".docx"}
+    report_suffixes = {".md", ".txt"}
     for path in bundle_dir.rglob("*"):
         if not path.is_file():
             continue
@@ -640,6 +640,11 @@ def build_final_report(
         f"- Finalized by: `main_agent`",
         f"- Completed all stages: {'yes' if completed_all else 'no'}",
         f"- Generated at: {time.strftime('%Y-%m-%d %H:%M:%S')}",
+        "",
+        "## Scientific Priority",
+        "- Stages `01..10` are enabling layers that produce the validated inputs needed for interpretation.",
+        "- Stage `11_correlation` is the primary integration stage for mutation-linked and expression-linked summaries.",
+        "- Stage `12_integrated_interpretation` must compare the observed relationships with other studies and distinguish association from causation.",
         "",
         "## Stage Summary",
     ]
