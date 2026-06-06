@@ -20,6 +20,7 @@ Main outputs:
 - variant-to-gene tables
 - gene burden matrix
 - control vs disease ML results
+- run-level versus group-aware validation summaries for non-independent run-level observations
 - cellsnp-lite per-cell allele counts
 - cluster-level mutation summaries
 - mutational burden and signature tables
@@ -71,7 +72,7 @@ The canonical pipeline is:
 6. `06_gene_burden`
    Builds the gene-by-sample burden matrix.
 7. `07_ml_control_vs_disease`
-   Runs ML classification and permutation testing.
+   Runs ML classification, permutation testing, and optional group-aware validation when multiple runs share a donor/GSM/sample group.
 8. `08_cellsnp`
    Runs cellsnp-lite for per-cell allele counting.
 9. `09_cluster_aggregation`
@@ -193,6 +194,25 @@ python scripts/launch_gatk_parallel_supervisor.py --run-root "PATH_TO_GATK_RUN_F
 ```
 
 The supervisor starts one-sample workers from `input_bam_remaining_13`, keeps at most two active samples, and launches the next pending sample when a slot opens. It skips stopped or failed samples by default so partial outputs are not overwritten silently.
+
+## Group-Aware Validation
+
+When several SRR runs originate from the same biological sample, donor proxy, or GEO/GSM group, run-level CV is not an independent group-level test. Keep run-level CV as a separability comparator and use group-aware validation as the primary independence-aware validation check.
+
+Run from `07_ml_control_vs_disease/`:
+
+```bash
+python scripts/run_group_aware_validation.py \
+  --feature-matrix ../06_gene_burden/outputs/artifacts/gene_burden_matrix.tsv \
+  --metadata ../data/metadata/metadata.cleaned.tsv \
+  --label-col condition \
+  --positive-label wound \
+  --group-col gsm \
+  --group-title-col sample_title \
+  --outdir outputs/group_validation
+```
+
+For an external GATK result bundle, pass absolute paths to the GATK-derived `gene_burden_matrix.tsv`, metadata TSV, and a bundle-specific output directory. The script writes `table_validation_for_report.tsv/.csv`, run-level CV summaries, leave-one-group-out predictions, grouped permutation summaries, and confusion matrices.
 
 ## What Gets Written Per Stage
 
