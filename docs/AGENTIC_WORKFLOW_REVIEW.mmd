@@ -1,0 +1,123 @@
+flowchart TD
+    U["User in VS Code / Cursor / Claude Code / Codex"]
+    M["main_agent<br/>single workflow controller"]
+
+    FASTQ["data/fastq"]
+    META["data/metadata/metadata.tsv"]
+    REF["config/ref"]
+    CLMAP["data/metadata/cell_cluster_map.tsv"]
+
+    U --> M
+
+    subgraph ST01["01_input_data"]
+        S01P["preflight_agent<br/>FASTQ + metadata checks"] --> S01E["execution_agent<br/>validate_inputs.py"] --> S01R["review_agent<br/>cleaned metadata QC"] --> S01M["report_agent<br/>mini report"]
+    end
+    M --> S01P
+    S01M --> M
+    FASTQ --> S01P
+    META --> S01P
+    S01M --> O01["metadata.cleaned.tsv"]
+
+    subgraph ST02["02_starsolo"]
+        S02P["preflight_agent<br/>references + cleaned metadata"] --> S02E["execution_agent<br/>run_starsolo.py"] --> S02R["review_agent<br/>BAM + Solo.out validation"] --> S02M["report_agent<br/>alignment summary"]
+    end
+    M --> S02P
+    S02M --> M
+    O01 --> S02P
+    FASTQ --> S02P
+    REF --> S02P
+    S02M --> O02["STARsolo artifacts"]
+
+    subgraph ST03["03_gatk_call"]
+        S03P["preflight_agent<br/>BAM + GATK readiness"] --> S03E["execution_agent<br/>run_gatk.py"] --> S03R["review_agent<br/>filtered VCF validation"] --> S03M["report_agent<br/>variant call summary"]
+    end
+    M --> S03P
+    S03M --> M
+    O02 --> S03P
+    REF --> S03P
+    S03M --> O03["filtered per-sample VCFs"]
+
+    subgraph ST04["04_cohort_filter"]
+        S04P["preflight_agent<br/>VCF set checks"] --> S04E["execution_agent<br/>run_cohort_filter.py"] --> S04R["review_agent<br/>cohort VCF validation"] --> S04M["report_agent<br/>cohort mutation summary"]
+    end
+    M --> S04P
+    S04M --> M
+    O03 --> S04P
+    S04M --> O04["cohort.common.vcf"]
+
+    subgraph ST05["05_variant_to_gene"]
+        S05P["preflight_agent<br/>cohort VCF + GTF checks"] --> S05E["execution_agent<br/>run_variant_to_gene.py"] --> S05R["review_agent<br/>variant-gene table validation"] --> S05M["report_agent<br/>gene mapping summary"]
+    end
+    M --> S05P
+    S05M --> M
+    O04 --> S05P
+    REF --> S05P
+    S05M --> O05["variant_gene_long.tsv"]
+
+    subgraph ST06["06_gene_burden"]
+        S06P["preflight_agent<br/>annotation + sample VCF checks"] --> S06E["execution_agent<br/>run_gene_burden.py"] --> S06R["review_agent<br/>burden matrix validation"] --> S06M["report_agent<br/>feature matrix summary"]
+    end
+    M --> S06P
+    S06M --> M
+    O05 --> S06P
+    O03 --> S06P
+    S06M --> O06["gene_burden_matrix.tsv"]
+
+    subgraph ST07["07_ml_control_vs_disease"]
+        S07P["preflight_agent<br/>feature matrix + labels checks"] --> S07E["execution_agent<br/>run_ml.py"] --> S07R["review_agent<br/>metrics + permutation validation"] --> S07M["report_agent<br/>ML interpretation"]
+    end
+    M --> S07P
+    S07M --> M
+    O06 --> S07P
+    O01 --> S07P
+    S07M --> O07["ML metrics and permutation outputs"]
+
+    subgraph ST08["08_cellsnp"]
+        S08P["preflight_agent<br/>BAM + cohort VCF checks"] --> S08E["execution_agent<br/>run_cellsnp.py"] --> S08R["review_agent<br/>per-cell allele output validation"] --> S08M["report_agent<br/>single-cell mutation summary"]
+    end
+    M --> S08P
+    S08M --> M
+    O02 --> S08P
+    O04 --> S08P
+    REF --> S08P
+    S08M --> O08["cellsnp outputs"]
+
+    subgraph ST09["09_cluster_aggregation"]
+        S09P["preflight_agent<br/>cellsnp + cluster map checks"] --> S09E["execution_agent<br/>run_cluster_aggregation.py"] --> S09R["review_agent<br/>cluster table validation"] --> S09M["report_agent<br/>cluster burden summary"]
+    end
+    M --> S09P
+    S09M --> M
+    O08 --> S09P
+    CLMAP --> S09P
+    S09M --> O09["cluster mutation tables"]
+
+    subgraph ST10["10_mutational_analysis"]
+        S10P["preflight_agent<br/>VCF + pathway config checks"] --> S10E["execution_agent<br/>run_mutational_analysis.py"] --> S10R["review_agent<br/>burden + signature validation"] --> S10M["report_agent<br/>mutational pattern summary"]
+    end
+    M --> S10P
+    S10M --> M
+    O03 --> S10P
+    S10M --> O10["mutation burden and signatures"]
+
+    subgraph ST11["11_correlation"]
+        S11P["preflight_agent<br/>integration input checks"] --> S11E["execution_agent<br/>run_correlation.py"] --> S11R["review_agent<br/>mutation-expression association validation"] --> S11M["report_agent<br/>main integration summary"]
+    end
+    M --> S11P
+    S11M --> M
+    O06 --> S11P
+    O09 --> S11P
+    O10 --> S11P
+    O02 --> S11P
+    O01 --> S11P
+    S11M --> O11["correlation and integration outputs"]
+
+    subgraph ST12["12_integrated_interpretation"]
+        S12P["preflight_agent<br/>bundle readiness checks"] --> S12E["execution_agent<br/>collect_for_report.py"] --> S12R["review_agent<br/>bundle completeness validation"] --> S12M["report_agent<br/>final literature-aware interpretation"]
+    end
+    M --> S12P
+    S12M --> M
+    O07 --> S12P
+    O09 --> S12P
+    O10 --> S12P
+    O11 --> S12P
+    S12M --> O12["final report, figures, tables, workflow bundle"]

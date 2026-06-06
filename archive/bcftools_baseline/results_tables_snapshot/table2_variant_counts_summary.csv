@@ -1,3 +1,0 @@
-set,n_samples,records_median,records_min,records_max,snps_median,indels_median
-filtered,14,139422,15397,186656,133647,3926
-cohort_filtered,14,68841,5279,94210,65317,2032

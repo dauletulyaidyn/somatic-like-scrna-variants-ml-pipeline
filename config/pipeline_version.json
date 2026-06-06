@@ -1,8 +1,0 @@
-{
-  "version": "0.9.0-beta.3",
-  "release_channel": "beta",
-  "codename": "gatk-autonomous",
-  "release_date": "2026-03-23",
-  "status": "working beta",
-  "entrypoint": "python scripts/run_autonomous_pipeline.py --auto-install --start-status --use-wsl"
-}

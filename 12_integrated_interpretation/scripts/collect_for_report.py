@@ -23,9 +23,10 @@ def main():
         metrics = stage / "outputs" / "metrics"
         plots = stage / "outputs" / "plots"
         figures = stage / "outputs" / "figures"
+        agentic = stage / "outputs" / "agentic"
 
         candidates = []
-        for d in (metrics, plots, figures):
+        for d in (metrics, plots, figures, agentic):
             if d.exists():
                 candidates += list(d.rglob("*"))
 

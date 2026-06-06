@@ -1,2 +1,0 @@
-mean_accuracy: 0.8000
-std_accuracy: 0.1633

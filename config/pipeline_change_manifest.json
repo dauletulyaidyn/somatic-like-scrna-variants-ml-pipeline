@@ -1,0 +1,10 @@
+{
+  "changed_stages": {
+    "02_starsolo": "Updated STARsolo execution path for cleaner autonomous reruns and CB/UB-compatible BAM handling.",
+    "05_variant_to_gene": "Variant-to-gene annotation logic was replaced with a more robust interval-based mapping step.",
+    "08_cellsnp": "cellsnp-lite stage was prepared for real per-cell allele counting instead of placeholder reuse.",
+    "10_mutational_analysis": "Mutational summaries were hardened to support broader VCF filename patterns and richer burden metrics.",
+    "11_correlation": "Correlation was expanded into integrated sample-level expression-mutation analysis with metadata, cluster, and STARsolo-aware summaries.",
+    "12_integrated_interpretation": "Final reporting now includes agentic stage reports, validation artifacts, and final bundle-level interpretation."
+  }
+}

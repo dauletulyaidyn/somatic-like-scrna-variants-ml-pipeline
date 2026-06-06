@@ -1,0 +1,634 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>GATK Run Status</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --border: #d8dee8;
+      --text: #1f2937;
+      --muted: #64748b;
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --ok: #0f766e;
+      --run: #2563eb;
+      --warn: #b45309;
+      --bad: #b91c1c;
+    }
+    body { margin: 0; font-family: Arial, sans-serif; color: var(--text); background: var(--bg); }
+    header { padding: 16px 20px; border-bottom: 1px solid var(--border); background: var(--panel); }
+    main { padding: 16px 20px 28px; }
+    h1 { margin: 0 0 8px; font-size: 24px; }
+    h2 { margin: 0 0 10px; font-size: 17px; }
+    table { border-collapse: collapse; width: 100%; background: var(--panel); }
+    th, td { border: 1px solid var(--border); padding: 7px 8px; vertical-align: top; font-size: 13px; }
+    th { background: #eef2f7; text-align: left; }
+    pre { margin: 0; white-space: pre-wrap; word-break: break-word; font-family: Consolas, monospace; font-size: 12px; }
+    .mono { font-family: Consolas, monospace; }
+    .muted { color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-bottom: 14px; }
+    .panel { border: 1px solid var(--border); border-radius: 6px; padding: 12px; background: var(--panel); }
+    .pill { display: inline-block; padding: 3px 8px; border-radius: 999px; background: #e5e7eb; margin: 0 5px 5px 0; font-size: 12px; }
+    .status-finished { color: var(--ok); font-weight: 700; }
+    .status-running { color: var(--run); font-weight: 700; }
+    .status-pending { color: var(--muted); }
+    .status-started { color: var(--warn); font-weight: 700; }
+    .status-stopped_or_failed { color: var(--bad); font-weight: 700; }
+    .row-running { background: #eff6ff; }
+    .row-finished { background: #ecfdf5; }
+    .row-stopped_or_failed { background: #fef2f2; }
+    .small { font-size: 12px; }
+    .files div { margin-bottom: 2px; }
+    .time-lines div { margin-bottom: 2px; }
+    .step-time { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; }
+    .estimate { font-size: 12px; line-height: 1.35; }
+    .estimate-block { margin-bottom: 8px; }
+    .estimate-title { font-weight: 700; margin-bottom: 2px; }
+    .est-min { color: var(--ok); }
+    .est-expected { color: var(--text); font-weight: 700; }
+    .est-max { color: var(--bad); }
+    .toggle-row {
+      width: 22px;
+      height: 22px;
+      margin-right: 7px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 700;
+      line-height: 18px;
+    }
+    .summary-cell { max-width: 220px; }
+    .detail-row td { background: #fff; padding: 12px 14px; }
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .details-block h3 { margin: 0 0 6px; font-size: 13px; }
+    .sortable {
+      cursor: pointer;
+      user-select: none;
+    }
+    .sort-indicator {
+      color: var(--muted);
+      margin-left: 5px;
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>GATK Run Status</h1>
+    <div class="mono small">{{ run_root }}</div>
+    <div class="muted small">
+      Last refresh: <span id="last-refresh">loading</span>
+      <span style="margin-left: 14px;">
+        Refresh every
+        <select id="refresh-interval">
+          <option value="10" selected>10 seconds</option>
+          <option value="20">20 seconds</option>
+          <option value="30">30 seconds</option>
+          <option value="60">60 seconds</option>
+          <option value="120">120 seconds</option>
+          <option value="180">180 seconds</option>
+          <option value="300">300 seconds</option>
+          <option value="600">600 seconds</option>
+          <option value="900">900 seconds</option>
+        </select>
+      </span>
+      <span style="margin-left: 14px;">Next refresh in <span id="refresh-countdown">10</span>s</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="grid">
+      <section class="panel">
+        <h2>Run</h2>
+        <div id="run-state">loading</div>
+        <div class="muted small" id="disk-state"></div>
+      </section>
+      <section class="panel">
+        <h2>Current Step</h2>
+        <div id="current-step">loading</div>
+      </section>
+      <section class="panel">
+        <h2>Sample Counts</h2>
+        <div id="sample-counts">loading</div>
+      </section>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th class="sortable" data-sort-key="sample">Sample <span class="sort-indicator" id="sort-sample"></span></th>
+          <th class="sortable" data-sort-key="status">Status <span class="sort-indicator" id="sort-status"></span></th>
+          <th>Sample Time</th>
+          <th>Estimate</th>
+          <th>Step</th>
+          <th>Variants</th>
+          <th>Files</th>
+          <th>Done Steps</th>
+        </tr>
+      </thead>
+      <tbody id="sample-rows"></tbody>
+    </table>
+
+    <div class="grid" style="margin-top: 14px;">
+      <section class="panel">
+        <h2>Active Processes</h2>
+        <pre id="processes">loading</pre>
+      </section>
+      <section class="panel">
+        <h2>Latest Log Tail</h2>
+        <pre id="latest-log">loading</pre>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const runRoot = {{ run_root | tojson }};
+    const expandedRows = new Set(JSON.parse(localStorage.getItem("gatkExpandedRows") || "[]"));
+    const collapsedRows = new Set(JSON.parse(localStorage.getItem("gatkCollapsedRows") || "[]"));
+    let sortState = JSON.parse(localStorage.getItem("gatkSortState") || '{"key":"sample","direction":"asc"}');
+    let latestSamples = [];
+    let refreshSeconds = 10;
+    let countdownSeconds = refreshSeconds;
+    let refreshTimer = null;
+    let countdownTimer = null;
+
+    function esc(value) {
+      return String(value ?? "").replace(/[&<>"']/g, (ch) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      }[ch]));
+    }
+
+    function countText(value) {
+      return value === null || value === undefined ? "" : Number(value).toLocaleString();
+    }
+
+    function sampleSortValue(sample) {
+      return String(sample || "").replace(/\d+/g, (part) => part.padStart(12, "0"));
+    }
+
+    function sortedSamples(samples) {
+      const statusRank = {
+        running: 0,
+        started: 1,
+        stopped_or_failed: 2,
+        pending: 3,
+        finished: 4
+      };
+      const direction = sortState.direction === "desc" ? -1 : 1;
+      return [...samples].sort((a, b) => {
+        let left;
+        let right;
+        if (sortState.key === "status") {
+          left = statusRank[a.status] ?? 99;
+          right = statusRank[b.status] ?? 99;
+          if (left !== right) return (left - right) * direction;
+        }
+        left = sampleSortValue(a.sample);
+        right = sampleSortValue(b.sample);
+        return left.localeCompare(right) * direction;
+      });
+    }
+
+    function updateSortIndicators() {
+      document.getElementById("sort-sample").textContent = sortState.key === "sample" ? (sortState.direction === "asc" ? "^" : "v") : "";
+      document.getElementById("sort-status").textContent = sortState.key === "status" ? (sortState.direction === "asc" ? "^" : "v") : "";
+    }
+
+    function fileLine(label, file) {
+      if (!file || !file.exists) return "";
+      return `<div><span class="muted">${label}</span> <span class="mono">${esc(file.size)}</span></div>`;
+    }
+
+    function persistRowState() {
+      localStorage.setItem("gatkExpandedRows", JSON.stringify([...expandedRows]));
+      localStorage.setItem("gatkCollapsedRows", JSON.stringify([...collapsedRows]));
+    }
+
+    function rowIsExpanded(s) {
+      const sample = String(s.sample || "");
+      if (expandedRows.has(sample)) return true;
+      if (collapsedRows.has(sample)) return false;
+      return s.status === "running" || s.status === "started";
+    }
+
+    function sampleTime(s) {
+      const start = s.sample_started_at || "";
+      const end = s.sample_finished_at || "";
+      const estimate = s.sample_estimate;
+      if (!start && !end && !estimate) return "";
+      const estimateBlock = estimate ? `
+        <div style="margin-top: 6px;">
+          <div class="estimate-title">Estimated finish</div>
+          <div class="est-min">min <span class="mono">${esc(estimate.min_finish || "")}</span></div>
+          <div class="est-expected">exact <span class="mono">${esc(estimate.expected_finish || "")}</span></div>
+          <div class="est-max">max <span class="mono">${esc(estimate.max_finish || "")}</span></div>
+        </div>
+      ` : "";
+      return `
+        <div class="time-lines small">
+          ${start ? `<div><span class="muted">Start</span> <span class="mono">${esc(start)}</span></div>` : ""}
+          <div><span class="muted">End</span> <span class="mono">${esc(end || "running / not finished")}</span></div>
+          ${estimateBlock}
+        </div>
+      `;
+    }
+
+    function stepWindow(detail) {
+      const startPrefix = detail.start_inferred ? "~" : "";
+      const endPrefix = detail.end_inferred ? "~" : "";
+      const start = detail.start ? `${startPrefix}${detail.start}` : "?";
+      const end = detail.end ? `${endPrefix}${detail.end}` : "?";
+      const elapsed = detail.elapsed ? `; ${detail.elapsed}` : "";
+      return `${start} -> ${end}${elapsed}`;
+    }
+
+    function doneStepsHtml(s) {
+      const details = s.done_step_details || [];
+      if (details.length) {
+        return details.map((x) => `
+          <span class="pill">
+            ${esc(x.step)}
+            <span class="step-time">(${esc(stepWindow(x))})</span>
+          </span>
+        `).join("");
+      }
+      return (s.done_steps || []).map((x) => `<span class="pill">${esc(x)}</span>`).join("");
+    }
+
+    function estimateLines(estimate) {
+      if (!estimate) return "";
+      return `
+        <div class="est-min">min ${esc(estimate.min_finish || "")} (${esc(estimate.min_remaining || "")})</div>
+        <div class="est-expected">exact ${esc(estimate.expected_finish || "")} (${esc(estimate.expected_remaining || "")})</div>
+        <div class="est-max">max ${esc(estimate.max_finish || "")} (${esc(estimate.max_remaining || "")})</div>
+      `;
+    }
+
+    function estimateBlock(title, estimate, showMethod = true) {
+      if (!estimate) return "";
+      return `
+        <div class="estimate-block">
+          <div class="estimate-title">${esc(title)}</div>
+          ${estimateLines(estimate)}
+          ${showMethod ? `<div class="muted small">${esc(estimate.method || "")}</div>` : ""}
+        </div>
+      `;
+    }
+
+    function estimateHtml(s) {
+      const sampleEstimate = s.sample_estimate;
+      const baselineSampleEstimate = s.baseline_sample_estimate;
+      const queueStart = s.queue_start_estimate;
+      const baselineQueueStart = s.baseline_queue_start_estimate;
+      const finishedEstimate = s.finished_estimate;
+      const baselineFinishedEstimate = s.baseline_finished_estimate;
+      const stepEstimates = s.step_estimates || [];
+      const baselineStepEstimates = s.baseline_step_estimates || [];
+      if (
+        !sampleEstimate && !baselineSampleEstimate &&
+        !queueStart && !baselineQueueStart &&
+        !finishedEstimate && !baselineFinishedEstimate &&
+        !stepEstimates.length && !baselineStepEstimates.length
+      ) {
+        return "";
+      }
+      function finishedSpendBlock(title, estimate) {
+        if (!estimate) return "";
+        return `
+          <div class="estimate-block">
+            <div class="estimate-title">${esc(title)}</div>
+            <div class="muted small">(${esc(estimate.start || "")} -> ${esc(estimate.end || "")})</div>
+            <div class="est-min">min ${esc(estimate.estimated_spend?.min || "")}</div>
+            <div class="est-expected">exact ${esc(estimate.estimated_spend?.exact || "")}</div>
+            <div class="est-max">max ${esc(estimate.estimated_spend?.max || "")}</div>
+            <div class="muted small">${esc(estimate.method || "")}</div>
+          </div>
+        `;
+      }
+      const finishedBlock = finishedEstimate ? `
+        ${finishedSpendBlock("Live model spend time", finishedEstimate)}
+        <div class="estimate-block">
+          <div class="estimate-title">Actual spend time</div>
+          <div class="est-expected">${esc(finishedEstimate.total_spend?.label || "")}</div>
+          <div class="small">
+            <span class="est-min">vs min ${esc(finishedEstimate.total_spend?.deviation_from_min || "")}</span><br>
+            <span class="est-expected">vs exact ${esc(finishedEstimate.total_spend?.deviation_from_exact || "")}</span><br>
+            <span class="est-max">vs max ${esc(finishedEstimate.total_spend?.deviation_from_max || "")}</span>
+          </div>
+        </div>
+      ` : "";
+      const baselineFinishedBlock = finishedSpendBlock("Baseline spend time", baselineFinishedEstimate);
+      const queueBlock = estimateBlock("Live adjusted start", queueStart, false);
+      const baselineQueueBlock = estimateBlock("Baseline start", baselineQueueStart, false);
+      const sampleBlock = estimateBlock("Live adjusted finish", sampleEstimate);
+      const baselineSampleBlock = estimateBlock("Baseline finish", baselineSampleEstimate);
+      function stepLabel(type) {
+        if (type === "current") return "(current)";
+        if (type === "pending") return "(pending)";
+        return "(next)";
+      }
+      const stepBlocks = stepEstimates.map((item) => `
+        <div class="estimate-block">
+          <div class="estimate-title">${esc(item.step)} ${stepLabel(item.type)}</div>
+          ${estimateLines(item.finish)}
+          <div class="muted small">${esc(item.finish?.method || "")}</div>
+        </div>
+      `).join("");
+      const baselineStepBlocks = baselineStepEstimates.map((item) => `
+        <div class="estimate-block">
+          <div class="estimate-title">Baseline ${esc(item.step)} ${stepLabel(item.type)}</div>
+          ${estimateLines(item.finish)}
+          <div class="muted small">${esc(item.finish?.method || "")}</div>
+        </div>
+      `).join("");
+      return `<div class="estimate">${finishedBlock}${baselineFinishedBlock}${queueBlock}${baselineQueueBlock}${sampleBlock}${baselineSampleBlock}${stepBlocks}${baselineStepBlocks}</div>`;
+    }
+
+    function sampleTimeSummary(s) {
+      if (s.status === "finished" && s.finished_estimate?.total_spend?.label) {
+        return `spent ${esc(s.finished_estimate.total_spend.label)}`;
+      }
+      if (s.sample_estimate?.expected_finish) {
+        return `live exact finish <span class="mono">${esc(s.sample_estimate.expected_finish)}</span>`;
+      }
+      if (s.sample_started_at) {
+        return `started <span class="mono">${esc(s.sample_started_at)}</span>`;
+      }
+      return "";
+    }
+
+    function estimateSummary(s) {
+      if (s.status === "finished" && s.finished_estimate?.total_spend) {
+        return `
+          <span class="est-expected">${esc(s.finished_estimate.total_spend.label || "")}</span>
+          <div class="muted small">vs exact ${esc(s.finished_estimate.total_spend.deviation_from_exact || "")}</div>
+        `;
+      }
+      if (s.sample_estimate) {
+        return `
+          <span class="est-min">${esc(s.sample_estimate.min_finish || "")}</span><br>
+          <span class="est-expected">live ${esc(s.sample_estimate.expected_finish || "")}</span><br>
+          <span class="est-max">${esc(s.sample_estimate.max_finish || "")}</span>
+          ${s.baseline_sample_estimate?.expected_finish ? `<div class="muted small">baseline ${esc(s.baseline_sample_estimate.expected_finish)}</div>` : ""}
+        `;
+      }
+      if (s.baseline_sample_estimate) {
+        return `
+          <span class="est-expected">baseline ${esc(s.baseline_sample_estimate.expected_finish || "")}</span>
+        `;
+      }
+      return "";
+    }
+
+    function filesSummary(files) {
+      const parts = [];
+      if (files.input_bam?.exists) parts.push(`input ${esc(files.input_bam.size)}`);
+      if (files.raw_vcf?.exists) parts.push(`raw ${esc(files.raw_vcf.size)}`);
+      if (files.filtered_vcf?.exists) parts.push(`PASS ${esc(files.filtered_vcf.size)}`);
+      return parts.join("<br>");
+    }
+
+    function doneStepsSummary(s) {
+      const detailSteps = s.done_step_details || [];
+      const plainSteps = s.done_steps || [];
+      const count = detailSteps.length || plainSteps.length;
+      const lastDetail = detailSteps.length ? detailSteps[detailSteps.length - 1] : null;
+      const lastPlain = plainSteps.length ? plainSteps[plainSteps.length - 1] : "";
+      const last = (lastDetail && lastDetail.step) || lastPlain || "";
+      return count ? `${count} done${last ? `<div class="muted small">${esc(last)}</div>` : ""}` : "";
+    }
+
+    function renderSamples(samples) {
+      latestSamples = samples;
+      const tbody = document.getElementById("sample-rows");
+      updateSortIndicators();
+      tbody.innerHTML = sortedSamples(samples).map((s) => {
+        const expanded = rowIsExpanded(s);
+        const files = s.files || {};
+        const fileHtml = [
+          fileLine("Input BAM", files.input_bam),
+          fileLine("RG BAM", files.rg_bam),
+          fileLine("Split BAM", files.split_bam),
+          fileLine("Raw VCF", files.raw_vcf),
+          fileLine("Filtered VCF", files.filtered_vcf),
+          fileLine("Log", files.log)
+        ].filter(Boolean).join("");
+        const variants = [
+          s.raw_variants !== null && s.raw_variants !== undefined ? `raw ${countText(s.raw_variants)}` : "",
+          s.pass_variants !== null && s.pass_variants !== undefined ? `PASS ${countText(s.pass_variants)}` : ""
+        ].filter(Boolean).join("<br>");
+        return `
+          <tr class="row-${esc(s.status)}">
+            <td class="mono">
+              <button class="toggle-row" data-sample="${esc(s.sample)}" aria-expanded="${expanded ? "true" : "false"}" aria-label="${expanded ? "Hide" : "Show"} details for ${esc(s.sample)}">${expanded ? "-" : "+"}</button>
+              ${esc(s.sample)}
+            </td>
+            <td class="status-${esc(s.status)}">${esc(s.status)}</td>
+            <td class="summary-cell">${sampleTimeSummary(s)}</td>
+            <td class="summary-cell">${estimateSummary(s)}</td>
+            <td class="summary-cell">
+              ${esc(s.current_step || "")}
+              ${s.current_step_started_at ? `<div class="muted small">started <span class="mono">${esc(s.current_step_started_at)}</span></div>` : ""}
+            </td>
+            <td class="mono">${variants}</td>
+            <td class="files summary-cell">${filesSummary(files)}</td>
+            <td class="summary-cell">${doneStepsSummary(s)}</td>
+          </tr>
+          ${expanded ? `
+            <tr class="detail-row row-${esc(s.status)}">
+              <td colspan="8">
+                <div class="details-grid">
+                  <section class="details-block">
+                    <h3>Sample Time</h3>
+                    ${sampleTime(s) || `<span class="muted">No timing yet</span>`}
+                  </section>
+                  <section class="details-block">
+                    <h3>Estimate</h3>
+                    ${estimateHtml(s) || `<span class="muted">No estimate yet</span>`}
+                  </section>
+                  <section class="details-block">
+                    <h3>Variants</h3>
+                    <div class="mono">${variants || ""}</div>
+                  </section>
+                  <section class="details-block">
+                    <h3>Files</h3>
+                    <div class="files">${fileHtml || `<span class="muted">No files yet</span>`}</div>
+                  </section>
+                  <section class="details-block">
+                    <h3>Done Steps</h3>
+                    ${doneStepsHtml(s) || `<span class="muted">No completed steps yet</span>`}
+                  </section>
+                </div>
+              </td>
+            </tr>
+          ` : ""}
+        `;
+      }).join("");
+    }
+
+    function renderCounts(counts) {
+      const order = ["finished", "running", "started", "pending", "stopped_or_failed"];
+      document.getElementById("sample-counts").innerHTML = order
+        .map((key) => `<span class="pill">${key} ${counts[key] || 0}</span>`)
+        .join("");
+    }
+
+    function renderRunState(data) {
+      const pid = data.pid || {};
+      const process = data.process || {};
+      const supervisor = data.parallel_supervisor || {};
+      const runEstimate = data.run_estimate ? `
+        <div class="estimate-block" style="margin-top: 8px;">
+          <div class="estimate-title">Live adjusted run finish</div>
+          ${estimateLines(data.run_estimate)}
+          <div class="muted small">${esc(data.run_estimate.method || "")}</div>
+        </div>
+      ` : "";
+      const runBaselineEstimate = data.run_baseline_estimate ? `
+        <div class="estimate-block">
+          <div class="estimate-title">Baseline run finish</div>
+          ${estimateLines(data.run_baseline_estimate)}
+          <div class="muted small">created ${esc(data.estimate_baseline_created_at || "")}</div>
+        </div>
+      ` : "";
+      const supervisorCounts = supervisor.counts || {};
+      const launched = supervisor.launched_this_tick || [];
+      const supervisorHtml = supervisor.exists ? `
+        <div class="estimate-block">
+          <div class="estimate-title">Parallel supervisor</div>
+          <div class="small">updated <span class="mono">${esc(supervisor.updated_at || "")}</span></div>
+          <div class="small">max parallel <span class="mono">${esc(supervisor.max_parallel || "")}</span>; poll <span class="mono">${esc(supervisor.poll_seconds || "")}s</span></div>
+          <div class="small">
+            running <span class="mono">${esc(supervisorCounts.running ?? "")}</span>,
+            pending <span class="mono">${esc(supervisorCounts.pending ?? "")}</span>,
+            finished <span class="mono">${esc(supervisorCounts.finished ?? "")}</span>,
+            stopped <span class="mono">${esc(supervisorCounts.stopped_or_failed ?? "")}</span>
+          </div>
+          ${launched.length ? `<div class="small">launched now ${launched.map((x) => `<span class="mono">${esc(x.sample || "")}</span>`).join(", ")}</div>` : ""}
+        </div>
+      ` : "";
+      document.getElementById("run-state").innerHTML = `
+        <div><span class="pill">${process.active ? "process active" : "no active process"}</span></div>
+        <div class="small">PID file: <span class="mono">${esc(pid.pid_file || "")}</span></div>
+        <div class="small">Windows PID: <span class="mono">${esc(pid.pid || "")}</span> ${pid.running ? "(running)" : "(not running)"}</div>
+        ${supervisorHtml}
+        ${runEstimate}
+        ${runBaselineEstimate}
+      `;
+      document.getElementById("disk-state").textContent = `Disk free ${data.disk_free || ""} / ${data.disk_total || ""}`;
+      const activeSamples = process.active_samples || [];
+      const activeHtml = activeSamples.length
+        ? activeSamples.map((item) => `
+            <div style="margin-bottom: 6px;">
+              <span class="mono">${esc(item.sample || "")}</span>
+              <span class="muted">-</span>
+              <span class="mono">${esc(item.step || "")}</span>
+              <div class="muted small">PID ${esc(item.pid || "")}; elapsed ${esc(item.etime || "")}</div>
+            </div>
+          `).join("")
+        : `
+            <div>Sample: <span class="mono">${esc(process.current_sample || "")}</span></div>
+            <div>Step: <span class="mono">${esc(process.current_step || "")}</span></div>
+          `;
+      document.getElementById("current-step").innerHTML = activeHtml;
+      const procText = (process.processes || []).map((p) => `${p.pid} ${p.etime} ${p.sample || ""} ${p.step || ""}\n${p.cmd}`).join("\n\n");
+      document.getElementById("processes").textContent = procText || "No matching process";
+    }
+
+    async function refresh() {
+      const url = `/api/gatk-status?run_root=${encodeURIComponent(runRoot)}`;
+      try {
+        const res = await fetch(url, { cache: "no-store" });
+        const data = await res.json();
+        if (!res.ok) {
+          document.getElementById("run-state").textContent = data.error || "API error";
+          return;
+        }
+        document.getElementById("last-refresh").textContent = data.server_time || "";
+        renderRunState(data);
+        renderCounts(data.counts || {});
+        renderSamples(data.samples || []);
+        document.getElementById("latest-log").textContent = [
+          data.latest_log || "",
+          "",
+          ...(data.latest_log_tail || [])
+        ].join("\n");
+        resetCountdown();
+      } catch (err) {
+        document.getElementById("run-state").textContent = String(err);
+        resetCountdown();
+      }
+    }
+
+    function updateCountdownText() {
+      document.getElementById("refresh-countdown").textContent = String(Math.max(0, countdownSeconds));
+    }
+
+    function resetCountdown() {
+      countdownSeconds = refreshSeconds;
+      updateCountdownText();
+    }
+
+    function configureRefreshTimers() {
+      if (refreshTimer) clearInterval(refreshTimer);
+      if (countdownTimer) clearInterval(countdownTimer);
+      refreshTimer = setInterval(refresh, refreshSeconds * 1000);
+      countdownTimer = setInterval(() => {
+        countdownSeconds -= 1;
+        if (countdownSeconds < 0) countdownSeconds = 0;
+        updateCountdownText();
+      }, 1000);
+      resetCountdown();
+    }
+
+    document.getElementById("refresh-interval").addEventListener("change", (event) => {
+      refreshSeconds = Number(event.target.value) || 10;
+      configureRefreshTimers();
+    });
+
+    document.querySelectorAll("th.sortable").forEach((header) => {
+      header.addEventListener("click", () => {
+        const key = header.dataset.sortKey || "sample";
+        if (sortState.key === key) {
+          sortState.direction = sortState.direction === "asc" ? "desc" : "asc";
+        } else {
+          sortState = { key, direction: "asc" };
+        }
+        localStorage.setItem("gatkSortState", JSON.stringify(sortState));
+        renderSamples(latestSamples);
+      });
+    });
+
+    document.getElementById("sample-rows").addEventListener("click", (event) => {
+      const button = event.target.closest(".toggle-row");
+      if (!button) return;
+      const sample = button.dataset.sample || "";
+      if (!sample) return;
+      const current = latestSamples.find((item) => String(item.sample || "") === sample);
+      const isExpanded = current ? rowIsExpanded(current) : expandedRows.has(sample);
+      if (isExpanded) {
+        expandedRows.delete(sample);
+        collapsedRows.add(sample);
+      } else {
+        collapsedRows.delete(sample);
+        expandedRows.add(sample);
+      }
+      persistRowState();
+      renderSamples(latestSamples);
+    });
+
+    refresh();
+    configureRefreshTimers();
+  </script>
+</body>
+</html>

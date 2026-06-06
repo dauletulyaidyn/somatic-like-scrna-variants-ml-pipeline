@@ -1,0 +1,500 @@
+{
+  "workflow_id": "legacy_01_12_agentic",
+  "stages": [
+    {
+      "id": "01_input_data",
+      "description": "Input validation and metadata cleaning",
+      "required_tools": [],
+      "inputs": [
+        {
+          "path": "data/fastq",
+          "kind": "dir",
+          "required": true,
+          "min_entries": 1,
+          "description": "Raw FASTQ directory"
+        },
+        {
+          "path": "data/metadata/metadata.tsv",
+          "kind": "file",
+          "required": true,
+          "description": "Raw sample metadata"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "data/metadata/metadata.cleaned.tsv",
+          "kind": "file",
+          "required": true,
+          "description": "Cleaned metadata table"
+        }
+      ],
+      "output_globs": [],
+      "review_focus": [
+        "Confirm that FASTQ naming and metadata sample_id values are aligned.",
+        "Confirm that the cleaned metadata table is ready for Stage 02."
+      ],
+      "report_focus": [
+        "Summarize how many metadata records were accepted and whether any FASTQ naming problems remain."
+      ]
+    },
+    {
+      "id": "02_starsolo",
+      "description": "STARsolo alignment and barcode-aware BAM generation",
+      "required_tools": [
+        "STAR",
+        "samtools"
+      ],
+      "inputs": [
+        {
+          "path": "data/metadata/metadata.cleaned.tsv",
+          "kind": "file",
+          "required": true
+        },
+        {
+          "path": "data/fastq",
+          "kind": "dir",
+          "required": true,
+          "min_entries": 1
+        },
+        {
+          "path": "config/starsolo_config.json",
+          "kind": "file",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "path": "02_starsolo/outputs/artifacts",
+          "kind": "dir",
+          "required": true,
+          "min_entries": 1
+        }
+      ],
+      "output_globs": [
+        {
+          "pattern": "02_starsolo/outputs/artifacts/**/*.bam*",
+          "min_matches": 1,
+          "description": "Aligned STARsolo BAM files"
+        }
+      ],
+      "review_focus": [
+        "Confirm that barcode-aware STARsolo outputs were produced for the expected samples.",
+        "Confirm that BAM outputs exist for downstream GATK and cellsnp-lite stages."
+      ],
+      "report_focus": [
+        "Summarize whether alignment artifacts are present and whether Stage 03 can proceed."
+      ]
+    },
+    {
+      "id": "03_gatk_call",
+      "description": "GATK RNA-seq variant calling",
+      "required_tools": [
+        "gatk",
+        "samtools"
+      ],
+      "inputs": [
+        {
+          "path": "02_starsolo/outputs/artifacts",
+          "kind": "dir",
+          "required": true,
+          "min_entries": 1
+        },
+        {
+          "path": "config/gatk_config.json",
+          "kind": "file",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "path": "03_gatk_call/outputs/artifacts",
+          "kind": "dir",
+          "required": true,
+          "min_entries": 1
+        }
+      ],
+      "output_globs": [
+        {
+          "pattern": "03_gatk_call/outputs/artifacts/*.filtered.vcf*",
+          "min_matches": 1,
+          "description": "Filtered per-sample VCF files"
+        }
+      ],
+      "review_focus": [
+        "Confirm that filtered per-sample variant calls exist.",
+        "Confirm that Stage 04 and Stage 10 can consume the GATK outputs."
+      ],
+      "report_focus": [
+        "Summarize whether sample-level expressed variant calls were produced successfully."
+      ]
+    },
+    {
+      "id": "04_cohort_filter",
+      "description": "Cohort-common variant filtering",
+      "required_tools": [],
+      "inputs": [
+        {
+          "path": "03_gatk_call/outputs/artifacts",
+          "kind": "dir",
+          "required": true,
+          "min_entries": 1
+        },
+        {
+          "path": "config/cohort_filter_config.json",
+          "kind": "file",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "path": "04_cohort_filter/outputs/artifacts/cohort.common.vcf",
+          "kind": "file",
+          "required": true
+        }
+      ],
+      "output_globs": [],
+      "review_focus": [
+        "Confirm that the cohort-common VCF was produced and is non-empty."
+      ],
+      "report_focus": [
+        "Summarize whether a cohort-level mutation set is available for gene annotation."
+      ]
+    },
+    {
+      "id": "05_variant_to_gene",
+      "description": "Variant to gene annotation",
+      "required_tools": [],
+      "inputs": [
+        {
+          "path": "04_cohort_filter/outputs/artifacts/cohort.common.vcf",
+          "kind": "file",
+          "required": true
+        },
+        {
+          "path": "config/variant_to_gene_config.json",
+          "kind": "file",
+          "required": true
+        },
+        {
+          "path": "config/ref/genes.gtf",
+          "kind": "file",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "path": "05_variant_to_gene/outputs/artifacts/variant_gene_long.tsv",
+          "kind": "file",
+          "required": true
+        }
+      ],
+      "output_globs": [],
+      "review_focus": [
+        "Confirm that variants were mapped to genes and the long-format table exists."
+      ],
+      "report_focus": [
+        "Summarize whether gene-linked variants are now available for burden modeling."
+      ]
+    },
+    {
+      "id": "06_gene_burden",
+      "description": "Gene burden feature matrix",
+      "required_tools": [],
+      "inputs": [
+        {
+          "path": "05_variant_to_gene/outputs/artifacts/variant_gene_long.tsv",
+          "kind": "file",
+          "required": true
+        },
+        {
+          "path": "03_gatk_call/outputs/artifacts",
+          "kind": "dir",
+          "required": true,
+          "min_entries": 1
+        },
+        {
+          "path": "config/gene_burden_config.json",
+          "kind": "file",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "path": "06_gene_burden/outputs/artifacts/gene_burden_matrix.tsv",
+          "kind": "file",
+          "required": true
+        }
+      ],
+      "output_globs": [],
+      "review_focus": [
+        "Confirm that the burden matrix was generated with gene rows and sample columns."
+      ],
+      "report_focus": [
+        "Summarize whether the feature matrix is ready for control-vs-disease modeling."
+      ]
+    },
+    {
+      "id": "07_ml_control_vs_disease",
+      "description": "ML classification and permutation testing",
+      "required_tools": [],
+      "inputs": [
+        {
+          "path": "06_gene_burden/outputs/artifacts/gene_burden_matrix.tsv",
+          "kind": "file",
+          "required": true
+        },
+        {
+          "path": "data/metadata/metadata.cleaned.tsv",
+          "kind": "file",
+          "required": true
+        },
+        {
+          "path": "config/ml_config.json",
+          "kind": "file",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "path": "07_ml_control_vs_disease/outputs/metrics",
+          "kind": "dir",
+          "required": true,
+          "min_entries": 1
+        }
+      ],
+      "output_globs": [
+        {
+          "pattern": "07_ml_control_vs_disease/outputs/metrics/*",
+          "min_matches": 2,
+          "description": "ML metrics and permutation outputs"
+        }
+      ],
+      "review_focus": [
+        "Confirm that ML metrics and permutation outputs were produced."
+      ],
+      "report_focus": [
+        "Summarize whether the burden matrix carries usable predictive signal."
+      ]
+    },
+    {
+      "id": "08_cellsnp",
+      "description": "cellsnp-lite per-cell allele counting",
+      "required_tools": [
+        "cellsnp-lite"
+      ],
+      "inputs": [
+        {
+          "path": "02_starsolo/outputs/artifacts",
+          "kind": "dir",
+          "required": true,
+          "min_entries": 1
+        },
+        {
+          "path": "04_cohort_filter/outputs/artifacts/cohort.common.vcf",
+          "kind": "file",
+          "required": true
+        },
+        {
+          "path": "config/cellsnp_config.json",
+          "kind": "file",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "path": "08_cellsnp/outputs/artifacts",
+          "kind": "dir",
+          "required": true,
+          "min_entries": 1
+        }
+      ],
+      "output_globs": [
+        {
+          "pattern": "08_cellsnp/outputs/artifacts/*/cellSNP.tag.AD.mtx*",
+          "min_matches": 1,
+          "description": "cellsnp-lite allele depth matrices"
+        }
+      ],
+      "review_focus": [
+        "Confirm that per-sample cellsnp-lite result directories were generated."
+      ],
+      "report_focus": [
+        "Summarize whether single-cell allele count matrices are ready for cluster aggregation."
+      ]
+    },
+    {
+      "id": "09_cluster_aggregation",
+      "description": "Cluster-level mutation aggregation",
+      "required_tools": [],
+      "inputs": [
+        {
+          "path": "08_cellsnp/outputs/artifacts",
+          "kind": "dir",
+          "required": true,
+          "min_entries": 1
+        },
+        {
+          "path": "config/cluster_aggregation_config.json",
+          "kind": "file",
+          "required": true
+        },
+        {
+          "path": "data/metadata/cell_cluster_map.tsv",
+          "kind": "file",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "path": "09_cluster_aggregation/outputs/artifacts",
+          "kind": "dir",
+          "required": true,
+          "min_entries": 1
+        }
+      ],
+      "output_globs": [
+        {
+          "pattern": "09_cluster_aggregation/outputs/artifacts/*.cellsnp.cluster_counts.tsv*",
+          "min_matches": 1,
+          "description": "Cluster-level mutation count tables"
+        }
+      ],
+      "review_focus": [
+        "Confirm that cluster-level mutation burden tables were generated."
+      ],
+      "report_focus": [
+        "Summarize whether cluster-level mutation structure is available for downstream integration."
+      ]
+    },
+    {
+      "id": "10_mutational_analysis",
+      "description": "Mutational burden and signature summaries",
+      "required_tools": [],
+      "inputs": [
+        {
+          "path": "03_gatk_call/outputs/artifacts",
+          "kind": "dir",
+          "required": true,
+          "min_entries": 1
+        },
+        {
+          "path": "config/mutational_analysis_config.json",
+          "kind": "file",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "path": "10_mutational_analysis/outputs/metrics/mutation_burden.tsv",
+          "kind": "file",
+          "required": true
+        },
+        {
+          "path": "10_mutational_analysis/outputs/metrics/mutation_signatures.tsv",
+          "kind": "file",
+          "required": true
+        }
+      ],
+      "output_globs": [],
+      "review_focus": [
+        "Confirm that mutational burden and signature tables were produced."
+      ],
+      "report_focus": [
+        "Summarize the availability of per-sample mutation burden and substitution pattern summaries."
+      ]
+    },
+    {
+      "id": "11_correlation",
+      "description": "Integrated expression-mutation correlation analysis",
+      "required_tools": [],
+      "inputs": [
+        {
+          "path": "06_gene_burden/outputs/artifacts/gene_burden_matrix.tsv",
+          "kind": "file",
+          "required": true
+        },
+        {
+          "path": "10_mutational_analysis/outputs/metrics/mutation_burden.tsv",
+          "kind": "file",
+          "required": true
+        },
+        {
+          "path": "config/correlation_config.json",
+          "kind": "file",
+          "required": true
+        },
+        {
+          "path": "09_cluster_aggregation/outputs/artifacts",
+          "kind": "dir",
+          "required": false
+        },
+        {
+          "path": "02_starsolo/outputs/artifacts",
+          "kind": "dir",
+          "required": false
+        },
+        {
+          "path": "data/metadata/metadata.cleaned.tsv",
+          "kind": "file",
+          "required": false
+        }
+      ],
+      "outputs": [
+        {
+          "path": "11_correlation/outputs/metrics/sample_integration.tsv",
+          "kind": "file",
+          "required": true
+        },
+        {
+          "path": "11_correlation/outputs/metrics/correlation_matrix.tsv",
+          "kind": "file",
+          "required": true
+        }
+      ],
+      "output_globs": [],
+      "review_focus": [
+        "Confirm that the stage integrates mutation burden, gene burden, cluster burden, and optional STARsolo-derived sample metrics.",
+        "Confirm that pairwise correlation outputs are present.",
+        "Confirm that the outputs are sufficient for mutation-expression interpretation rather than a single isolated coefficient."
+      ],
+      "report_focus": [
+        "Summarize the strongest mutation-expression associations and whether they are positive, negative, weak, or unstable.",
+        "Summarize whether the integrated sample-level expression-mutation view is ready for final interpretation and external-study comparison."
+      ]
+    },
+    {
+      "id": "12_integrated_interpretation",
+      "description": "Final report bundle assembly",
+      "required_tools": [],
+      "inputs": [
+        {
+          "path": "11_correlation/outputs/metrics/correlation_matrix.tsv",
+          "kind": "file",
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "path": "12_integrated_interpretation/outputs/metrics/for_report_manifest.tsv",
+          "kind": "file",
+          "required": true
+        },
+        {
+          "path": "for_report",
+          "kind": "dir",
+          "required": true,
+          "min_entries": 1
+        }
+      ],
+      "output_globs": [],
+      "review_focus": [
+        "Confirm that the report bundle and manifest were generated.",
+        "Confirm that the final bundle can support a literature-aware interpretation of mutation-expression coupling."
+      ],
+      "report_focus": [
+        "Summarize whether the reproducibility report bundle, figures, tables, and integrated interpretation are complete.",
+        "Compare the observed mutation-expression relationships with other studies and explicitly distinguish association from causation."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Stage {{ stage.id }}</title>
+  <meta http-equiv="refresh" content="10">
+  <style>
+    body { font-family: Arial, sans-serif; padding: 16px; color: #222; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ddd; padding: 8px; vertical-align: top; }
+    th { background: #f3f3f3; text-align: left; }
+    .mono { font-family: Consolas, monospace; }
+    .pill { display: inline-block; padding: 4px 8px; border-radius: 999px; background: #eee; margin-right: 8px; }
+    .warn { color: #a15c00; font-weight: 700; }
+    .changed-badge { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 999px; background: #22c55e; color: #fff; font-size: 12px; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <p><a href="/">Back to pipeline status</a></p>
+  <h1>{{ stage.id }} - {{ stage.description }}{% if stage.changed %}<span class="changed-badge">Changed</span>{% endif %}</h1>
+  {% if stage.change_note %}
+  <p>{{ stage.change_note }}</p>
+  {% endif %}
+  <p>
+    Runner:
+    <span class="pill">{{ supervisor.status }}</span>
+    {% if supervisor.runner_pid %}<span class="mono">PID {{ supervisor.runner_pid }}</span>{% endif %}
+  </p>
+  <p>
+    Watchdog:
+    <span class="pill">{{ watchdog.status }}</span>
+    {% if watchdog.watchdog_pid %}<span class="mono">PID {{ watchdog.watchdog_pid }}</span>{% endif %}
+  </p>
+  <p>
+    Status: {{ stage.last_status }} |
+    Estimate (s): {{ stage.estimate_seconds }} |
+    Started: {{ stage.last_start_ts | fmt_ts }} |
+    Finished: {{ stage.last_end_ts | fmt_ts }}
+  </p>
+  <p>
+    Last duration (s): {{ stage.last_duration | fmt_num }} |
+    Estimate error (s): {{ stage.last_estimate_error | fmt_num }}
+  </p>
+  <p>Last error: {{ stage.last_error }}</p>
+
+  {% if watchdog.anomalies %}
+  <p class="warn">Watchdog warnings:</p>
+  <ul>
+    {% for item in watchdog.anomalies %}
+    <li class="mono">{{ item }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  <h2>Events</h2>
+  <table>
+    <tr><th>Type</th><th>Timestamp</th><th>Message</th></tr>
+    {% for e in events %}
+    <tr>
+      <td>{{ e.type }}</td>
+      <td>{{ e.ts | fmt_ts }}</td>
+      <td>{{ e.message }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <h2>Scanned Files</h2>
+  <table>
+    <tr><th>Path</th><th>Size (bytes)</th><th>Timestamp</th><th>Preview</th></tr>
+    {% for f in files %}
+    <tr>
+      <td class="mono">{{ f.path }}</td>
+      <td>{{ f.size_bytes }}</td>
+      <td>{{ f.ts | fmt_ts }}</td>
+      <td><a href="/file?path={{ f.path }}">open</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>

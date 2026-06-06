@@ -1,5 +1,6 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 import argparse
+import gzip
 import json
 import sys
 from pathlib import Path
@@ -7,14 +8,43 @@ from pathlib import Path
 import pandas as pd
 
 
+def open_text(path: Path):
+    if path.suffix == ".gz":
+        return gzip.open(path, "rt", encoding="utf-8")
+    return path.open("r", encoding="utf-8")
+
+
 def normalize_sample_id(vcf: Path) -> str:
     name = vcf.name
-    if name.endswith(".filtered.vcf"):
-        name = name[: -len(".filtered.vcf")]
-    elif name.endswith(".vcf"):
-        name = name[: -len(".vcf")]
+    suffixes = [
+        ".filtered.annotated.vcf.gz",
+        ".filtered.annotated.vcf",
+        ".filtered.vcf.gz",
+        ".filtered.vcf",
+        ".raw.vcf.gz",
+        ".raw.vcf",
+        ".vcf.gz",
+        ".vcf",
+    ]
+    for suffix in suffixes:
+        if name.endswith(suffix):
+            name = name[: -len(suffix)]
+            break
     name = name.replace("Aligned.sortedByCoord.out", "")
     return name
+
+
+def candidate_filtered_vcfs(vcf_dir: Path) -> list[Path]:
+    files: list[Path] = []
+    seen: set[str] = set()
+    for pattern in ("*.filtered.vcf.gz", "*.filtered.vcf"):
+        for vcf in sorted(vcf_dir.glob(pattern)):
+            sample_id = normalize_sample_id(vcf)
+            if sample_id in seen:
+                continue
+            seen.add(sample_id)
+            files.append(vcf)
+    return files
 
 
 def main():
@@ -40,15 +70,11 @@ def main():
         print("Missing required columns in variant-gene TSV", file=sys.stderr)
         return 2
 
-    # Build variant->gene key map
     df["key"] = df["chrom"].astype(str) + ":" + df["pos"].astype(str) + ":" + df["ref"] + ":" + df["alt"]
     var_to_gene = df.groupby(["key", "gene_id", "gene_name"]).size().reset_index()[["key", "gene_id", "gene_name"]]
-
-    # Initialize burden matrix with genes as rows
     genes = var_to_gene[["gene_id", "gene_name"]].drop_duplicates().reset_index(drop=True)
 
-    # Parse per-sample VCFs and count variants per gene
-    vcf_files = sorted(vcf_dir.glob("*.filtered.vcf"))
+    vcf_files = candidate_filtered_vcfs(vcf_dir)
     if not vcf_files:
         print("No filtered VCF files found", file=sys.stderr)
         return 2
@@ -56,8 +82,8 @@ def main():
     for vcf in vcf_files:
         sample_id = normalize_sample_id(vcf)
         sample_keys = set()
-        with vcf.open("r", encoding="utf-8") as f:
-            for line in f:
+        with open_text(vcf) as handle:
+            for line in handle:
                 if line.startswith("#"):
                     continue
                 parts = line.rstrip("\n").split("\t")

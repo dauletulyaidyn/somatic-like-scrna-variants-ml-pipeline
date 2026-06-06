@@ -3,6 +3,8 @@
 Purpose
 - Provide an entry point for AI agents to execute the pipeline end-to-end.
 - Support autonomous execution from a single command such as `zapusti analiz`.
+- Treat `scripts/run_agentic_pipeline.py` as the canonical orchestration layer for the legacy `01_...12_` workflow.
+- Keep formal release/version metadata out of the repo until the workflow is ready for publication or public distribution.
 
 Repository layout
 - Root folders:
@@ -10,7 +12,7 @@ Repository layout
   - `data/`     : raw inputs (FASTQ, metadata)
   - `docs/`     : shared documentation
   - `notebooks/`: exploratory notebooks
-  - `../results/`  : shared outputs outside repo (used for manuscript)
+  - `../results/`  : shared analysis outputs outside repo
   - `for_report/`  : curated tables/figures copied by final stage
   - `scripts/`  : shared utilities
   - `status/`   : Flask status web UI
@@ -84,7 +86,7 @@ Status system (required)
 - Web UI:
   - `python status/app.py --port 5556`
   - Open `http://localhost:5556`
-  - Autonomous entrypoint: `python scripts/run_autonomous_pipeline.py --auto-install --start-status`
+  - Canonical entrypoint: `python scripts/run_agentic_pipeline.py --auto-install --start-status`
 
 Initial inputs (required)
 - `data/fastq/` : raw scRNA-seq FASTQ files.
@@ -141,7 +143,7 @@ gunzip -c config/ref/whitelist.txt.gz > config/ref/whitelist.txt
 - Known dataset mappings (update if protocol differs):
   - PAD dataset (3-read): `read_structure=three_read`, whitelist `737K-april-2014_rc.txt` (10x v1).
   - Test FASTQ (2-read R1=28, R2~90): `read_structure=two_read`, whitelist `3M-february-2018_TRU.txt.gz` (10x 3' v3/v3.1).
-  - CVD dataset (local `U:\! ! ! Datasets\! ! ! CVD Original dadtaset`): `read_structure=two_read`, whitelist `3M-february-2018_TRU.txt.gz` (10x 3' v3/v3.1).
+  - CVD-like 10x v3/v3.1 datasets: `read_structure=two_read`, whitelist `3M-february-2018_TRU.txt.gz`.
 
 Whitelist selection requirement
 - Preferred autonomous behavior:
@@ -163,10 +165,18 @@ Naming convention
 - `SAMPLEID_R2.fastq.gz`
 
 Execution protocol
-1) Start in `01_input_data/`.
-2) Read `TECH_SPEC.md` and execute its actions.
-3) Confirm outputs, then proceed to the next stage folder indicated by the spec.
-4) Repeat until `12_integrated_interpretation/`.
+1) The single `main_agent` owns the whole workflow.
+2) For each stage, a subordinate `stage_preflight_agent` or skill checks inputs, config paths, and required tools.
+3) If preflight passes, a subordinate `stage_execution_agent` or skill runs the deterministic stage command.
+4) After execution, a subordinate `stage_review_agent` or skill checks whether the outputs are valid for downstream use.
+5) Then a subordinate `stage_report_agent` or skill writes a mini report and mini interpretation for the stage.
+6) The `main_agent` decides whether the workflow may advance to the next stage.
+7) After the last stage, the `main_agent` writes the final integrated report, final interpretation, and bundle-level figures/tables summary.
+
+Canonical entrypoints
+- `python scripts/run_agentic_pipeline.py --auto-install --start-status --use-wsl`
+- `python scripts/launch_pipeline_background.py --use-wsl --watchdog-interval 10`
+- `./zapusti_analiz.ps1`
 
 Data hygiene
 - Do not write outputs outside `../results/` or stage `outputs/` unless explicitly stated.
