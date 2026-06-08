@@ -270,10 +270,13 @@
         }
       ],
       "review_focus": [
-        "Confirm that ML metrics and permutation outputs were produced."
+        "Confirm that ML metrics and permutation outputs were produced.",
+        "Confirm that feature filtering and scaling are fit inside each validation training fold.",
+        "Use group-aware validation when metadata contains repeated donor, GSM, sample, or other non-independent units."
       ],
       "report_focus": [
-        "Summarize whether the burden matrix carries usable predictive signal."
+        "Summarize run-level separability separately from group-aware validation.",
+        "Avoid interpreting run-level cross-validation as independent generalization when repeated biological/group units are present."
       ]
     },
     {

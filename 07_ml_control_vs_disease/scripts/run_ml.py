@@ -6,9 +6,13 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from sklearn.base import clone
+from sklearn.feature_selection import VarianceThreshold
 from sklearn.model_selection import RepeatedStratifiedKFold
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import roc_auc_score
+from sklearn.metrics import balanced_accuracy_score, roc_auc_score
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
 
 
 def load_data(feature_path, meta_path, label_col, positive_label):
@@ -44,6 +48,30 @@ def load_data(feature_path, meta_path, label_col, positive_label):
     return feats, y
 
 
+def build_model(random_state=42):
+    return Pipeline(
+        [
+            ("var", VarianceThreshold()),
+            ("scale", StandardScaler()),
+            (
+                "clf",
+                LogisticRegression(
+                    max_iter=5000,
+                    solver="liblinear",
+                    class_weight="balanced",
+                    random_state=random_state,
+                ),
+            ),
+        ]
+    )
+
+
+def safe_roc_auc(y_true, probs):
+    if len(np.unique(y_true)) < 2:
+        return float("nan")
+    return float(roc_auc_score(y_true, probs))
+
+
 def main():
     ap = argparse.ArgumentParser(description="Run ML for control vs disease.")
     ap.add_argument("--config", required=True, help="config JSON")
@@ -65,15 +93,38 @@ def main():
     X, y = load_data(feature_path, meta_path, cfg["label_col"], cfg["positive_label"])
 
     rkf = RepeatedStratifiedKFold(n_splits=cfg["cv_folds"], n_repeats=cfg["cv_repeats"], random_state=42)
-    model = LogisticRegression(max_iter=1000)
+    model_template = build_model(random_state=42)
 
-    scores = []
+    auc_scores = []
+    bal_acc_scores = []
     for train_idx, test_idx in rkf.split(X, y):
+        model = clone(model_template)
         model.fit(X[train_idx], y[train_idx])
+        preds = model.predict(X[test_idx])
         probs = model.predict_proba(X[test_idx])[:, 1]
-        scores.append(roc_auc_score(y[test_idx], probs))
+        auc_scores.append(safe_roc_auc(y[test_idx], probs))
+        bal_acc_scores.append(balanced_accuracy_score(y[test_idx], preds))
 
-    metrics = pd.DataFrame({"metric": ["roc_auc_mean", "roc_auc_std"], "value": [np.mean(scores), np.std(scores)]})
+    metrics = pd.DataFrame(
+        {
+            "metric": [
+                "roc_auc_mean",
+                "roc_auc_std",
+                "balanced_accuracy_mean",
+                "balanced_accuracy_std",
+                "model",
+                "leakage_control",
+            ],
+            "value": [
+                np.nanmean(auc_scores),
+                np.nanstd(auc_scores),
+                np.mean(bal_acc_scores),
+                np.std(bal_acc_scores),
+                "VarianceThreshold + StandardScaler + L2 logistic regression",
+                "all preprocessing fit inside each CV training fold",
+            ],
+        }
+    )
     Path(out_metrics).parent.mkdir(parents=True, exist_ok=True)
     metrics.to_csv(out_metrics, sep="\t", index=False)
 
@@ -83,10 +134,11 @@ def main():
         y_perm = np.random.permutation(y)
         fold_scores = []
         for train_idx, test_idx in rkf.split(X, y_perm):
+            model = clone(model_template)
             model.fit(X[train_idx], y_perm[train_idx])
             probs = model.predict_proba(X[test_idx])[:, 1]
-            fold_scores.append(roc_auc_score(y_perm[test_idx], probs))
-        perm_scores.append(np.mean(fold_scores))
+            fold_scores.append(safe_roc_auc(y_perm[test_idx], probs))
+        perm_scores.append(np.nanmean(fold_scores))
 
     perm = pd.DataFrame({"perm_score": perm_scores})
     perm.to_csv(out_perm, sep="\t", index=False)

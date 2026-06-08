@@ -21,6 +21,7 @@ How to run (manual)
 
 How to run group-aware validation (manual)
 - Use this when multiple run-level observations can come from the same biological sample, donor proxy, or GEO/GSM group.
+- This is the preferred validation mode for non-independent run-level observations.
 - Required metadata columns:
   - `sample_id`
   - label column, default `condition`
@@ -50,10 +51,12 @@ For a completed external GATK analysis bundle, point `--feature-matrix`, `--meta
 - `group_validation_summary.md`
 
 Validation design
-- Run-level repeated stratified CV is retained only as a separability comparator.
+- The default stage script `run_ml.py` reports run-level repeated stratified CV only as a separability comparator.
+- The default stage script uses a leakage-safe scikit-learn Pipeline: `VarianceThreshold -> StandardScaler -> L2 logistic regression`, fit separately inside each CV training fold.
 - Group-aware leave-one-group-out validation keeps all rows from the held-out group out of training.
 - Grouped permutation permutes labels at group level and preserves the number of positive groups.
-- Preprocessing is leakage-safe: variance filtering and scaling are fit inside each CV fold.
+- Group-aware validation uses the same leakage-safe Pipeline, with variance filtering and scaling fit inside each run-level or group-held-out fold.
+- If PCA, SelectKBest, model selection, or hyperparameter search is added in future analyses, those steps must be placed inside the fold-level Pipeline or nested inside the training fold.
 
 Pre-run checks (manual)
 - Verify OS and environment.
