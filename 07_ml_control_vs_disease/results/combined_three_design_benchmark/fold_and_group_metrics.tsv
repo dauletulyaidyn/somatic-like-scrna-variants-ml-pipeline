@@ -1,0 +1,1149 @@
+design	model	fold	accuracy	balanced_accuracy	roc_auc	f1_positive	heldout_gsm	true_label	predicted_label	prob_positive	correct
+SRR-level repeated CV	Logistic regression (L2)	1	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	2	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	3	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	4	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	Logistic regression (L2)	5	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	6	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	7	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	8	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	9	0.6666666666666666	0.5	1.0	0.8
+SRR-level repeated CV	Logistic regression (L2)	10	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	11	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	12	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	13	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	14	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	15	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	16	0.3333333333333333	0.5	0.0	0.5
+SRR-level repeated CV	Logistic regression (L2)	17	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	18	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	19	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	20	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	21	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	22	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	23	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	24	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	25	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	26	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	27	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	28	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	29	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	30	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	31	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	32	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	33	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	34	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	Logistic regression (L2)	35	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	36	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	37	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	38	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	39	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	40	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	41	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	42	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	43	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	44	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	45	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	46	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	47	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	48	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	49	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	50	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	51	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	52	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	53	0.3333333333333333	0.5	1.0	0.5
+SRR-level repeated CV	Logistic regression (L2)	54	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	55	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	56	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	57	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	58	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	59	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	60	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	61	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	62	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	63	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	64	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	65	0.5	0.5	1.0	0.6666666666666666
+SRR-level repeated CV	Logistic regression (L2)	66	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	67	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	68	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	69	0.6666666666666666	0.5	1.0	0.8
+SRR-level repeated CV	Logistic regression (L2)	70	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	71	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	72	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	73	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	74	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	75	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	76	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	77	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	78	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	79	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	80	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	81	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	82	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	83	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	84	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	85	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	86	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	87	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	88	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	89	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	90	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	91	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	92	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	93	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	94	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	95	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	96	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	97	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	98	0.3333333333333333	0.5	0.0	0.5
+SRR-level repeated CV	Logistic regression (L2)	99	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	100	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	101	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	102	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	103	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	104	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	105	0.5	0.5	1.0	0.6666666666666666
+SRR-level repeated CV	Logistic regression (L2)	106	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	107	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	108	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	109	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	110	0.5	0.5	1.0	0.6666666666666666
+SRR-level repeated CV	Logistic regression (L2)	111	0.3333333333333333	0.5	0.0	0.5
+SRR-level repeated CV	Logistic regression (L2)	112	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	113	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	114	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	115	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	116	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	117	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	118	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	119	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	120	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	121	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	122	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	123	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	124	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	Logistic regression (L2)	125	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	126	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	127	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	128	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	129	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	130	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	131	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	132	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	133	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	134	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	135	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	136	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	137	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	138	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	139	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	Logistic regression (L2)	140	0.5	0.5	1.0	0.6666666666666666
+SRR-level repeated CV	Logistic regression (L2)	141	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	142	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	143	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	144	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	145	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	146	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	147	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	148	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Logistic regression (L2)	149	0.6666666666666666	0.5	1.0	0.8
+SRR-level repeated CV	Logistic regression (L2)	150	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	1	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	2	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	3	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	4	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	Neural network (MLP)	5	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	6	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	7	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	8	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	9	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	10	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	11	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	12	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	13	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	14	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	15	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	16	0.3333333333333333	0.5	0.5	0.5
+SRR-level repeated CV	Neural network (MLP)	17	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	18	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	19	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	20	0.5	0.5	1.0	0.0
+SRR-level repeated CV	Neural network (MLP)	21	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	22	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	23	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	24	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	25	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	26	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	27	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	28	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	29	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	30	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	31	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	32	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	33	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	34	0.3333333333333333	0.5	0.0	0.0
+SRR-level repeated CV	Neural network (MLP)	35	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	36	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	37	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	38	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	Neural network (MLP)	39	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	40	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	41	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	42	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	43	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	44	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	45	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	46	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	47	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	48	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	49	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	50	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	51	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	52	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	53	0.3333333333333333	0.5	1.0	0.5
+SRR-level repeated CV	Neural network (MLP)	54	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	55	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	56	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	57	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	58	0.3333333333333333	0.5	0.5	0.5
+SRR-level repeated CV	Neural network (MLP)	59	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	60	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	61	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	62	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	Neural network (MLP)	63	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	64	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	65	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	66	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	67	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	Neural network (MLP)	68	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	69	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	70	0.5	0.5	1.0	0.0
+SRR-level repeated CV	Neural network (MLP)	71	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	Neural network (MLP)	72	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	73	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	74	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	75	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	76	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	Neural network (MLP)	77	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	78	0.3333333333333333	0.5	0.5	0.5
+SRR-level repeated CV	Neural network (MLP)	79	0.6666666666666666	0.5	0.5	0.8
+SRR-level repeated CV	Neural network (MLP)	80	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	81	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	82	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	83	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	84	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	85	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	86	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	87	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	88	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	89	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	90	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	91	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	92	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	93	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	94	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	95	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	96	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	Neural network (MLP)	97	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	98	0.3333333333333333	0.5	0.5	0.5
+SRR-level repeated CV	Neural network (MLP)	99	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	100	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	101	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	Neural network (MLP)	102	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	103	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	104	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	105	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	106	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	107	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	108	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	109	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	110	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	111	0.3333333333333333	0.5	0.5	0.5
+SRR-level repeated CV	Neural network (MLP)	112	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	113	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	114	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	115	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	116	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	117	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	118	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	119	0.6666666666666666	0.75	0.5	0.6666666666666666
+SRR-level repeated CV	Neural network (MLP)	120	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	121	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	122	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	123	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	124	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	Neural network (MLP)	125	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	126	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	127	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	128	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	129	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	130	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	131	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	132	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	133	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	134	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	135	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	136	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	137	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	138	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	139	0.3333333333333333	0.5	0.0	0.0
+SRR-level repeated CV	Neural network (MLP)	140	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	141	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	142	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	143	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	Neural network (MLP)	144	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	145	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	146	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	147	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	148	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	149	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Neural network (MLP)	150	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	1	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	2	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	3	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	Random forest	4	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	Random forest	5	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	6	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	7	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	8	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	9	0.6666666666666666	0.5	1.0	0.8
+SRR-level repeated CV	Random forest	10	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	11	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	12	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	13	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	14	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	15	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	16	0.3333333333333333	0.5	0.0	0.5
+SRR-level repeated CV	Random forest	17	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	18	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	19	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	20	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	21	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	22	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	Random forest	23	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	24	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	25	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	26	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	27	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	28	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	29	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	30	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	31	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	32	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	Random forest	33	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	34	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	Random forest	35	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	36	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	37	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	38	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	39	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	40	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	41	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	42	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	43	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	44	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	45	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	46	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	47	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	48	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	49	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	50	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	51	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	52	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	53	0.3333333333333333	0.5	1.0	0.5
+SRR-level repeated CV	Random forest	54	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	55	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	56	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	57	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	58	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	59	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	60	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	61	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	62	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	63	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	64	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	65	0.5	0.5	1.0	0.6666666666666666
+SRR-level repeated CV	Random forest	66	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	Random forest	67	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	68	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	69	0.6666666666666666	0.5	1.0	0.8
+SRR-level repeated CV	Random forest	70	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	71	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	72	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	73	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	Random forest	74	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	75	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	76	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	77	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	78	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	79	0.6666666666666666	0.5	1.0	0.8
+SRR-level repeated CV	Random forest	80	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	81	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	82	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	83	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	84	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	85	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	86	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	87	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	88	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	89	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	90	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	91	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	92	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	93	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	94	0.6666666666666666	0.5	1.0	0.8
+SRR-level repeated CV	Random forest	95	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	96	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	97	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	98	0.3333333333333333	0.5	1.0	0.5
+SRR-level repeated CV	Random forest	99	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	100	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	101	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	Random forest	102	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	103	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	104	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	105	0.5	0.5	1.0	0.6666666666666666
+SRR-level repeated CV	Random forest	106	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	107	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	108	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	109	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	110	0.5	0.5	1.0	0.6666666666666666
+SRR-level repeated CV	Random forest	111	0.3333333333333333	0.5	1.0	0.5
+SRR-level repeated CV	Random forest	112	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	113	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	114	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	115	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	116	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	Random forest	117	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	118	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	119	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	120	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	121	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	Random forest	122	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	123	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	Random forest	124	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	Random forest	125	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	126	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	Random forest	127	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	128	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	129	0.6666666666666666	0.5	1.0	0.8
+SRR-level repeated CV	Random forest	130	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	131	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	132	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	133	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	134	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	135	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	136	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	137	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	138	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	139	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	Random forest	140	0.5	0.5	1.0	0.6666666666666666
+SRR-level repeated CV	Random forest	141	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	Random forest	142	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	143	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	144	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	Random forest	145	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	146	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	147	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	148	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Random forest	149	0.6666666666666666	0.5	1.0	0.8
+SRR-level repeated CV	Random forest	150	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	1	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	2	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	3	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	4	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	SVM (RBF)	5	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	6	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	7	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	8	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	9	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	10	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	11	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	12	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	13	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	14	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	15	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	16	0.3333333333333333	0.5	1.0	0.5
+SRR-level repeated CV	SVM (RBF)	17	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	18	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	19	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	20	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	21	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	22	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	23	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	24	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	25	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	26	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	27	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	28	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	29	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	30	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	31	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	32	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	33	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	34	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	SVM (RBF)	35	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	36	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	37	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	38	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	39	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	40	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	41	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	42	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	43	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	44	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	45	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	46	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	47	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	48	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	49	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	50	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	51	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	52	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	53	0.3333333333333333	0.5	1.0	0.5
+SRR-level repeated CV	SVM (RBF)	54	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	55	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	56	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	57	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	58	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	59	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	60	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	61	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	62	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	63	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	64	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	65	0.5	0.5	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	66	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	67	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	68	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	69	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	70	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	71	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	72	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	73	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	74	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	75	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	76	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	77	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	78	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	79	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	SVM (RBF)	80	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	81	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	82	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	83	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	84	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	SVM (RBF)	85	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	86	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	87	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	88	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	89	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	90	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	91	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	92	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	93	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	94	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	95	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	96	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	97	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	98	0.3333333333333333	0.5	1.0	0.5
+SRR-level repeated CV	SVM (RBF)	99	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	100	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	101	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	102	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	103	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	104	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	105	0.5	0.5	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	106	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	107	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	108	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	109	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	110	0.5	0.5	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	111	0.3333333333333333	0.5	1.0	0.5
+SRR-level repeated CV	SVM (RBF)	112	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	113	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	114	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	115	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	116	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	117	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	118	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	119	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	120	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	121	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	122	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	123	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	124	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	SVM (RBF)	125	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	126	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	127	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	128	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	129	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	130	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	131	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	132	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	133	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	134	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	135	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	136	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	137	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	138	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	139	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	SVM (RBF)	140	0.5	0.5	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	141	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	142	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	SVM (RBF)	143	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	144	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	SVM (RBF)	145	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	146	1.0	1.0	0.0	1.0
+SRR-level repeated CV	SVM (RBF)	147	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	148	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	149	1.0	1.0	1.0	1.0
+SRR-level repeated CV	SVM (RBF)	150	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	1	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	2	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	3	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	4	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	5	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	6	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	7	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	8	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	9	0.6666666666666666	0.5	1.0	0.8
+SRR-level repeated CV	k-nearest neighbours	10	0.5	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	11	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	12	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	13	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	14	0.6666666666666666	0.5	1.0	0.8
+SRR-level repeated CV	k-nearest neighbours	15	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	16	0.3333333333333333	0.5	0.5	0.5
+SRR-level repeated CV	k-nearest neighbours	17	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	18	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	19	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	20	0.5	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	21	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	22	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	23	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	24	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	25	0.5	0.5	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	26	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	27	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	28	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	29	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	30	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	31	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	32	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	33	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	34	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	35	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	36	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	37	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	38	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	39	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	40	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	41	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	42	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	43	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	44	0.6666666666666666	0.5	1.0	0.8
+SRR-level repeated CV	k-nearest neighbours	45	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	46	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	47	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	48	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	49	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	50	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	51	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	52	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	53	0.3333333333333333	0.5	0.5	0.5
+SRR-level repeated CV	k-nearest neighbours	54	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	55	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	56	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	57	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	58	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	59	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	60	0.5	0.5	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	61	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	62	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	63	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	64	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	65	0.5	0.5	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	66	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	67	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	68	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	69	0.6666666666666666	0.5	1.0	0.8
+SRR-level repeated CV	k-nearest neighbours	70	0.5	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	71	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	72	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	73	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	74	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	75	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	76	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	77	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	78	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	79	0.6666666666666666	0.5	1.0	0.8
+SRR-level repeated CV	k-nearest neighbours	80	0.5	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	81	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	82	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	83	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	84	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	85	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	86	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	87	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	88	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	89	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	90	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	91	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	92	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	93	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	94	0.6666666666666666	0.5	1.0	0.8
+SRR-level repeated CV	k-nearest neighbours	95	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	96	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	97	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	98	0.3333333333333333	0.5	0.5	0.5
+SRR-level repeated CV	k-nearest neighbours	99	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	100	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	101	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	102	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	103	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	104	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	105	0.5	0.5	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	106	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	107	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	108	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	109	0.6666666666666666	0.5	1.0	0.8
+SRR-level repeated CV	k-nearest neighbours	110	0.5	0.5	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	111	0.3333333333333333	0.5	0.5	0.5
+SRR-level repeated CV	k-nearest neighbours	112	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	113	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	114	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	115	0.5	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	116	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	117	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	118	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	119	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	120	0.5	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	121	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	122	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	123	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	124	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	125	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	126	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	127	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	128	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	129	0.6666666666666666	0.5	1.0	0.8
+SRR-level repeated CV	k-nearest neighbours	130	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	131	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	132	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	133	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	134	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	135	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	136	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	137	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	138	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	139	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	140	0.5	0.5	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	141	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	142	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	143	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	144	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	145	0.5	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	146	1.0	1.0	1.0	1.0
+SRR-level repeated CV	k-nearest neighbours	147	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	k-nearest neighbours	148	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	k-nearest neighbours	149	0.6666666666666666	0.5	1.0	0.8
+SRR-level repeated CV	k-nearest neighbours	150	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	1	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	2	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	3	0.6666666666666666	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	4	0.3333333333333333	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	5	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	6	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	7	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	8	0.6666666666666666	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	9	0.6666666666666666	0.5	0.5	0.8
+SRR-level repeated CV	Decision tree	10	0.5	0.5	0.5	0.6666666666666666
+SRR-level repeated CV	Decision tree	11	0.6666666666666666	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	12	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	13	0.6666666666666666	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	14	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	15	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	16	0.3333333333333333	0.5	0.5	0.5
+SRR-level repeated CV	Decision tree	17	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	18	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	19	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	20	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	21	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	22	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	23	0.3333333333333333	0.25	0.25	0.0
+SRR-level repeated CV	Decision tree	24	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	25	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	26	0.3333333333333333	0.5	0.5	0.5
+SRR-level repeated CV	Decision tree	27	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	28	0.6666666666666666	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	29	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	30	0.5	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	31	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	32	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	33	0.6666666666666666	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	34	0.3333333333333333	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	35	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	36	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	37	0.3333333333333333	0.25	0.25	0.0
+SRR-level repeated CV	Decision tree	38	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	39	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	40	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	41	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	42	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	43	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	44	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	45	0.5	0.5	0.5	0.6666666666666666
+SRR-level repeated CV	Decision tree	46	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	47	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	48	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	49	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	50	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	51	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	52	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	53	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	54	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	55	0.5	0.5	0.5	0.6666666666666666
+SRR-level repeated CV	Decision tree	56	0.3333333333333333	0.5	0.5	0.5
+SRR-level repeated CV	Decision tree	57	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	58	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	59	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	60	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	61	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	62	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	63	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	64	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	65	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	66	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	67	0.6666666666666666	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	68	0.6666666666666666	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	69	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	70	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	71	0.6666666666666666	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	72	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	73	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	74	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	75	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	76	0.6666666666666666	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	77	0.3333333333333333	0.5	0.5	0.5
+SRR-level repeated CV	Decision tree	78	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	79	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	80	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	81	0.3333333333333333	0.25	0.25	0.0
+SRR-level repeated CV	Decision tree	82	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	83	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	84	0.3333333333333333	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	85	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	86	0.6666666666666666	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	87	0.6666666666666666	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	88	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	89	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	90	0.5	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	91	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	92	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	93	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	94	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	95	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	96	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	97	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	98	0.3333333333333333	0.5	0.5	0.5
+SRR-level repeated CV	Decision tree	99	0.3333333333333333	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	100	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	101	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	102	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	103	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	104	0.6666666666666666	0.5	0.5	0.8
+SRR-level repeated CV	Decision tree	105	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	106	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	107	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	108	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	109	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	110	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	111	0.3333333333333333	0.5	0.5	0.5
+SRR-level repeated CV	Decision tree	112	0.6666666666666666	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	113	0.6666666666666666	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	114	0.3333333333333333	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	115	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	116	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	117	0.3333333333333333	0.25	0.25	0.0
+SRR-level repeated CV	Decision tree	118	0.3333333333333333	0.5	0.5	0.5
+SRR-level repeated CV	Decision tree	119	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	120	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	121	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	122	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	123	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	124	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	125	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	126	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	127	0.6666666666666666	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	128	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	129	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	130	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	131	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	132	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	133	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	134	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	135	0.5	0.5	0.5	0.6666666666666666
+SRR-level repeated CV	Decision tree	136	0.3333333333333333	0.25	0.25	0.0
+SRR-level repeated CV	Decision tree	137	0.6666666666666666	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	138	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	139	0.3333333333333333	0.5	0.5	0.0
+SRR-level repeated CV	Decision tree	140	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	141	0.3333333333333333	0.5	0.5	0.5
+SRR-level repeated CV	Decision tree	142	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	143	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	144	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	145	0.5	0.5	0.5	0.6666666666666666
+SRR-level repeated CV	Decision tree	146	0.3333333333333333	0.25	0.25	0.0
+SRR-level repeated CV	Decision tree	147	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	148	0.6666666666666666	0.75	0.75	0.6666666666666666
+SRR-level repeated CV	Decision tree	149	1.0	1.0	1.0	1.0
+SRR-level repeated CV	Decision tree	150	0.5	0.5	0.5	0.0
+SRR-level repeated CV	XGBoost	1	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	2	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	3	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	4	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	5	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	6	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	7	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	8	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	9	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	10	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	11	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	12	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	13	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	14	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	XGBoost	15	0.5	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	16	0.3333333333333333	0.5	1.0	0.5
+SRR-level repeated CV	XGBoost	17	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	18	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	19	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	20	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	21	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	22	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	23	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	24	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	25	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	26	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	27	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	28	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	29	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	30	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	31	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	32	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	33	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	34	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	XGBoost	35	0.5	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	36	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	37	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	38	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	39	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	XGBoost	40	0.5	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	41	0.3333333333333333	0.25	0.5	0.0
+SRR-level repeated CV	XGBoost	42	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	43	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	44	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	45	0.5	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	46	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	47	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	48	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	49	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	XGBoost	50	0.5	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	51	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	52	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	53	0.3333333333333333	0.5	1.0	0.5
+SRR-level repeated CV	XGBoost	54	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	XGBoost	55	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	56	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	57	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	58	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	59	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	60	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	61	0.3333333333333333	0.25	0.5	0.0
+SRR-level repeated CV	XGBoost	62	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	63	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	64	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	XGBoost	65	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	66	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	67	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	68	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	69	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	XGBoost	70	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	71	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	72	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	73	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	74	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	XGBoost	75	0.5	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	76	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	77	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	78	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	79	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	80	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	81	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	82	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	83	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	84	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	XGBoost	85	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	86	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	87	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	88	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	89	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	90	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	91	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	92	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	93	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	94	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	95	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	96	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	97	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	98	0.3333333333333333	0.5	1.0	0.5
+SRR-level repeated CV	XGBoost	99	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	100	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	101	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	102	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	103	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	104	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	105	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	106	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	107	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	108	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	109	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	XGBoost	110	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	111	0.3333333333333333	0.5	1.0	0.5
+SRR-level repeated CV	XGBoost	112	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	113	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	114	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	115	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	116	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	117	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	118	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	119	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	XGBoost	120	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	121	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	122	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	123	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	124	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	125	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	126	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	127	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	128	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	129	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	130	0.5	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	131	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	132	0.3333333333333333	0.25	0.5	0.0
+SRR-level repeated CV	XGBoost	133	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	134	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	XGBoost	135	0.5	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	136	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	137	0.6666666666666666	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	138	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	139	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	XGBoost	140	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	141	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	142	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	143	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	144	0.3333333333333333	0.5	1.0	0.0
+SRR-level repeated CV	XGBoost	145	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	146	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	147	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	148	1.0	1.0	1.0	1.0
+SRR-level repeated CV	XGBoost	149	0.6666666666666666	0.75	1.0	0.6666666666666666
+SRR-level repeated CV	XGBoost	150	1.0	1.0	1.0	1.0
+GSM-LOGO global loci	Logistic regression (L2)	1					GSM5364333	0.0	1.0	0.9993640134709607	False
+GSM-LOGO global loci	Logistic regression (L2)	2					GSM5364334	0.0	0.0	0.0008381358313918625	True
+GSM-LOGO global loci	Logistic regression (L2)	3					GSM5364335	0.0	0.0	0.07022353733890804	True
+GSM-LOGO global loci	Logistic regression (L2)	4					GSM5364336	0.0	0.0	0.022700518043935032	True
+GSM-LOGO global loci	Logistic regression (L2)	5					GSM5364337	1.0	1.0	0.9599758013747312	True
+GSM-LOGO global loci	Logistic regression (L2)	6					GSM5364338	1.0	0.0	0.2872828232058069	False
+GSM-LOGO global loci	Logistic regression (L2)	7					GSM5364339	1.0	1.0	0.9940904921831691	True
+GSM-LOGO global loci	Neural network (MLP)	1					GSM5364333	0.0	1.0	0.9975706338882446	False
+GSM-LOGO global loci	Neural network (MLP)	2					GSM5364334	0.0	0.0	0.0045033046044409275	True
+GSM-LOGO global loci	Neural network (MLP)	3					GSM5364335	0.0	0.0	2.102367962337169e-14	True
+GSM-LOGO global loci	Neural network (MLP)	4					GSM5364336	0.0	0.0	0.0	True
+GSM-LOGO global loci	Neural network (MLP)	5					GSM5364337	1.0	1.0	1.0	True
+GSM-LOGO global loci	Neural network (MLP)	6					GSM5364338	1.0	0.0	0.3153924345970154	False
+GSM-LOGO global loci	Neural network (MLP)	7					GSM5364339	1.0	1.0	1.0	True
+GSM-LOGO global loci	Random forest	1					GSM5364333	0.0	1.0	0.774	False
+GSM-LOGO global loci	Random forest	2					GSM5364334	0.0	0.0	0.21	True
+GSM-LOGO global loci	Random forest	3					GSM5364335	0.0	0.0	0.349	True
+GSM-LOGO global loci	Random forest	4					GSM5364336	0.0	0.0	0.279	True
+GSM-LOGO global loci	Random forest	5					GSM5364337	1.0	0.0	0.488	False
+GSM-LOGO global loci	Random forest	6					GSM5364338	1.0	0.0	0.39	False
+GSM-LOGO global loci	Random forest	7					GSM5364339	1.0	1.0	0.529	True
+GSM-LOGO global loci	SVM (RBF)	1					GSM5364333	0.0	1.0	0.9000258214117378	False
+GSM-LOGO global loci	SVM (RBF)	2					GSM5364334	0.0	0.0	0.18372394714317475	True
+GSM-LOGO global loci	SVM (RBF)	3					GSM5364335	0.0	0.0	0.3612020984858689	True
+GSM-LOGO global loci	SVM (RBF)	4					GSM5364336	0.0	0.0	0.22232550708080062	True
+GSM-LOGO global loci	SVM (RBF)	5					GSM5364337	1.0	0.0	0.4112996548559201	False
+GSM-LOGO global loci	SVM (RBF)	6					GSM5364338	1.0	0.0	0.1939816730434619	False
+GSM-LOGO global loci	SVM (RBF)	7					GSM5364339	1.0	0.0	0.43667406733942704	False
+GSM-LOGO global loci	k-nearest neighbours	1					GSM5364333	0.0	1.0	1.0	False
+GSM-LOGO global loci	k-nearest neighbours	2					GSM5364334	0.0	0.0	0.0	True
+GSM-LOGO global loci	k-nearest neighbours	3					GSM5364335	0.0	0.0	0.0	True
+GSM-LOGO global loci	k-nearest neighbours	4					GSM5364336	0.0	0.0	0.0	True
+GSM-LOGO global loci	k-nearest neighbours	5					GSM5364337	1.0	1.0	0.6779872979255539	True
+GSM-LOGO global loci	k-nearest neighbours	6					GSM5364338	1.0	0.0	0.29874349227554153	False
+GSM-LOGO global loci	k-nearest neighbours	7					GSM5364339	1.0	1.0	1.0	True
+GSM-LOGO global loci	Decision tree	1					GSM5364333	0.0	1.0	1.0	False
+GSM-LOGO global loci	Decision tree	2					GSM5364334	0.0	0.0	0.0	True
+GSM-LOGO global loci	Decision tree	3					GSM5364335	0.0	0.0	0.0	True
+GSM-LOGO global loci	Decision tree	4					GSM5364336	0.0	1.0	1.0	False
+GSM-LOGO global loci	Decision tree	5					GSM5364337	1.0	1.0	1.0	True
+GSM-LOGO global loci	Decision tree	6					GSM5364338	1.0	0.0	0.0	False
+GSM-LOGO global loci	Decision tree	7					GSM5364339	1.0	1.0	0.5	True
+GSM-LOGO global loci	XGBoost	1					GSM5364333	0.0	1.0	0.6638209819793701	False
+GSM-LOGO global loci	XGBoost	2					GSM5364334	0.0	0.0	0.22929051518440247	True
+GSM-LOGO global loci	XGBoost	3					GSM5364335	0.0	0.0	0.2458592653274536	True
+GSM-LOGO global loci	XGBoost	4					GSM5364336	0.0	0.0	0.23822784423828125	True
+GSM-LOGO global loci	XGBoost	5					GSM5364337	1.0	1.0	0.5120372176170349	True
+GSM-LOGO global loci	XGBoost	6					GSM5364338	1.0	0.0	0.4043242335319519	False
+GSM-LOGO global loci	XGBoost	7					GSM5364339	1.0	0.0	0.4627900719642639	False
+GSM-LOGO training-only loci	Logistic regression (L2)	1					GSM5364333	0.0	0.0	0.39966154539685195	True
+GSM-LOGO training-only loci	Logistic regression (L2)	2					GSM5364334	0.0	0.0	0.00011729945440655323	True
+GSM-LOGO training-only loci	Logistic regression (L2)	3					GSM5364335	0.0	0.0	0.00196465769847593	True
+GSM-LOGO training-only loci	Logistic regression (L2)	4					GSM5364336	0.0	0.0	0.001570600506587638	True
+GSM-LOGO training-only loci	Logistic regression (L2)	5					GSM5364337	1.0	0.0	0.03802684674343801	False
+GSM-LOGO training-only loci	Logistic regression (L2)	6					GSM5364338	1.0	0.0	0.011137629610601565	False
+GSM-LOGO training-only loci	Logistic regression (L2)	7					GSM5364339	1.0	0.0	0.32345901615952277	False
+GSM-LOGO training-only loci	Neural network (MLP)	1					GSM5364333	0.0	0.0	0.3269754648208618	True
+GSM-LOGO training-only loci	Neural network (MLP)	2					GSM5364334	0.0	0.0	0.002331373281776905	True
+GSM-LOGO training-only loci	Neural network (MLP)	3					GSM5364335	0.0	0.0	4.607373374964849e-14	True
+GSM-LOGO training-only loci	Neural network (MLP)	4					GSM5364336	0.0	0.0	0.0	True
+GSM-LOGO training-only loci	Neural network (MLP)	5					GSM5364337	1.0	0.0	0.027623163536190987	False
+GSM-LOGO training-only loci	Neural network (MLP)	6					GSM5364338	1.0	0.0	6.892745083942589e-19	False
+GSM-LOGO training-only loci	Neural network (MLP)	7					GSM5364339	1.0	0.0	0.05935581028461456	False
+GSM-LOGO training-only loci	Random forest	1					GSM5364333	0.0	0.0	0.372	True
+GSM-LOGO training-only loci	Random forest	2					GSM5364334	0.0	0.0	0.192	True
+GSM-LOGO training-only loci	Random forest	3					GSM5364335	0.0	0.0	0.195	True
+GSM-LOGO training-only loci	Random forest	4					GSM5364336	0.0	0.0	0.21000000000000002	True
+GSM-LOGO training-only loci	Random forest	5					GSM5364337	1.0	0.0	0.23199999999999998	False
+GSM-LOGO training-only loci	Random forest	6					GSM5364338	1.0	0.0	0.20500000000000002	False
+GSM-LOGO training-only loci	Random forest	7					GSM5364339	1.0	0.0	0.275	False
+GSM-LOGO training-only loci	SVM (RBF)	1					GSM5364333	0.0	0.0	0.4854946451671886	True
+GSM-LOGO training-only loci	SVM (RBF)	2					GSM5364334	0.0	0.0	0.1700202001744407	True
+GSM-LOGO training-only loci	SVM (RBF)	3					GSM5364335	0.0	0.0	0.16807842308025472	True
+GSM-LOGO training-only loci	SVM (RBF)	4					GSM5364336	0.0	0.0	0.15018953995055861	True
+GSM-LOGO training-only loci	SVM (RBF)	5					GSM5364337	1.0	0.0	0.2091050196783431	False
+GSM-LOGO training-only loci	SVM (RBF)	6					GSM5364338	1.0	0.0	0.09234735753521844	False
+GSM-LOGO training-only loci	SVM (RBF)	7					GSM5364339	1.0	0.0	0.23786060512362195	False
+GSM-LOGO training-only loci	k-nearest neighbours	1					GSM5364333	0.0	1.0	0.6679483613858889	False
+GSM-LOGO training-only loci	k-nearest neighbours	2					GSM5364334	0.0	0.0	0.0	True
+GSM-LOGO training-only loci	k-nearest neighbours	3					GSM5364335	0.0	0.0	0.0	True
+GSM-LOGO training-only loci	k-nearest neighbours	4					GSM5364336	0.0	0.0	0.0	True
+GSM-LOGO training-only loci	k-nearest neighbours	5					GSM5364337	1.0	0.0	0.0	False
+GSM-LOGO training-only loci	k-nearest neighbours	6					GSM5364338	1.0	0.0	0.0	False
+GSM-LOGO training-only loci	k-nearest neighbours	7					GSM5364339	1.0	0.0	0.0	False
+GSM-LOGO training-only loci	Decision tree	1					GSM5364333	0.0	1.0	1.0	False
+GSM-LOGO training-only loci	Decision tree	2					GSM5364334	0.0	0.0	0.0	True
+GSM-LOGO training-only loci	Decision tree	3					GSM5364335	0.0	0.0	0.0	True
+GSM-LOGO training-only loci	Decision tree	4					GSM5364336	0.0	0.0	0.0	True
+GSM-LOGO training-only loci	Decision tree	5					GSM5364337	1.0	0.0	0.0	False
+GSM-LOGO training-only loci	Decision tree	6					GSM5364338	1.0	1.0	1.0	True
+GSM-LOGO training-only loci	Decision tree	7					GSM5364339	1.0	1.0	0.5	True
+GSM-LOGO training-only loci	XGBoost	1					GSM5364333	0.0	0.0	0.31633973121643066	True
+GSM-LOGO training-only loci	XGBoost	2					GSM5364334	0.0	0.0	0.24947239458560944	True
+GSM-LOGO training-only loci	XGBoost	3					GSM5364335	0.0	0.0	0.23624536395072937	True
+GSM-LOGO training-only loci	XGBoost	4					GSM5364336	0.0	0.0	0.24199995398521423	True
+GSM-LOGO training-only loci	XGBoost	5					GSM5364337	1.0	0.0	0.2696232199668884	False
+GSM-LOGO training-only loci	XGBoost	6					GSM5364338	1.0	0.0	0.27307578921318054	False
+GSM-LOGO training-only loci	XGBoost	7					GSM5364339	1.0	0.0	0.24509041011333466	False

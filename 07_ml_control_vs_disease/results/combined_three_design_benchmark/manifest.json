@@ -1,0 +1,30 @@
+{
+  "analysis": "combined classifier comparison across three validation designs",
+  "combined_input": "early concatenation of expression__ and gatk_variant__ features for every classifier and design",
+  "n_runs": 14,
+  "n_gsm_groups": 7,
+  "n_global_variant_features": 27230,
+  "n_expression_features": 18860,
+  "n_global_combined_features": 46090,
+  "training_only_rule": "within each GSM-LOGO fold, recurrent loci are selected only from training SRRs with support >= 4 and max VAF >= 0.05; gene burden is rebuilt and concatenated with expression",
+  "cv": "RepeatedStratifiedKFold(5 folds x 30 repeats, random_state=42)",
+  "group_cv": "LeaveOneGroupOut(GSM), held-out run probabilities averaged to one GSM prediction",
+  "models": [
+    "Logistic regression (L2)",
+    "Neural network (MLP)",
+    "Random forest",
+    "SVM (RBF)",
+    "k-nearest neighbours",
+    "Decision tree",
+    "XGBoost"
+  ],
+  "inputs": {
+    "combined_matrix": "V:\\! ! ! PAD\\Final version\\results_GATK_primary_2026-05-30\\all_samples_hg38_matched_ref_2026-05-31\\ijms_revision_analysis_2026-06-05\\feature_set_comparison\\combined_gatk_variant_plus_expression_matrix.tsv",
+    "combined_matrix_sha256": "3e4b414e47c4fd64c86c3ae1fc443d85a1ffbf836b12e00e725a1fd6937792ec",
+    "metadata": "V:\\! ! ! PAD\\Final version\\results_GATK_primary_2026-05-30\\all_samples_hg38_matched_ref_2026-05-31\\ijms_revision_analysis_2026-06-05\\metadata.cleaned.tsv",
+    "metadata_sha256": "461d14c288be4d6aed365e4d02af05c36998f2d37ff5d8cdaaf899d02b113f25",
+    "vcf_dir": "V:\\! ! ! PAD\\Final version\\results_GATK_primary_2026-05-30\\all_samples_hg38_matched_ref_2026-05-31\\ijms_revision_analysis_2026-06-05\\input_pass_vcfs",
+    "variant_gene_tsv": "V:\\! ! ! PAD\\Final version\\results_GATK_primary_2026-05-30\\all_samples_hg38_matched_ref_2026-05-31\\ijms_revision_analysis_2026-06-05\\variant_to_gene\\variant_gene_long.tsv",
+    "variant_gene_tsv_sha256": "c5365c46a369ff767d08626c34cb9a29ce46e9a481778bd92e964be026b1dd5e"
+  }
+}

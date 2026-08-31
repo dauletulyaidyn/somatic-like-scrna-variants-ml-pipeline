@@ -1,7 +1,7 @@
 # 07_ml_control_vs_disease: ML classification
 
 Purpose
-- Train and evaluate ML models to classify control (baseline, untreated) vs disease (condition, treated) using gene-burden features.
+- Train and evaluate ML models to classify control (baseline, untreated) vs disease (condition, treated) using gene-burden features or an explicitly declared combined feature matrix.
 
 Inputs
 - Gene-burden matrix (genes x samples) from `06_gene_burden/outputs/artifacts/`.
@@ -57,6 +57,25 @@ Validation design
 - Grouped permutation permutes labels at group level and preserves the number of positive groups.
 - Group-aware validation uses the same leakage-safe Pipeline, with variance filtering and scaling fit inside each run-level or group-held-out fold.
 - If PCA, SelectKBest, model selection, or hyperparameter search is added in future analyses, those steps must be placed inside the fold-level Pipeline or nested inside the training fold.
+
+Combined classifier benchmark across three validation designs
+- `scripts/run_combined_three_design_benchmark.py` compares the same classifier set using **only the combined early-concatenation input** (expression + mutation-derived features).
+- It reports three distinct designs: SRR-level repeated CV, GSM-LOGO with globally formed recurrent loci, and GSM-LOGO with recurrent loci/gene burden rebuilt using only the training SRRs in each fold.
+- In the training-only design, the expression block remains part of the combined input, while the mutation-derived block is reconstructed per fold before concatenation. Model preprocessing is also fit inside each fold.
+- Separate plots are written for every design, plus one three-panel comparison. LOGO bars are aggregate metrics over seven held-out GSM predictions and therefore are not shown with a fabricated fold SD.
+
+Example:
+
+```bash
+python scripts/run_combined_three_design_benchmark.py \
+  --combined-matrix /path/to/combined_gatk_variant_plus_expression_matrix.tsv \
+  --metadata /path/to/metadata.cleaned.tsv \
+  --vcf-dir /path/to/input_pass_vcfs \
+  --variant-gene-tsv /path/to/variant_gene.tsv \
+  --outdir results/combined_three_design_benchmark
+```
+
+The recurrent-locus defaults reproduce the declared PAD branch (`min_samples=4`, `min_vaf=0.05`). The combined matrix is an internal early-fusion comparator, not evidence of independent clinical generalization.
 
 Pre-run checks (manual)
 - Verify OS and environment.
