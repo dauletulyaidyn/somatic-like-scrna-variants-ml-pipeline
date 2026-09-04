@@ -2,6 +2,10 @@
 
 Author: Kunikeyev Aidyn
 
+Current release: **v1.1.0**
+
+Russian usage guide: [`docs/USAGE_RU.md`](docs/USAGE_RU.md)
+
 This repository contains one working pipeline for integrated scRNA-seq expression and mutation analysis.
 
 The canonical workflow is the legacy `01_...12_` stage chain, controlled by one `main_agent`.
@@ -253,8 +257,9 @@ If you do not use the agentic runner, you are responsible for:
 - `docs/AGENTIC_WORKFLOW_REVIEW.md`
 - `TECH_SPEC.md`
 
-## Current Repo State
+## Release Information
 
-This is a working research repo state.
-
-Formal release metadata, publication packaging, and public-distribution polish are intentionally not maintained here yet.
+- Current version: `1.1.0`
+- Changelog: [`CHANGELOG.md`](CHANGELOG.md)
+- Detailed Russian instructions: [`docs/USAGE_RU.md`](docs/USAGE_RU.md)
+- This is a research workflow. RNA-derived variants and internal ML results must not be presented as clinically validated biomarkers without orthogonal and external validation.

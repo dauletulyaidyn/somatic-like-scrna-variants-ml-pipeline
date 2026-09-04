@@ -147,7 +147,9 @@ def main():
             cdna_read = r2
             barcode_read = r1
 
-        out_prefix = Path(args.outdir) / sample_id / ""
+        sample_outdir = Path(args.outdir) / sample_id
+        sample_outdir.mkdir(parents=True, exist_ok=True)
+        out_prefix = str(sample_outdir) + os.sep
         tmp_base = Path(os.environ.get("STAR_TMP_DIR", "/tmp"))
         tmp_dir = tmp_base / f"STARtmp_{sample_id}_{os.getpid()}"
 
@@ -162,7 +164,7 @@ def main():
             "--soloCBlen", cb_len,
             "--soloUMIstart", umi_start,
             "--soloUMIlen", umi_len,
-            "--outFileNamePrefix", str(out_prefix),
+            "--outFileNamePrefix", out_prefix,
             "--outTmpDir", str(tmp_dir),
         ]
         cmd += ["--soloCBwhitelist", whitelist_arg]
@@ -177,7 +179,7 @@ def main():
             print(f"STARsolo failed for {sample_id} (exit {rc})", file=sys.stderr)
             return rc
 
-        bam_path = Path(args.outdir) / sample_id / "Aligned.sortedByCoord.out.bam"
+        bam_path = sample_outdir / "Aligned.sortedByCoord.out.bam"
         if bam_path.exists():
             idx_rc = subprocess.run(["samtools", "index", str(bam_path)]).returncode
             if idx_rc != 0:
@@ -185,7 +187,22 @@ def main():
                 return idx_rc
 
         bai_path = bam_path.with_suffix(bam_path.suffix + ".bai")
-        solo_dir = Path(args.outdir) / sample_id / "Solo.out"
+        solo_dir = sample_outdir / "Solo.out"
+        required_artifacts = [
+            bam_path,
+            bai_path,
+            solo_dir / "Gene" / "raw" / "matrix.mtx",
+            solo_dir / "Gene" / "raw" / "barcodes.tsv",
+            solo_dir / "Gene" / "raw" / "features.tsv",
+        ]
+        invalid_artifacts = [p for p in required_artifacts if not p.is_file() or p.stat().st_size == 0]
+        if invalid_artifacts:
+            print(
+                f"STARsolo artifact validation failed for {sample_id}: "
+                + ", ".join(str(p) for p in invalid_artifacts),
+                file=sys.stderr,
+            )
+            return 3
         rows_out.append(
             {
                 "sample_id": sample_id,

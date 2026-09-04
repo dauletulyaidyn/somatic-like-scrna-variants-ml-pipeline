@@ -15,8 +15,6 @@
                        "--outSAMtype",
                        "BAM",
                        "SortedByCoordinate",
-                       "--outTmpDir",
-                       "/tmp/STARtmp_main",
                        "--soloBarcodeReadLength",
                        "0"
                    ]

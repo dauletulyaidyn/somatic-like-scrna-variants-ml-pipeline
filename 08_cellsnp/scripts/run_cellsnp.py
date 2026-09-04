@@ -56,7 +56,7 @@ def main():
         return 2
 
     for bam in bams:
-        sample_id = bam.stem
+        sample_id = bam.parent.name if bam.name == "Aligned.sortedByCoord.out.bam" else bam.stem
         sample_out = outdir / sample_id
         sample_out.mkdir(parents=True, exist_ok=True)
         sample_barcodes = infer_sample_barcode_file(bam) or whitelist

@@ -50,7 +50,7 @@ def main():
     outdir = Path(args.outdir)
     outdir.mkdir(parents=True, exist_ok=True)
 
-    vcfs = sorted(vcf_dir.glob("*.vcf"))
+    vcfs = sorted(vcf_dir.glob("*.filtered.vcf"))
     if not vcfs:
         print("No VCFs found", file=sys.stderr)
         return 2

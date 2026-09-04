@@ -85,7 +85,7 @@ def main():
     metrics_dir.mkdir(parents=True, exist_ok=True)
 
     for bam in bams:
-        sample_id = bam.stem
+        sample_id = bam.parent.name if bam.name == "Aligned.sortedByCoord.out.bam" else bam.stem
         sample_tmp = tmp_root / sample_id
         sample_tmp.mkdir(parents=True, exist_ok=True)
 
