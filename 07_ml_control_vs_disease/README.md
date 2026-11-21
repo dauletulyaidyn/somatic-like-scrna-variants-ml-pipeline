@@ -59,7 +59,7 @@ Validation design
 - If PCA, SelectKBest, model selection, or hyperparameter search is added in future analyses, those steps must be placed inside the fold-level Pipeline or nested inside the training fold.
 
 Combined classifier benchmark across three validation designs
-- `scripts/run_combined_three_design_benchmark.py` compares the same classifier set using **only the combined early-concatenation input** (expression + mutation-derived features).
+- `scripts/run_combined_three_design_benchmark.py` compares logistic regression, MLP, random forest, RBF SVM, k-nearest neighbours, and XGBoost across mutation-only, expression-only, and combined inputs. Decision tree is intentionally excluded from this confirmatory comparison.
 - It reports three distinct designs: SRR-level repeated CV, GSM-LOGO with globally formed recurrent loci, and GSM-LOGO with recurrent loci/gene burden rebuilt using only the training SRRs in each fold.
 - In the training-only design, the expression block remains part of the combined input, while the mutation-derived block is reconstructed per fold before concatenation. Model preprocessing is also fit inside each fold.
 - Separate plots are written for every design, plus one three-panel comparison. LOGO bars are aggregate metrics over seven held-out GSM predictions and therefore are not shown with a fabricated fold SD.

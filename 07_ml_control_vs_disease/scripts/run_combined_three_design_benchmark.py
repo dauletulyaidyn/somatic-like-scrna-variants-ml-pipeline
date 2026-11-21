@@ -24,7 +24,6 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
-from sklearn.tree import DecisionTreeClassifier
 
 warnings.filterwarnings("ignore", category=UserWarning)
 
@@ -46,7 +45,6 @@ def model_templates(seed: int, jobs: int) -> dict[str, Pipeline]:
         "Random forest": trees(RandomForestClassifier(n_estimators=500, max_features="sqrt", class_weight="balanced", random_state=seed, n_jobs=jobs)),
         "SVM (RBF)": scaled(SVC(kernel="rbf", C=1.0, gamma="scale", probability=True, class_weight="balanced", random_state=seed)),
         "k-nearest neighbours": scaled(KNeighborsClassifier(n_neighbors=3, weights="distance")),
-        "Decision tree": trees(DecisionTreeClassifier(max_depth=3, min_samples_leaf=2, class_weight="balanced", random_state=seed)),
     }
     try:
         import xgboost as xgb
@@ -70,7 +68,7 @@ def read_inputs(matrix_path: Path, metadata_path: Path, positive_label: str):
     x = matrix[samples].T.to_numpy(dtype=np.float32)
     y = (metadata["condition"].astype(str) == positive_label).astype(int).to_numpy()
     groups = metadata["gsm"].astype(str).to_numpy()
-    return x, x[:, expression_mask], y, groups, samples, metadata, int(variant_mask.sum()), int(expression_mask.sum())
+    return x, x[:, variant_mask], x[:, expression_mask], y, groups, samples, metadata, int(variant_mask.sum()), int(expression_mask.sum())
 
 
 def parse_af(parts: list[str]) -> float:
@@ -152,7 +150,7 @@ def metrics(y_true, pred, prob) -> dict[str, float]:
     }
 
 
-def run_srr_cv(x, y, groups, samples, templates, folds: int, repeats: int, seed: int):
+def run_srr_cv(x, y, groups, samples, templates, folds: int, repeats: int, seed: int, feature_set: str):
     splitter = RepeatedStratifiedKFold(n_splits=folds, n_repeats=repeats, random_state=seed)
     summaries, fold_rows, prediction_rows = [], [], []
     for model_name, template in templates.items():
@@ -163,23 +161,27 @@ def run_srr_cv(x, y, groups, samples, templates, folds: int, repeats: int, seed:
             pred, prob = model.predict(x[test]), model.predict_proba(x[test])[:, 1]
             row_metrics = metrics(y[test], pred, prob)
             model_metrics.append(row_metrics)
-            fold_rows.append({"design": "SRR-level repeated CV", "model": model_name, "fold": fold, **row_metrics})
+            fold_rows.append({"feature_set": feature_set, "design": "SRR-level repeated CV", "model": model_name, "fold": fold, **row_metrics})
             for idx, p, pr in zip(test, pred, prob):
-                prediction_rows.append({"design": "SRR-level repeated CV", "model": model_name, "fold": fold, "sample_id": samples[idx], "gsm": groups[idx], "true_label": int(y[idx]), "predicted_label": int(p), "prob_positive": float(pr)})
-        summaries.append({"design": "SRR-level repeated CV", "model": model_name, **{f"{key}_mean": float(np.mean([m[key] for m in model_metrics])) for key in model_metrics[0]}, **{f"{key}_sd": float(np.std([m[key] for m in model_metrics], ddof=1)) for key in model_metrics[0]}, "n_folds": folds * repeats})
+                prediction_rows.append({"feature_set": feature_set, "design": "SRR-level repeated CV", "model": model_name, "fold": fold, "sample_id": samples[idx], "gsm": groups[idx], "true_label": int(y[idx]), "predicted_label": int(p), "prob_positive": float(pr)})
+        summaries.append({"feature_set": feature_set, "design": "SRR-level repeated CV", "model": model_name, **{f"{key}_mean": float(np.mean([m[key] for m in model_metrics])) for key in model_metrics[0]}, **{f"{key}_sd": float(np.std([m[key] for m in model_metrics], ddof=1)) for key in model_metrics[0]}, "n_folds": folds * repeats})
     return summaries, fold_rows, prediction_rows
 
 
-def run_logo(x_global, x_expression, y, groups, samples, metadata, templates, training_only, run_sets=None, run_af=None, variant_gene=None, min_samples=4, min_vaf=0.05):
+def run_logo(x_global, x_expression, y, groups, samples, metadata, templates, training_only, feature_set, run_sets=None, run_af=None, variant_gene=None, min_samples=4, min_vaf=0.05):
     design = "GSM-LOGO training-only loci" if training_only else "GSM-LOGO global loci"
     summaries, fold_rows, prediction_rows, feature_rows = [], [], [], []
     splits = list(LeaveOneGroupOut().split(x_global, y, groups))
     fold_matrices = []
     for fold, (train, test) in enumerate(splits, 1):
         if training_only:
-            train_samples = [samples[idx] for idx in train]
-            x_mutation, n_loci, n_genes = training_only_mutation_matrix(train_samples, samples, run_sets, run_af, variant_gene, min_samples, min_vaf)
-            x_fold = np.hstack([x_mutation, x_expression])
+            if feature_set == "expression-only":
+                x_fold = x_expression
+                n_loci, n_genes = 0, 0
+            else:
+                train_samples = [samples[idx] for idx in train]
+                x_mutation, n_loci, n_genes = training_only_mutation_matrix(train_samples, samples, run_sets, run_af, variant_gene, min_samples, min_vaf)
+                x_fold = x_mutation if feature_set == "mutation-only" else np.hstack([x_mutation, x_expression])
             feature_rows.append({"fold": fold, "heldout_gsm": str(groups[test][0]), "n_training_runs": len(train), "n_recurrent_loci": n_loci, "n_mutation_genes": n_genes, "n_expression_features": x_expression.shape[1], "n_combined_features": x_fold.shape[1]})
         else:
             x_fold = x_global
@@ -195,11 +197,11 @@ def run_logo(x_global, x_expression, y, groups, samples, metadata, templates, tr
             group_pred = int(group_prob >= 0.5)
             group_true = int(y[test][0])
             truth.append(group_true); predictions.append(group_pred); probabilities.append(group_prob)
-            fold_rows.append({"design": design, "model": model_name, "fold": fold, "heldout_gsm": heldout, "true_label": group_true, "predicted_label": group_pred, "prob_positive": group_prob, "correct": group_pred == group_true})
+            fold_rows.append({"feature_set": feature_set, "design": design, "model": model_name, "fold": fold, "heldout_gsm": heldout, "true_label": group_true, "predicted_label": group_pred, "prob_positive": group_prob, "correct": group_pred == group_true})
             for idx, prob in zip(test, run_prob):
-                prediction_rows.append({"design": design, "model": model_name, "fold": fold, "sample_id": samples[idx], "gsm": heldout, "true_label": int(y[idx]), "prob_positive": float(prob)})
+                prediction_rows.append({"feature_set": feature_set, "design": design, "model": model_name, "fold": fold, "sample_id": samples[idx], "gsm": heldout, "true_label": int(y[idx]), "prob_positive": float(prob)})
         result = metrics(np.asarray(truth), np.asarray(predictions), np.asarray(probabilities))
-        summaries.append({"design": design, "model": model_name, **{f"{key}_mean": value for key, value in result.items()}, **{f"{key}_sd": np.nan for key in result}, "n_folds": len(splits)})
+        summaries.append({"feature_set": feature_set, "design": design, "model": model_name, **{f"{key}_mean": value for key, value in result.items()}, **{f"{key}_sd": np.nan for key in result}, "n_folds": len(splits)})
     return summaries, fold_rows, prediction_rows, feature_rows
 
 
@@ -225,6 +227,35 @@ def plot_results(summary: pd.DataFrame, outdir: Path):
         fig.savefig(outdir / f"combined_classifier_{slug}.png", dpi=300, bbox_inches="tight"); plt.close(fig)
 
 
+def plot_feature_results(summary: pd.DataFrame, outdir: Path):
+    designs = ["SRR-level repeated CV", "GSM-LOGO global loci", "GSM-LOGO training-only loci"]
+    labels = ["SRR-level repeated CV", "GSM-LOGO, global loci", "GSM-LOGO, training-only loci"]
+    feature_titles = {"mutation-only": "Mutation-derived only", "expression-only": "Expression only", "combined": "Combined expression + mutation-derived"}
+    feature_colors = {"mutation-only": "#d06b36", "expression-only": "#6b78b4", "combined": "#2a9d8f"}
+    for feature_set, title in feature_titles.items():
+        feature = summary[summary.feature_set == feature_set]
+        order = feature[feature.design == designs[0]].sort_values("balanced_accuracy_mean", ascending=False).model.tolist()
+        fig, axes = plt.subplots(1, 3, figsize=(18, 6.5), sharey=True)
+        for ax, design, label in zip(axes, designs, labels):
+            part = feature[feature.design == design].set_index("model").loc[order].iloc[::-1]
+            errors = part["balanced_accuracy_sd"].to_numpy() if design.startswith("SRR") else None
+            ax.barh(part.index, part["balanced_accuracy_mean"], xerr=errors, color=feature_colors[feature_set])
+            ax.axvline(0.5, color="#8b1e1e", linestyle="--"); ax.set_xlim(0, 1.05); ax.set_title(label)
+            ax.set_xlabel("Balanced accuracy" + (" (mean +/- SD)" if errors is not None else " (7 held-out GSM groups)")); ax.grid(axis="x", alpha=0.2)
+        fig.suptitle(f"Classifier comparison: {title}", fontsize=16); fig.tight_layout()
+        fig.savefig(outdir / f"{feature_set}_classifier_comparison_three_designs.png", dpi=300, bbox_inches="tight"); plt.close(fig)
+    model_order = summary[(summary.feature_set == "combined") & (summary.design == designs[0])].sort_values("balanced_accuracy_mean").model.tolist()
+    for design, label in zip(designs, labels):
+        fig, ax = plt.subplots(figsize=(11, 7)); positions = np.arange(len(model_order)); height = 0.24
+        for offset, feature_set in zip([-height, 0, height], feature_titles):
+            part = summary[(summary.design == design) & (summary.feature_set == feature_set)].set_index("model").loc[model_order]
+            ax.barh(positions + offset, part["balanced_accuracy_mean"], height=height, color=feature_colors[feature_set], label=feature_titles[feature_set])
+        ax.set_yticks(positions, model_order); ax.axvline(0.5, color="#8b1e1e", linestyle="--"); ax.set_xlim(0, 1.05)
+        ax.set_title(label + " — feature-set comparison"); ax.set_xlabel("Balanced accuracy" + (" (mean across 150 folds)" if design.startswith("SRR") else " (7 held-out GSM groups)")); ax.grid(axis="x", alpha=0.2); ax.legend(loc="lower right"); fig.tight_layout()
+        slug = {designs[0]: "srr_cv", designs[1]: "gsm_logo_global", designs[2]: "gsm_logo_training_only"}[design]
+        fig.savefig(outdir / f"feature_sets_{slug}.png", dpi=300, bbox_inches="tight"); plt.close(fig)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--combined-matrix", type=Path, required=True)
@@ -240,24 +271,28 @@ def main() -> int:
     parser.add_argument("--random-state", type=int, default=42)
     parser.add_argument("--jobs", type=int, default=2)
     args = parser.parse_args(); args.outdir.mkdir(parents=True, exist_ok=True)
-    x, x_expression, y, groups, samples, metadata, n_variant, n_expression = read_inputs(args.combined_matrix, args.metadata, args.positive_label)
+    x, x_variant, x_expression, y, groups, samples, metadata, n_variant, n_expression = read_inputs(args.combined_matrix, args.metadata, args.positive_label)
     run_sets, run_af = load_run_loci(args.vcf_dir, samples)
     variant_gene = load_variant_gene(args.variant_gene_tsv)
     templates = model_templates(args.random_state, args.jobs)
-    summaries, folds, predictions = [], [], []
-    s, f, p = run_srr_cv(x, y, groups, samples, templates, args.cv_folds, args.cv_repeats, args.random_state); summaries += s; folds += f; predictions += p
-    s, f, p, _ = run_logo(x, x_expression, y, groups, samples, metadata, templates, False); summaries += s; folds += f; predictions += p
-    s, f, p, feature_rows = run_logo(x, x_expression, y, groups, samples, metadata, templates, True, run_sets, run_af, variant_gene, args.min_samples, args.min_vaf); summaries += s; folds += f; predictions += p
+    summaries, folds, predictions, feature_rows = [], [], [], []
+    feature_matrices = {"mutation-only": x_variant, "expression-only": x_expression, "combined": x}
+    for feature_set, matrix in feature_matrices.items():
+        s, f, p = run_srr_cv(matrix, y, groups, samples, templates, args.cv_folds, args.cv_repeats, args.random_state, feature_set); summaries += s; folds += f; predictions += p
+        s, f, p, _ = run_logo(matrix, x_expression, y, groups, samples, metadata, templates, False, feature_set); summaries += s; folds += f; predictions += p
+        s, f, p, counts = run_logo(matrix, x_expression, y, groups, samples, metadata, templates, True, feature_set, run_sets, run_af, variant_gene, args.min_samples, args.min_vaf); summaries += s; folds += f; predictions += p
+        for row in counts: row["feature_set"] = feature_set
+        feature_rows += counts
     summary_df = pd.DataFrame(summaries)
-    summary_df.to_csv(args.outdir / "combined_three_design_model_comparison.tsv", sep="\t", index=False)
-    summary_df.to_csv(args.outdir / "combined_three_design_model_comparison.csv", index=False)
+    summary_df.to_csv(args.outdir / "feature_set_three_design_model_comparison.tsv", sep="\t", index=False)
+    summary_df.to_csv(args.outdir / "feature_set_three_design_model_comparison.csv", index=False)
     pd.DataFrame(folds).to_csv(args.outdir / "fold_and_group_metrics.tsv", sep="\t", index=False)
     pd.DataFrame(predictions).to_csv(args.outdir / "predictions.tsv", sep="\t", index=False)
     pd.DataFrame(feature_rows).to_csv(args.outdir / "training_only_feature_counts.tsv", sep="\t", index=False)
-    manifest = {"analysis": "combined classifier comparison across three validation designs", "combined_input": "early concatenation of expression__ and gatk_variant__ features for every classifier and design", "n_runs": len(samples), "n_gsm_groups": len(set(groups)), "n_global_variant_features": n_variant, "n_expression_features": n_expression, "n_global_combined_features": x.shape[1], "training_only_rule": f"within each GSM-LOGO fold, recurrent loci are selected only from training SRRs with support >= {args.min_samples} and max VAF >= {args.min_vaf}; gene burden is rebuilt and concatenated with expression", "cv": f"RepeatedStratifiedKFold({args.cv_folds} folds x {args.cv_repeats} repeats, random_state={args.random_state})", "group_cv": "LeaveOneGroupOut(GSM), held-out run probabilities averaged to one GSM prediction", "models": list(templates), "inputs": {"combined_matrix": str(args.combined_matrix.resolve()), "combined_matrix_sha256": sha256(args.combined_matrix), "metadata": str(args.metadata.resolve()), "metadata_sha256": sha256(args.metadata), "vcf_dir": str(args.vcf_dir.resolve()), "variant_gene_tsv": str(args.variant_gene_tsv.resolve()), "variant_gene_tsv_sha256": sha256(args.variant_gene_tsv)}}
+    manifest = {"analysis": "three feature sets across three validation designs", "feature_sets": list(feature_matrices), "n_runs": len(samples), "n_gsm_groups": len(set(groups)), "n_global_variant_features": n_variant, "n_expression_features": n_expression, "n_global_combined_features": x.shape[1], "training_only_rule": f"within each GSM-LOGO fold, recurrent loci are selected only from training SRRs with support >= {args.min_samples} and max VAF >= {args.min_vaf}; gene burden is rebuilt; expression-only is unchanged; combined concatenates both blocks", "cv": f"RepeatedStratifiedKFold({args.cv_folds} folds x {args.cv_repeats} repeats, random_state={args.random_state})", "group_cv": "LeaveOneGroupOut(GSM), held-out run probabilities averaged to one GSM prediction", "models": list(templates), "inputs": {"combined_matrix": str(args.combined_matrix.resolve()), "combined_matrix_sha256": sha256(args.combined_matrix), "metadata": str(args.metadata.resolve()), "metadata_sha256": sha256(args.metadata), "vcf_dir": str(args.vcf_dir.resolve()), "variant_gene_tsv": str(args.variant_gene_tsv.resolve()), "variant_gene_tsv_sha256": sha256(args.variant_gene_tsv)}}
     (args.outdir / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
-    plot_results(summary_df, args.outdir)
-    print(summary_df[["design", "model", "balanced_accuracy_mean", "roc_auc_mean"]].to_string(index=False)); return 0
+    plot_feature_results(summary_df, args.outdir)
+    print(summary_df[["feature_set", "design", "model", "balanced_accuracy_mean", "roc_auc_mean"]].to_string(index=False)); return 0
 
 
 if __name__ == "__main__":

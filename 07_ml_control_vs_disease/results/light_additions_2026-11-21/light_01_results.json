@@ -1,0 +1,108 @@
+{
+  "identity_Skin1_vs_W2": {
+    "cross_jaccard": [
+      0.14628285693196058,
+      0.14516770833764203,
+      0.14574355152801896,
+      0.1447161486908345
+    ],
+    "between_donor_jaccard_range": [
+      0.04754217944567693,
+      0.14628285693196058
+    ],
+    "between_donor_jaccard_mean": 0.07239197372992937,
+    "within_donor_jaccard_range": [
+      0.18742319680732786,
+      0.25707813632965537
+    ],
+    "cross_jaccard_percentile_among_between": 0.9761904761904762,
+    "cross_genotype_concordance": [
+      0.9080366128336608,
+      0.9074071963437012,
+      0.9075836981843048,
+      0.9076536740444733
+    ],
+    "between_gc_range": [
+      0.7571774595711335,
+      0.9080366128336608
+    ],
+    "within_gc_range": [
+      0.9018025331210258,
+      0.9284253830110673
+    ]
+  },
+  "coverage_condition_exact": {
+    "n_pass": {
+      "wound_minus_unwounded": 362343.66666666674,
+      "p_two_sided_exact": 0.17142857142857143
+    },
+    "calls_per_gb": {
+      "wound_minus_unwounded": 22985.275309301614,
+      "p_two_sided_exact": 0.08571428571428572
+    }
+  },
+  "runtime_vs_bam": {
+    "spearman_rho_HC_vs_bam": 0.6373626373626374,
+    "p": 0.0191181137774633
+  },
+  "storage": {
+    "pass_vcf_total_gb": 3.391838579,
+    "bam_total_gb_unique_runs": 245.289055298,
+    "cohort_vcf_gb": 0.180016029
+  },
+  "union_pass_loci": 9528556,
+  "donor_structure": [
+    {
+      "measure": "PASS-locus Jaccard",
+      "within": 0.22422837075063112,
+      "between_same": 0.06921605601722053,
+      "between_diff": 0.07477391201446097,
+      "between_all": 0.07239197372992937,
+      "donor_effect": 0.15183639702070176,
+      "p_donor_perm": 9.999000099990002e-05,
+      "condition_effect": -0.0055578559972404434,
+      "p_condition_exact": 0.7142857142857143,
+      "n_relabelings": 35,
+      "nn_donor_id_acc": 1.0
+    },
+    {
+      "measure": "Genotype concordance (shared loci)",
+      "within": 0.9188184631185683,
+      "between_same": 0.7940836989779501,
+      "between_diff": 0.7941811476021016,
+      "between_all": 0.7941393839060366,
+      "donor_effect": 0.12467907921253174,
+      "p_donor_perm": 9.999000099990002e-05,
+      "condition_effect": -9.744862415150823e-05,
+      "p_condition_exact": 0.5142857142857142,
+      "n_relabelings": 35,
+      "nn_donor_id_acc": 1.0
+    },
+    {
+      "measure": "Gene-burden Spearman (cohort filter)",
+      "within": 0.9282095595441848,
+      "between_same": 0.8336995413545284,
+      "between_diff": 0.8367908839849401,
+      "between_all": 0.8354660228576207,
+      "donor_effect": 0.0927435366865641,
+      "p_donor_perm": 9.999000099990002e-05,
+      "condition_effect": -0.0030913426304116642,
+      "p_condition_exact": 0.6,
+      "n_relabelings": 35,
+      "nn_donor_id_acc": 1.0
+    },
+    {
+      "measure": "Expression Pearson (log1p CPM)",
+      "within": 0.4820663580331198,
+      "between_same": 0.1108568331175292,
+      "between_diff": 0.11667085220164296,
+      "between_all": 0.11417912973702278,
+      "donor_effect": 0.36788722829609705,
+      "p_donor_perm": 9.999000099990002e-05,
+      "condition_effect": -0.005814019084113761,
+      "p_condition_exact": 0.5714285714285714,
+      "n_relabelings": 35,
+      "nn_donor_id_acc": 1.0
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+step	n_runs_logged	median_min	min_min	max_min	total_hours
+AddOrReplaceReadGroups	12	30.575000000000003	21.7	38.72	6.062
+SplitNCigarReads	14	363.975	220.52	446.87	81.31249999999999
+HaplotypeCaller	14	337.0	187.16	591.59	82.27883333333332
+VariantFiltration	14	0.33	0.13	0.62	0.076
+SelectVariants	14	0.235	0.12	0.41	0.05683333333333333

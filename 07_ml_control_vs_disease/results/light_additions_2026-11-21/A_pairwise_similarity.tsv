@@ -1,0 +1,365 @@
+measure	run_a	run_b	title_a	title_b	pair_class	value
+PASS-locus Jaccard	SRR14762238	SRR14762239	Sc_Skin1	Sc_Skin1	within donor	0.2558505037839164
+PASS-locus Jaccard	SRR14762238	SRR14762240	Sc_Skin1	Sc_Skin2	between donors, same condition	0.053919643298879556
+PASS-locus Jaccard	SRR14762238	SRR14762241	Sc_Skin1	Sc_Skin2	between donors, same condition	0.05374504706862176
+PASS-locus Jaccard	SRR14762238	SRR14762242	Sc_Skin1	Sc_Skin3	between donors, same condition	0.07121433352742508
+PASS-locus Jaccard	SRR14762238	SRR14762243	Sc_Skin1	Sc_Skin3	between donors, same condition	0.07116404522905406
+PASS-locus Jaccard	SRR14762238	SRR14762244	Sc_Skin1	Sc_Skin4	between donors, same condition	0.049656460566590226
+PASS-locus Jaccard	SRR14762238	SRR14762245	Sc_Skin1	Sc_Skin4	between donors, same condition	0.049288460390556434
+PASS-locus Jaccard	SRR14762238	SRR14762246	Sc_Skin1	Sc_W1	between donors, different condition	0.08607687771759392
+PASS-locus Jaccard	SRR14762238	SRR14762247	Sc_Skin1	Sc_W1	between donors, different condition	0.08611043070636533
+PASS-locus Jaccard	SRR14762238	SRR14762248	Sc_Skin1	Sc_W2	between donors, different condition	0.14628285693196058
+PASS-locus Jaccard	SRR14762238	SRR14762250	Sc_Skin1	Sc_W2	between donors, different condition	0.14516770833764203
+PASS-locus Jaccard	SRR14762238	SRR14762251	Sc_Skin1	Sc_W3	between donors, different condition	0.07855816641122133
+PASS-locus Jaccard	SRR14762238	SRR14762252	Sc_Skin1	Sc_W3	between donors, different condition	0.07871145012801956
+PASS-locus Jaccard	SRR14762239	SRR14762240	Sc_Skin1	Sc_Skin2	between donors, same condition	0.05377472041079764
+PASS-locus Jaccard	SRR14762239	SRR14762241	Sc_Skin1	Sc_Skin2	between donors, same condition	0.053761789021013126
+PASS-locus Jaccard	SRR14762239	SRR14762242	Sc_Skin1	Sc_Skin3	between donors, same condition	0.07132106640136229
+PASS-locus Jaccard	SRR14762239	SRR14762243	Sc_Skin1	Sc_Skin3	between donors, same condition	0.0711159895373327
+PASS-locus Jaccard	SRR14762239	SRR14762244	Sc_Skin1	Sc_Skin4	between donors, same condition	0.04951777394385858
+PASS-locus Jaccard	SRR14762239	SRR14762245	Sc_Skin1	Sc_Skin4	between donors, same condition	0.04947351317082786
+PASS-locus Jaccard	SRR14762239	SRR14762246	Sc_Skin1	Sc_W1	between donors, different condition	0.08584512692355904
+PASS-locus Jaccard	SRR14762239	SRR14762247	Sc_Skin1	Sc_W1	between donors, different condition	0.08550188947599084
+PASS-locus Jaccard	SRR14762239	SRR14762248	Sc_Skin1	Sc_W2	between donors, different condition	0.14574355152801896
+PASS-locus Jaccard	SRR14762239	SRR14762250	Sc_Skin1	Sc_W2	between donors, different condition	0.1447161486908345
+PASS-locus Jaccard	SRR14762239	SRR14762251	Sc_Skin1	Sc_W3	between donors, different condition	0.07841819231536663
+PASS-locus Jaccard	SRR14762239	SRR14762252	Sc_Skin1	Sc_W3	between donors, different condition	0.07830040406493809
+PASS-locus Jaccard	SRR14762240	SRR14762241	Sc_Skin2	Sc_Skin2	within donor	0.18742319680732786
+PASS-locus Jaccard	SRR14762240	SRR14762242	Sc_Skin2	Sc_Skin3	between donors, same condition	0.06442343261401877
+PASS-locus Jaccard	SRR14762240	SRR14762243	Sc_Skin2	Sc_Skin3	between donors, same condition	0.06447649285188972
+PASS-locus Jaccard	SRR14762240	SRR14762244	Sc_Skin2	Sc_Skin4	between donors, same condition	0.05883989124640604
+PASS-locus Jaccard	SRR14762240	SRR14762245	Sc_Skin2	Sc_Skin4	between donors, same condition	0.058893856496113194
+PASS-locus Jaccard	SRR14762240	SRR14762246	Sc_Skin2	Sc_W1	between donors, different condition	0.0477413493288525
+PASS-locus Jaccard	SRR14762240	SRR14762247	Sc_Skin2	Sc_W1	between donors, different condition	0.047602267823973296
+PASS-locus Jaccard	SRR14762240	SRR14762248	Sc_Skin2	Sc_W2	between donors, different condition	0.06631261670136065
+PASS-locus Jaccard	SRR14762240	SRR14762250	Sc_Skin2	Sc_W2	between donors, different condition	0.06623499235331021
+PASS-locus Jaccard	SRR14762240	SRR14762251	Sc_Skin2	Sc_W3	between donors, different condition	0.0633171663494377
+PASS-locus Jaccard	SRR14762240	SRR14762252	Sc_Skin2	Sc_W3	between donors, different condition	0.06292046149989725
+PASS-locus Jaccard	SRR14762241	SRR14762242	Sc_Skin2	Sc_Skin3	between donors, same condition	0.06463244533520932
+PASS-locus Jaccard	SRR14762241	SRR14762243	Sc_Skin2	Sc_Skin3	between donors, same condition	0.06459636084059457
+PASS-locus Jaccard	SRR14762241	SRR14762244	Sc_Skin2	Sc_Skin4	between donors, same condition	0.05878082544814931
+PASS-locus Jaccard	SRR14762241	SRR14762245	Sc_Skin2	Sc_Skin4	between donors, same condition	0.05869678224621501
+PASS-locus Jaccard	SRR14762241	SRR14762246	Sc_Skin2	Sc_W1	between donors, different condition	0.04770082688466842
+PASS-locus Jaccard	SRR14762241	SRR14762247	Sc_Skin2	Sc_W1	between donors, different condition	0.04754217944567693
+PASS-locus Jaccard	SRR14762241	SRR14762248	Sc_Skin2	Sc_W2	between donors, different condition	0.06596248481709059
+PASS-locus Jaccard	SRR14762241	SRR14762250	Sc_Skin2	Sc_W2	between donors, different condition	0.06616897568996918
+PASS-locus Jaccard	SRR14762241	SRR14762251	Sc_Skin2	Sc_W3	between donors, different condition	0.06278604855014068
+PASS-locus Jaccard	SRR14762241	SRR14762252	Sc_Skin2	Sc_W3	between donors, different condition	0.06278951617000378
+PASS-locus Jaccard	SRR14762242	SRR14762243	Sc_Skin3	Sc_Skin3	within donor	0.2184183853123802
+PASS-locus Jaccard	SRR14762242	SRR14762244	Sc_Skin3	Sc_Skin4	between donors, same condition	0.06115195444660078
+PASS-locus Jaccard	SRR14762242	SRR14762245	Sc_Skin3	Sc_Skin4	between donors, same condition	0.060977847372441496
+PASS-locus Jaccard	SRR14762242	SRR14762246	Sc_Skin3	Sc_W1	between donors, different condition	0.06352203194308458
+PASS-locus Jaccard	SRR14762242	SRR14762247	Sc_Skin3	Sc_W1	between donors, different condition	0.063642694779666
+PASS-locus Jaccard	SRR14762242	SRR14762248	Sc_Skin3	Sc_W2	between donors, different condition	0.08544553036388364
+PASS-locus Jaccard	SRR14762242	SRR14762250	Sc_Skin3	Sc_W2	between donors, different condition	0.08529363831493406
+PASS-locus Jaccard	SRR14762242	SRR14762251	Sc_Skin3	Sc_W3	between donors, different condition	0.07739197205479122
+PASS-locus Jaccard	SRR14762242	SRR14762252	Sc_Skin3	Sc_W3	between donors, different condition	0.07753413157635333
+PASS-locus Jaccard	SRR14762243	SRR14762244	Sc_Skin3	Sc_Skin4	between donors, same condition	0.06145747955286609
+PASS-locus Jaccard	SRR14762243	SRR14762245	Sc_Skin3	Sc_Skin4	between donors, same condition	0.061154831325957816
+PASS-locus Jaccard	SRR14762243	SRR14762246	Sc_Skin3	Sc_W1	between donors, different condition	0.06369225257677745
+PASS-locus Jaccard	SRR14762243	SRR14762247	Sc_Skin3	Sc_W1	between donors, different condition	0.06332403265221405
+PASS-locus Jaccard	SRR14762243	SRR14762248	Sc_Skin3	Sc_W2	between donors, different condition	0.08536845731139069
+PASS-locus Jaccard	SRR14762243	SRR14762250	Sc_Skin3	Sc_W2	between donors, different condition	0.08487637025476202
+PASS-locus Jaccard	SRR14762243	SRR14762251	Sc_Skin3	Sc_W3	between donors, different condition	0.07787547476700636
+PASS-locus Jaccard	SRR14762243	SRR14762252	Sc_Skin3	Sc_W3	between donors, different condition	0.07788031391158648
+PASS-locus Jaccard	SRR14762244	SRR14762245	Sc_Skin4	Sc_Skin4	within donor	0.25707813632965537
+PASS-locus Jaccard	SRR14762244	SRR14762246	Sc_Skin4	Sc_W1	between donors, different condition	0.053598956069363664
+PASS-locus Jaccard	SRR14762244	SRR14762247	Sc_Skin4	Sc_W1	between donors, different condition	0.053398920102215384
+PASS-locus Jaccard	SRR14762244	SRR14762248	Sc_Skin4	Sc_W2	between donors, different condition	0.06441037503762882
+PASS-locus Jaccard	SRR14762244	SRR14762250	Sc_Skin4	Sc_W2	between donors, different condition	0.0642577089763976
+PASS-locus Jaccard	SRR14762244	SRR14762251	Sc_Skin4	Sc_W3	between donors, different condition	0.06634411779189442
+PASS-locus Jaccard	SRR14762244	SRR14762252	Sc_Skin4	Sc_W3	between donors, different condition	0.06656490396554887
+PASS-locus Jaccard	SRR14762245	SRR14762246	Sc_Skin4	Sc_W1	between donors, different condition	0.05345526763825752
+PASS-locus Jaccard	SRR14762245	SRR14762247	Sc_Skin4	Sc_W1	between donors, different condition	0.05354025887247136
+PASS-locus Jaccard	SRR14762245	SRR14762248	Sc_Skin4	Sc_W2	between donors, different condition	0.06443127129020136
+PASS-locus Jaccard	SRR14762245	SRR14762250	Sc_Skin4	Sc_W2	between donors, different condition	0.06421279811866613
+PASS-locus Jaccard	SRR14762245	SRR14762251	Sc_Skin4	Sc_W3	between donors, different condition	0.06638381342523354
+PASS-locus Jaccard	SRR14762245	SRR14762252	Sc_Skin4	Sc_W3	between donors, different condition	0.06619079605390621
+PASS-locus Jaccard	SRR14762246	SRR14762247	Sc_W1	Sc_W1	within donor	0.21899168308008088
+PASS-locus Jaccard	SRR14762246	SRR14762248	Sc_W1	Sc_W2	between donors, same condition	0.08141707540567696
+PASS-locus Jaccard	SRR14762246	SRR14762250	Sc_W1	Sc_W2	between donors, same condition	0.0802852878797378
+PASS-locus Jaccard	SRR14762246	SRR14762251	Sc_W1	Sc_W3	between donors, same condition	0.0866685405308301
+PASS-locus Jaccard	SRR14762246	SRR14762252	Sc_W1	Sc_W3	between donors, same condition	0.08663534312120015
+PASS-locus Jaccard	SRR14762247	SRR14762248	Sc_W1	Sc_W2	between donors, same condition	0.08111819843027132
+PASS-locus Jaccard	SRR14762247	SRR14762250	Sc_W1	Sc_W2	between donors, same condition	0.08047409513639978
+PASS-locus Jaccard	SRR14762247	SRR14762251	Sc_W1	Sc_W3	between donors, same condition	0.08674283732490704
+PASS-locus Jaccard	SRR14762247	SRR14762252	Sc_W1	Sc_W3	between donors, same condition	0.08648891587563062
+PASS-locus Jaccard	SRR14762248	SRR14762250	Sc_W2	Sc_W2	within donor	0.23215814526899764
+PASS-locus Jaccard	SRR14762248	SRR14762251	Sc_W2	Sc_W3	between donors, same condition	0.09661658159468492
+PASS-locus Jaccard	SRR14762248	SRR14762252	Sc_W2	Sc_W3	between donors, same condition	0.09670505564975686
+PASS-locus Jaccard	SRR14762250	SRR14762251	Sc_W2	Sc_W3	between donors, same condition	0.09636534306046714
+PASS-locus Jaccard	SRR14762250	SRR14762252	Sc_W2	Sc_W3	between donors, same condition	0.0962257002675953
+PASS-locus Jaccard	SRR14762251	SRR14762252	Sc_W3	Sc_W3	within donor	0.19967854467205945
+Genotype concordance (shared loci)	SRR14762238	SRR14762239	Sc_Skin1	Sc_Skin1	within donor	0.9226394803344132
+Genotype concordance (shared loci)	SRR14762238	SRR14762240	Sc_Skin1	Sc_Skin2	between donors, same condition	0.7611254154768036
+Genotype concordance (shared loci)	SRR14762238	SRR14762241	Sc_Skin1	Sc_Skin2	between donors, same condition	0.7612066455666482
+Genotype concordance (shared loci)	SRR14762238	SRR14762242	Sc_Skin1	Sc_Skin3	between donors, same condition	0.7921466403819205
+Genotype concordance (shared loci)	SRR14762238	SRR14762243	Sc_Skin1	Sc_Skin3	between donors, same condition	0.7904434059858024
+Genotype concordance (shared loci)	SRR14762238	SRR14762244	Sc_Skin1	Sc_Skin4	between donors, same condition	0.7571774595711335
+Genotype concordance (shared loci)	SRR14762238	SRR14762245	Sc_Skin1	Sc_Skin4	between donors, same condition	0.7577081445731253
+Genotype concordance (shared loci)	SRR14762238	SRR14762246	Sc_Skin1	Sc_W1	between donors, different condition	0.812725979243388
+Genotype concordance (shared loci)	SRR14762238	SRR14762247	Sc_Skin1	Sc_W1	between donors, different condition	0.8128342245989305
+Genotype concordance (shared loci)	SRR14762238	SRR14762248	Sc_Skin1	Sc_W2	between donors, different condition	0.9080366128336608
+Genotype concordance (shared loci)	SRR14762238	SRR14762250	Sc_Skin1	Sc_W2	between donors, different condition	0.9074071963437012
+Genotype concordance (shared loci)	SRR14762238	SRR14762251	Sc_Skin1	Sc_W3	between donors, different condition	0.7921260786193672
+Genotype concordance (shared loci)	SRR14762238	SRR14762252	Sc_Skin1	Sc_W3	between donors, different condition	0.793555967102774
+Genotype concordance (shared loci)	SRR14762239	SRR14762240	Sc_Skin1	Sc_Skin2	between donors, same condition	0.7605385478442058
+Genotype concordance (shared loci)	SRR14762239	SRR14762241	Sc_Skin1	Sc_Skin2	between donors, same condition	0.7616631616669338
+Genotype concordance (shared loci)	SRR14762239	SRR14762242	Sc_Skin1	Sc_Skin3	between donors, same condition	0.7923468325051328
+Genotype concordance (shared loci)	SRR14762239	SRR14762243	Sc_Skin1	Sc_Skin3	between donors, same condition	0.7909016545160347
+Genotype concordance (shared loci)	SRR14762239	SRR14762244	Sc_Skin1	Sc_Skin4	between donors, same condition	0.7599652214443857
+Genotype concordance (shared loci)	SRR14762239	SRR14762245	Sc_Skin1	Sc_Skin4	between donors, same condition	0.7606112816095049
+Genotype concordance (shared loci)	SRR14762239	SRR14762246	Sc_Skin1	Sc_W1	between donors, different condition	0.8125357683891601
+Genotype concordance (shared loci)	SRR14762239	SRR14762247	Sc_Skin1	Sc_W1	between donors, different condition	0.8134387351778656
+Genotype concordance (shared loci)	SRR14762239	SRR14762248	Sc_Skin1	Sc_W2	between donors, different condition	0.9075836981843048
+Genotype concordance (shared loci)	SRR14762239	SRR14762250	Sc_Skin1	Sc_W2	between donors, different condition	0.9076536740444733
+Genotype concordance (shared loci)	SRR14762239	SRR14762251	Sc_Skin1	Sc_W3	between donors, different condition	0.7908369133175412
+Genotype concordance (shared loci)	SRR14762239	SRR14762252	Sc_Skin1	Sc_W3	between donors, different condition	0.7925030241884885
+Genotype concordance (shared loci)	SRR14762240	SRR14762241	Sc_Skin2	Sc_Skin2	within donor	0.9018025331210258
+Genotype concordance (shared loci)	SRR14762240	SRR14762242	Sc_Skin2	Sc_Skin3	between donors, same condition	0.7891557886789454
+Genotype concordance (shared loci)	SRR14762240	SRR14762243	Sc_Skin2	Sc_Skin3	between donors, same condition	0.7888838105836298
+Genotype concordance (shared loci)	SRR14762240	SRR14762244	Sc_Skin2	Sc_Skin4	between donors, same condition	0.8161875583427081
+Genotype concordance (shared loci)	SRR14762240	SRR14762245	Sc_Skin2	Sc_Skin4	between donors, same condition	0.8164962019259525
+Genotype concordance (shared loci)	SRR14762240	SRR14762246	Sc_Skin2	Sc_W1	between donors, different condition	0.7657615257115963
+Genotype concordance (shared loci)	SRR14762240	SRR14762247	Sc_Skin2	Sc_W1	between donors, different condition	0.7664542442008667
+Genotype concordance (shared loci)	SRR14762240	SRR14762248	Sc_Skin2	Sc_W2	between donors, different condition	0.7722277890517771
+Genotype concordance (shared loci)	SRR14762240	SRR14762250	Sc_Skin2	Sc_W2	between donors, different condition	0.7713343282569617
+Genotype concordance (shared loci)	SRR14762240	SRR14762251	Sc_Skin2	Sc_W3	between donors, different condition	0.763149428985041
+Genotype concordance (shared loci)	SRR14762240	SRR14762252	Sc_Skin2	Sc_W3	between donors, different condition	0.7663595007581944
+Genotype concordance (shared loci)	SRR14762241	SRR14762242	Sc_Skin2	Sc_Skin3	between donors, same condition	0.7899355247650269
+Genotype concordance (shared loci)	SRR14762241	SRR14762243	Sc_Skin2	Sc_Skin3	between donors, same condition	0.78885560691119
+Genotype concordance (shared loci)	SRR14762241	SRR14762244	Sc_Skin2	Sc_Skin4	between donors, same condition	0.8150313252434744
+Genotype concordance (shared loci)	SRR14762241	SRR14762245	Sc_Skin2	Sc_Skin4	between donors, same condition	0.8156388378874608
+Genotype concordance (shared loci)	SRR14762241	SRR14762246	Sc_Skin2	Sc_W1	between donors, different condition	0.769360734801708
+Genotype concordance (shared loci)	SRR14762241	SRR14762247	Sc_Skin2	Sc_W1	between donors, different condition	0.7678369080310748
+Genotype concordance (shared loci)	SRR14762241	SRR14762248	Sc_Skin2	Sc_W2	between donors, different condition	0.7713398380313274
+Genotype concordance (shared loci)	SRR14762241	SRR14762250	Sc_Skin2	Sc_W2	between donors, different condition	0.7714942879937533
+Genotype concordance (shared loci)	SRR14762241	SRR14762251	Sc_Skin2	Sc_W3	between donors, different condition	0.7672824549868046
+Genotype concordance (shared loci)	SRR14762241	SRR14762252	Sc_Skin2	Sc_W3	between donors, different condition	0.7655419802033606
+Genotype concordance (shared loci)	SRR14762242	SRR14762243	Sc_Skin3	Sc_Skin3	within donor	0.914415881108755
+Genotype concordance (shared loci)	SRR14762242	SRR14762244	Sc_Skin3	Sc_Skin4	between donors, same condition	0.8004789289084338
+Genotype concordance (shared loci)	SRR14762242	SRR14762245	Sc_Skin3	Sc_Skin4	between donors, same condition	0.8007875281260045
+Genotype concordance (shared loci)	SRR14762242	SRR14762246	Sc_Skin3	Sc_W1	between donors, different condition	0.7885712808515314
+Genotype concordance (shared loci)	SRR14762242	SRR14762247	Sc_Skin3	Sc_W1	between donors, different condition	0.7887825634903826
+Genotype concordance (shared loci)	SRR14762242	SRR14762248	Sc_Skin3	Sc_W2	between donors, different condition	0.8056556351397998
+Genotype concordance (shared loci)	SRR14762242	SRR14762250	Sc_Skin3	Sc_W2	between donors, different condition	0.807412755193434
+Genotype concordance (shared loci)	SRR14762242	SRR14762251	Sc_Skin3	Sc_W3	between donors, different condition	0.790224361853096
+Genotype concordance (shared loci)	SRR14762242	SRR14762252	Sc_Skin3	Sc_W3	between donors, different condition	0.7912055772421779
+Genotype concordance (shared loci)	SRR14762243	SRR14762244	Sc_Skin3	Sc_Skin4	between donors, same condition	0.802434980004079
+Genotype concordance (shared loci)	SRR14762243	SRR14762245	Sc_Skin3	Sc_Skin4	between donors, same condition	0.8014312067229287
+Genotype concordance (shared loci)	SRR14762243	SRR14762246	Sc_Skin3	Sc_W1	between donors, different condition	0.7890408308069405
+Genotype concordance (shared loci)	SRR14762243	SRR14762247	Sc_Skin3	Sc_W1	between donors, different condition	0.7883988773107075
+Genotype concordance (shared loci)	SRR14762243	SRR14762248	Sc_Skin3	Sc_W2	between donors, different condition	0.8051012250718407
+Genotype concordance (shared loci)	SRR14762243	SRR14762250	Sc_Skin3	Sc_W2	between donors, different condition	0.8053592766995323
+Genotype concordance (shared loci)	SRR14762243	SRR14762251	Sc_Skin3	Sc_W3	between donors, different condition	0.7900907287490394
+Genotype concordance (shared loci)	SRR14762243	SRR14762252	Sc_Skin3	Sc_W3	between donors, different condition	0.7897989531287176
+Genotype concordance (shared loci)	SRR14762244	SRR14762245	Sc_Skin4	Sc_Skin4	within donor	0.9217684100052476
+Genotype concordance (shared loci)	SRR14762244	SRR14762246	Sc_Skin4	Sc_W1	between donors, different condition	0.7811944112034671
+Genotype concordance (shared loci)	SRR14762244	SRR14762247	Sc_Skin4	Sc_W1	between donors, different condition	0.7831935892573255
+Genotype concordance (shared loci)	SRR14762244	SRR14762248	Sc_Skin4	Sc_W2	between donors, different condition	0.7710746351779518
+Genotype concordance (shared loci)	SRR14762244	SRR14762250	Sc_Skin4	Sc_W2	between donors, different condition	0.7723881728582259
+Genotype concordance (shared loci)	SRR14762244	SRR14762251	Sc_Skin4	Sc_W3	between donors, different condition	0.7724104657635925
+Genotype concordance (shared loci)	SRR14762244	SRR14762252	Sc_Skin4	Sc_W3	between donors, different condition	0.7729223767906087
+Genotype concordance (shared loci)	SRR14762245	SRR14762246	Sc_Skin4	Sc_W1	between donors, different condition	0.7827842599875131
+Genotype concordance (shared loci)	SRR14762245	SRR14762247	Sc_Skin4	Sc_W1	between donors, different condition	0.7841878965506135
+Genotype concordance (shared loci)	SRR14762245	SRR14762248	Sc_Skin4	Sc_W2	between donors, different condition	0.7727412982126058
+Genotype concordance (shared loci)	SRR14762245	SRR14762250	Sc_Skin4	Sc_W2	between donors, different condition	0.7731512047049895
+Genotype concordance (shared loci)	SRR14762245	SRR14762251	Sc_Skin4	Sc_W3	between donors, different condition	0.7726493570098174
+Genotype concordance (shared loci)	SRR14762245	SRR14762252	Sc_Skin4	Sc_W3	between donors, different condition	0.7729744587908414
+Genotype concordance (shared loci)	SRR14762246	SRR14762247	Sc_W1	Sc_W1	within donor	0.9177588974872377
+Genotype concordance (shared loci)	SRR14762246	SRR14762248	Sc_W1	Sc_W2	between donors, same condition	0.8068764366874377
+Genotype concordance (shared loci)	SRR14762246	SRR14762250	Sc_W1	Sc_W2	between donors, same condition	0.8083964631434598
+Genotype concordance (shared loci)	SRR14762246	SRR14762251	Sc_W1	Sc_W3	between donors, same condition	0.8083232077764277
+Genotype concordance (shared loci)	SRR14762246	SRR14762252	Sc_W1	Sc_W3	between donors, same condition	0.8068690024548092
+Genotype concordance (shared loci)	SRR14762247	SRR14762248	Sc_W1	Sc_W2	between donors, same condition	0.8065869019398819
+Genotype concordance (shared loci)	SRR14762247	SRR14762250	Sc_W1	Sc_W2	between donors, same condition	0.80719906181433
+Genotype concordance (shared loci)	SRR14762247	SRR14762251	Sc_W1	Sc_W3	between donors, same condition	0.8068831018827021
+Genotype concordance (shared loci)	SRR14762247	SRR14762252	Sc_W1	Sc_W3	between donors, same condition	0.8068363824031891
+Genotype concordance (shared loci)	SRR14762248	SRR14762250	Sc_W2	Sc_W2	within donor	0.9284253830110673
+Genotype concordance (shared loci)	SRR14762248	SRR14762251	Sc_W2	Sc_W3	between donors, same condition	0.814212064231927
+Genotype concordance (shared loci)	SRR14762248	SRR14762252	Sc_W2	Sc_W3	between donors, same condition	0.8143319606245458
+Genotype concordance (shared loci)	SRR14762250	SRR14762251	Sc_W2	Sc_W3	between donors, same condition	0.8145899898236243
+Genotype concordance (shared loci)	SRR14762250	SRR14762252	Sc_W2	Sc_W3	between donors, same condition	0.8147568811823991
+Genotype concordance (shared loci)	SRR14762251	SRR14762252	Sc_W3	Sc_W3	within donor	0.9249186567622322
+Gene-burden Spearman (cohort filter)	SRR14762238	SRR14762239	Sc_Skin1	Sc_Skin1	within donor	0.9454946387947502
+Gene-burden Spearman (cohort filter)	SRR14762238	SRR14762240	Sc_Skin1	Sc_Skin2	between donors, same condition	0.8174363383520454
+Gene-burden Spearman (cohort filter)	SRR14762238	SRR14762241	Sc_Skin1	Sc_Skin2	between donors, same condition	0.8202810001933444
+Gene-burden Spearman (cohort filter)	SRR14762238	SRR14762242	Sc_Skin1	Sc_Skin3	between donors, same condition	0.8441947180497502
+Gene-burden Spearman (cohort filter)	SRR14762238	SRR14762243	Sc_Skin1	Sc_Skin3	between donors, same condition	0.8450346445805709
+Gene-burden Spearman (cohort filter)	SRR14762238	SRR14762244	Sc_Skin1	Sc_Skin4	between donors, same condition	0.8073015500278212
+Gene-burden Spearman (cohort filter)	SRR14762238	SRR14762245	Sc_Skin1	Sc_Skin4	between donors, same condition	0.8099345369658533
+Gene-burden Spearman (cohort filter)	SRR14762238	SRR14762246	Sc_Skin1	Sc_W1	between donors, different condition	0.8563314012211503
+Gene-burden Spearman (cohort filter)	SRR14762238	SRR14762247	Sc_Skin1	Sc_W1	between donors, different condition	0.8580304663344409
+Gene-burden Spearman (cohort filter)	SRR14762238	SRR14762248	Sc_Skin1	Sc_W2	between donors, different condition	0.9121498303435519
+Gene-burden Spearman (cohort filter)	SRR14762238	SRR14762250	Sc_Skin1	Sc_W2	between donors, different condition	0.910506532505506
+Gene-burden Spearman (cohort filter)	SRR14762238	SRR14762251	Sc_Skin1	Sc_W3	between donors, different condition	0.840374149471008
+Gene-burden Spearman (cohort filter)	SRR14762238	SRR14762252	Sc_Skin1	Sc_W3	between donors, different condition	0.8405566684259606
+Gene-burden Spearman (cohort filter)	SRR14762239	SRR14762240	Sc_Skin1	Sc_Skin2	between donors, same condition	0.8195934930144044
+Gene-burden Spearman (cohort filter)	SRR14762239	SRR14762241	Sc_Skin1	Sc_Skin2	between donors, same condition	0.821806656851203
+Gene-burden Spearman (cohort filter)	SRR14762239	SRR14762242	Sc_Skin1	Sc_Skin3	between donors, same condition	0.846186740436558
+Gene-burden Spearman (cohort filter)	SRR14762239	SRR14762243	Sc_Skin1	Sc_Skin3	between donors, same condition	0.8442659200443414
+Gene-burden Spearman (cohort filter)	SRR14762239	SRR14762244	Sc_Skin1	Sc_Skin4	between donors, same condition	0.8086514704058965
+Gene-burden Spearman (cohort filter)	SRR14762239	SRR14762245	Sc_Skin1	Sc_Skin4	between donors, same condition	0.8121093409890903
+Gene-burden Spearman (cohort filter)	SRR14762239	SRR14762246	Sc_Skin1	Sc_W1	between donors, different condition	0.8560896520730928
+Gene-burden Spearman (cohort filter)	SRR14762239	SRR14762247	Sc_Skin1	Sc_W1	between donors, different condition	0.8584676090444924
+Gene-burden Spearman (cohort filter)	SRR14762239	SRR14762248	Sc_Skin1	Sc_W2	between donors, different condition	0.9131666448519263
+Gene-burden Spearman (cohort filter)	SRR14762239	SRR14762250	Sc_Skin1	Sc_W2	between donors, different condition	0.9113748089098092
+Gene-burden Spearman (cohort filter)	SRR14762239	SRR14762251	Sc_Skin1	Sc_W3	between donors, different condition	0.8418798585368181
+Gene-burden Spearman (cohort filter)	SRR14762239	SRR14762252	Sc_Skin1	Sc_W3	between donors, different condition	0.8416103915824571
+Gene-burden Spearman (cohort filter)	SRR14762240	SRR14762241	Sc_Skin2	Sc_Skin2	within donor	0.8982162001022771
+Gene-burden Spearman (cohort filter)	SRR14762240	SRR14762242	Sc_Skin2	Sc_Skin3	between donors, same condition	0.8249555049525725
+Gene-burden Spearman (cohort filter)	SRR14762240	SRR14762243	Sc_Skin2	Sc_Skin3	between donors, same condition	0.8259315684363682
+Gene-burden Spearman (cohort filter)	SRR14762240	SRR14762244	Sc_Skin2	Sc_Skin4	between donors, same condition	0.8101537884422337
+Gene-burden Spearman (cohort filter)	SRR14762240	SRR14762245	Sc_Skin2	Sc_Skin4	between donors, same condition	0.8092708940271222
+Gene-burden Spearman (cohort filter)	SRR14762240	SRR14762246	Sc_Skin2	Sc_W1	between donors, different condition	0.7999600490003905
+Gene-burden Spearman (cohort filter)	SRR14762240	SRR14762247	Sc_Skin2	Sc_W1	between donors, different condition	0.8008068822337812
+Gene-burden Spearman (cohort filter)	SRR14762240	SRR14762248	Sc_Skin2	Sc_W2	between donors, different condition	0.8253966415365518
+Gene-burden Spearman (cohort filter)	SRR14762240	SRR14762250	Sc_Skin2	Sc_W2	between donors, different condition	0.8275858680213094
+Gene-burden Spearman (cohort filter)	SRR14762240	SRR14762251	Sc_Skin2	Sc_W3	between donors, different condition	0.8136464539455462
+Gene-burden Spearman (cohort filter)	SRR14762240	SRR14762252	Sc_Skin2	Sc_W3	between donors, different condition	0.8137172128380339
+Gene-burden Spearman (cohort filter)	SRR14762241	SRR14762242	Sc_Skin2	Sc_Skin3	between donors, same condition	0.827063524062272
+Gene-burden Spearman (cohort filter)	SRR14762241	SRR14762243	Sc_Skin2	Sc_Skin3	between donors, same condition	0.8270578461122914
+Gene-burden Spearman (cohort filter)	SRR14762241	SRR14762244	Sc_Skin2	Sc_Skin4	between donors, same condition	0.8118622390852556
+Gene-burden Spearman (cohort filter)	SRR14762241	SRR14762245	Sc_Skin2	Sc_Skin4	between donors, same condition	0.8110617036005979
+Gene-burden Spearman (cohort filter)	SRR14762241	SRR14762246	Sc_Skin2	Sc_W1	between donors, different condition	0.8014976538421525
+Gene-burden Spearman (cohort filter)	SRR14762241	SRR14762247	Sc_Skin2	Sc_W1	between donors, different condition	0.8035409624917237
+Gene-burden Spearman (cohort filter)	SRR14762241	SRR14762248	Sc_Skin2	Sc_W2	between donors, different condition	0.8294915989622081
+Gene-burden Spearman (cohort filter)	SRR14762241	SRR14762250	Sc_Skin2	Sc_W2	between donors, different condition	0.8302244417188822
+Gene-burden Spearman (cohort filter)	SRR14762241	SRR14762251	Sc_Skin2	Sc_W3	between donors, different condition	0.8151132229976588
+Gene-burden Spearman (cohort filter)	SRR14762241	SRR14762252	Sc_Skin2	Sc_W3	between donors, different condition	0.814926212593593
+Gene-burden Spearman (cohort filter)	SRR14762242	SRR14762243	Sc_Skin3	Sc_Skin3	within donor	0.92577588218443
+Gene-burden Spearman (cohort filter)	SRR14762242	SRR14762244	Sc_Skin3	Sc_Skin4	between donors, same condition	0.8272149083688917
+Gene-burden Spearman (cohort filter)	SRR14762242	SRR14762245	Sc_Skin3	Sc_Skin4	between donors, same condition	0.8264404766834568
+Gene-burden Spearman (cohort filter)	SRR14762242	SRR14762246	Sc_Skin3	Sc_W1	between donors, different condition	0.8306507491717735
+Gene-burden Spearman (cohort filter)	SRR14762242	SRR14762247	Sc_Skin3	Sc_W1	between donors, different condition	0.8329027615200909
+Gene-burden Spearman (cohort filter)	SRR14762242	SRR14762248	Sc_Skin3	Sc_W2	between donors, different condition	0.8529315593270794
+Gene-burden Spearman (cohort filter)	SRR14762242	SRR14762250	Sc_Skin3	Sc_W2	between donors, different condition	0.8551861247362565
+Gene-burden Spearman (cohort filter)	SRR14762242	SRR14762251	Sc_Skin3	Sc_W3	between donors, different condition	0.8382027408185728
+Gene-burden Spearman (cohort filter)	SRR14762242	SRR14762252	Sc_Skin3	Sc_W3	between donors, different condition	0.8377288333037933
+Gene-burden Spearman (cohort filter)	SRR14762243	SRR14762244	Sc_Skin3	Sc_Skin4	between donors, same condition	0.8275193863906556
+Gene-burden Spearman (cohort filter)	SRR14762243	SRR14762245	Sc_Skin3	Sc_Skin4	between donors, same condition	0.8294903273084024
+Gene-burden Spearman (cohort filter)	SRR14762243	SRR14762246	Sc_Skin3	Sc_W1	between donors, different condition	0.8331059268812147
+Gene-burden Spearman (cohort filter)	SRR14762243	SRR14762247	Sc_Skin3	Sc_W1	between donors, different condition	0.8325881810141476
+Gene-burden Spearman (cohort filter)	SRR14762243	SRR14762248	Sc_Skin3	Sc_W2	between donors, different condition	0.851144042885128
+Gene-burden Spearman (cohort filter)	SRR14762243	SRR14762250	Sc_Skin3	Sc_W2	between donors, different condition	0.853741750564636
+Gene-burden Spearman (cohort filter)	SRR14762243	SRR14762251	Sc_Skin3	Sc_W3	between donors, different condition	0.8384348111678305
+Gene-burden Spearman (cohort filter)	SRR14762243	SRR14762252	Sc_Skin3	Sc_W3	between donors, different condition	0.8368508927243457
+Gene-burden Spearman (cohort filter)	SRR14762244	SRR14762245	Sc_Skin4	Sc_Skin4	within donor	0.9175495645586955
+Gene-burden Spearman (cohort filter)	SRR14762244	SRR14762246	Sc_Skin4	Sc_W1	between donors, different condition	0.8113424875321447
+Gene-burden Spearman (cohort filter)	SRR14762244	SRR14762247	Sc_Skin4	Sc_W1	between donors, different condition	0.8118575271394722
+Gene-burden Spearman (cohort filter)	SRR14762244	SRR14762248	Sc_Skin4	Sc_W2	between donors, different condition	0.8228375959989844
+Gene-burden Spearman (cohort filter)	SRR14762244	SRR14762250	Sc_Skin4	Sc_W2	between donors, different condition	0.8251726534973283
+Gene-burden Spearman (cohort filter)	SRR14762244	SRR14762251	Sc_Skin4	Sc_W3	between donors, different condition	0.8239916842465671
+Gene-burden Spearman (cohort filter)	SRR14762244	SRR14762252	Sc_Skin4	Sc_W3	between donors, different condition	0.8257696942854603
+Gene-burden Spearman (cohort filter)	SRR14762245	SRR14762246	Sc_Skin4	Sc_W1	between donors, different condition	0.8118932936673807
+Gene-burden Spearman (cohort filter)	SRR14762245	SRR14762247	Sc_Skin4	Sc_W1	between donors, different condition	0.8133565968694617
+Gene-burden Spearman (cohort filter)	SRR14762245	SRR14762248	Sc_Skin4	Sc_W2	between donors, different condition	0.8277827357691262
+Gene-burden Spearman (cohort filter)	SRR14762245	SRR14762250	Sc_Skin4	Sc_W2	between donors, different condition	0.8290819651775249
+Gene-burden Spearman (cohort filter)	SRR14762245	SRR14762251	Sc_Skin4	Sc_W3	between donors, different condition	0.8256188102470154
+Gene-burden Spearman (cohort filter)	SRR14762245	SRR14762252	Sc_Skin4	Sc_W3	between donors, different condition	0.8273437992497412
+Gene-burden Spearman (cohort filter)	SRR14762246	SRR14762247	Sc_W1	Sc_W1	within donor	0.936140723270645
+Gene-burden Spearman (cohort filter)	SRR14762246	SRR14762248	Sc_W1	Sc_W2	between donors, same condition	0.8533077264172765
+Gene-burden Spearman (cohort filter)	SRR14762246	SRR14762250	Sc_W1	Sc_W2	between donors, same condition	0.8521517815729285
+Gene-burden Spearman (cohort filter)	SRR14762246	SRR14762251	Sc_W1	Sc_W3	between donors, same condition	0.8566321550279228
+Gene-burden Spearman (cohort filter)	SRR14762246	SRR14762252	Sc_W1	Sc_W3	between donors, same condition	0.8565045287861298
+Gene-burden Spearman (cohort filter)	SRR14762247	SRR14762248	Sc_W1	Sc_W2	between donors, same condition	0.8547474389979874
+Gene-burden Spearman (cohort filter)	SRR14762247	SRR14762250	Sc_W1	Sc_W2	between donors, same condition	0.8538949157396459
+Gene-burden Spearman (cohort filter)	SRR14762247	SRR14762251	Sc_W1	Sc_W3	between donors, same condition	0.8592813976302123
+Gene-burden Spearman (cohort filter)	SRR14762247	SRR14762252	Sc_W1	Sc_W3	between donors, same condition	0.859362934319462
+Gene-burden Spearman (cohort filter)	SRR14762248	SRR14762250	Sc_W2	Sc_W2	within donor	0.9422552688021331
+Gene-burden Spearman (cohort filter)	SRR14762248	SRR14762251	Sc_W2	Sc_W3	between donors, same condition	0.8544372595997769
+Gene-burden Spearman (cohort filter)	SRR14762248	SRR14762252	Sc_W2	Sc_W3	between donors, same condition	0.8526922163140522
+Gene-burden Spearman (cohort filter)	SRR14762250	SRR14762251	Sc_W2	Sc_W3	between donors, same condition	0.8537002850575629
+Gene-burden Spearman (cohort filter)	SRR14762250	SRR14762252	Sc_W2	Sc_W3	between donors, same condition	0.8516522719190681
+Gene-burden Spearman (cohort filter)	SRR14762251	SRR14762252	Sc_W3	Sc_W3	within donor	0.9320346390963631
+Expression Pearson (log1p CPM)	SRR14762238	SRR14762239	Sc_Skin1	Sc_Skin1	within donor	0.48306400449856113
+Expression Pearson (log1p CPM)	SRR14762238	SRR14762240	Sc_Skin1	Sc_Skin2	between donors, same condition	0.08476420414235177
+Expression Pearson (log1p CPM)	SRR14762238	SRR14762241	Sc_Skin1	Sc_Skin2	between donors, same condition	0.04777865966741593
+Expression Pearson (log1p CPM)	SRR14762238	SRR14762242	Sc_Skin1	Sc_Skin3	between donors, same condition	0.09601950571355454
+Expression Pearson (log1p CPM)	SRR14762238	SRR14762243	Sc_Skin1	Sc_Skin3	between donors, same condition	0.09652074431729439
+Expression Pearson (log1p CPM)	SRR14762238	SRR14762244	Sc_Skin1	Sc_Skin4	between donors, same condition	0.05060601044615057
+Expression Pearson (log1p CPM)	SRR14762238	SRR14762245	Sc_Skin1	Sc_Skin4	between donors, same condition	0.06473565504684102
+Expression Pearson (log1p CPM)	SRR14762238	SRR14762246	Sc_Skin1	Sc_W1	between donors, different condition	0.11174364632552004
+Expression Pearson (log1p CPM)	SRR14762238	SRR14762247	Sc_Skin1	Sc_W1	between donors, different condition	0.11917583394881227
+Expression Pearson (log1p CPM)	SRR14762238	SRR14762248	Sc_Skin1	Sc_W2	between donors, different condition	0.29127088730966266
+Expression Pearson (log1p CPM)	SRR14762238	SRR14762250	Sc_Skin1	Sc_W2	between donors, different condition	0.28386496844054554
+Expression Pearson (log1p CPM)	SRR14762238	SRR14762251	Sc_Skin1	Sc_W3	between donors, different condition	0.09128815629408572
+Expression Pearson (log1p CPM)	SRR14762238	SRR14762252	Sc_Skin1	Sc_W3	between donors, different condition	0.09535348136063845
+Expression Pearson (log1p CPM)	SRR14762239	SRR14762240	Sc_Skin1	Sc_Skin2	between donors, same condition	0.11672964625181947
+Expression Pearson (log1p CPM)	SRR14762239	SRR14762241	Sc_Skin1	Sc_Skin2	between donors, same condition	0.05886479227201652
+Expression Pearson (log1p CPM)	SRR14762239	SRR14762242	Sc_Skin1	Sc_Skin3	between donors, same condition	0.12870938463733744
+Expression Pearson (log1p CPM)	SRR14762239	SRR14762243	Sc_Skin1	Sc_Skin3	between donors, same condition	0.12253686025923426
+Expression Pearson (log1p CPM)	SRR14762239	SRR14762244	Sc_Skin1	Sc_Skin4	between donors, same condition	0.08080775391375002
+Expression Pearson (log1p CPM)	SRR14762239	SRR14762245	Sc_Skin1	Sc_Skin4	between donors, same condition	0.09077681752313894
+Expression Pearson (log1p CPM)	SRR14762239	SRR14762246	Sc_Skin1	Sc_W1	between donors, different condition	0.1451195538659613
+Expression Pearson (log1p CPM)	SRR14762239	SRR14762247	Sc_Skin1	Sc_W1	between donors, different condition	0.14632998641306613
+Expression Pearson (log1p CPM)	SRR14762239	SRR14762248	Sc_Skin1	Sc_W2	between donors, different condition	0.31473969465581336
+Expression Pearson (log1p CPM)	SRR14762239	SRR14762250	Sc_Skin1	Sc_W2	between donors, different condition	0.3020045014171781
+Expression Pearson (log1p CPM)	SRR14762239	SRR14762251	Sc_Skin1	Sc_W3	between donors, different condition	0.12721791723760925
+Expression Pearson (log1p CPM)	SRR14762239	SRR14762252	Sc_Skin1	Sc_W3	between donors, different condition	0.12652823624002973
+Expression Pearson (log1p CPM)	SRR14762240	SRR14762241	Sc_Skin2	Sc_Skin2	within donor	0.23801208465999768
+Expression Pearson (log1p CPM)	SRR14762240	SRR14762242	Sc_Skin2	Sc_Skin3	between donors, same condition	0.14088434457053273
+Expression Pearson (log1p CPM)	SRR14762240	SRR14762243	Sc_Skin2	Sc_Skin3	between donors, same condition	0.14210351816611277
+Expression Pearson (log1p CPM)	SRR14762240	SRR14762244	Sc_Skin2	Sc_Skin4	between donors, same condition	0.06519069738968854
+Expression Pearson (log1p CPM)	SRR14762240	SRR14762245	Sc_Skin2	Sc_Skin4	between donors, same condition	0.11242655983588887
+Expression Pearson (log1p CPM)	SRR14762240	SRR14762246	Sc_Skin2	Sc_W1	between donors, different condition	0.0748925461210328
+Expression Pearson (log1p CPM)	SRR14762240	SRR14762247	Sc_Skin2	Sc_W1	between donors, different condition	0.08359120945834839
+Expression Pearson (log1p CPM)	SRR14762240	SRR14762248	Sc_Skin2	Sc_W2	between donors, different condition	0.11499798669248061
+Expression Pearson (log1p CPM)	SRR14762240	SRR14762250	Sc_Skin2	Sc_W2	between donors, different condition	0.12926952337411335
+Expression Pearson (log1p CPM)	SRR14762240	SRR14762251	Sc_Skin2	Sc_W3	between donors, different condition	0.10746134821238888
+Expression Pearson (log1p CPM)	SRR14762240	SRR14762252	Sc_Skin2	Sc_W3	between donors, different condition	0.10686413155595102
+Expression Pearson (log1p CPM)	SRR14762241	SRR14762242	Sc_Skin2	Sc_Skin3	between donors, same condition	0.058134991423177206
+Expression Pearson (log1p CPM)	SRR14762241	SRR14762243	Sc_Skin2	Sc_Skin3	between donors, same condition	0.058586413226930506
+Expression Pearson (log1p CPM)	SRR14762241	SRR14762244	Sc_Skin2	Sc_Skin4	between donors, same condition	0.08343186968108737
+Expression Pearson (log1p CPM)	SRR14762241	SRR14762245	Sc_Skin2	Sc_Skin4	between donors, same condition	0.036537291575873355
+Expression Pearson (log1p CPM)	SRR14762241	SRR14762246	Sc_Skin2	Sc_W1	between donors, different condition	0.042050092713335555
+Expression Pearson (log1p CPM)	SRR14762241	SRR14762247	Sc_Skin2	Sc_W1	between donors, different condition	0.03979884811527541
+Expression Pearson (log1p CPM)	SRR14762241	SRR14762248	Sc_Skin2	Sc_W2	between donors, different condition	0.05077537918832811
+Expression Pearson (log1p CPM)	SRR14762241	SRR14762250	Sc_Skin2	Sc_W2	between donors, different condition	0.05992334856746776
+Expression Pearson (log1p CPM)	SRR14762241	SRR14762251	Sc_Skin2	Sc_W3	between donors, different condition	0.05314295265896647
+Expression Pearson (log1p CPM)	SRR14762241	SRR14762252	Sc_Skin2	Sc_W3	between donors, different condition	0.044163157080269806
+Expression Pearson (log1p CPM)	SRR14762242	SRR14762243	Sc_Skin3	Sc_Skin3	within donor	0.5792531289287449
+Expression Pearson (log1p CPM)	SRR14762242	SRR14762244	Sc_Skin3	Sc_Skin4	between donors, same condition	0.08083728529424859
+Expression Pearson (log1p CPM)	SRR14762242	SRR14762245	Sc_Skin3	Sc_Skin4	between donors, same condition	0.12531499485159736
+Expression Pearson (log1p CPM)	SRR14762242	SRR14762246	Sc_Skin3	Sc_W1	between donors, different condition	0.07927843973072946
+Expression Pearson (log1p CPM)	SRR14762242	SRR14762247	Sc_Skin3	Sc_W1	between donors, different condition	0.08826786265393073
+Expression Pearson (log1p CPM)	SRR14762242	SRR14762248	Sc_Skin3	Sc_W2	between donors, different condition	0.12165282928262307
+Expression Pearson (log1p CPM)	SRR14762242	SRR14762250	Sc_Skin3	Sc_W2	between donors, different condition	0.12967290060994088
+Expression Pearson (log1p CPM)	SRR14762242	SRR14762251	Sc_Skin3	Sc_W3	between donors, different condition	0.11168213076700544
+Expression Pearson (log1p CPM)	SRR14762242	SRR14762252	Sc_Skin3	Sc_W3	between donors, different condition	0.10808181876775864
+Expression Pearson (log1p CPM)	SRR14762243	SRR14762244	Sc_Skin3	Sc_Skin4	between donors, same condition	0.08892351762156171
+Expression Pearson (log1p CPM)	SRR14762243	SRR14762245	Sc_Skin3	Sc_Skin4	between donors, same condition	0.12170983756593924
+Expression Pearson (log1p CPM)	SRR14762243	SRR14762246	Sc_Skin3	Sc_W1	between donors, different condition	0.08907751288800743
+Expression Pearson (log1p CPM)	SRR14762243	SRR14762247	Sc_Skin3	Sc_W1	between donors, different condition	0.09448732978147775
+Expression Pearson (log1p CPM)	SRR14762243	SRR14762248	Sc_Skin3	Sc_W2	between donors, different condition	0.1295210154968789
+Expression Pearson (log1p CPM)	SRR14762243	SRR14762250	Sc_Skin3	Sc_W2	between donors, different condition	0.12336505647735499
+Expression Pearson (log1p CPM)	SRR14762243	SRR14762251	Sc_Skin3	Sc_W3	between donors, different condition	0.10278749322438858
+Expression Pearson (log1p CPM)	SRR14762243	SRR14762252	Sc_Skin3	Sc_W3	between donors, different condition	0.10525970655137029
+Expression Pearson (log1p CPM)	SRR14762244	SRR14762245	Sc_Skin4	Sc_Skin4	within donor	0.4461789966399652
+Expression Pearson (log1p CPM)	SRR14762244	SRR14762246	Sc_Skin4	Sc_W1	between donors, different condition	0.07674894229197933
+Expression Pearson (log1p CPM)	SRR14762244	SRR14762247	Sc_Skin4	Sc_W1	between donors, different condition	0.08495335433513632
+Expression Pearson (log1p CPM)	SRR14762244	SRR14762248	Sc_Skin4	Sc_W2	between donors, different condition	0.09885691763016272
+Expression Pearson (log1p CPM)	SRR14762244	SRR14762250	Sc_Skin4	Sc_W2	between donors, different condition	0.09468738396776999
+Expression Pearson (log1p CPM)	SRR14762244	SRR14762251	Sc_Skin4	Sc_W3	between donors, different condition	0.09220633645247144
+Expression Pearson (log1p CPM)	SRR14762244	SRR14762252	Sc_Skin4	Sc_W3	between donors, different condition	0.09610654424894029
+Expression Pearson (log1p CPM)	SRR14762245	SRR14762246	Sc_Skin4	Sc_W1	between donors, different condition	0.09394244578972509
+Expression Pearson (log1p CPM)	SRR14762245	SRR14762247	Sc_Skin4	Sc_W1	between donors, different condition	0.10852751381960081
+Expression Pearson (log1p CPM)	SRR14762245	SRR14762248	Sc_Skin4	Sc_W2	between donors, different condition	0.12347047149288011
+Expression Pearson (log1p CPM)	SRR14762245	SRR14762250	Sc_Skin4	Sc_W2	between donors, different condition	0.1192842189621037
+Expression Pearson (log1p CPM)	SRR14762245	SRR14762251	Sc_Skin4	Sc_W3	between donors, different condition	0.14194611481846225
+Expression Pearson (log1p CPM)	SRR14762245	SRR14762252	Sc_Skin4	Sc_W3	between donors, different condition	0.1247691783912826
+Expression Pearson (log1p CPM)	SRR14762246	SRR14762247	Sc_W1	Sc_W1	within donor	0.5658087784764382
+Expression Pearson (log1p CPM)	SRR14762246	SRR14762248	Sc_W1	Sc_W2	between donors, same condition	0.14608079178363828
+Expression Pearson (log1p CPM)	SRR14762246	SRR14762250	Sc_W1	Sc_W2	between donors, same condition	0.14261766563630515
+Expression Pearson (log1p CPM)	SRR14762246	SRR14762251	Sc_W1	Sc_W3	between donors, same condition	0.1631068289575087
+Expression Pearson (log1p CPM)	SRR14762246	SRR14762252	Sc_W1	Sc_W3	between donors, same condition	0.1669044579732737
+Expression Pearson (log1p CPM)	SRR14762247	SRR14762248	Sc_W1	Sc_W2	between donors, same condition	0.14575285217463035
+Expression Pearson (log1p CPM)	SRR14762247	SRR14762250	Sc_W1	Sc_W2	between donors, same condition	0.1424528913939267
+Expression Pearson (log1p CPM)	SRR14762247	SRR14762251	Sc_W1	Sc_W3	between donors, same condition	0.17253568213497453
+Expression Pearson (log1p CPM)	SRR14762247	SRR14762252	Sc_W1	Sc_W3	between donors, same condition	0.16978214427922786
+Expression Pearson (log1p CPM)	SRR14762248	SRR14762250	Sc_W2	Sc_W2	within donor	0.47677631045147384
+Expression Pearson (log1p CPM)	SRR14762248	SRR14762251	Sc_W2	Sc_W3	between donors, same condition	0.14971165502684844
+Expression Pearson (log1p CPM)	SRR14762248	SRR14762252	Sc_W2	Sc_W3	between donors, same condition	0.14074609204325042
+Expression Pearson (log1p CPM)	SRR14762250	SRR14762251	Sc_W2	Sc_W3	between donors, same condition	0.1527652536375192
+Expression Pearson (log1p CPM)	SRR14762250	SRR14762252	Sc_W2	Sc_W3	between donors, same condition	0.1454583217964058
+Expression Pearson (log1p CPM)	SRR14762251	SRR14762252	Sc_W3	Sc_W3	within donor	0.5853712025766575

@@ -1,0 +1,169 @@
+design	model	gsm	true_label	prob_wound_sample	predicted_label
+GSM-LOGO, global loci (mutation)	Logistic regression (L2)	GSM5364333	0	0.9996877358501393	1
+GSM-LOGO, global loci (mutation)	Logistic regression (L2)	GSM5364334	0	9.827924740887694e-05	0
+GSM-LOGO, global loci (mutation)	Logistic regression (L2)	GSM5364335	0	0.0723556676879506	0
+GSM-LOGO, global loci (mutation)	Logistic regression (L2)	GSM5364336	0	0.015526715149192655	0
+GSM-LOGO, global loci (mutation)	Logistic regression (L2)	GSM5364337	1	0.9741550918422293	1
+GSM-LOGO, global loci (mutation)	Logistic regression (L2)	GSM5364338	1	0.24054585611951146	0
+GSM-LOGO, global loci (mutation)	Logistic regression (L2)	GSM5364339	1	0.9986731806944544	1
+GSM-LOGO, global loci (mutation)	Neural network (MLP)	GSM5364333	0	0.9986251890659332	1
+GSM-LOGO, global loci (mutation)	Neural network (MLP)	GSM5364334	0	0.0021524836774915457	0
+GSM-LOGO, global loci (mutation)	Neural network (MLP)	GSM5364335	0	3.03786824593288e-27	0
+GSM-LOGO, global loci (mutation)	Neural network (MLP)	GSM5364336	0	0.02755733486264944	0
+GSM-LOGO, global loci (mutation)	Neural network (MLP)	GSM5364337	1	0.863798588514328	1
+GSM-LOGO, global loci (mutation)	Neural network (MLP)	GSM5364338	1	0.12260767444968224	0
+GSM-LOGO, global loci (mutation)	Neural network (MLP)	GSM5364339	1	0.9540174305438995	1
+GSM-LOGO, global loci (mutation)	Random forest	GSM5364333	0	0.776	1
+GSM-LOGO, global loci (mutation)	Random forest	GSM5364334	0	0.16999999999999998	0
+GSM-LOGO, global loci (mutation)	Random forest	GSM5364335	0	0.302	0
+GSM-LOGO, global loci (mutation)	Random forest	GSM5364336	0	0.2	0
+GSM-LOGO, global loci (mutation)	Random forest	GSM5364337	1	0.543	1
+GSM-LOGO, global loci (mutation)	Random forest	GSM5364338	1	0.432	0
+GSM-LOGO, global loci (mutation)	Random forest	GSM5364339	1	0.554	1
+GSM-LOGO, global loci (mutation)	SVM (RBF)	GSM5364333	0	0.8455070100522355	1
+GSM-LOGO, global loci (mutation)	SVM (RBF)	GSM5364334	0	0.17087091316947153	0
+GSM-LOGO, global loci (mutation)	SVM (RBF)	GSM5364335	0	0.404134613872486	0
+GSM-LOGO, global loci (mutation)	SVM (RBF)	GSM5364336	0	0.20594780745762353	0
+GSM-LOGO, global loci (mutation)	SVM (RBF)	GSM5364337	1	0.4393614227386393	0
+GSM-LOGO, global loci (mutation)	SVM (RBF)	GSM5364338	1	0.19498484997611254	0
+GSM-LOGO, global loci (mutation)	SVM (RBF)	GSM5364339	1	0.45857460329626965	0
+GSM-LOGO, global loci (mutation)	k-nearest neighbours	GSM5364333	0	1.0	1
+GSM-LOGO, global loci (mutation)	k-nearest neighbours	GSM5364334	0	0.0	0
+GSM-LOGO, global loci (mutation)	k-nearest neighbours	GSM5364335	0	0.0	0
+GSM-LOGO, global loci (mutation)	k-nearest neighbours	GSM5364336	0	0.0	0
+GSM-LOGO, global loci (mutation)	k-nearest neighbours	GSM5364337	1	0.682468799135559	1
+GSM-LOGO, global loci (mutation)	k-nearest neighbours	GSM5364338	1	0.28385101810674107	0
+GSM-LOGO, global loci (mutation)	k-nearest neighbours	GSM5364339	1	0.6828748731225528	1
+GSM-LOGO, global loci (mutation)	XGBoost	GSM5364333	0	0.636389434337616	1
+GSM-LOGO, global loci (mutation)	XGBoost	GSM5364334	0	0.22667086869478226	0
+GSM-LOGO, global loci (mutation)	XGBoost	GSM5364335	0	0.23967362195253372	0
+GSM-LOGO, global loci (mutation)	XGBoost	GSM5364336	0	0.2360275462269783	0
+GSM-LOGO, global loci (mutation)	XGBoost	GSM5364337	1	0.4904956966638565	0
+GSM-LOGO, global loci (mutation)	XGBoost	GSM5364338	1	0.3889731615781784	0
+GSM-LOGO, global loci (mutation)	XGBoost	GSM5364339	1	0.433078870177269	0
+GSM-LOGO, training-only loci (mutation)	Logistic regression (L2)	GSM5364333	0	0.16808944104816406	0
+GSM-LOGO, training-only loci (mutation)	Logistic regression (L2)	GSM5364334	0	6.341486509513993e-06	0
+GSM-LOGO, training-only loci (mutation)	Logistic regression (L2)	GSM5364335	0	0.0007225973522102072	0
+GSM-LOGO, training-only loci (mutation)	Logistic regression (L2)	GSM5364336	0	0.0004885670601806814	0
+GSM-LOGO, training-only loci (mutation)	Logistic regression (L2)	GSM5364337	1	0.014527854509898568	0
+GSM-LOGO, training-only loci (mutation)	Logistic regression (L2)	GSM5364338	1	0.005214913030811159	0
+GSM-LOGO, training-only loci (mutation)	Logistic regression (L2)	GSM5364339	1	0.2935666599578054	0
+GSM-LOGO, training-only loci (mutation)	Neural network (MLP)	GSM5364333	0	0.14364157617092133	0
+GSM-LOGO, training-only loci (mutation)	Neural network (MLP)	GSM5364334	0	0.00017117607785621658	0
+GSM-LOGO, training-only loci (mutation)	Neural network (MLP)	GSM5364335	0	0.004610689822584391	0
+GSM-LOGO, training-only loci (mutation)	Neural network (MLP)	GSM5364336	0	0.0014473522314801812	0
+GSM-LOGO, training-only loci (mutation)	Neural network (MLP)	GSM5364337	1	0.02848173025995493	0
+GSM-LOGO, training-only loci (mutation)	Neural network (MLP)	GSM5364338	1	0.10671046376228333	0
+GSM-LOGO, training-only loci (mutation)	Neural network (MLP)	GSM5364339	1	0.05077366158366203	0
+GSM-LOGO, training-only loci (mutation)	Random forest	GSM5364333	0	0.365	0
+GSM-LOGO, training-only loci (mutation)	Random forest	GSM5364334	0	0.153	0
+GSM-LOGO, training-only loci (mutation)	Random forest	GSM5364335	0	0.129	0
+GSM-LOGO, training-only loci (mutation)	Random forest	GSM5364336	0	0.14100000000000001	0
+GSM-LOGO, training-only loci (mutation)	Random forest	GSM5364337	1	0.179	0
+GSM-LOGO, training-only loci (mutation)	Random forest	GSM5364338	1	0.189	0
+GSM-LOGO, training-only loci (mutation)	Random forest	GSM5364339	1	0.223	0
+GSM-LOGO, training-only loci (mutation)	SVM (RBF)	GSM5364333	0	0.38277464023209296	0
+GSM-LOGO, training-only loci (mutation)	SVM (RBF)	GSM5364334	0	0.1838696359412752	0
+GSM-LOGO, training-only loci (mutation)	SVM (RBF)	GSM5364335	0	0.16509647585362575	0
+GSM-LOGO, training-only loci (mutation)	SVM (RBF)	GSM5364336	0	0.14159054355782374	0
+GSM-LOGO, training-only loci (mutation)	SVM (RBF)	GSM5364337	1	0.1762122119586365	0
+GSM-LOGO, training-only loci (mutation)	SVM (RBF)	GSM5364338	1	0.09985808799477469	0
+GSM-LOGO, training-only loci (mutation)	SVM (RBF)	GSM5364339	1	0.19855694684324068	0
+GSM-LOGO, training-only loci (mutation)	k-nearest neighbours	GSM5364333	0	0.32914036530227525	0
+GSM-LOGO, training-only loci (mutation)	k-nearest neighbours	GSM5364334	0	0.0	0
+GSM-LOGO, training-only loci (mutation)	k-nearest neighbours	GSM5364335	0	0.0	0
+GSM-LOGO, training-only loci (mutation)	k-nearest neighbours	GSM5364336	0	0.0	0
+GSM-LOGO, training-only loci (mutation)	k-nearest neighbours	GSM5364337	1	0.0	0
+GSM-LOGO, training-only loci (mutation)	k-nearest neighbours	GSM5364338	1	0.0	0
+GSM-LOGO, training-only loci (mutation)	k-nearest neighbours	GSM5364339	1	0.0	0
+GSM-LOGO, training-only loci (mutation)	XGBoost	GSM5364333	0	0.29298049211502075	0
+GSM-LOGO, training-only loci (mutation)	XGBoost	GSM5364334	0	0.2474401444196701	0
+GSM-LOGO, training-only loci (mutation)	XGBoost	GSM5364335	0	0.24425479769706726	0
+GSM-LOGO, training-only loci (mutation)	XGBoost	GSM5364336	0	0.23327723145484924	0
+GSM-LOGO, training-only loci (mutation)	XGBoost	GSM5364337	1	0.25728483498096466	0
+GSM-LOGO, training-only loci (mutation)	XGBoost	GSM5364338	1	0.240642249584198	0
+GSM-LOGO, training-only loci (mutation)	XGBoost	GSM5364339	1	0.28264404833316803	0
+Person-LOGO, training-only loci (mutation)	Logistic regression (L2)	GSM5364334	0	6.341486509513993e-06	0
+Person-LOGO, training-only loci (mutation)	Logistic regression (L2)	GSM5364335	0	0.0007225973522102072	0
+Person-LOGO, training-only loci (mutation)	Logistic regression (L2)	GSM5364336	0	0.0004885670601806814	0
+Person-LOGO, training-only loci (mutation)	Logistic regression (L2)	GSM5364337	1	0.014527854509898568	0
+Person-LOGO, training-only loci (mutation)	Logistic regression (L2)	GSM5364339	1	0.2935666599578054	0
+Person-LOGO, training-only loci (mutation)	Logistic regression (L2)	GSM5364333	0	0.006104926837142071	0
+Person-LOGO, training-only loci (mutation)	Logistic regression (L2)	GSM5364338	1	0.035226690287384343	0
+Person-LOGO, training-only loci (mutation)	Neural network (MLP)	GSM5364334	0	0.00017117607785621658	0
+Person-LOGO, training-only loci (mutation)	Neural network (MLP)	GSM5364335	0	0.004610689822584391	0
+Person-LOGO, training-only loci (mutation)	Neural network (MLP)	GSM5364336	0	0.0014473522314801812	0
+Person-LOGO, training-only loci (mutation)	Neural network (MLP)	GSM5364337	1	0.02848173025995493	0
+Person-LOGO, training-only loci (mutation)	Neural network (MLP)	GSM5364339	1	0.05077366158366203	0
+Person-LOGO, training-only loci (mutation)	Neural network (MLP)	GSM5364333	0	0.016021753661334515	0
+Person-LOGO, training-only loci (mutation)	Neural network (MLP)	GSM5364338	1	0.05580124072730541	0
+Person-LOGO, training-only loci (mutation)	Random forest	GSM5364334	0	0.153	0
+Person-LOGO, training-only loci (mutation)	Random forest	GSM5364335	0	0.129	0
+Person-LOGO, training-only loci (mutation)	Random forest	GSM5364336	0	0.14100000000000001	0
+Person-LOGO, training-only loci (mutation)	Random forest	GSM5364337	1	0.179	0
+Person-LOGO, training-only loci (mutation)	Random forest	GSM5364339	1	0.223	0
+Person-LOGO, training-only loci (mutation)	Random forest	GSM5364333	0	0.211	0
+Person-LOGO, training-only loci (mutation)	Random forest	GSM5364338	1	0.244	0
+Person-LOGO, training-only loci (mutation)	SVM (RBF)	GSM5364334	0	0.1838696359412752	0
+Person-LOGO, training-only loci (mutation)	SVM (RBF)	GSM5364335	0	0.16509647585362575	0
+Person-LOGO, training-only loci (mutation)	SVM (RBF)	GSM5364336	0	0.14159054355782374	0
+Person-LOGO, training-only loci (mutation)	SVM (RBF)	GSM5364337	1	0.1762122119586365	0
+Person-LOGO, training-only loci (mutation)	SVM (RBF)	GSM5364339	1	0.19855694684324068	0
+Person-LOGO, training-only loci (mutation)	SVM (RBF)	GSM5364333	0	0.1897116878131103	0
+Person-LOGO, training-only loci (mutation)	SVM (RBF)	GSM5364338	1	0.21617355171878175	0
+Person-LOGO, training-only loci (mutation)	k-nearest neighbours	GSM5364334	0	0.0	0
+Person-LOGO, training-only loci (mutation)	k-nearest neighbours	GSM5364335	0	0.0	0
+Person-LOGO, training-only loci (mutation)	k-nearest neighbours	GSM5364336	0	0.0	0
+Person-LOGO, training-only loci (mutation)	k-nearest neighbours	GSM5364337	1	0.0	0
+Person-LOGO, training-only loci (mutation)	k-nearest neighbours	GSM5364339	1	0.0	0
+Person-LOGO, training-only loci (mutation)	k-nearest neighbours	GSM5364333	0	0.0	0
+Person-LOGO, training-only loci (mutation)	k-nearest neighbours	GSM5364338	1	0.0	0
+Person-LOGO, training-only loci (mutation)	XGBoost	GSM5364334	0	0.2474401444196701	0
+Person-LOGO, training-only loci (mutation)	XGBoost	GSM5364335	0	0.24425479769706726	0
+Person-LOGO, training-only loci (mutation)	XGBoost	GSM5364336	0	0.23327723145484924	0
+Person-LOGO, training-only loci (mutation)	XGBoost	GSM5364337	1	0.25728483498096466	0
+Person-LOGO, training-only loci (mutation)	XGBoost	GSM5364339	1	0.28264404833316803	0
+Person-LOGO, training-only loci (mutation)	XGBoost	GSM5364333	0	0.27913227677345276	0
+Person-LOGO, training-only loci (mutation)	XGBoost	GSM5364338	1	0.3004196882247925	0
+GSM-LOGO, expression only	Logistic regression (L2)	GSM5364333	0	0.9603562120385803	1
+GSM-LOGO, expression only	Logistic regression (L2)	GSM5364334	0	0.25193575198936025	0
+GSM-LOGO, expression only	Logistic regression (L2)	GSM5364335	0	0.1527681593420181	0
+GSM-LOGO, expression only	Logistic regression (L2)	GSM5364336	0	0.27976273666154466	0
+GSM-LOGO, expression only	Logistic regression (L2)	GSM5364337	1	0.7895234289335822	1
+GSM-LOGO, expression only	Logistic regression (L2)	GSM5364338	1	0.10406068844028868	0
+GSM-LOGO, expression only	Logistic regression (L2)	GSM5364339	1	0.7720034844469068	1
+GSM-LOGO, expression only	Neural network (MLP)	GSM5364333	0	0.9363031685352325	1
+GSM-LOGO, expression only	Neural network (MLP)	GSM5364334	0	0.22220242768526077	0
+GSM-LOGO, expression only	Neural network (MLP)	GSM5364335	0	0.3462460786104202	0
+GSM-LOGO, expression only	Neural network (MLP)	GSM5364336	0	0.22044909000396729	0
+GSM-LOGO, expression only	Neural network (MLP)	GSM5364337	1	0.6646261215209961	1
+GSM-LOGO, expression only	Neural network (MLP)	GSM5364338	1	0.1289546862244606	0
+GSM-LOGO, expression only	Neural network (MLP)	GSM5364339	1	0.4756714403629303	0
+GSM-LOGO, expression only	Random forest	GSM5364333	0	0.5720000000000001	1
+GSM-LOGO, expression only	Random forest	GSM5364334	0	0.403	0
+GSM-LOGO, expression only	Random forest	GSM5364335	0	0.397	0
+GSM-LOGO, expression only	Random forest	GSM5364336	0	0.477	0
+GSM-LOGO, expression only	Random forest	GSM5364337	1	0.35	0
+GSM-LOGO, expression only	Random forest	GSM5364338	1	0.324	0
+GSM-LOGO, expression only	Random forest	GSM5364339	1	0.417	0
+GSM-LOGO, expression only	SVM (RBF)	GSM5364333	0	0.5721660739405694	1
+GSM-LOGO, expression only	SVM (RBF)	GSM5364334	0	0.5028233071566139	1
+GSM-LOGO, expression only	SVM (RBF)	GSM5364335	0	0.5294768258903637	1
+GSM-LOGO, expression only	SVM (RBF)	GSM5364336	0	0.5194810748595615	1
+GSM-LOGO, expression only	SVM (RBF)	GSM5364337	1	0.3612254585294741	0
+GSM-LOGO, expression only	SVM (RBF)	GSM5364338	1	0.23287496992624807	0
+GSM-LOGO, expression only	SVM (RBF)	GSM5364339	1	0.35911333310611304	0
+GSM-LOGO, expression only	k-nearest neighbours	GSM5364333	0	0.6766677077408748	1
+GSM-LOGO, expression only	k-nearest neighbours	GSM5364334	0	0.6580605750682696	1
+GSM-LOGO, expression only	k-nearest neighbours	GSM5364335	0	0.0	0
+GSM-LOGO, expression only	k-nearest neighbours	GSM5364336	0	0.6417033791416646	1
+GSM-LOGO, expression only	k-nearest neighbours	GSM5364337	1	0.6570763218343727	1
+GSM-LOGO, expression only	k-nearest neighbours	GSM5364338	1	0.0	0
+GSM-LOGO, expression only	k-nearest neighbours	GSM5364339	1	0.327791106238017	0
+GSM-LOGO, expression only	XGBoost	GSM5364333	0	0.394670695066452	0
+GSM-LOGO, expression only	XGBoost	GSM5364334	0	0.2529394328594208	0
+GSM-LOGO, expression only	XGBoost	GSM5364335	0	0.2498682737350464	0
+GSM-LOGO, expression only	XGBoost	GSM5364336	0	0.27456240355968475	0
+GSM-LOGO, expression only	XGBoost	GSM5364337	1	0.20723415166139603	0
+GSM-LOGO, expression only	XGBoost	GSM5364338	1	0.2276739552617073	0
+GSM-LOGO, expression only	XGBoost	GSM5364339	1	0.3444782644510269	0

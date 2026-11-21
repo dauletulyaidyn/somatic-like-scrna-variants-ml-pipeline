@@ -1,0 +1,29 @@
+{
+  "n_labelings": 35,
+  "observed_wound_gsms": [
+    "GSM5364337",
+    "GSM5364338",
+    "GSM5364339"
+  ],
+  "same_person_grouping": {
+    "GSM5364333": "P_Skin1_W2",
+    "GSM5364338": "P_Skin1_W2"
+  },
+  "min_samples": 4,
+  "min_vaf": 0.05,
+  "models": [
+    "Logistic regression (L2)",
+    "Neural network (MLP)",
+    "Random forest",
+    "SVM (RBF)",
+    "k-nearest neighbours",
+    "XGBoost"
+  ],
+  "designs": [
+    "GSM-LOGO, global loci (mutation)",
+    "GSM-LOGO, training-only loci (mutation)",
+    "Person-LOGO, training-only loci (mutation)",
+    "GSM-LOGO, expression only"
+  ],
+  "min_attainable_p": 0.02857142857142857
+}

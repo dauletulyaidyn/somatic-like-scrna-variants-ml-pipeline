@@ -1,0 +1,25 @@
+design	model	obs_AUC	exact_p_AUC	null_AUC_mean
+GSM-LOGO, global loci (mutatio	Logistic regression 	0.75	0.286	0.464
+GSM-LOGO, global loci (mutatio	Neural network (MLP)	0.75	0.257	0.419
+GSM-LOGO, global loci (mutatio	Random forest	0.75	0.114	0.295
+GSM-LOGO, global loci (mutatio	SVM (RBF)	0.583	0.257	0.305
+GSM-LOGO, global loci (mutatio	k-nearest neighbours	0.75	0.114	0.369
+GSM-LOGO, global loci (mutatio	XGBoost	0.75	0.114	0.267
+GSM-LOGO, training-only loci (	Logistic regression 	0.833	0.2	0.5
+GSM-LOGO, training-only loci (	Neural network (MLP)	0.75	0.171	0.404
+GSM-LOGO, training-only loci (	Random forest	0.5	0.314	0.26
+GSM-LOGO, training-only loci (	SVM (RBF)	0.417	0.286	0.233
+GSM-LOGO, training-only loci (	k-nearest neighbours	0.375	0.371	0.319
+GSM-LOGO, training-only loci (	XGBoost	0.5	0.2	0.217
+Person-LOGO, training-only loc	Logistic regression 	1.0	0.057	0.552
+Person-LOGO, training-only loc	Neural network (MLP)	1.0	0.029	0.425
+Person-LOGO, training-only loc	Random forest	0.583	0.057	0.163
+Person-LOGO, training-only loc	SVM (RBF)	0.833	0.029	0.129
+Person-LOGO, training-only loc	k-nearest neighbours	0.5	0.2	0.276
+Person-LOGO, training-only loc	XGBoost	0.833	0.029	0.155
+GSM-LOGO, expression only	Logistic regression 	0.5	0.543	0.445
+GSM-LOGO, expression only	Neural network (MLP)	0.5	0.514	0.429
+GSM-LOGO, expression only	Random forest	0.0	1.0	0.024
+GSM-LOGO, expression only	SVM (RBF)	0.0	1.0	0.0
+GSM-LOGO, expression only	k-nearest neighbours	0.292	0.486	0.304
+GSM-LOGO, expression only	XGBoost	0.583	0.029	0.088
