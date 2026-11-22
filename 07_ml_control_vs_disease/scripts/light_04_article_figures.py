@@ -121,12 +121,14 @@ def main() -> int:
     per = pd.read_csv(a.res / "C_per_run_calls_vs_coverage.tsv", sep="\t")
     cor = pd.read_csv(a.res / "C_coverage_correlations.tsv", sep="\t")
     fig, axes = plt.subplots(1, 3, figsize=(W, 2.2))
-    for ax, col, lab in zip(axes, ["median_dp", "detected_genes", "bam_gb"], ["median DP at PASS calls", "detected genes (expression)", "BAM size, GB"]):
+    for ax, col, lab, ttl in zip(axes, ["median_dp", "detected_genes", "bam_gb"], ["median DP at PASS calls", "detected genes (expression)", "BAM size, GB"],
+                                 ["A. Read depth", "B. Detected genes", "C. BAM size"]):
         for cnd, mk, c in [("unwounded", "o", BLUE), ("wound", "s", ORANGE)]:
             d = per[per.condition == cnd]; ax.scatter(d[col], d.n_pass / 1e6, marker=mk, color=c, s=18, label=cnd, edgecolor="white", lw=0.4)
         r = cor[(cor.x == col) & cor.level.str.startswith("run")].iloc[0]
-        ax.set_xlabel(lab); ax.set_title(f"rho = {r.spearman_rho:.2f}, p = {r.p:.1g}")
-    axes[0].set_ylabel("PASS calls, millions"); axes[0].legend(frameon=False, loc="lower right")
+        ax.set_xlabel(lab); ax.set_title(f"{ttl}\nSpearman ρ = {r.spearman_rho:.2f}, p = {r.p:.1g}", fontsize=7)
+        ax.set_ylim(0.5, 1.75)
+    axes[0].set_ylabel("PASS calls, millions"); axes[0].legend(frameon=False, loc="upper left", fontsize=6.5, borderaxespad=0.2)
     fig.tight_layout(); fig.savefig(a.nanrk / "Figure_3_coverage_dependence.png"); plt.close(fig)
 
     sw = pd.read_csv(a.res / "B_cohort_filter_sweep.tsv", sep="\t")
