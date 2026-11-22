@@ -54,7 +54,7 @@ def table(d, df, caption, note=None, size=8.5):
                 v = f"{v:.4g}" if abs(v) < 1000 else f"{v:,.0f}"
             elif isinstance(v, (int,)) and not isinstance(v, bool):
                 v = f"{v:,}"
-            cells[j].text = ""; rr = cells[j].paragraphs[0].add_run(str(v)); rr.font.size = Pt(size)
+            cells[j].text = ""; rr = cells[j].paragraphs[0].add_run("–" if pd.isna(v) or str(v).strip().lower() in ("nan", "none") else str(v)); rr.font.size = Pt(size)
     tr = t.rows[0]._tr; trPr = tr.get_or_add_trPr(); trPr.append(parse_xml(f'<w:tblHeader {nsdecls("w")}/>'))
     if note:
         p = d.add_paragraph(); r = p.add_run(note); r.italic = True; r.font.size = Pt(9)
@@ -123,7 +123,7 @@ table(d, don, "Table S2. Similarity by pair class (14 runs, 91 pairs)")
 table(d, idt[idt["Min. DP"] == 20], "Table S3. Genotype identity audit at DP ≥ 20 (all 28 sample pairs; mean over run pairs)", "DP ≥ 10 values are in KBTU_S3_identity_pairs.csv.", size=8)
 table(d, nul, "Table S4. Exact-null summary for all designs and models (35 labelings)", "GSM-LOGO: 7 folds; Person-LOGO: 6 folds with GSM5364333 and GSM5364338 held out together.", size=7.5)
 table(d, folds, "Table S5. Training-only feature counts per fold")
-table(d, brier, "Table S6. Brier score of sample-level probabilities with exact p over 35 labelings (new metric)", "Brier = mean squared difference between the sample-level wound probability and the label; a constant prediction of 0.5 gives 0.250. Exact p = share of labelings with Brier at most the observed value.", size=7.5)
+table(d, brier, "Table S6. Brier score of sample-level probabilities with exact p over 35 labelings", "Brier = mean squared difference between the sample-level wound probability and the label; a constant prediction of 0.5 gives 0.250. Exact p = share of labelings with Brier at most the observed value.", size=7.5)
 h(d, "CSV files")
 para(d, "KBTU_S1_runs.csv; KBTU_S2_pairwise_similarity.csv (91 run pairs × 4 measures); KBTU_S3_identity_pairs.csv (91 run pairs at DP ≥ 10 and ≥ 20); "
         "KBTU_S4_exact_null_all_labelings.csv (35 labelings × 4 designs × 6 models); KBTU_S4b_observed_sample_predictions.csv and KBTU_S4c_observed_run_predictions.csv "
@@ -152,7 +152,7 @@ rtt.columns = ["Run", "ReadGroups, min", "SplitNCigar, min", "HaplotypeCaller, m
 table(d, rtt, "Table S4. GATK wall-clock time per run and step", size=7.5)
 table(d, nul, "Table S5a. Exact-null summary (35 labelings)", size=7.5)
 o2 = obs.copy(); o2.columns = ["Design", "Model", "GEO sample", "True label (1 = wound)", "Mean P(wound)", "Predicted label"]
-table(d, ndep, "Table S6a. Raw and coverage-normalised gene burden: dependence on depth and sample identification (new pipeline element)", "Normalised burden = burden / PASS calls of the run × 10⁵.", size=8)
+table(d, ndep, "Table S6a. Raw and coverage-normalised gene burden: dependence on depth and sample identification", "Normalised burden = burden / PASS calls of the run × 10⁵.", size=8)
 table(d, nexa, "Table S6b. Logistic regression on raw and normalised burden, exact p over 35 labelings", size=8)
 table(d, o2[o2.Design.str.contains("training-only")], "Table S5b. Held-out sample-level predictions under the GEO labeling (training-only designs)", "All designs: NANRK_S5_observed_sample_predictions.csv.", size=7)
 out = ART / "1_NANRK" / "4_supplementary"; out.mkdir(parents=True, exist_ok=True)
