@@ -1,0 +1,7 @@
+# contact data of authors and editors — kept local only
+build_letters.py
+build_letters.py.bak*
+# source manuscripts and backups
+*.docx
+*.bak_*
+__pycache__/
