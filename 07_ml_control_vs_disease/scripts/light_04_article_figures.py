@@ -106,13 +106,15 @@ def main() -> int:
     ax.bar(x - bw, qc.raw / 1e6, bw, color="#c9c9c9", label="raw HaplotypeCaller")
     ax.bar(x, qc["pass"] / 1e6, bw, color=BLUE, label="PASS (hard filters)")
     ax.bar(x + bw, qc.cohort_recurrent / 1e6, bw, color=ORANGE, label="recurrent (>=4 runs)")
-    ax.set_xticks(x, labels, rotation=60, ha="right"); ax.set_ylabel("records, millions"); ax.legend(frameon=False, ncol=1, loc="upper left")
-    ax.set_title("A. Call counts per run"); ax.axvline(7.5, color=GREY, lw=0.6, ls=":")
+    ax.set_xticks(x, labels, rotation=60, ha="right"); ax.set_ylabel("records, millions"); ax.set_ylim(0, (qc.raw / 1e6).max() * 1.32)
+    ax.legend(frameon=False, ncol=3, loc="upper center", fontsize=6.5, handlelength=1.2, columnspacing=1.0)
+    ax.set_title("A. Call counts per run"); ax.axvline(7.5, ymax=0.78, color=GREY, lw=0.6, ls=":")
     ax = axes[1]
     bottom = np.zeros(len(samples))
     for f, c in [("HighSOR", PURPLE), ("LowQD", TEAL), ("HighFS", RED)]:
         v = 100 * qc[f] / qc.raw; ax.bar(x, v, 0.7, bottom=bottom, color=c, label=f); bottom += v
-    ax.set_xticks(x, labels, rotation=60, ha="right"); ax.set_ylabel("% of raw records flagged"); ax.legend(frameon=False, fontsize=6.5)
+    ax.set_xticks(x, labels, rotation=60, ha="right"); ax.set_ylabel("% of raw records flagged"); ax.set_ylim(0, bottom.max() * 1.3)
+    ax.legend(frameon=False, ncol=3, loc="upper center", fontsize=6.5, handlelength=1.2, columnspacing=1.0)
     ax.set_title("B. Hard-filter flags (may overlap)")
     fig.tight_layout(); fig.savefig(a.nanrk / "Figure_2_call_counts_qc.png"); plt.close(fig)
 
@@ -134,11 +136,13 @@ def main() -> int:
     ax = axes[1]
     for col, lab, c in [("within", "same GSM", ORANGE), ("between_same", "diff. GSM, same cond.", BLUE), ("between_diff", "diff. GSM, diff. cond.", GREY)]:
         ax.plot(sw.min_support_runs, sw[col], "o-", ms=3, color=c, label=lab)
-    ax.set_xlabel("min. supporting runs k"); ax.set_ylabel("mean Jaccard"); ax.set_title("B. Run similarity"); ax.legend(frameon=False, fontsize=6)
+    ax.set_xlabel("min. supporting runs k"); ax.set_ylabel("mean Jaccard"); ax.set_title("B. Run similarity"); ax.set_ylim(0, 1.32); ax.set_yticks([0.2, 0.4, 0.6, 0.8, 1.0]); ax.spines["left"].set_bounds(0, 1.0)
+    ax.legend(frameon=False, fontsize=6, loc="upper left", borderaxespad=0.1)
     ax = axes[2]; ax.plot(sw.min_support_runs, sw.nn_donor_id_acc, "o-", ms=3, color=ORANGE, label="1-NN GSM identification")
     ax.plot(sw.min_support_runs, sw.p_condition_exact, "s-", ms=3, color=BLUE, label="condition effect, exact p"); ax.axhline(0.05, ls=":", color="black", lw=0.7)
-    ax.set_ylim(0, 1.05); ax.set_xlabel("min. supporting runs k"); ax.set_title("C. Group vs condition signal"); ax.legend(frameon=False, fontsize=6, loc="center left")
-    for ax in axes: ax.axvline(4, ls="--", color=RED, lw=0.8)
+    ax.set_ylim(-0.42, 1.05); ax.set_yticks([0, 0.2, 0.4, 0.6, 0.8, 1.0]); ax.spines["left"].set_bounds(0, 1.05)
+    ax.set_xlabel("min. supporting runs k"); ax.set_title("C. Group vs condition signal"); ax.legend(frameon=False, fontsize=6, loc="lower left", borderaxespad=0.2)
+    for ax in axes: ax.axvline(4, ymin=(0.42 / 1.47 if ax is axes[2] else 0), ymax=(0.9 / 1.32 if ax is axes[1] else 1), ls="--", color=RED, lw=0.8)
     fig.tight_layout(); fig.savefig(a.nanrk / "Figure_4_filter_sensitivity.png"); plt.close(fig)
 
     rt = pd.read_csv(a.res / "D_gatk_runtime_per_run.tsv", sep="\t").set_index("sample_id").loc[samples]
@@ -165,7 +169,7 @@ def main() -> int:
 
     pairs = pd.read_csv(a.res / "A_pairwise_similarity.tsv", sep="\t"); summ = pd.read_csv(a.res / "A_donor_structure_summary.tsv", sep="\t").set_index("measure")
     order = ["within donor", "between donors, same condition", "between donors, different condition"]; cols = [ORANGE, BLUE, GREY]
-    fig, axes = plt.subplots(1, 4, figsize=(W, 2.3)); rng = np.random.default_rng(3)
+    fig, axes = plt.subplots(1, 4, figsize=(W, 2.5)); rng = np.random.default_rng(3)
     names = ["PASS-locus Jaccard", "Genotype concordance (shared loci)", "Gene-burden Spearman (cohort filter)", "Expression Pearson (log1p CPM)"]
     short_names = ["A. Locus Jaccard", "B. Genotype concordance", "C. Gene-burden Spearman", "D. Expression Pearson"]
     for ax, n, sn in zip(axes, names, short_names):
@@ -174,7 +178,7 @@ def main() -> int:
             v = part[part.pair_class == cls].value.to_numpy()
             ax.scatter(k + rng.uniform(-0.17, 0.17, len(v)), v, s=7, color=c, alpha=0.85, lw=0)
             ax.hlines(v.mean(), k - 0.3, k + 0.3, color="black", lw=1.2)
-        st = summ.loc[n]; ax.set_xticks(range(3), ["same\nGSM", "diff. GSM\nsame cond.", "diff. GSM\ndiff. cond."], fontsize=6)
+        st = summ.loc[n]; ax.set_xticks(range(3), ["same\nGSM", "diff.\nGSM,\nsame\ncond.", "diff.\nGSM,\ndiff.\ncond."], fontsize=6)
         ax.set_title(f"{sn}\nGSM p<0.001; cond. p={st.p_condition_exact:.2f}", fontsize=7)
     fig.tight_layout(); fig.savefig(a.kbtu / "Figure_3_pair_classes.png"); plt.close(fig)
 
