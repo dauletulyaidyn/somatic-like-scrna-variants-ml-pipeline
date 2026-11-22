@@ -1,0 +1,3 @@
+model	ba_mean	ba_sd	auc_mean	nonzero_median	max_iter_used
+Elastic-net logistic regression	0.7233333333333334	0.23734172873068066	0.9483333333333334	18.0	4545
+Logistic regression (L2)	0.9733333333333334	0.11272504212925585	0.98	27221.0	9

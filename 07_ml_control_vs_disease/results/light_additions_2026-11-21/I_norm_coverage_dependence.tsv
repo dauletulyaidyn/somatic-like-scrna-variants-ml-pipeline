@@ -1,0 +1,3 @@
+features	rho_total_vs_median_depth	rho_total_vs_detected_genes	median_abs_rho_gene_vs_depth	share_genes_abs_rho_ge_0.5	nn_sample_identification
+raw	0.8894991799933214	0.5296703296703297	0.4595745763298827	0.45485600940346754	1.0
+normalised	0.0	-0.4241758241758242	0.3156820749009881	0.28744032317297097	1.0

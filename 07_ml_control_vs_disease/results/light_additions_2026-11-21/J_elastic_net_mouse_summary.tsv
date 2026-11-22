@@ -1,0 +1,17 @@
+model	design	feature_space	balanced_accuracy	ba_sd	roc_auc	median_nonzero	max_iter_used
+Logistic regression (L2)	SRR-level repeated CV	EXP	1.0	0.0	1.0	35024.5	9
+Logistic regression (L2)	GSM-LOGO global loci	EXP	1.0		1.0	35535.5	9
+Logistic regression (L2)	SRR-level repeated CV	VAR	1.0	0.0	1.0	18857.5	9
+Logistic regression (L2)	GSM-LOGO global loci	VAR	1.0		1.0	19209.5	9
+Logistic regression (L2)	GSM-LOGO training-only loci	VAR	1.0		1.0	17048.0	9
+Logistic regression (L2)	SRR-level repeated CV	COMBINED	1.0	0.0	1.0	53903.5	9
+Logistic regression (L2)	GSM-LOGO global loci	COMBINED	1.0		1.0	54747.0	9
+Logistic regression (L2)	GSM-LOGO training-only loci	COMBINED	1.0		1.0	52584.5	9
+Elastic-net logistic regression	SRR-level repeated CV	EXP	1.0	0.0	1.0	253.5	8580
+Elastic-net logistic regression	GSM-LOGO global loci	EXP	1.0		1.0	512.0	7446
+Elastic-net logistic regression	SRR-level repeated CV	VAR	1.0	0.0	1.0	115.0	845
+Elastic-net logistic regression	GSM-LOGO global loci	VAR	1.0		1.0	101.0	951
+Elastic-net logistic regression	GSM-LOGO training-only loci	VAR	1.0		1.0	101.0	884
+Elastic-net logistic regression	SRR-level repeated CV	COMBINED	1.0	0.0	1.0	290.0	7273
+Elastic-net logistic regression	GSM-LOGO global loci	COMBINED	1.0		1.0	604.0	6652
+Elastic-net logistic regression	GSM-LOGO training-only loci	COMBINED	1.0		1.0	604.0	6675
